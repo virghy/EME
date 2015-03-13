@@ -5,6 +5,29 @@ ehthumbs.db
 # Folder config file
 Desktop.ini
 
+# Archivos de VFP
+*.scx
+*.sct
+*.vcx
+*.vct
+*.frx
+*.frt
+*.mnx
+*.mnt
+*.pjx
+*.pjt
+*.app
+*.mpr
+*.dbc
+*.dcx
+*.dct
+*.dbf
+*.fpt
+*.cdx
+
+
+
+
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 

@@ -2,4 +2,8 @@ Probando....
 Linea 2....
 Linea 3...agregado localmente
 Linea 4... agggg
+<<<<<<< HEAD
 Linea 5... tocado desde local
+=======
+Linea 5... tocado desde web
+>>>>>>> 39f30045d5940d060dad01fdebf7f7684e01ffda
