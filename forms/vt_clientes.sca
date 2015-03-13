@@ -1,0 +1,1603 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _03J0NIQSA
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 270
+InitialSelectedAlias = "bs_clientes"
+Left = 149
+Name = "Dataenvironment"
+Top = 122
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+4[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW11JUV1
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "bs_clientes"
+CursorSource = "vt_clientes"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 150
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Order = ""
+Top = 20
+Width = 95
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MOV
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_aniversarios"
+BufferModeOverride = 5
+CursorSource = "vt_aniversarios"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0VTLOK
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_feedback"
+CursorSource = "vt_feedback"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 290
+Name = "Cursor3"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _03J0NIQSC
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Clientes"
+DataSession = 2
+DoCreate = .T.
+Height = 471
+LockScreen = .F.
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 474
+Pageframe1.Left = -8
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Caption = "En\<trada de Datos"
+Pageframe1.Page1.FontBold = .F.
+Pageframe1.Page1.FontSize = 8
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.FontBold = .F.
+Pageframe1.Page2.FontSize = 8
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.ColumnCount = -1
+Pageframe1.Page2.grdList.DeleteMark = .F.
+Pageframe1.Page2.grdList.ForeColor = 0,0,0
+Pageframe1.Page2.grdList.GridLineWidth = 1
+Pageframe1.Page2.grdList.GridLines = 3
+Pageframe1.Page2.grdList.HeaderHeight = 20
+Pageframe1.Page2.grdList.Height = 200
+Pageframe1.Page2.grdList.Left = 7
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.grdList.Panel = 1
+Pageframe1.Page2.grdList.RecordMark = .F.
+Pageframe1.Page2.grdList.RecordSource = "bs_clientes"
+Pageframe1.Page2.grdList.ScrollBars = 3
+Pageframe1.Page2.grdList.Top = 22
+Pageframe1.Page2.grdList.Width = 539
+Pageframe1.TabIndex = 1
+Pageframe1.Top = 0
+Pageframe1.Width = 612
+Width = 601
+WindowState = 0
+camponro = idcliente,vt_clientes,idempresa=?oApp.Empresa
+campos = idEmpresa
+campotam = 4
+editmode = .F.
+enlaces = Vendedores,Cobradores,Condiciones de Venta,Categoria,Cartera
+etiquetamenu = Clientes
+identidad = IdCliente
+idobjeto = 44
+lblRequerido.Name = "lblRequerido"
+tabla1 = bs_CLIENTES
+tabla2 = vt_aniversarios
+tabla3 = vt_feedback
+tablaconsulta = Clientes
+valores = oApp.Empresa
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+thisform.pageframe1.page1.pageframe1.page1.refresh()
+thisform.pageframe1.page1.pageframe1.page2.refresh()
+thisform.pageframe1.page1.pageframe1.page3.refresh()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _03J0NIQSA
+[CLASS] campo_busca
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_busca1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "bs_clientes.idcliente"
+Left = 126
+Name = "Campo_busca1"
+Top = 7
+Width = 153
+datoayuda = Clientes
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RA0WXO7J
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkActivo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Cliente Activo"
+Comment = ""
+ControlSource = "bs_clientes.activo"
+FontBold = .T.
+Height = 16
+Left = 436
+Name = "chkActivo"
+SpecialEffect = 0
+TabIndex = 23
+Top = 13
+Value = .T.
+Width = 108
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05K0UJJLD
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Código:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 81
+Name = "Label1"
+TabIndex = 24
+Top = 10
+Width = 42
+WordWrap = .T.
+ZOrderSet = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _03J0NIQSE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblRazsocial
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Razón Social:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 52
+Name = "lblRazsocial"
+TabIndex = 25
+Top = 34
+Width = 71
+WordWrap = .T.
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MP0
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] Pageframe1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ActivePage = 3
+BorderWidth = 0
+ErasePage = .T.
+Height = 371
+Left = 7
+Name = "Pageframe1"
+Page1.Caption = "Generales"
+Page1.FontBold = .F.
+Page1.FontSize = 8
+Page1.ForeColor = 255,128,64
+Page1.Name = "Page1"
+Page1.PageOrder = 3
+Page2.Caption = "Aniversarios"
+Page2.FontSize = 8
+Page2.ForeColor = 0,128,0
+Page2.Name = "Page2"
+Page2.PageOrder = 2
+Page3.Caption = "FeedBack"
+Page3.FontSize = 8
+Page3.ForeColor = 255,0,128
+Page3.Name = "Page3"
+Page3.PageOrder = 1
+PageCount = 3
+TabOrientation = 2
+Tabs = .T.
+Top = 64
+Width = 591
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Page1.Activate
+this.refresh()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MP2
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] apellido
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.nomcontacto"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Format = "K"
+Height = 22
+InputMask = ""
+Left = 109
+MaxLength = 13
+Name = "apellido"
+TabIndex = 21
+Top = 320
+Value = 
+Width = 201
+ZOrderSet = 3
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW11JUV1
+[CLASS] cbocarteracliente
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbocarteracliente1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Left = 109
+Name = "Cbocarteracliente1"
+TabIndex = 10
+Top = 169
+Width = 153
+cmdsql = Select vt_carteras.descripcion, ltrim( str(idcartera) ) from vt_carteras where idempresa = ?oApp.Empresa order by 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPY
+[CLASS] cbocategoriacliente
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbocategoriacliente1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Left = 109
+Name = "Cbocategoriacliente1"
+TabIndex = 9
+Top = 145
+Width = 153
+cmdsql = select vt_categoria.descripcion,ltrim( str(idcategoria) ) from vt_categoria where idempresa =?oApp.Empresa order by 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPW
+[CLASS] cbocobrador
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbocobrador1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+BoundTo = .F.
+ColumnCount = 2
+ColumnWidths = "150,0"
+Left = 109
+Name = "Cbocobrador1"
+TabIndex = 7
+Top = 97
+Width = 153
+cmdsql = Select rtrim(b.nombre)+' '+rtrim(b.apellido), rtrim(a.idCobrador) from vt_cobradores a, bs_personas b where idempresa = ?oApp.Empresa and a.idpersona=b.idpersona order by 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPX
+[CLASS] cbocondventa
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbocondventa1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Left = 109
+Name = "Cbocondventa1"
+TabIndex = 8
+Top = 121
+Width = 153
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MQ0
+[CLASS] cbolistaprecio
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbolistaprecio1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Left = 373
+Name = "Cbolistaprecio1"
+TabIndex = 11
+Top = 73
+Width = 153
+cmdsql = select vt_listaprecio.descripcion, idlista from vt_listaprecio where idempresa = ?oApp.Empresa order by 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1ZL0OE6PN
+[CLASS] cbocarteracliente
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] cboTipoImpuesto
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "bs_clientes.tipoimpuesto"
+Left = 372
+Name = "cboTipoImpuesto"
+RowSource = "Gravadas,G,Exentas,E"
+RowSourceType = 1
+TabIndex = 10
+Top = 169
+Width = 153
+cmdsql = 
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPR
+[CLASS] cbovendedor
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbovendedor1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+ColumnCount = 2
+ColumnWidths = "150,50"
+ControlSource = "bs_clientes.idvendedor"
+Left = 109
+Name = "Cbovendedor1"
+RowSourceType = 3
+TabIndex = 6
+Top = 73
+Width = 153
+cmdsql = Select rtrim(b.nombre)+' '+rtrim(b.apellido) nombre, rtrim(a.idvendedor)  from vt_vendedores a, bs_personas b where a.idempresa = ?oApp.Empresa and a.idpersona=b.idpersona order by 1 
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MQ1
+[CLASS] cbozonacomercial
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbozonacomercial1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Left = 373
+Name = "Cbozonacomercial1"
+TabIndex = 12
+Top = 97
+Width = 153
+cmdsql = select vt_zonacom.descripcion, ltrim( str(idzonacom) ) from vt_zonacom where idempresa=?oApp.empresa order by 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MQ2
+[CLASS] cbozonageog
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbozonageog1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Left = 373
+Name = "Cbozonageog1"
+TabIndex = 13
+Top = 121
+Width = 153
+cmdsql = select vt_zonageog.descripcion, ltrim( str(idzonageog) ) from vt_zonageog where idempresa=?oApp.Empresa order by 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPP
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cuentaContable
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 264
+Name = "cuentaContable"
+TabIndex = 39
+Top = 17
+Width = 262
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MQ3
+[CLASS] idcuenta
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcuenta1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "bs_clientes.cuenta"
+Height = 22
+Left = 109
+Name = "Idcuenta1"
+TabIndex = 3
+Top = 17
+Width = 153
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPJ
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label2
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Cuenta contable:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 14
+Name = "Label2"
+TabIndex = 36
+Top = 20
+Width = 92
+WordWrap = .T.
+ZOrderSet = 22
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPB
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label3
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "E-mail:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 277
+Name = "Label3"
+TabIndex = 32
+Top = 251
+Width = 36
+WordWrap = .T.
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPA
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label4
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "URL:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 289
+Name = "Label4"
+TabIndex = 33
+Top = 275
+Width = 24
+WordWrap = .T.
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label5
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "RUC:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 81
+Name = "Label5"
+TabIndex = 34
+Top = 44
+Width = 25
+WordWrap = .T.
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCargcontacto
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Cargo:"
+Height = 16
+Left = 316
+Name = "lblCargcontacto"
+TabIndex = 27
+Top = 323
+Width = 38
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPD
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblCiudad
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Ciudad:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 65
+Name = "lblCiudad"
+TabIndex = 29
+Top = 251
+Width = 41
+WordWrap = .T.
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MP4
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblDireccion
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Dirección:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 52
+Name = "lblDireccion"
+TabIndex = 28
+Top = 202
+Width = 54
+WordWrap = .T.
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MP9
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblFax
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Fax:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 85
+Name = "lblFax"
+TabIndex = 31
+Top = 299
+Width = 21
+WordWrap = .T.
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPH
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFechaingre
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Fecha de Alta:"
+Height = 16
+Left = 292
+Name = "lblFechaingre"
+TabIndex = 35
+Top = 44
+Width = 78
+ZOrderSet = 18
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _03J0NIQSA
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcartera
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Cartera:"
+Height = 16
+Left = 60
+Name = "lblIdcartera"
+TabIndex = 42
+Top = 172
+Width = 46
+ZOrderSet = 30
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcategoria
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Categoría:"
+Height = 16
+Left = 48
+Name = "lblIdcategoria"
+TabIndex = 41
+Top = 148
+Width = 58
+ZOrderSet = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPK
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdlista
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Lista de Precio:"
+Height = 16
+Left = 283
+Name = "lblIdlista"
+TabIndex = 43
+Top = 76
+Width = 87
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdzonacom
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Zona Comercial:"
+Height = 16
+Left = 279
+Name = "lblIdzonacom"
+TabIndex = 44
+Top = 100
+Width = 91
+ZOrderSet = 26
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPL
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdzonageog
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Zona geográfica:"
+Height = 16
+Left = 277
+Name = "lblIdzonageog"
+TabIndex = 45
+Top = 124
+Width = 93
+ZOrderSet = 24
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblLineacredito
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Linea Crédito:"
+Height = 16
+Left = 291
+Name = "lblLineacredito"
+TabIndex = 46
+Top = 148
+Width = 79
+ZOrderSet = 28
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MP3
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblRuc
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Nombre Contacto:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 7
+Name = "lblRuc"
+TabIndex = 26
+Top = 323
+Width = 99
+WordWrap = .T.
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MP6
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblTelefono
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Teléfono:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 54
+Name = "lblTelefono"
+TabIndex = 30
+Top = 275
+Width = 52
+WordWrap = .T.
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MQ4
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] Tseditbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "bs_clientes.direccion"
+Height = 45
+Left = 109
+Name = "Tseditbox1"
+TabIndex = 15
+Top = 201
+Width = 417
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MQ5
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] Tseditbox2
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+AddLineFeeds = .F.
+ControlSource = "bs_clientes.email"
+Height = 22
+Left = 317
+Name = "Tseditbox2"
+ScrollBars = 0
+TabIndex = 19
+Top = 248
+Width = 209
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MQ6
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] Tseditbox3
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+AddLineFeeds = .F.
+ControlSource = "bs_clientes.url"
+Height = 22
+Left = 317
+Name = "Tseditbox3"
+ScrollBars = 0
+TabIndex = 20
+Top = 272
+Width = 209
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Condición Venta:"
+Height = 16
+Left = 11
+Name = "Tslabel1"
+TabIndex = 40
+Top = 124
+Width = 95
+ZOrderSet = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Cobrador:"
+Height = 16
+Left = 49
+Name = "Tslabel2"
+TabIndex = 38
+Top = 100
+Width = 57
+ZOrderSet = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Vendedor:"
+Height = 16
+Left = 46
+Name = "Tslabel3"
+TabIndex = 37
+Top = 76
+Width = 60
+ZOrderSet = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1ZL0OE6PD
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Tipo Impuesto:"
+Height = 16
+Left = 285
+Name = "Tslabel4"
+TabIndex = 42
+Top = 173
+Width = 85
+ZOrderSet = 30
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MP7
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox2
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.ruc"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 22
+Left = 109
+MaxLength = 20
+Name = "Tstextbox2"
+TabIndex = 4
+Top = 41
+Width = 153
+ZOrderSet = 9
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPF
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCargcontacto
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_clientes.cargo"
+FontSize = 8
+Height = 22
+Left = 357
+MaxLength = 20
+Name = "txtCargcontacto"
+TabIndex = 22
+Top = 320
+Width = 169
+ZOrderSet = 15
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPC
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCiudad
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.ciudad"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 22
+Left = 109
+MaxLength = 25
+Name = "txtCiudad"
+TabIndex = 16
+Top = 248
+Width = 153
+ZOrderSet = 11
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MP8
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFax
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.fax"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 22
+Left = 109
+MaxLength = 20
+Name = "txtFax"
+TabIndex = 18
+Top = 296
+Width = 153
+ZOrderSet = 9
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPI
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFechaingre
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 2
+Comment = ""
+ControlSource = "bs_clientes.fecha_alta"
+Enabled = .T.
+FontSize = 8
+Height = 22
+Left = 373
+Name = "txtFechaingre"
+ReadOnly = .F.
+TabIndex = 5
+Top = 41
+Width = 153
+ZOrderSet = 17
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MPN
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtLineacredito
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_clientes.lineacredito"
+Height = 22
+InputMask = "999,999,999,999"
+Left = 373
+Name = "txtLineacredito"
+TabIndex = 14
+Top = 145
+Width = 153
+ZOrderSet = 27
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MP5
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTelefono
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.telefono"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Format = "K"
+Height = 22
+InputMask = ""
+Left = 109
+MaxLength = 20
+Name = "txtTelefono"
+TabIndex = 17
+Top = 272
+Value = 
+Width = 153
+ZOrderSet = 7
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _03J0NIQSA
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdVt_aniversarios
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Anchor = 15
+Column1.ControlSource = "vt_aniversarios.idtipofecha"
+Column1.FontSize = 8
+Column1.Name = "Column4"
+Column1.Sparse = .F.
+Column1.Width = 114
+Column2.ControlSource = "vt_aniversarios.fecha"
+Column2.FontSize = 8
+Column2.Name = "Column5"
+Column2.Width = 58
+Column3.ControlSource = "vt_aniversarios.detalle"
+Column3.FontSize = 8
+Column3.Name = "Column6"
+Column3.Width = 330
+ColumnCount = 3
+FontSize = 8
+Height = 330
+HighlightStyle = 0
+Left = 18
+Name = "grdVt_aniversarios"
+Panel = 1
+RecordSource = "vt_aniversarios"
+RecordSourceType = 1
+RowHeight = 17
+Top = 19
+Width = 526
+campo = IdEmpresa,IdCliente
+editable = .T.
+valor = oApp.Empresa,bs_Clientes.IdCliente
+valorvariable = bs_Clientes.IdCliente
+variablevista = m.IdCliente
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW11JUV1
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdVt_aniversarios.Column4
+[START PROPERTIES]
+Caption = "Tipo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0V2MOV
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdVt_aniversarios.Column4
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 2
+DisabledItemForeColor = 0,0,128
+Left = 54
+Name = "Tscombobox1"
+Top = 49
+cmdsql = Select TipoFecha,IdTipoFecha from vt_TipoFecha
+cursor = cTipoFecha
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _03J0NIQSC
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdVt_aniversarios.Column5
+[START PROPERTIES]
+Caption = "Fecha"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _03J0NIQSA
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdVt_aniversarios.Column5
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _03J0NIQSE
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdVt_aniversarios.Column6
+[START PROPERTIES]
+Caption = "Detalle"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05K0UJJLD
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdVt_aniversarios.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0VTLPD
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdVt_aniversarios
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Anchor = 15
+Column1.ControlSource = "vt_feedback.fecha"
+Column1.FontSize = 8
+Column1.Name = "Column5"
+Column1.Width = 66
+Column2.ControlSource = "vt_feedback.detalle"
+Column2.FontSize = 8
+Column2.Name = "Column6"
+Column2.Width = 330
+ColumnCount = 2
+FontSize = 8
+GridLineWidth = 1
+Height = 330
+HighlightStyle = 0
+Left = 14
+Name = "grdVt_aniversarios"
+Panel = 1
+RecordSource = "vt_feedback"
+RecordSourceType = 1
+RowHeight = 30
+Top = 19
+Width = 526
+campo = IdEmpresa,IdCliente
+editable = .T.
+valor = oApp.Empresa,bs_Clientes.IdCliente
+valorvariable = bs_Clientes.IdCliente
+variablevista = m.IdCliente
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0VTLPF
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page3.grdVt_aniversarios.Column5
+[START PROPERTIES]
+Caption = "Fecha"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0VTLPG
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page3.grdVt_aniversarios.Column5
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0VTLPH
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page3.grdVt_aniversarios.Column6
+[START PROPERTIES]
+Caption = "Detalle"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UZ0VTLPI
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page3.grdVt_aniversarios.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _03J0NIQSA
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtRazsocial
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.razsocial"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Format = "K"
+Height = 22
+InputMask = ""
+Left = 126
+MaxLength = 40
+Name = "txtRazsocial"
+TabIndex = 2
+Top = 31
+Value = 
+Width = 417
+ZOrderSet = 1
+editable = .T.
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

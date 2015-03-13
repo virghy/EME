@@ -1,0 +1,510 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCE
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 220
+Left = 1
+Width = 520
+Height = 200
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCG
+[CLASS] _splash
+[CLASSLOC] ..\libs\_dialogs.vcx
+[BASECLASS] form
+[OBJNAME] _splash1
+[START PROPERTIES]
+Height = 305
+Width = 375
+ShowWindow = 2
+DoCreate = .T.
+BorderStyle = 1
+Caption = "Futura"
+MDIForm = .T.
+ClipControls = .F.
+LockScreen = .F.
+AlwaysOnTop = .T.
+BackColor = 255,255,255
+Name = "_splash1"
+Label1.AutoSize = .T.
+Label1.FontSize = 36
+Label1.WordWrap = .F.
+Label1.Alignment = 2
+Label1.Caption = "Futura"
+Label1.Height = 60
+Label1.Left = 84
+Label1.Top = 84
+Label1.Width = 151
+Label1.ForeColor = 0,0,128
+Label1.BackColor = 0,0,128
+Label1.ZOrderSet = 23
+Label1.Name = "Label1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+THIS.TITLEBAR = 0
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label4
+[PARENT] _splash1
+[START PROPERTIES]
+AutoSize = .T.
+Tag = "00"
+FontBold = .T.
+FontSize = 36
+Alignment = 2
+BackStyle = 0
+Caption = "Futura"
+Height = 60
+Left = 87
+Top = 87
+Width = 151
+ForeColor = 128,128,128
+BackColor = 128,128,128
+ZOrderSet = 0
+Name = "Label4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label16
+[PARENT] _splash1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .T.
+FontSize = 8
+WordWrap = .T.
+Alignment = 0
+BackStyle = 0
+Caption = "Se autoriza el uso de este producto a:"
+Height = 16
+Left = 40
+Top = 152
+Width = 288
+ForeColor = 0,0,0
+BackColor = 0,0,128
+ZOrderSet = 20
+Name = "Label16"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] NroRegistro
+[PARENT] _splash1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .T.
+FontSize = 8
+WordWrap = .T.
+Alignment = 0
+BackStyle = 0
+Caption = "Registro: "
+Height = 16
+Left = 40
+Top = 192
+Width = 288
+ForeColor = 0,0,0
+BackColor = 0,0,128
+ZOrderSet = 21
+Name = "NroRegistro"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05I0PJ3R1
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label15
+[PARENT] _splash1
+[START PROPERTIES]
+Caption = ""
+Height = 13
+Left = 318
+Top = 255
+Width = 7
+BackColor = 234,227,206
+ZOrderSet = 7
+Name = "Label15"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05I0PJ3QY
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label14
+[PARENT] _splash1
+[START PROPERTIES]
+Caption = ""
+Height = 13
+Left = 323
+Top = 255
+Width = 9
+BackColor = 128,0,128
+ZOrderSet = 8
+Name = "Label14"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05I0PJ3QU
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label13
+[PARENT] _splash1
+[START PROPERTIES]
+Caption = ""
+Height = 13
+Left = 329
+Top = 255
+Width = 9
+BackColor = 0,0,128
+ZOrderSet = 9
+Name = "Label13"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Serie
+[PARENT] _splash1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .T.
+FontSize = 8
+WordWrap = .T.
+Alignment = 0
+BackStyle = 0
+Caption = "Serie: "
+Height = 16
+Left = 40
+Top = 208
+Width = 288
+ForeColor = 0,0,0
+BackColor = 0,0,128
+ZOrderSet = 22
+Name = "Serie"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] UsuarioAutorizado
+[PARENT] _splash1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .T.
+FontSize = 8
+WordWrap = .T.
+Alignment = 0
+BackStyle = 0
+Caption = "Usuario Autorizado"
+Height = 16
+Left = 40
+Top = 176
+Width = 296
+ForeColor = 0,0,0
+BackColor = 0,0,128
+ZOrderSet = 10
+Name = "UsuarioAutorizado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label5
+[PARENT] _splash1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .T.
+FontSize = 16
+Alignment = 1
+BackStyle = 0
+Caption = "Versión "
+Height = 27
+Left = 216
+Top = 0
+Width = 160
+ForeColor = 0,0,128
+BackColor = 0,0,128
+ZOrderSet = 11
+Name = "Label5"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+AGETFILEVERSION(LAVERSION, "futura.EXE")
+IF TYPE('laVersion(4)')<>'U'
+THIS.CAPTION = THIS.CAPTION+" "+LAVERSION(4)
+ELSE
+THIS.CAPTION = THIS.CAPTION+" "+"2.0"
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04K0OASTB
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label2
+[PARENT] _splash1
+[START PROPERTIES]
+AutoSize = .F.
+FontSize = 7
+WordWrap = .T.
+Alignment = 2
+BackStyle = 0
+BorderStyle = 0
+Caption = "Este programa está protegido por las leyes de propiedad intelectual, según se describe en Acerca de. © 1999-2007 - Futura Software "
+Height = 30
+Left = 34
+Top = 228
+Width = 306
+ZOrderSet = 12
+Name = "Label2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label6
+[PARENT] _splash1
+[START PROPERTIES]
+FontBold = .T.
+FontShadow = .T.
+FontStrikethru = .F.
+FontUnderline = .F.
+WordWrap = .F.
+Alignment = 0
+BorderStyle = 0
+Caption = ""
+Height = 25
+Left = -7
+Top = 0
+Width = 201
+ForeColor = 0,0,128
+BackColor = 191,215,238
+ZOrderSet = 13
+Name = "Label6"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05H0PCPTS
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label7
+[PARENT] _splash1
+[START PROPERTIES]
+AutoSize = .T.
+FontBold = .T.
+FontShadow = .T.
+FontStrikethru = .F.
+FontUnderline = .F.
+WordWrap = .F.
+Alignment = 0
+BackStyle = 0
+BorderStyle = 0
+Caption = "Administración Comercial"
+Height = 17
+Left = 40
+Top = 3
+Width = 149
+ForeColor = 0,0,128
+BackColor = 0,0,0
+ZOrderSet = 14
+Name = "Label7"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XY0T50IT
+[CLASS] line
+[BASECLASS] line
+[OBJNAME] Line1
+[PARENT] _splash1
+[START PROPERTIES]
+Height = 0
+Left = 43
+Top = 168
+Width = 205
+ZOrderSet = 24
+Name = "Line1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCG
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label8
+[PARENT] _splash1
+[START PROPERTIES]
+Caption = ""
+Height = 25
+Left = 192
+Top = 0
+Width = 9
+ForeColor = 0,128,0
+BackColor = 0,0,128
+ZOrderSet = 15
+Name = "Label8"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label9
+[PARENT] _splash1
+[START PROPERTIES]
+Caption = ""
+Height = 25
+Left = 200
+Top = 0
+Width = 9
+BackColor = 128,0,128
+ZOrderSet = 16
+Name = "Label9"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S9N0HBLCE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label10
+[PARENT] _splash1
+[START PROPERTIES]
+Caption = ""
+Height = 25
+Left = 208
+Top = 0
+Width = 7
+BackColor = 234,227,206
+ZOrderSet = 17
+Name = "Label10"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05I0PCTNL
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label11
+[PARENT] _splash1
+[START PROPERTIES]
+BackStyle = 0
+Caption = "®"
+Height = 17
+Left = 235
+Top = 96
+Width = 12
+ZOrderSet = 18
+Name = "Label11"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20M0O7MSI
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label3
+[PARENT] _splash1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .F.
+FontSize = 8
+WordWrap = .T.
+Alignment = 0
+BackStyle = 0
+Caption = "www.futura.com.py"
+Height = 16
+Left = 137
+Top = 252
+Width = 101
+ForeColor = 0,0,255
+BackColor = 0,0,128
+ZOrderSet = 22
+Name = "Label3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05I0PJ3QS
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label12
+[PARENT] _splash1
+[START PROPERTIES]
+FontBold = .T.
+FontShadow = .T.
+FontStrikethru = .F.
+FontUnderline = .F.
+WordWrap = .F.
+Alignment = 0
+BorderStyle = 0
+Caption = ""
+Height = 13
+Left = 336
+Top = 255
+Width = 165
+ForeColor = 255,255,255
+BackColor = 191,215,238
+ZOrderSet = 19
+Name = "Label12"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[START RESERVED1]
+  ..\include\tastrade.h>Mõn†5@ ..\..\..\archivos de programa\microsoft visual foxpro 9\foxpro.hFN’‰1 ..\include\strings.hNOõn†5[END RESERVED1]
+[EOF]

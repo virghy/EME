@@ -1,0 +1,1568 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 575
+InitialSelectedAlias = "creditos"
+Left = -58
+Name = "Dataenvironment"
+Top = 60
+Width = 1016
+[END PROPERTIES]
+[START RESERVED2]
+4[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA9
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "creditos"
+BufferModeOverride = 1
+CursorSource = "fn_creditos"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 13
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 6
+Width = 95
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0B30PVY48
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vCodeudor"
+BufferModeOverride = 5
+CursorSource = "fn_codeudor"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 166
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 251
+Width = 140
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0B5135C9F
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor8
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vcuotas"
+BufferModeOverride = 5
+CursorSource = "fn_cuotas"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 172
+Name = "Cursor8"
+NoDataOnLoad = .T.
+Top = 48
+Width = 140
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLAP
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Creditos"
+DoCreate = .T.
+Height = 476
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 476
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page1.PageOrder = 1
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.PageOrder = 2
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.PageCount = 2
+Pageframe1.TabIndex = 1
+Pageframe1.Top = 0
+Pageframe1.Width = 641
+Width = 640
+appconfig.Name = "appconfig"
+auditmarcahora = Audit_Fecha
+auditusuario = Audit_Usuario
+camponro = idcredito,fn_Creditos
+campos = IdSucursal,IdTipoCredito
+identidad = IdCredito
+lblRequerido.Name = "lblRequerido"
+repetirvalores = IdSucursal,Fecha,IdTipoCredito,IdCobrador,IdVendedor
+tabla1 = creditos
+tabla2 = vCodeudor
+tabla3 = vCuotas
+tablaconsulta = Creditos
+ultimonro = 
+valores = '01','01'
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE addnew
+DODEFAULT()
+ENDPROC
+**
+PROCEDURE afteraddnew
+thisform.pageframe1.page1.grdcuotas.refresh()
+thisform.pageframe1.page1.grdcodeudor.refresh()
+ENDPROC
+**
+PROCEDURE calcularcuota
+LOCAL lnimporte, lctipocredito
+WITH thisform.pageframe1.page1
+     lctipocredito = .cbotipocredito.value
+     sql("Exec fn_TraerInteres ?Creditos.IdTipoCredito, ?Creditos.Cuotas", "cTasaInteres")
+     lnimporte = MTON(.txtimporte.value)
+     .txtimportecuota.value = ROUND(PAYMENT(lnimporte, ctasainteres.interes / 100 / 12, .txtcuotas.value),  ;
+                              0)
+     IF ctasainteres.interes = 0
+          .txttotal.value = .txtimporte.value
+     ELSE
+          .txttotal.value = .txtimportecuota.value * .txtcuotas.value
+     ENDIF
+     .txtsaldo.value = .txttotal.value
+ENDWITH
+ENDPROC
+**
+PROCEDURE save
+DODEFAULT()
+ENDPROC
+**
+FUNCTION validar
+lcalias = ALIAS()
+IF EMPTY(cvendedor.idcomision)
+     MESSAGEBOX("El vendedor seleccionado no tiene asignado una Tabla de Comisiones", 64,  ;
+               "Sistema de Gestión Financiera")
+     RETURN .F.
+ENDIF
+IF EMPTY(creditos.cuotas)
+     MESSAGEBOX("Debe indicar una Cuota.", 64, "Sistema de Gestión Financiera")
+     RETURN .F.
+ENDIF
+sql("EXEC fn_TraerComision ?cVendedor.IdComision,?Creditos.Cuotas", "xComision")
+SELECT (lcalias)
+IF RECCOUNT('xComision') = 0
+     MESSAGEBOX('No se ha encontrado la comision correspondiente a esta cuota.', 64,  ;
+               "Sistema de Gestión Financiera")
+     RETURN .F.
+ENDIF
+IF EMPTY(creditos.comision)
+     REPLACE comision WITH xcomision.comision IN creditos
+ELSE
+     IF xcomision.comision <> creditos.comision
+          msg = MESSAGEBOX("La comision asignada a este credito es diferente a la actual" + CHR(13) +  ;
+                "Desea actualizarla?", 068, "Sistema de Gestión Financiera")
+          IF msg = 6
+               REPLACE comision WITH xcomision.comision IN creditos
+          ENDIF
+     ENDIF
+ENDIF
+ENDFUNC
+**
+[END METHODS]
+[START RESERVED3]
+*calcularcuota 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SD1BFNP2
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboTipoCredito
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "100,0"
+ControlSource = "creditos.idtipocredito"
+FirstElement = 1
+Height = 22
+Left = 467
+Name = "cboTipoCredito"
+NumberOfElements = 0
+Style = 2
+TabIndex = 33
+Top = 46
+Width = 157
+ZOrderSet = 37
+cmdsql = Select TipoCredito, idTipoCredito from fn_tipoCredito order by 1 
+cursor = cTipoCredito
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] ci
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Height = 22
+InputMask = "9,999,999"
+Left = 281
+Name = "ci"
+TabIndex = 4
+Top = 70
+Value = 0
+Width = 86
+ZOrderSet = 31
+actualizar = .F.
+indice = ci
+indice1 = 
+mensajeerror = No se encuentra el C.I. del Cliente
+objeto = this.parent.NombreCliente
+objeto2 = this.parent.IdCliente
+origen = R
+prefijo = 
+retorna = rTrim(Nombre)+' '+Apellido
+retorna2 = idcliente
+tabla = fn_Clientes
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K97
+[CLASS] detalle
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandgroup
+[OBJNAME] Detalle1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AddItem.Height = 67
+AddItem.Left = 8
+AddItem.Name = "AddItem"
+AddItem.Top = 0
+AddItem.Width = 31
+BackStyle = 0
+BorderStyle = 0
+Height = 138
+Left = 590
+Name = "Detalle1"
+RemoveItem.Height = 66
+RemoveItem.Left = 8
+RemoveItem.Name = "RemoveItem"
+RemoveItem.Top = 70
+RemoveItem.Width = 31
+TabIndex = 42
+Top = 280
+Width = 43
+ZOrderSet = 44
+campo = idcredito
+codigo = idcredito
+editable = .T.
+enlace = grdCodeudor
+tabla = vCodeudor
+valor = creditos.idcredito
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K92
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdCodeudor
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "vCodeudor.idcliente"
+Column1.FontSize = 8
+Column1.Name = "Column3"
+Column1.ReadOnly = .F.
+Column1.Width = 73
+Column2.ControlSource = "vCodeudor.nombre"
+Column2.FontSize = 8
+Column2.InputMask = ""
+Column2.Name = "Column4"
+Column2.ReadOnly = .T.
+Column2.Width = 310
+ColumnCount = 2
+FontSize = 8
+HeaderHeight = 22
+Height = 125
+Left = 304
+Name = "grdCodeudor"
+Panel = 1
+ReadOnly = .F.
+RecordSource = "vCodeudor"
+RecordSourceType = 1
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 29
+Top = 291
+Width = 290
+ZOrderSet = 43
+editable = .T.
+valorvariable = creditos.idcredito
+variablevista = m.idcredito
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K93
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCodeudor.Column3
+[START PROPERTIES]
+Alignment = 2
+BackColor = 0,64,128
+Caption = "Nro. C.I."
+FontBold = .T.
+FontSize = 8
+ForeColor = 255,255,255
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K94
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_clave2
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCodeudor.Column3
+[START PROPERTIES]
+ControlSource = "creditos.idcliente"
+Height = 22
+InputMask = "999999999"
+Left = 143
+Name = "Campo_clave2"
+TabIndex = 11
+Top = 78
+Width = 96
+ZOrderSet = 28
+indice = idcliente
+mensajeerror = No se encuentra el C.I. del Cliente
+objeto = This.Parent.Parent.Column4.Text1
+origen = R
+retorna = rtrim(Nombre)+' '+Apellido
+tabla = fn_Clientes
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K95
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCodeudor.Column4
+[START PROPERTIES]
+Alignment = 0
+BackColor = 0,64,128
+Caption = "Nombre y Apellido"
+FontBold = .T.
+FontSize = 8
+ForeColor = 255,255,255
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K96
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCodeudor.Column4
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = ""
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K98
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdCuotas
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ChildOrder = ""
+Column1.ControlSource = "vcuotas.nrocuota"
+Column1.FontSize = 8
+Column1.Name = "Column3"
+Column1.ReadOnly = .T.
+Column1.Width = 36
+Column2.ControlSource = "vcuotas.monto"
+Column2.FontSize = 8
+Column2.InputMask = "9,999,999,999"
+Column2.Name = "Column4"
+Column2.ReadOnly = .T.
+Column2.Width = 81
+Column3.ControlSource = "vcuotas.vence"
+Column3.DynamicInputMask = ""
+Column3.FontSize = 8
+Column3.Format = "YS"
+Column3.InputMask = "YS"
+Column3.Name = "Column5"
+Column3.ReadOnly = .T.
+Column3.Width = 72
+Column4.ControlSource = "vcuotas.saldo"
+Column4.FontSize = 8
+Column4.InputMask = "9,999,999,999"
+Column4.Name = "Column6"
+Column4.ReadOnly = .T.
+Column4.Width = 81
+ColumnCount = 4
+FontSize = 8
+HeaderHeight = 22
+Height = 125
+Left = 6
+LinkMaster = ""
+Name = "grdCuotas"
+Panel = 1
+ReadOnly = .T.
+RecordSource = "vCuotas"
+RecordSourceType = 1
+RelationalExpr = ""
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 27
+Top = 291
+Width = 299
+ZOrderSet = 45
+valorvariable = creditos.idcredito
+variablevista = m.idcredito
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K9C
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCuotas.Column3
+[START PROPERTIES]
+Alignment = 2
+BackColor = 0,64,128
+Caption = "Nro. "
+FontBold = .T.
+FontSize = 8
+ForeColor = 255,255,255
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K9D
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCuotas.Column3
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vcuotas.nrocuota"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K9E
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCuotas.Column4
+[START PROPERTIES]
+Alignment = 1
+BackColor = 0,64,128
+Caption = "Monto"
+FontBold = .T.
+FontSize = 8
+ForeColor = 255,255,255
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K9F
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCuotas.Column4
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vcuotas.monto"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "9,999,999,999"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K9G
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCuotas.Column5
+[START PROPERTIES]
+Alignment = 2
+BackColor = 0,64,128
+Caption = "Vence"
+FontBold = .T.
+FontSize = 8
+ForeColor = 255,255,255
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K9H
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCuotas.Column5
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vcuotas.vence"
+DateFormat = 13
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K9I
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCuotas.Column6
+[START PROPERTIES]
+Alignment = 1
+BackColor = 0,64,128
+Caption = "Saldo"
+FontBold = .T.
+FontSize = 8
+ForeColor = 255,255,255
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K9J
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCuotas.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vcuotas.saldo"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "9,999,999,999"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idCliente
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "creditos.idcliente"
+Height = 22
+InputMask = "999999999"
+Left = 135
+Name = "idCliente"
+TabIndex = 3
+Top = 70
+Width = 96
+ZOrderSet = 33
+datoayuda = Clientes
+indice = idcliente
+indice1 = 
+mensajeerror = No se encuentra el C.I. del Cliente
+objeto = this.parent.NombreCliente
+objeto2 = this.parent.Ci
+origen = R
+prefijo = 
+retorna = rTrim(Nombre)+' '+Apellido
+retorna2 = Ci
+tabla = fn_Clientes
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLBW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCuotas
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro. Cuotas"
+Height = 16
+Left = 61
+Name = "lblCuotas"
+TabIndex = 12
+Top = 166
+Width = 66
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLCI
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDiasatrasado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Dias atrasados"
+Height = 16
+Left = 436
+Name = "lblDiasatrasado"
+TabIndex = 38
+Top = 421
+Width = 83
+ZOrderSet = 25
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLBJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFecha
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Fecha"
+Height = 16
+Left = 93
+Name = "lblFecha"
+TabIndex = 6
+Top = 46
+Width = 34
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcliente
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Idcliente"
+Height = 16
+Left = 78
+Name = "lblIdcliente"
+TabIndex = 8
+Top = 70
+Width = 49
+ZOrderSet = 30
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcobrador
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Cobrador"
+Height = 16
+Left = 393
+Name = "lblIdcobrador"
+TabIndex = 34
+Top = 70
+Width = 71
+ZOrderSet = 26
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLB1
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcredito
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro. Credito"
+Height = 16
+Left = 58
+Name = "lblIdcredito"
+TabIndex = 5
+Top = 22
+Width = 68
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdsucursal
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Sucursal"
+Height = 16
+Left = 393
+Name = "lblIdsucursal"
+TabIndex = 30
+Top = 22
+Width = 71
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLCW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdvendedor
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Vendedor"
+Height = 16
+Left = 393
+Name = "lblIdvendedor"
+TabIndex = 36
+Top = 94
+Width = 71
+ZOrderSet = 28
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblImporte
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Importe credito"
+Height = 16
+Left = 39
+Name = "lblImporte"
+TabIndex = 10
+Top = 142
+Width = 88
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblPrimervto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+BackColor = 0,64,128
+BackStyle = 1
+Caption = "Cuotas"
+ForeColor = 255,255,255
+Height = 16
+Left = 8
+Name = "lblPrimervto"
+TabIndex = 26
+Top = 274
+Width = 274
+ZOrderSet = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLCC
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSaldo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Saldo"
+Height = 16
+Left = 271
+Name = "lblSaldo"
+TabIndex = 39
+Top = 421
+Width = 32
+ZOrderSet = 23
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTotal
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Total credito"
+Height = 16
+Left = 41
+Name = "lblTotal"
+TabIndex = 16
+Top = 214
+Width = 86
+ZOrderSet = 18
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NombreCliente
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 0
+Comment = ""
+ControlSource = ""
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 135
+MaxLength = 0
+Name = "NombreCliente"
+TabIndex = 9
+Top = 94
+Width = 232
+ZOrderSet = 32
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0US0ZW1IA
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] obs
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "creditos.obs"
+Height = 63
+Left = 395
+Name = "obs"
+TabIndex = 25
+Top = 202
+Width = 229
+ZOrderSet = 1
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 109
+Left = 391
+Name = "Ts3dshape1"
+Top = 14
+Width = 240
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 109
+Left = 15
+Name = "Ts3dshape2"
+Top = 14
+Width = 368
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0B008RFXC
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 136
+Left = 15
+Name = "Ts3dshape3"
+Top = 134
+Width = 368
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0B009IE1I
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 136
+Left = 391
+Name = "Ts3dshape4"
+Top = 134
+Width = 240
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA9
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "200,0"
+ControlSource = "Creditos.Idcobrador"
+FirstElement = 1
+Height = 22
+Left = 467
+Name = "Tscombobox1"
+NumberOfElements = 0
+Style = 2
+TabIndex = 35
+Top = 70
+Width = 157
+ZOrderSet = 35
+cmdsql = Select cobrador,idcobrador from bs_cobrador order by 1
+cursor = cCobrador
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA9
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "100,0"
+ControlSource = "Creditos.Idsucursal"
+FirstElement = 1
+Height = 22
+Left = 467
+Name = "Tscombobox2"
+NumberOfElements = 0
+Style = 2
+TabIndex = 31
+Top = 22
+Width = 157
+ZOrderSet = 34
+cmdsql = Select nombre,idsucursal from bs_Sucursal 
+cursor = cSucursal
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "200,0"
+ControlSource = "Creditos.Idvendedor"
+FirstElement = 1
+Height = 22
+Left = 467
+Name = "Tscombobox3"
+NumberOfElements = 0
+Style = 2
+TabIndex = 37
+Top = 94
+Width = 157
+ZOrderSet = 36
+cmdsql = Select nombre,idvendedor,IdComision from bs_Vendedor order by 1
+cursor = cVendedor
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ17ADGR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Importe cuota"
+Height = 16
+Left = 48
+Name = "Tslabel1"
+TabIndex = 14
+Top = 190
+Width = 79
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SD1BFNP1
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Tipo Credito"
+Height = 16
+Left = 393
+Name = "Tslabel2"
+TabIndex = 32
+Top = 46
+Width = 71
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0US0ZW1IB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Observacion"
+Height = 16
+Left = 395
+Name = "Tslabel3"
+TabIndex = 24
+Top = 187
+Width = 70
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0X5K9K
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+BackColor = 0,64,128
+BackStyle = 1
+Caption = "Codeudores"
+ForeColor = 255,255,255
+Height = 16
+Left = 306
+Name = "Tslabel4"
+TabIndex = 28
+Top = 274
+Width = 271
+ZOrderSet = 19
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XE0XBJI0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Primer Venc."
+Height = 16
+Left = 39
+Name = "Tslabel5"
+TabIndex = 18
+Top = 237
+Width = 86
+ZOrderSet = 38
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1030XCLBN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "C.I."
+Height = 16
+Left = 239
+Name = "Tslabel6"
+TabIndex = 7
+Top = 70
+Width = 33
+ZOrderSet = 27
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _18E0L5TOY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro. Pagaré"
+Height = 16
+Left = 399
+Name = "Tslabel7"
+TabIndex = 20
+Top = 142
+Width = 65
+ZOrderSet = 40
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _18E0L5TP0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro. Orden"
+Height = 16
+Left = 403
+Name = "Tslabel8"
+TabIndex = 22
+Top = 166
+Width = 61
+ZOrderSet = 42
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _18E0L5TOX
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "creditos.nropagare"
+Height = 22
+InputMask = "999,999,999"
+Left = 467
+Name = "Tstextbox1"
+TabIndex = 21
+Top = 142
+Width = 157
+ZOrderSet = 39
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+**
+PROCEDURE Valid
+IF STR(this.value) <> this.tag .AND.  .NOT. EMPTY(this.parent.txtcuotas.value)
+     thisform.calcularcuota()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _18E0L5TOZ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "creditos.nroorden"
+Height = 22
+InputMask = "999,999,999"
+Left = 467
+Name = "Tstextbox2"
+TabIndex = 23
+Top = 166
+Width = 157
+ZOrderSet = 41
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+**
+PROCEDURE Valid
+IF STR(this.value) <> this.tag .AND.  .NOT. EMPTY(this.parent.txtcuotas.value)
+     thisform.calcularcuota()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLBS
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCuotas
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "creditos.cuotas"
+Height = 22
+InputMask = "999"
+Left = 135
+Name = "txtCuotas"
+TabIndex = 13
+Top = 166
+Width = 132
+ZOrderSet = 15
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+**
+PROCEDURE Valid
+IF STR(this.value) <> this.tag
+     thisform.calcularcuota()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLCF
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDiasatrasado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 0
+Comment = ""
+ControlSource = "creditos.diasatrasado"
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 527
+Name = "txtDiasatrasado"
+TabIndex = 41
+Top = 421
+Width = 36
+ZOrderSet = 24
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLBG
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecha
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "creditos.fecha"
+Height = 22
+Left = 135
+Name = "txtFecha"
+TabIndex = 2
+Top = 46
+Width = 96
+ZOrderSet = 9
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+this.parent.txtprimervto.value = GOMONTH(this.value, 1)
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLAY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdcredito
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "creditos.idcredito"
+Height = 22
+Left = 135
+Name = "txtIdcredito"
+TabIndex = 1
+Top = 22
+Width = 96
+ZOrderSet = 4
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLA8
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtImporte
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "creditos.importe"
+Height = 22
+InputMask = "999,999,999"
+Left = 135
+Name = "txtImporte"
+TabIndex = 11
+Top = 142
+Width = 132
+ZOrderSet = 11
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+**
+PROCEDURE Valid
+IF STR(this.value) <> this.tag .AND.  .NOT. EMPTY(this.parent.txtcuotas.value)
+     thisform.calcularcuota()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ17ICFY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtImportecuota
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 1
+Comment = ""
+ControlSource = "creditos.importecuota"
+DisabledForeColor = 128,128,128
+Enabled = .T.
+Height = 22
+InputMask = "999,999,999"
+Left = 135
+Name = "txtImportecuota"
+TabIndex = 15
+Top = 190
+Width = 132
+ZOrderSet = 29
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+**
+PROCEDURE LostFocus
+IF STR(this.value) <> this.tag
+     this.parent.txttotal.value = this.value * this.parent.txtcuotas.value
+     this.parent.txtsaldo.value = this.parent.txttotal.value
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLC3
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtPrimervto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "creditos.primervto"
+Height = 22
+Left = 135
+Name = "txtPrimervto"
+TabIndex = 19
+Top = 238
+Width = 132
+ZOrderSet = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLC9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSaldo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 0
+Comment = ""
+ControlSource = "creditos.saldo"
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999"
+Left = 311
+Name = "txtSaldo"
+TabIndex = 40
+Top = 421
+Width = 108
+ZOrderSet = 22
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ12TLBY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTotal
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 0
+Comment = ""
+ControlSource = "creditos.total"
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 21
+InputMask = "999,999,999"
+Left = 135
+Name = "txtTotal"
+TabIndex = 17
+Top = 214
+Width = 132
+ZOrderSet = 17
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

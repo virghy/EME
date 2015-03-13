@@ -1,0 +1,1091 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8DW
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+Left = 450
+Name = "Dataenvironment"
+Top = 131
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8DX
+[CLASS] cursoradapter
+[BASECLASS] cursoradapter
+[OBJNAME] Cursoradapter1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "cursoradapter1"
+CursorSchema =      376AUDITFECHA T, AUDITUSUARIO C(10), CLIENTE C(50), DESCRIPCION M, ESTADO C(1), FECHA T, FECHAENTREGA T, FIN T, IDCLIENTE C(10), IDEMPRESA C(3), IDMONEDA C(3), IDPROYECTO I, INICIO T, LOCALIDAD C(50), NOMBRE C(50), NRO I, PBENEFICIOS N(5, 2), PGASTOS N(5, 2), PPERDIDAS N(5, 2), RESPONSABLE1 C(50), RESPONSABLE2 C(50), DECIMPORTE I, DECLAA I, DECMEDICION I, DECNPI I, DECPRECIO I
+DataSourceType = "ODBC"
+FetchSize = -1
+Flags = 0
+Height = 90
+KeyFieldList = IDPROYECTO
+Left = 10
+Name = "Cursoradapter1"
+SelectCmd =      322select AuditFecha, AuditUsuario, Cliente, Descripcion, Estado, Fecha, FechaEntrega, Fin, IdCliente, IdEmpresa, IdMoneda, IdProyecto, Inicio, Localidad, Nombre, Nro, PBeneficios, PGastos, PPerdidas, Responsable1, Responsable2, decImporte, decLAA, decMedicion, decNPI, decPrecio from pr_Poyecto where IdEmpresa=?oApp.Empresa
+Tables = pr_Poyecto
+Tag = "DRIVER=SQL Server;SERVER=vgo\sqlexpress;APP=Futura Software;DATABASE=FUTURA;LANGUAGE=Español;Trusted_Connection=No;UID=FuturaApp;PWD=AppFutura;"
+Top = 20
+UpdatableFieldList =      269AUDITFECHA, AUDITUSUARIO, CLIENTE, DESCRIPCION, ESTADO, FECHA, FECHAENTREGA, FIN, IDCLIENTE, IDEMPRESA, IDMONEDA, IDPROYECTO, INICIO, LOCALIDAD, NOMBRE, NRO, PBENEFICIOS, PGASTOS, PPERDIDAS, RESPONSABLE1, RESPONSABLE2, DECIMPORTE, DECLAA, DECMEDICION, DECNPI, DECPRECIO
+UpdateNameList =      800AUDITFECHA pr_Poyecto.AuditFecha, AUDITUSUARIO pr_Poyecto.AuditUsuario, CLIENTE pr_Poyecto.Cliente, DESCRIPCION pr_Poyecto.Descripcion, ESTADO pr_Poyecto.Estado, FECHA pr_Poyecto.Fecha, FECHAENTREGA pr_Poyecto.FechaEntrega, FIN pr_Poyecto.Fin, IDCLIENTE pr_Poyecto.IdCliente, IDEMPRESA pr_Poyecto.IdEmpresa, IDMONEDA pr_Poyecto.IdMoneda, IDPROYECTO pr_Poyecto.IdProyecto, INICIO pr_Poyecto.Inicio, LOCALIDAD pr_Poyecto.Localidad, NOMBRE pr_Poyecto.Nombre, NRO pr_Poyecto.Nro, PBENEFICIOS pr_Poyecto.PBeneficios, PGASTOS pr_Poyecto.PGastos, PPERDIDAS pr_Poyecto.PPerdidas, RESPONSABLE1 pr_Poyecto.Responsable1, RESPONSABLE2 pr_Poyecto.Responsable2, DECIMPORTE pr_Poyecto.decImporte, DECLAA pr_Poyecto.decLAA, DECMEDICION pr_Poyecto.decMedicion, DECNPI pr_Poyecto.decNPI, DECPRECIO pr_Poyecto.decPrecio
+Width = 91
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE AutoOpen
+*** Setup code: DO NOT REMOVE
+if not pemstatus(This, '__VFPSetup', 5)
+	This.AddProperty('__VFPSetup', 1)
+	This.Init()
+endif
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+PROCEDURE Init
+*** Setup code: DO NOT REMOVE
+local llReturn
+do case
+	case not pemstatus(This, '__VFPSetup', 5)
+		This.AddProperty('__VFPSetup', 0)
+	case This.__VFPSetup = 1
+		This.__VFPSetup = 2
+	case This.__VFPSetup = 2
+		This.__VFPSetup = 0
+		return
+endcase
+set multilocks on
+llReturn = dodefault()
+*** End of Setup code: DO NOT REMOVE
+*** Select connection code: DO NOT REMOVE
+
+***<DataSource>
+This.DataSource = sqlstringconnect([DRIVER=SQL Server;SERVER=vgo\sqlexpress;APP=Futura Software;DATABASE=FUTUR] + ;
+	[A;LANGUAGE=Español;Trusted_Connection=No;UID=FuturaApp;PWD=AppFutura;])
+***</DataSource>
+*** End of Select connection code: DO NOT REMOVE
+
+*** Setup code: DO NOT REMOVE
+if This.__VFPSetup = 1
+	This.__VFPSetup = 2
+endif
+return llReturn
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8DY
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+DoCreate = .T.
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8E6
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtDescripcion
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.descripcion"
+Left = 132
+Name = "edtDescripcion"
+TabIndex = 1
+Top = 126
+Width = 80
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8E0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAuditfecha
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Auditfecha"
+Height = 16
+Left = 44
+Name = "lblAuditfecha"
+TabIndex = 1
+Top = 45
+Width = 61
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8E3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAuditusuario
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Auditusuario"
+Height = 16
+Left = 44
+Name = "lblAuditusuario"
+TabIndex = 1
+Top = 72
+Width = 73
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8E5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCliente
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Cliente"
+Height = 16
+Left = 44
+Name = "lblCliente"
+TabIndex = 1
+Top = 99
+Width = 41
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8F7
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDecimporte
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Decimporte"
+Height = 16
+Left = 44
+Name = "lblDecimporte"
+TabIndex = 1
+Top = 668
+Width = 66
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8F9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDeclaa
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Declaa"
+Height = 16
+Left = 44
+Name = "lblDeclaa"
+TabIndex = 1
+Top = 695
+Width = 37
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8FB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDecmedicion
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Decmedicion"
+Height = 16
+Left = 44
+Name = "lblDecmedicion"
+TabIndex = 1
+Top = 722
+Width = 73
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8FD
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDecnpi
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Decnpi"
+Height = 16
+Left = 44
+Name = "lblDecnpi"
+TabIndex = 1
+Top = 749
+Width = 39
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8FF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDecprecio
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Decprecio"
+Height = 16
+Left = 44
+Name = "lblDecprecio"
+TabIndex = 1
+Top = 776
+Width = 57
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8E7
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcion
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Descripcion"
+Height = 16
+Left = 44
+Name = "lblDescripcion"
+TabIndex = 1
+Top = 126
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8E9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblEstado
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Estado"
+Height = 16
+Left = 44
+Name = "lblEstado"
+TabIndex = 1
+Top = 206
+Width = 39
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFecha
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Fecha"
+Height = 16
+Left = 44
+Name = "lblFecha"
+TabIndex = 1
+Top = 233
+Width = 34
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8ED
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFechaentrega
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Fechaentrega"
+Height = 16
+Left = 44
+Name = "lblFechaentrega"
+TabIndex = 1
+Top = 260
+Width = 77
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFin
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Fin"
+Height = 16
+Left = 44
+Name = "lblFin"
+TabIndex = 1
+Top = 287
+Width = 18
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EH
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcliente
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Idcliente"
+Height = 16
+Left = 44
+Name = "lblIdcliente"
+TabIndex = 1
+Top = 314
+Width = 49
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdempresa
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Idempresa"
+Height = 16
+Left = 44
+Name = "lblIdempresa"
+TabIndex = 1
+Top = 341
+Width = 62
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EL
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdmoneda
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Idmoneda"
+Height = 16
+Left = 44
+Name = "lblIdmoneda"
+TabIndex = 1
+Top = 368
+Width = 57
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdproyecto
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Idproyecto"
+Height = 16
+Left = 44
+Name = "lblIdproyecto"
+TabIndex = 1
+Top = 395
+Width = 61
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblInicio
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Inicio"
+Height = 16
+Left = 44
+Name = "lblInicio"
+TabIndex = 1
+Top = 422
+Width = 31
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8ER
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblLocalidad
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Localidad"
+Height = 16
+Left = 44
+Name = "lblLocalidad"
+TabIndex = 1
+Top = 449
+Width = 54
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8ET
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNombre
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Nombre"
+Height = 16
+Left = 44
+Name = "lblNombre"
+TabIndex = 1
+Top = 476
+Width = 46
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNro
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Nro"
+Height = 16
+Left = 44
+Name = "lblNro"
+TabIndex = 1
+Top = 503
+Width = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EX
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblPbeneficios
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Pbeneficios"
+Height = 16
+Left = 44
+Name = "lblPbeneficios"
+TabIndex = 3
+Top = 530
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblPgastos
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Pgastos"
+Height = 16
+Left = 44
+Name = "lblPgastos"
+TabIndex = 4
+Top = 558
+Width = 47
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8F1
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblPperdidas
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Pperdidas"
+Height = 16
+Left = 44
+Name = "lblPperdidas"
+TabIndex = 5
+Top = 586
+Width = 58
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8F3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblResponsable1
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Responsable1"
+Height = 16
+Left = 44
+Name = "lblResponsable1"
+TabIndex = 1
+Top = 614
+Width = 80
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8F5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblResponsable2
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Caption = "Responsable2"
+Height = 16
+Left = 44
+Name = "lblResponsable2"
+TabIndex = 1
+Top = 641
+Width = 80
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8DZ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAuditfecha
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.auditfecha"
+Height = 22
+Left = 132
+Name = "txtAuditfecha"
+TabIndex = 1
+Top = 45
+Width = 125
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8E2
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAuditusuario
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.auditusuario"
+Height = 22
+Left = 132
+MaxLength = 10
+Name = "txtAuditusuario"
+TabIndex = 1
+Top = 72
+Width = 70
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8E4
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCliente
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.cliente"
+Height = 22
+Left = 132
+MaxLength = 50
+Name = "txtCliente"
+TabIndex = 1
+Top = 99
+Width = 308
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8F6
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDecimporte
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.decimporte"
+Height = 22
+Left = 132
+Name = "txtDecimporte"
+TabIndex = 1
+Top = 668
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8F8
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDeclaa
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.declaa"
+Height = 22
+Left = 132
+Name = "txtDeclaa"
+TabIndex = 1
+Top = 695
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8FA
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDecmedicion
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.decmedicion"
+Height = 22
+Left = 132
+Name = "txtDecmedicion"
+TabIndex = 1
+Top = 722
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8FC
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDecnpi
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.decnpi"
+Height = 22
+Left = 132
+Name = "txtDecnpi"
+TabIndex = 1
+Top = 749
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8FE
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDecprecio
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.decprecio"
+Height = 22
+Left = 132
+Name = "txtDecprecio"
+TabIndex = 1
+Top = 776
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8E8
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtEstado
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.estado"
+Height = 22
+Left = 132
+MaxLength = 1
+Name = "txtEstado"
+TabIndex = 1
+Top = 206
+Width = 28
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EA
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecha
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.fecha"
+Height = 22
+Left = 132
+Name = "txtFecha"
+TabIndex = 1
+Top = 233
+Width = 125
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EC
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFechaentrega
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.fechaentrega"
+Height = 22
+Left = 132
+Name = "txtFechaentrega"
+TabIndex = 1
+Top = 260
+Width = 125
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EE
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFin
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.fin"
+Height = 22
+Left = 132
+Name = "txtFin"
+TabIndex = 1
+Top = 287
+Width = 125
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EG
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdcliente
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.idcliente"
+Height = 22
+Left = 132
+MaxLength = 10
+Name = "txtIdcliente"
+TabIndex = 1
+Top = 314
+Width = 70
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EI
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdempresa
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.idempresa"
+Height = 22
+Left = 132
+MaxLength = 3
+Name = "txtIdempresa"
+TabIndex = 1
+Top = 341
+Width = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EK
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdmoneda
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.idmoneda"
+Height = 22
+Left = 132
+MaxLength = 3
+Name = "txtIdmoneda"
+TabIndex = 1
+Top = 368
+Width = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EM
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdproyecto
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.idproyecto"
+Height = 22
+Left = 132
+Name = "txtIdproyecto"
+TabIndex = 1
+Top = 395
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtInicio
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.inicio"
+Height = 22
+Left = 132
+Name = "txtInicio"
+TabIndex = 1
+Top = 422
+Width = 125
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EQ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtLocalidad
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.localidad"
+Height = 22
+Left = 132
+MaxLength = 50
+Name = "txtLocalidad"
+TabIndex = 1
+Top = 449
+Width = 308
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8ES
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.nombre"
+Height = 22
+Left = 132
+MaxLength = 50
+Name = "txtNombre"
+TabIndex = 1
+Top = 476
+Width = 308
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNro
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.nro"
+Height = 22
+Left = 132
+Name = "txtNro"
+TabIndex = 1
+Top = 503
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EW
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtPbeneficios
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.pbeneficios"
+Height = 23
+Left = 132
+Name = "txtPbeneficios"
+TabIndex = 1
+Top = 530
+Width = 45
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8EY
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtPgastos
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.pgastos"
+Height = 23
+Left = 132
+Name = "txtPgastos"
+TabIndex = 1
+Top = 558
+Width = 45
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8F0
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtPperdidas
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.pperdidas"
+Height = 23
+Left = 132
+Name = "txtPperdidas"
+TabIndex = 1
+Top = 586
+Width = 45
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8F2
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtResponsable1
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.responsable1"
+Height = 22
+Left = 132
+MaxLength = 50
+Name = "txtResponsable1"
+TabIndex = 1
+Top = 614
+Width = 308
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24V11B8F4
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtResponsable2
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cursoradapter1.responsable2"
+Height = 22
+Left = 132
+MaxLength = 50
+Name = "txtResponsable2"
+TabIndex = 1
+Top = 641
+Width = 308
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

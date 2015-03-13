@@ -1,0 +1,172 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IW0QQ846
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 220
+Left = 1
+Width = 520
+Height = 200
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J70L6FX7
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 10
+Height = 90
+Width = 91
+Alias = "cp_cartera"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+CursorSource = "cp_cartera"
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IW0QQ847
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] CARTERA
+[START PROPERTIES]
+Height = 217
+Width = 395
+DoCreate = .T.
+Caption = "Cartera de Proveedores"
+campos = IdEmpresa
+tabla1 = cp_cartera
+valores = oApp.Empresa
+Name = "CARTERA"
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 2
+Pageframe1.Left = 1
+Pageframe1.Width = 395
+Pageframe1.Height = 214
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J60NN85A
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCodigo
+[PARENT] CARTERA.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Alignment = 1
+Caption = "IdCartera"
+Height = 16
+Left = 58
+Top = 62
+Width = 76
+TabIndex = 32
+ZOrderSet = 28
+Name = "lblCodigo"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J60NN85B
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] CARTERA.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Alignment = 1
+Caption = "Cartera"
+Height = 16
+Left = 58
+Top = 87
+Width = 76
+TabIndex = 32
+ZOrderSet = 28
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J60NN85C
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCartera
+[PARENT] CARTERA.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Anchor = 0
+ControlSource = "cp_cartera.cartera"
+Height = 22
+Left = 137
+TabIndex = 2
+Top = 87
+Width = 228
+ZOrderSet = 41
+Name = "txtCartera"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J60NN85D
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] TxtIdCartera
+[PARENT] CARTERA.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cp_cartera.idcartera"
+Height = 22
+Left = 137
+TabIndex = 1
+Top = 62
+Width = 60
+ZOrderSet = 6
+Name = "TxtIdCartera"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

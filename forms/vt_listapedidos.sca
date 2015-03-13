@@ -1,0 +1,605 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CV0K0GZ5
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 435
+Left = -60
+Name = "Dataenvironment"
+Top = 86
+Width = 847
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+PUBLIC LFECHA, VTOTAL
+STORE DATE() TO LFECHA
+SQL("SELECT convert(bit,0) as Marcado, Vt_pedido.NroPedido, Vt_pedido.FechaPedido,  "+"  Vt_pedido.IdCliente,Vt_clientes.RazSocial AS cliente,Vt_pedido.Importe,  "+"  Vt_pedido.HoraEntrega,Vt_pedido.HoraPedido, Vt_pedido.FechaEntrega,  "+"   Vt_pedido.Direccion, "+"  Vt_pedido.IdVendedor, Vt_pedido.IdPedido, Vt_pedido.IdEstado, "+"   Vt_pedido.Obs "+" FROM dbo.VT_Pedido Vt_pedido, dbo.vt_clientes Vt_clientes "+" WHERE Vt_clientes.IdEmpresa = Vt_pedido.IdEmpresa "+"   AND Vt_pedido.IdCliente = Vt_clientes.IdCliente "+"   AND Vt_pedido.idempresa = ?oApp.Empresa "+"   AND Vt_pedido.idestado = 'P' and fechapedido= ?m.lfecha", 'cListaPedido')
+SUM CLISTAPEDIDO.IMPORTE TO VTOTAL 
+GOTO TOP
+ENDPROC
+**
+[END METHODS]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CV0K0GZ6
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+AppConfig.Name = "AppConfig"
+BorderStyle = 3
+Caption = "Pedidos a Facturar"
+DataSession = 2
+DoCreate = .T.
+Height = 415
+Name = "Tsbaseform12"
+Width = 639
+WindowType = 1
+ctoolbar = tstoolbar
+editmode = .F.
+idobjeto = 52
+lallowdelete = .F.
+lallowedits = .F.
+lallownew = .F.
+lblRequerido.Name = "lblRequerido"
+navegador = .F.
+tabla1 = cListaPedido
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Activate
+DODEFAULT()
+THIS.FILTRAR()
+ENDPROC
+**
+PROCEDURE Destroy
+DODEFAULT()
+RELEASE LFECHA, VTOTAL
+ENDPROC
+**
+PROCEDURE Init
+LPARAMETERS LOORIGEN
+PUBLIC VTOTAL, LFECHA
+STORE DATE() TO LFECHA
+STORE 0 TO VTOTAL
+THIS.ORIGEN = LOORIGEN
+DODEFAULT()
+ENDPROC
+**
+[END METHODS]
+[START RESERVED3]
+*filtrar 
+origen
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CV0K0GZ5
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdAddToCurrentOrder
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Ag\<regar Pedidos marcados"
+Height = 26
+Left = 21
+Name = "cmdAddToCurrentOrder"
+TabStop = .F.
+Top = 372
+Width = 168
+ZOrderSet = 3
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LCALIAS, LOGRID, LNOLDAREA, LNNUMITEMSADDED
+LNNUMITEMSADDED = 0
+LOCAL LNTHISSESSIONID, LNTARGETSESSIONID
+LNTHISSESSIONID = THISFORM.DATASESSIONID
+LNTARGETSESSIONID = THISFORM.ORIGEN.DATASESSIONID
+LNOLDAREA = SELECT()
+THISFORM.LOCKSCREEN = .T.
+THISFORM.ORIGEN.LOCKSCREEN = .T.
+LOGRID = THISFORM.GRIDLINEITEMS
+LCALIAS = LOGRID.RECORDSOURCE
+SELECT (LCALIAS)
+WAIT WINDOW NOWAIT "Actualizando el pedido"
+SCAN
+IF THISFORM.TSOPTIONGROUP1.OPTION1.VALUE=1
+IF CLISTAPEDIDO.MARCADO
+LCIDPEDIDO = CLISTAPEDIDO.IDPEDIDO
+LCIDCLIENTE = CLISTAPEDIDO.IDCLIENTE
+LCNROPEDIDO = CLISTAPEDIDO.NROPEDIDO
+LNIMPORTE = CLISTAPEDIDO.IMPORTE
+LCFECHAPEDIDO = CLISTAPEDIDO.FECHAPEDIDO
+LCCLIENTE = CLISTAPEDIDO.CLIENTE
+LCFECHA = GETDATE()
+SET DATASESSION TO (LNTARGETSESSIONID)
+INSERT INTO vt_Confirma (IDPEDIDO, IDCLIENTE, NROPEDIDO, IMPORTE, FECHAPEDIDO, CLIENTE, FECHAFACTURA) VALUES (LCIDPEDIDO, LCIDCLIENTE, LCNROPEDIDO, LNIMPORTE, LCFECHAPEDIDO, LCCLIENTE, LCFECHA)
+SET DATASESSION TO (LNTHISSESSIONID)
+LNNUMITEMSADDED = LNNUMITEMSADDED+1
+ENDIF
+= TABLEREVERT(.T., "cListaPedido")
+ELSE
+IF CLISTAPEDIDO2.MARCADO
+LCIDPEDIDO = CLISTAPEDIDO2.IDPEDIDO
+LCIDCLIENTE = CLISTAPEDIDO2.IDCLIENTE
+LCNROPEDIDO = CLISTAPEDIDO2.NROPEDIDO
+LNIMPORTE = CLISTAPEDIDO2.IMPORTE
+LCFECHAPEDIDO = CLISTAPEDIDO2.FECHAPEDIDO
+LCCLIENTE = CLISTAPEDIDO2.CLIENTE
+LCFECHA = GETDATE()
+SET DATASESSION TO (LNTARGETSESSIONID)
+INSERT INTO vt_Confirma (IDPEDIDO, IDCLIENTE, NROPEDIDO, IMPORTE, FECHAPEDIDO, CLIENTE, FECHAFACTURA) VALUES (LCIDPEDIDO, LCIDCLIENTE, LCNROPEDIDO, LNIMPORTE, LCFECHAPEDIDO, LCCLIENTE, LCFECHA)
+SET DATASESSION TO (LNTHISSESSIONID)
+LNNUMITEMSADDED = LNNUMITEMSADDED+1
+ENDIF
+= TABLEREVERT(.T., "cListaPedido2")
+ENDIF
+ENDSCAN
+SELECT (LNOLDAREA)
+THISFORM.HIDE()
+THISFORM.ORIGEN.REFRESHFORM()
+THISFORM.ORIGEN.LOCKSCREEN = .F.
+WAIT CLEAR
+RELEASE THISFORM, VPMONEDA
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TA
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] gridLineItems
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Column1.ColumnOrder = 2
+Column1.ControlSource = ""
+Column1.FontSize = 8
+Column1.Name = "NroPedido"
+Column1.ReadOnly = .T.
+Column1.Width = 68
+Column2.ColumnOrder = 3
+Column2.ControlSource = ""
+Column2.FontSize = 8
+Column2.Name = "Fecha"
+Column2.ReadOnly = .T.
+Column2.Width = 57
+Column3.ColumnOrder = 4
+Column3.ControlSource = ""
+Column3.FontSize = 8
+Column3.Name = "IdCliente"
+Column3.ReadOnly = .T.
+Column3.Width = 63
+Column4.ColumnOrder = 5
+Column4.ControlSource = ""
+Column4.FontSize = 8
+Column4.Name = "Cliente"
+Column4.ReadOnly = .T.
+Column4.Width = 230
+Column5.ColumnOrder = 1
+Column5.ControlSource = ""
+Column5.FontSize = 8
+Column5.Name = "Marcado"
+Column5.Sparse = .F.
+Column5.Width = 67
+Column6.ColumnOrder = 6
+Column6.ControlSource = ""
+Column6.FontSize = 8
+Column6.InputMask = "999,999,999"
+Column6.Name = "Importe"
+Column6.ReadOnly = .T.
+Column6.Width = 76
+ColumnCount = 6
+FontSize = 8
+Height = 324
+Left = 12
+Name = "gridLineItems"
+Panel = 1
+RecordSource = "cListaPedido"
+RecordSourceType = 1
+RowHeight = 17
+ScrollBars = 2
+Top = 12
+Width = 586
+campo = FechaFactura
+editable = .F.
+valor = GetDate()
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TH
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.gridLineItems.Cliente
+[START PROPERTIES]
+Caption = "Cliente"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TI
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.gridLineItems.Cliente
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TD
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.gridLineItems.Fecha
+[START PROPERTIES]
+Caption = "Fecha"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TE
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.gridLineItems.Fecha
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TF
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.gridLineItems.IdCliente
+[START PROPERTIES]
+Caption = "Id Cliente"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TG
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.gridLineItems.IdCliente
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TL
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.gridLineItems.Importe
+[START PROPERTIES]
+Caption = "Importe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TM
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.gridLineItems.Importe
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TJ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.gridLineItems.Marcado
+[START PROPERTIES]
+Caption = "Marcado"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF EMPTY(THIS.TAG)
+REPLACE MARCADO WITH .T. ALL
+THIS.TAG = 'M'
+ELSE
+REPLACE MARCADO WITH .F. ALL
+THIS.TAG = ""
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TK
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] Check1
+[PARENT] Tsbaseform12.gridLineItems.Marcado
+[START PROPERTIES]
+Caption = ""
+Height = 17
+Left = 28
+Name = "Check1"
+Top = 23
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TB
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.gridLineItems.NroPedido
+[START PROPERTIES]
+Caption = "Nro Pedido"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70Y96TC
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NroPedido
+[PARENT] Tsbaseform12.gridLineItems.NroPedido
+[START PROPERTIES]
+Left = 35
+Name = "NroPedido"
+ReadOnly = .T.
+Top = 23
+actualizar = .F.
+condicionextra = a.IdEmpresa=?oApp.Empresa and b.IdEmpresa=?oApp.Empresa  and a.IDCliente = b.IdCliente
+copiarcampos = a.IdCliente,RazSocial as Cliente, Importe
+indice = NroPedido
+objeto = this.parent.parent.Fecha.text1
+origen = R
+pegarcampos = IdCliente,Cliente,Importe
+resulrepe = .T.
+retorna = FechaPedido
+tabla = vt_Pedido a, vt_Clientes b
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1PH10LDXR
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Marcar  \<Todos"
+Height = 26
+Left = 194
+Name = "Tscommandbutton1"
+TabStop = .F.
+Top = 372
+Width = 112
+ZOrderSet = 3
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THIS.TAG = IIF(EMPTY(THIS.TAG), '1', '')
+IF THISFORM.TSOPTIONGROUP1.OPTION2.VALUE=1
+SELECT CLISTAPEDIDO2
+REPLACE CLISTAPEDIDO2.MARCADO WITH IIF( .NOT. EMPTY(THIS.TAG), .T., .F.) ALL
+ELSE
+SELECT CLISTAPEDIDO
+REPLACE CLISTAPEDIDO.MARCADO WITH IIF( .NOT. EMPTY(THIS.TAG), .T., .F.) ALL
+ENDIF
+GOTO TOP
+THIS.CAPTION = IIF( .NOT. EMPTY(THIS.TAG), 'Desmarcar \<Todos', 'Marcar \<Todos')
+THISFORM.REFRESH
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1PF1426RZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Total:"
+Height = 12
+Left = 420
+Name = "Tslabel1"
+Top = 336
+Width = 41
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1PH0YXU6V
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Fecha"
+Height = 22
+Left = 306
+Name = "Tslabel2"
+Top = 336
+Width = 41
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CV0K0GZ5
+[CLASS] tsoptiongroup
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] optiongroup
+[OBJNAME] Tsoptiongroup1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 29
+Left = 312
+Name = "Tsoptiongroup1"
+Option1.AutoSize = .F.
+Option1.Caption = "Por Fecha"
+Option1.FontBold = .T.
+Option1.Height = 18
+Option1.Left = 14
+Option1.Name = "Option1"
+Option1.Style = 0
+Option1.Top = 6
+Option1.Width = 93
+Option2.AutoSize = .F.
+Option2.Caption = "Todos los Pendientes"
+Option2.FontBold = .T.
+Option2.Height = 18
+Option2.Left = 110
+Option2.Name = "Option2"
+Option2.Style = 0
+Option2.Top = 6
+Option2.Width = 146
+Top = 372
+Width = 264
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Option1.Click
+IF  .NOT. USED('cListaPedido')
+SQL("SELECT convert(bit,0) as Marcado, Vt_pedido.NroPedido, Vt_pedido.FechaPedido,  "+"  Vt_pedido.IdCliente,Vt_clientes.RazSocial AS cliente,Vt_pedido.Importe,  "+"  Vt_pedido.HoraEntrega,Vt_pedido.HoraPedido, Vt_pedido.FechaEntrega,  "+"   Vt_pedido.Direccion, "+"  Vt_pedido.IdVendedor, Vt_pedido.IdPedido, Vt_pedido.IdEstado, "+"   Vt_pedido.Obs "+" FROM dbo.VT_Pedido Vt_pedido, dbo.vt_clientes Vt_clientes "+" WHERE Vt_clientes.IdEmpresa = Vt_pedido.IdEmpresa "+"   AND Vt_pedido.IdCliente = Vt_clientes.IdCliente "+"   AND Vt_pedido.idempresa = ?oApp.Empresa "+"   AND Vt_pedido.idestado = 'P' and fechapedido= ?m.lfecha order by Vt_pedido.NroPedido", 'cListaPedido')
+THISFORM.GRIDLINEITEMS.RECORDSOURCE = 'cListaPedido'
+SELECT CLISTAPEDIDO
+SUM CLISTAPEDIDO.IMPORTE TO VTOTAL 
+GOTO TOP
+SELECT CLISTAPEDIDO2
+USE
+THISFORM.REFRESH
+ENDIF
+ENDPROC
+**
+PROCEDURE Option2.Click
+IF  .NOT. USED('cListaPedido2')
+SQL("SELECT convert(bit,0) as Marcado, Vt_pedido.NroPedido, Vt_pedido.FechaPedido,  "+"  Vt_pedido.IdCliente,Vt_clientes.RazSocial AS cliente,Vt_pedido.Importe,  "+"  Vt_pedido.HoraEntrega,Vt_pedido.HoraPedido, Vt_pedido.FechaEntrega,  "+"   Vt_pedido.Direccion, "+"  Vt_pedido.IdVendedor, Vt_pedido.IdPedido, Vt_pedido.IdEstado, "+"   Vt_pedido.Obs "+" FROM dbo.VT_Pedido Vt_pedido, dbo.vt_clientes Vt_clientes "+" WHERE Vt_clientes.IdEmpresa = Vt_pedido.IdEmpresa "+"   AND Vt_pedido.IdCliente = Vt_clientes.IdCliente "+"   AND Vt_pedido.idempresa = ?oApp.Empresa "+"   AND Vt_pedido.idestado = 'P' order by Vt_pedido.NroPedido", 'cListaPedido2')
+THISFORM.GRIDLINEITEMS.RECORDSOURCE = 'cListaPedido2'
+SELECT CLISTAPEDIDO2
+SUM CLISTAPEDIDO2.IMPORTE TO VTOTAL 
+GOTO TOP
+SELECT CLISTAPEDIDO
+USE
+THISFORM.REFRESH
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1PF1426RY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ControlSource = "vtotal"
+Format = "K"
+InputMask = "99,999,999,999"
+Left = 480
+Name = "Tstextbox1"
+Top = 336
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1PH0YXU6U
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ControlSource = "lfecha"
+Left = 313
+Name = "Tstextbox2"
+Top = 348
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,489 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP0M18XG
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+InitialSelectedAlias = "rh_conceptos"
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW12CTPO
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rh_conceptos"
+CursorSource = "rh_conceptos"
+Database = \\venus\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP0MY7N5
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform12
+[START PROPERTIES]
+Caption = "Conceptos de Movimiento"
+DataSession = 2
+DoCreate = .T.
+Height = 300
+MinButton = .T.
+Name = "Tsmaintform12"
+PAGEFRAME1.ErasePage = .T.
+PAGEFRAME1.Height = 301
+PAGEFRAME1.Left = -1
+PAGEFRAME1.Name = "PAGEFRAME1"
+PAGEFRAME1.PAGE1.Name = "PAGE1"
+PAGEFRAME1.PAGE2.GRDLIST.Height = 199
+PAGEFRAME1.PAGE2.GRDLIST.Left = 2
+PAGEFRAME1.PAGE2.GRDLIST.Name = "GRDLIST"
+PAGEFRAME1.PAGE2.GRDLIST.Top = 3
+PAGEFRAME1.PAGE2.GRDLIST.Width = 287
+PAGEFRAME1.PAGE2.Name = "PAGE2"
+PAGEFRAME1.TabStretch = 1
+PAGEFRAME1.TabStyle = 0
+PAGEFRAME1.Top = -1
+PAGEFRAME1.Width = 493
+Width = 491
+WindowState = 0
+camponro = idconcepto,rh_conceptos,idEmpresa= ?oApp.Empresa
+campos = IdEmpresa
+campotam = 3
+idobjeto = 434
+lblRequerido.Name = "lblRequerido"
+tabla1 = rh_conceptos
+valores = oApp.Empresa
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP11C1A0
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] afecta
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnLines = .F.
+ColumnWidths = "189,0"
+ControlSource = "rh_conceptos.patr_empl"
+FirstElement = 1
+Height = 22
+Left = 180
+Name = "afecta"
+NumberOfElements = 0
+RowSource = "Empleado,E,Patronal,P"
+RowSourceType = 1
+Style = 2
+TabIndex = 14
+Top = 167
+Width = 189
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP0M18XG
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkAcept_mov
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .F.
+Caption = "Acepta  movimiento"
+Comment = ""
+ControlSource = "rh_conceptos.acept_mov"
+FontBold = .T.
+Height = 16
+Left = 84
+Name = "chkAcept_mov"
+Style = 0
+TabIndex = 15
+Top = 203
+Width = 128
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP11C197
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblConcepto
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Descripción"
+Height = 16
+Left = 87
+Name = "lblConcepto"
+TabIndex = 3
+Top = 46
+Width = 75
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP11C192
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdconcepto
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Concepto"
+Height = 16
+Left = 87
+Name = "lblIdconcepto"
+TabIndex = 1
+Top = 25
+Width = 75
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP11C19O
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblPatr_empl
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Afectación"
+Height = 16
+Left = 87
+Name = "lblPatr_empl"
+TabIndex = 13
+Top = 170
+Width = 75
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP11C199
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTipo
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Tipo"
+Height = 16
+Left = 87
+Name = "lblTipo"
+TabIndex = 5
+Top = 72
+Width = 75
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP0M18XG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblUnid_valor
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Medida"
+Height = 16
+Left = 87
+Name = "lblUnid_valor"
+TabIndex = 7
+Top = 95
+Width = 75
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0Y9879
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblValor
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Valor Modulo"
+Height = 16
+Left = 87
+Name = "lblValor"
+TabIndex = 9
+Top = 119
+Width = 75
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP11C18L
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Medida
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnLines = .F.
+ColumnWidths = "189,0"
+ControlSource = "rh_conceptos.unid_valor"
+FirstElement = 1
+Height = 22
+Left = 180
+Name = "Medida"
+NumberOfElements = 0
+RowSource = "Porcentaje,P,Unidad,U,Valor,V"
+RowSourceType = 1
+Style = 2
+TabIndex = 8
+Top = 95
+Width = 189
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+this.parent.txtvalor.refresh()
+this.parent.unidad.refresh()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP0M18XG
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tipo
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnLines = .F.
+ColumnWidths = "189,0"
+ControlSource = "rh_conceptos.tipo"
+FirstElement = 1
+Height = 22
+Left = 180
+Name = "Tipo"
+NumberOfElements = 0
+RowSource = "Ingreso,I,Egreso,E"
+RowSourceType = 1
+Style = 2
+TabIndex = 6
+Top = 71
+Width = 189
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW12AN6P
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .F.
+Caption = "Valor Imponible"
+ControlSource = "rh_conceptos.imponible"
+FontBold = .T.
+Height = 16
+Left = 84
+Name = "Tscheckbox1"
+Style = 0
+TabIndex = 15
+Top = 227
+Width = 128
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700KDQL6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Unidad"
+Height = 16
+Left = 87
+Name = "Tslabel1"
+TabIndex = 11
+Top = 143
+Width = 75
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP11C194
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtConcepto
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "rh_conceptos.concepto"
+Height = 22
+Left = 180
+Name = "txtConcepto"
+TabIndex = 4
+Top = 47
+Width = 189
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP11C18U
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdconcepto
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "rh_conceptos.idconcepto"
+Enabled = .T.
+Height = 22
+Left = 180
+Name = "txtIdconcepto"
+TabIndex = 2
+Top = 23
+Width = 189
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0Y9878
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtValor
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "rh_conceptos.valor"
+Height = 22
+Left = 180
+Name = "txtValor"
+TabIndex = 10
+Top = 119
+Width = 189
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+this.enabled = IIF(this.parent.medida.value =  ;
+               'V', .F., .T.)  ;
+               .AND.  ;
+               thisform.editmode
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700KDQL8
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Unidad
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnLines = .F.
+ColumnWidths = "189,0"
+ControlSource = "rh_conceptos.unidad"
+FirstElement = 1
+Height = 22
+Left = 180
+Name = "Unidad"
+NumberOfElements = 0
+RowSource = "Días,D,Horas,H"
+RowSourceType = 1
+Style = 2
+TabIndex = 12
+Top = 143
+Width = 189
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+this.enabled = IIF(this.parent.medida.value =  ;
+               'U', .T., .F.)  ;
+               .AND.  ;
+               thisform.editmode
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,1192 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 542
+InitialSelectedAlias = "depositos"
+Left = -72
+Name = "Dataenvironment"
+Top = 27
+Width = 819
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1J60YTUUP
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor7
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vdetdepos"
+BufferModeOverride = 5
+CursorSource = "ts_vdetdepos"
+Database = ..\data\datos.dbc
+Height = 245
+Left = 162
+Name = "Cursor7"
+NoDataOnLoad = .T.
+Top = 39
+Width = 138
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QE0XL6SY
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor5
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "depositos"
+BufferModeOverride = 5
+CursorSource = "ts_depositos"
+Database = ..\data\datos.dbc
+Height = 246
+Left = 495
+Name = "Cursor5"
+NoDataOnLoad = .T.
+Top = 21
+Width = 277
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WWM
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Depositos y Debitos-Creditos Bancarios"
+DoCreate = .T.
+Height = 461
+LockScreen = .F.
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 464
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.PageCount = 2
+Pageframe1.TabIndex = 1
+Pageframe1.Top = -2
+Pageframe1.Width = 480
+WhatsThisButton = .T.
+Width = 480
+WindowState = 0
+asientorecordsource = depositos.NroAsiento
+auditmarcahora = audit_Fecha
+auditusuario = Audit_usuario
+camponro = 
+campos = iddeposito,idempresa,Fecha, cotizacion
+campotam = 10
+detalle = .T.
+editmode = .F.
+etiquetamenu = Compras
+idasiento = ('03')
+identidad = iddeposito
+lblRequerido.Name = "lblRequerido"
+tabla1 = depositos
+tabla2 = vDetDepos
+tablaconsulta = DEPOSITOS
+valores = newid("TS_DEPOSITO"),oapp.empresa,Date(),1
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+THISFORM.PAGEFRAME1.PAGE1.NROCUENTA.VALUE = THISFORM.PAGEFRAME1.PAGE1.TSSUCURSAL.LIST(THISFORM.PAGEFRAME1.PAGE1.TSSUCURSAL.LISTINDEX, 3)
+THISFORM.PAGEFRAME1.PAGE1.NROCUENTASALIDA.VALUE = THISFORM.PAGEFRAME1.PAGE1.CUENTASALIDA.LIST(THISFORM.PAGEFRAME1.PAGE1.CUENTASALIDA.LISTINDEX, 3)
+ENDPROC
+PROCEDURE validar
+IF EMPTY(THISFORM.PAGEFRAME1.PAGE1.TSSUCURSAL.VALUE) .AND. EMPTY(THISFORM.PAGEFRAME1.PAGE1.CUENTASALIDA.VALUE)
+MESSAGEBOX('Ingrese cuenta', 64, "Futura Software")
+RETURN .F.
+ENDIF
+IF EMPTY(THISFORM.PAGEFRAME1.PAGE1.TOTALES.TXTTOTAL.VALUE)
+MESSAGEBOX('Ingrese Valor.', 64, "Futura Software")
+RETURN .F.
+ENDIF
+*!*	LOCAL A, B
+*!*	A = RTRIM(THIS.PAGEFRAME1.PAGE1.TSSUCURSAL.LIST(THIS.PAGEFRAME1.PAGE1.TSSUCURSAL.LISTINDEX, 3))
+*!*	B = RTRIM(THIS.PAGEFRAME1.PAGE1.CUENTASALIDA.LIST(THIS.PAGEFRAME1.PAGE1.CUENTASALIDA.LISTINDEX, 4))
+IF OPERACION.TIPO='T' .AND. ts_Cuentas.Idmoneda<> ts_Cuentas1.Idmoneda
+	MESSAGEBOX('No se puede transferir en Ctas. de moneda Diferente', 64, "Futura Software")
+	RETURN .F.
+ENDIF
+IF THIS.PAGEFRAME1.PAGE1.TSSUCURSAL.VALUE==THIS.PAGEFRAME1.PAGE1.CUENTASALIDA.VALUE
+MESSAGEBOX('Las cuentas de entrada y salida no pueden ser iguales.', 64, "Futura Software")
+RETURN .F.
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1XG0N2BID
+[CLASS] cboconcepto
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cboconcepto1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,40"
+ControlSource = "depositos.idconcepto"
+Height = 22
+Left = 83
+Name = "Cboconcepto1"
+TabIndex = 6
+Top = 128
+Width = 204
+cmdsql = Select concepto, convert(char(3),idconcepto) as IdConcepto, CuentaContable from cn_conceptos where idempresa= ?oApp.Empresa order by concepto
+cursor = cConceptos
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW0U5V3Q
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Cotizacion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "depositos.cotizacion"
+DateFormat = 13
+Format = ""
+Height = 23
+Left = 349
+Name = "Cotizacion"
+TabIndex = 9
+Top = 34
+Width = 105
+ZOrderSet = 3
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ED11YNZO
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] CuentaSalida
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+BoundTo = .F.
+ColumnCount = 4
+ColumnWidths = "150,0,0,20"
+ControlSource = "depositos.idcuenta"
+DisplayCount = 0
+DisplayValue = 
+FirstElement = 1
+Height = 23
+Left = 83
+Name = "CuentaSalida"
+NumberOfElements = 0
+Style = 2
+TabIndex = 4
+Top = 80
+Width = 207
+ZOrderSet = 9
+cmdsql = Select rtrim(c.nombre)+'  '+rtrim(c.idmoneda),convert(char(10),idcuenta) as IdCuenta,nrocuenta,c.idmoneda,Decimales from ts_Cuentas c left join bs_monedas m  on c.IdMoneda = m.IdMoneda where c.IdEmpresa=?oApp.Empresa
+cursor = ts_Cuentas1
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+If  .Not. Empty(This.Value)
+	This.Parent.NROCUENTASALIDA.Value = TS_CUENTAS1.NROCUENTA
+Else
+	This.Parent.NROCUENTASALIDA.Value = ''
+Endif
+If TS_CUENTAS1.DECIMALES>0
+	This.Parent.TSFACT1.COLUMN4.InputMask = '999,999,999.99'
+	This.Parent.TSFACT1.COLUMN4.TEXT1.InputMask = '999,999,999.99'
+Else
+	This.Parent.TSFACT1.COLUMN4.InputMask = '999,999,999,999'
+	This.Parent.TSFACT1.COLUMN4.TEXT1.InputMask = '999,999,999,999'
+Endif
+ENDPROC
+PROCEDURE ProgrammaticChange
+THIS.INTERACTIVECHANGE()
+ENDPROC
+PROCEDURE When
+RETURN OPERACION.TIPO<>'C'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07W0LMSRO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] fechafac
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Fecha:"
+FontBold = .F.
+Height = 16
+Left = 14
+Name = "fechafac"
+TabIndex = 13
+Top = 34
+Width = 64
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25U108MSR
+[CLASS] idproyecto
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idproyecto1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "depositos.nroproyecto"
+Height = 23
+Left = 83
+Name = "Idproyecto1"
+TabIndex = 7
+Top = 151
+Width = 72
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05F0ROVJR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdfactura
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro.:"
+FontBold = .T.
+Height = 12
+Left = 322
+Name = "lblIdfactura"
+TabIndex = 19
+Top = 10
+Visible = .T.
+Width = 25
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NroCuenta
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+DateFormat = 13
+Enabled = .F.
+Format = "K"
+Height = 23
+Left = 349
+Name = "NroCuenta"
+TabIndex = 10
+Top = 58
+Width = 105
+ZOrderSet = 6
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ED11YNZM
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NroCuentaSalida
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+DateFormat = 13
+Enabled = .F.
+Format = "K"
+Height = 23
+Left = 349
+Name = "NroCuentaSalida"
+TabIndex = 11
+Top = 82
+Width = 105
+ZOrderSet = 6
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Operacion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 3
+ColumnWidths = "150,65,30"
+ControlSource = "Depositos.Idoperacion"
+FontBold = .T.
+Height = 23
+Left = 83
+Name = "Operacion"
+RowSourceType = 3
+Style = 2
+TabIndex = 1
+Top = 8
+Width = 207
+ZOrderSet = 10
+cmdsql = select descripcion,idoperacion,tipo from ts_operacion where IdOperacion <> 2 order by 1 
+cursor = Operacion
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+IF OPERACION.TIPO='D'
+THIS.PARENT.TSSUCURSAL.VALUE = .NULL.
+ENDIF
+IF OPERACION.TIPO='C'
+THIS.PARENT.CUENTASALIDA.VALUE = .NULL.
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25U108MSP
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Proyecto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 23
+Left = 155
+Name = "Proyecto"
+TabIndex = 18
+Top = 151
+Width = 300
+ZOrderSet = 3
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] totales
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 52
+Left = 7
+Name = "totales"
+SpecialEffect = 1
+TabIndex = 22
+Top = 345
+Width = 448
+ZOrderSet = 2
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+THIS.PARENT.TSFACT1.SUMCOLUMN()
+IF THISFORM.EDITMODE
+THIS.TOTALEFECTIVO.VALUE = THIS.PARENT.TSFACT1.TOTALES(2)
+THIS.TOTALCHEQUE.VALUE = THIS.PARENT.TSFACT1.TOTALES(1)
+ENDIF
+THIS.TXTTOTAL.VALUE = THIS.TOTALEFECTIVO.VALUE+THIS.TOTALCHEQUE.VALUE
+DODEFAULT()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07W0LMSRQ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] TotalCheque
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 192,192,192
+ControlSource = "depositos.totalcheque"
+Enabled = .F.
+Height = 24
+InputMask = "999,999,999,999"
+Left = 182
+Name = "TotalCheque"
+TabIndex = 2
+Top = 21
+Value = 0
+Width = 84
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07W0LMSRO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] TotalEfectivo
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 192,192,192
+ControlSource = "depositos.totalefectivo"
+Enabled = .F.
+Height = 24
+InputMask = "999,999,999,999"
+Left = 38
+Name = "TotalEfectivo"
+TabIndex = 1
+Top = 21
+Value = 0
+Width = 84
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07W0LMSRS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+AutoSize = .F.
+BackColor = 0,0,0
+Caption = "TOTAL GENERAL"
+Height = 16
+Left = 350
+Name = "Tslabel5"
+TabIndex = 6
+Top = 6
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07W0LMSRT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+AutoSize = .F.
+BackColor = 0,0,0
+Caption = "Total Efectivo"
+Height = 16
+Left = 38
+Name = "Tslabel6"
+TabIndex = 7
+Top = 6
+Width = 75
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WWM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+AutoSize = .F.
+BackColor = 0,0,0
+Caption = "Total Cheques"
+Height = 16
+Left = 182
+Name = "Tslabel7"
+TabIndex = 8
+Top = 6
+Width = 82
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07W0LMSRR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txttotal
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 255,255,255
+BackStyle = 1
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 24
+InputMask = "999,999,999,999"
+Left = 350
+Name = "txttotal"
+TabIndex = 4
+Top = 21
+Value = 0
+Width = 90
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D50O1XIM
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Valores a Depositar..."
+FontBold = .F.
+Height = 21
+Left = 227
+Name = "Tscommandbutton1"
+TabIndex = 23
+Top = 402
+Width = 228
+ZOrderSet = 14
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LCCUSTOMERID, LNOLDAREA
+IF EMPTY(THIS.PARENT.OPERACION.VALUE)
+= MESSAGEBOX("Seleccione primero una operación", 48, "Futura Software")
+THIS.PARENT.OPERACION.SETFOCUS()
+RETURN
+ENDIF
+PUBLIC VPMONEDA
+VPMONEDA = THIS.PARENT.TSSUCURSAL.LIST(THIS.PARENT.TSSUCURSAL.LISTINDEX, 4)
+OAPP.DOFORM("TS_ValorDepos", THISFORM)
+ENDPROC
+PROCEDURE When
+IF RTRIM(THIS.PARENT.OPERACION.VALUE)='1'
+RETURN .T.
+ELSE
+MESSAGEBOX('No disponible para Débito o Transferencia', 0, 'Futura Soft')
+RETURN .F.
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0N8IV7
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsfact1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AllowAddNew = .F.
+AllowHeaderSizing = .F.
+AllowRowSizing = .F.
+ChildOrder = ""
+Column1.ColumnOrder = 3
+Column1.ControlSource = "vDetDepos.nrocheque"
+Column1.FontSize = 8
+Column1.Name = "Column2"
+Column1.Visible = .T.
+Column1.Width = 108
+Column2.ColumnOrder = 2
+Column2.ControlSource = "vDetDepos.idbanco"
+Column2.FontSize = 8
+Column2.Name = "Banco"
+Column2.Sparse = .F.
+Column2.Visible = .T.
+Column2.Width = 144
+Column3.ColumnOrder = 4
+Column3.ControlSource = "vDetDepos.importe"
+Column3.DynamicInputMask = ""
+Column3.FontSize = 8
+Column3.InputMask = "999,999,999,999.99"
+Column3.Name = "Column4"
+Column3.Visible = .T.
+Column3.Width = 101
+Column4.ColumnOrder = 1
+Column4.ControlSource = "vDetDepos.tipovalor"
+Column4.CurrentControl = "Tscombobox1"
+Column4.FontSize = 8
+Column4.Name = "Tipo"
+Column4.Sparse = .F.
+Column4.Visible = .T.
+Column4.Width = 70
+ColumnCount = 4
+DeleteMark = .F.
+FontSize = 8
+GridLines = 2
+HeaderHeight = 20
+Height = 153
+Highlight = .F.
+Left = 8
+LinkMaster = ""
+Name = "Tsfact1"
+Panel = 1
+PanelLink = .T.
+RecordMark = .F.
+RecordSource = "vDetDepos"
+RelationalExpr = ""
+RightToLeft = .T.
+RowHeight = 22
+ScrollBars = 2
+SplitBar = .F.
+TabIndex = 7
+Top = 188
+Width = 448
+ZOrderSet = 0
+campo = iddeposito,idempresa
+cfieldtosum = iif(TIPOVALOR<>1,Importe,0),iif(TIPOVALOR=1,importe,0)
+codigo = TIPOvalor
+editable = .T.
+valor = depositos.iddeposito,oapp.empresa
+valorvariable = depositos.iddeposito
+variablevista = m.iddeposito
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+THIS.PARENT.TOTALES.REFRESH()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0N8IVF
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Banco
+[START PROPERTIES]
+Caption = "Banco"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D50NHNQL
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Banco
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "vDetDepos.idbanco"
+FirstElement = 1
+Height = 22
+Left = 163
+Name = "Tscombobox3"
+NumberOfElements = 0
+SpecialEffect = 1
+Style = 2
+TabIndex = 12
+Top = 150
+Width = 194
+cmdsql = Select descripcion,convert(char(10),idbanco) as IdBanco from bs_Bancos order by 1
+condicionvalidacion = 
+cursor = Bancos
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0N8IVD
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Column2
+[START PROPERTIES]
+Caption = "Cheque Nº"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0N8IVE
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vDetDepos.nrocheque"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+RETURN STR(VDETDEPOS.TIPOVALOR)<>'01'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0N8IVI
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Column4
+[START PROPERTIES]
+Caption = "Importe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0N8IVJ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Column4
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vDetDepos.importe"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999,999.99"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THIS.PARENT.PARENT.PARENT.TOTALES.REFRESH()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0N8IVM
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Tipo
+[START PROPERTIES]
+Caption = "Tipo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0N8IVN
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Tipo
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 2
+ColumnLines = .T.
+ControlSource = "vDetDepos.tipovalor"
+Left = 18
+Name = "Tscombobox1"
+SpecialEffect = 1
+Style = 2
+Top = 26
+Visible = .T.
+cmdsql = select  tipovalor,rtrim(convert(varchar(4),idtipovalor)) from ts_tipovalor where isnull(fiscal,0)=0
+condicionvalidacion = 
+cursor = TipoValor
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THIS.PARENT.PARENT.PARENT.TOTALES.REFRESH()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07W0LMSRS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Cuenta Entrada:"
+FontBold = .F.
+Height = 16
+Left = -5
+Name = "Tslabel1"
+TabIndex = 15
+Top = 58
+Width = 83
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25U108MSQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel12
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Proyecto"
+FontBold = .F.
+Height = 16
+Left = 23
+Name = "Tslabel12"
+TabIndex = 15
+Top = 151
+Width = 51
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BN0RLYVU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nº Cuenta:"
+FontBold = .F.
+Height = 16
+Left = 287
+Name = "Tslabel2"
+TabIndex = 20
+Top = 58
+Width = 60
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Referencia"
+FontBold = .F.
+Height = 16
+Left = 23
+Name = "Tslabel3"
+TabIndex = 17
+Top = 105
+Width = 55
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0NLX7P
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Operación:"
+FontBold = .T.
+Height = 16
+Left = -5
+Name = "Tslabel4"
+TabIndex = 12
+Top = 11
+Width = 83
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW0U5V3R
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Cotización:"
+FontBold = .F.
+Height = 16
+Left = 286
+Name = "Tslabel5"
+TabIndex = 14
+Top = 34
+Width = 60
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ED11YNZQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Cuenta Salida:"
+FontBold = .F.
+Height = 16
+Left = -5
+Name = "Tslabel6"
+TabIndex = 16
+Top = 82
+Width = 83
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ED11YNZR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nº Cuenta:"
+FontBold = .F.
+Height = 16
+Left = 287
+Name = "Tslabel7"
+TabIndex = 21
+Top = 82
+Width = 60
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1XG0N2BIE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Concepto"
+FontBold = .F.
+Height = 16
+Left = 30
+Name = "Tslabel8"
+TabIndex = 18
+Top = 128
+Width = 48
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07W0LMSRO
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] tsSucursal
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+BoundTo = .F.
+ColumnCount = 4
+ColumnWidths = "150,0,0,0"
+ControlSource = "depositos.idcuenta_ent"
+DisplayCount = 0
+DisplayValue = 
+FirstElement = 1
+Height = 23
+Left = 83
+Name = "tsSucursal"
+NumberOfElements = 0
+Style = 2
+TabIndex = 3
+Top = 56
+Width = 207
+ZOrderSet = 9
+cmdsql = Select rtrim(c.nombre)+'  '+rtrim(c.idmoneda),convert(char(10),idcuenta) as IdCuenta,nrocuenta,c.idmoneda,Decimales from ts_Cuentas c left join bs_monedas m  on c.IdMoneda = m.IdMoneda where c.IdEmpresa=?oApp.Empresa
+cursor = ts_Cuentas
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+If  .Not. Empty(This.Value)
+	This.Parent.NROCUENTA.Value = TS_CUENTAS.NROCUENTA
+Else
+	This.Parent.NROCUENTA.Value = ''
+Endif
+If TS_CUENTAS.DECIMALES>0
+	This.Parent.TSFACT1.COLUMN4.InputMask = '999,999,999.99'
+	This.Parent.TSFACT1.COLUMN4.TEXT1.InputMask = '999,999,999.99'
+Else
+	This.Parent.TSFACT1.COLUMN4.InputMask = '999,999,999,999'
+	This.Parent.TSFACT1.COLUMN4.TEXT1.InputMask = '999,999,999,999'
+Endif
+ENDPROC
+PROCEDURE ProgrammaticChange
+THIS.INTERACTIVECHANGE()
+ENDPROC
+PROCEDURE When
+RETURN OPERACION.TIPO<>'D'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "depositos.referencia"
+DateFormat = 13
+Format = "K"
+Height = 23
+Left = 83
+Name = "Tstextbox1"
+TabIndex = 5
+Top = 104
+Width = 372
+ZOrderSet = 4
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtcpbt
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "depositos.nrooperacion"
+Enabled = .F.
+FontBold = .T.
+Height = 23
+InputMask = ""
+Left = 349
+Name = "txtcpbt"
+TabIndex = 8
+Top = 10
+Visible = .T.
+Width = 105
+ZOrderSet = 7
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecfactu
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "depositos.fecha"
+DateFormat = 13
+Format = "D"
+Height = 23
+Left = 83
+Name = "txtFecfactu"
+TabIndex = 2
+Top = 32
+Width = 207
+ZOrderSet = 3
+condicionvalidacion = !empty(depositos.fecha)
+editable = .T.
+mensajevalidacion = Ingrese Fecha
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

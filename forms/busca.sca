@@ -1,0 +1,117 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\strings.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _06B0HONXO
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _06B0HONXP
+[CLASS] searchform
+[CLASSLOC] ..\libs\utility.vcx
+[BASECLASS] form
+[OBJNAME] Searchform12
+[START PROPERTIES]
+DataSession = 1
+DoCreate = .T.
+editmode = .T.
+Name = "Searchform12"
+Searchclass1.cboFields1.TabIndex = 1
+Searchclass1.cboFields1.Name = "cboFields1"
+Searchclass1.cboOperators1.TabIndex = 2
+Searchclass1.cboOperators1.Name = "cboOperators1"
+Searchclass1.txtExpr1.TabIndex = 3
+Searchclass1.txtExpr1.Name = "txtExpr1"
+Searchclass1.cboFields2.TabIndex = 4
+Searchclass1.cboFields2.Name = "cboFields2"
+Searchclass1.cboOperators2.TabIndex = 5
+Searchclass1.cboOperators2.Name = "cboOperators2"
+Searchclass1.txtExpr2.TabIndex = 6
+Searchclass1.txtExpr2.Name = "txtExpr2"
+Searchclass1.optgrpAndOr.Option1.Left = 5
+Searchclass1.optgrpAndOr.Option1.Top = 5
+Searchclass1.optgrpAndOr.Option1.Name = "Option1"
+Searchclass1.optgrpAndOr.Option2.Left = 5
+Searchclass1.optgrpAndOr.Option2.Top = 23
+Searchclass1.optgrpAndOr.Option2.Name = "Option2"
+Searchclass1.optgrpAndOr.TabIndex = 7
+Searchclass1.optgrpAndOr.Name = "optgrpAndOr"
+Searchclass1.Label1.TabIndex = 8
+Searchclass1.Label1.Name = "Label1"
+Searchclass1.Label2.TabIndex = 10
+Searchclass1.Label2.Name = "Label2"
+Searchclass1.Label3.TabIndex = 11
+Searchclass1.Label3.Name = "Label3"
+Searchclass1.label4.TabIndex = 12
+Searchclass1.label4.Name = "label4"
+Searchclass1.label5.TabIndex = 13
+Searchclass1.label5.Name = "label5"
+Searchclass1.label6.TabIndex = 14
+Searchclass1.label6.Name = "label6"
+Searchclass1.chkCaseSensitive.TabIndex = 9
+Searchclass1.chkCaseSensitive.Name = "chkCaseSensitive"
+Searchclass1.TabIndex = 1
+Searchclass1.Name = "Searchclass1"
+Commandgroup1.Command1.Top = 0
+Commandgroup1.Command1.Left = 89
+Commandgroup1.Command1.Height = 23
+Commandgroup1.Command1.Width = 66
+Commandgroup1.Command1.FontSize = 8
+Commandgroup1.Command1.Name = "Command1"
+Commandgroup1.Command2.Top = 0
+Commandgroup1.Command2.Left = 173
+Commandgroup1.Command2.Height = 23
+Commandgroup1.Command2.Width = 66
+Commandgroup1.Command2.FontSize = 8
+Commandgroup1.Command2.Name = "Command2"
+Commandgroup1.Command3.Top = 0
+Commandgroup1.Command3.Left = 257
+Commandgroup1.Command3.Height = 23
+Commandgroup1.Command3.Width = 66
+Commandgroup1.Command3.FontSize = 8
+Commandgroup1.Command3.Name = "Command3"
+Commandgroup1.Command4.Top = 0
+Commandgroup1.Command4.Left = 5
+Commandgroup1.Command4.Height = 24
+Commandgroup1.Command4.Width = 66
+Commandgroup1.Command4.Name = "Command4"
+Commandgroup1.Height = 36
+Commandgroup1.Left = 48
+Commandgroup1.Top = 168
+Commandgroup1.Width = 324
+Commandgroup1.TabIndex = 2
+Commandgroup1.Name = "Commandgroup1"
+[END PROPERTIES]
+[START RESERVED3]
+editmode
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+MS Sans Serif, 0, 8, 7, 16, 13, 14, 3, 0
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+[EOF]

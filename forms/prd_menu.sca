@@ -1,0 +1,415 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0WFJMG
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 200
+InitialSelectedAlias = "prd_menu"
+Left = 85
+Name = "Dataenvironment"
+Top = 278
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1ND0LYLDT
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "prd_menu"
+BufferModeOverride = 5
+CursorSource = "prd_menu"
+Database = ..\data\datos.dbc
+Height = 150
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 107
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1ND0N9BTY
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "prd_menudet"
+BufferModeOverride = 5
+CursorSource = "prd_menudet"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 149
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0WFJMH
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmovform12
+[START PROPERTIES]
+Caption = "Menus"
+DataSession = 2
+DoCreate = .T.
+Height = 357
+Icon = ..\bitmaps\default.ico
+Name = "Tsmovform12"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 360
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Top = 0
+Pageframe1.Width = 600
+Width = 598
+auditmarcahora = audit_fecha
+auditusuario = audit_usuario
+campos = idempresa,idmenu,fecha
+detalle = .T.
+identidad = idmenu
+lblRequerido.Name = "lblRequerido"
+tabla1 = Prd_Menu
+tabla2 = Prd_Menudet
+tablaconsulta = menu
+valores = oapp.empresa,newid('prd_menu'),date()
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0WFJML
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] descripcion
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "prd_menu.descripcion"
+Height = 22
+Left = 167
+Name = "descripcion"
+TabIndex = 3
+Top = 73
+Width = 324
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0WFJMI
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] fecha
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "prd_menu.fecha"
+Left = 167
+Name = "fecha"
+TabIndex = 1
+Top = 29
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0WFJMJ
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idproducto
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "prd_menu.idproducto"
+Left = 167
+Name = "idproducto"
+TabIndex = 2
+Top = 51
+condicion_en_edicion = Activo = 1
+condicionextra = IdEmpresa= ?oApp.Empresa and idtipo in('P','G','S')
+datoayuda = Productos
+indice = idproducto
+objeto = this.parent.producto
+origen = R
+requerido = .T.
+retayuda = descripcion
+retorna = descripcion
+tabla = st_producto
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0WFJMG
+[CLASS] label_boton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Label_boton1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Fecha"
+FontName = "Arial"
+FontSize = 8
+Left = 46
+Name = "Label_boton1"
+TabIndex = 7
+Top = 37
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0XCAKB
+[CLASS] label_boton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Label_boton2
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Id. Producto"
+FontName = "Arial"
+FontSize = 8
+Left = 46
+Name = "Label_boton2"
+TabIndex = 8
+Top = 56
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0XCAKQ
+[CLASS] label_boton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Label_boton3
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Descripcion"
+FontName = "Arial"
+FontSize = 8
+Left = 46
+Name = "Label_boton3"
+TabIndex = 9
+Top = 73
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0XCAKR
+[CLASS] label_boton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Label_boton4
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Precio"
+FontName = "Arial"
+FontSize = 8
+Left = 46
+Name = "Label_boton4"
+TabIndex = 10
+Top = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0WFJMM
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] precio
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "prd_menu.precio"
+InputMask = "999,999,999"
+Left = 167
+Name = "precio"
+TabIndex = 4
+Top = 94
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0WFJMK
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Producto
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Height = 22
+Left = 266
+Name = "Producto"
+TabIndex = 6
+Top = 51
+Width = 225
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0WFJMN
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "prd_menudet.idproducto"
+Column1.FontSize = 8
+Column1.Name = "Column1"
+Column1.Width = 66
+Column2.ControlSource = "prd_menudet.descripcion"
+Column2.FontSize = 8
+Column2.Name = "Column2"
+Column2.Width = 285
+Column3.ControlSource = "prd_menudet.cantidad"
+Column3.FontSize = 8
+Column3.InputMask = "999,999.99"
+Column3.Name = "Column3"
+Column3.Width = 77
+ColumnCount = 3
+FontSize = 8
+Height = 188
+Left = 47
+Name = "Tsgrid1"
+Panel = 1
+RecordSource = "prd_menudet"
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 5
+Top = 118
+Width = 451
+campo = idmenu,idempresa
+editable = .T.
+valor = prd_menu.idmenu,oapp.empresa
+valorvariable = idmenu
+variablevista = m.idmenu
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0X658H
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Tsgrid1.Column1
+[START PROPERTIES]
+Caption = "IdProducto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC12IGVP
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idproducto
+[PARENT] Tsmovform12.Pageframe1.Page1.Tsgrid1.Column1
+[START PROPERTIES]
+FontSize = 8
+Left = 47
+Name = "idproducto"
+Top = 26
+condicion_en_edicion = Activo=1
+condicionextra = IdEmpresa= ?oApp.Empresa and idtipo in('P','G','S')
+datoayuda = Productos
+indice = idproducto
+objeto = this.Parent.Parent.column2.producto
+origen = R
+retayuda = idproducto
+retorna = descripcion
+tabla = st_producto
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0X658J
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Tsgrid1.Column2
+[START PROPERTIES]
+Caption = "Producto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0X658K
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Producto
+[PARENT] Tsmovform12.Pageframe1.Page1.Tsgrid1.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Producto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0X658L
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Tsgrid1.Column3
+[START PROPERTIES]
+Caption = "Cantidad"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NC0X658M
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Cantidad
+[PARENT] Tsmovform12.Pageframe1.Page1.Tsgrid1.Column3
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999.99"
+Margin = 0
+Name = "Cantidad"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

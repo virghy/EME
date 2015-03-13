@@ -1,0 +1,1447 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0LUIV3
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+InitialSelectedAlias = "vxAsientos"
+Left = 125
+Name = "Dataenvironment"
+Top = 196
+Width = 520
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO seteo
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0M90B9
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vxAsientos"
+BufferModeOverride = 5
+CursorSource = "cnt_asientos"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 115
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0M90BA
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vxDetalle"
+BufferModeOverride = 5
+CursorSource = "cnt_detalle"
+Database = ..\data\datos.dbc
+Filter = "vxDetalle.IdAsiento = vxAsientos.IdAsiento"
+Height = 90
+Left = 150
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0LUIV4
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+Caption = "Proceso de Generación de Asientos"
+DoCreate = .T.
+Height = 550
+Name = "Tsbaseform12"
+Width = 800
+editmode = .F.
+idasiento = .F.
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE cheques
+TEXT TO cmdSQL NOSHOW 
+	SELECT Ts_depositos_base.idempresa, Ts_depositos_base.depositante,
+	  Ts_depositos_base.iddeposito, Ts_depositos_base.idcuenta,
+	  Ts_depositos_base.idcuenta_ent, Ts_depositos_base.fecha,
+	  Ts_depositos_base.FechaDiferida, Ts_depositos_base.totalcheque,
+	  Ts_depositos_base.totalefectivo, Ts_depositos_base.idoperacion,
+	  Ts_depositos_base.nrooperacion, Ts_depositos_base.idconcepto,
+	  Ts_depositos_base.cotizacion, Ts_depositos_base.referencia,
+	  Ts_depositos_base.nroasiento, Ts_depositos_base.nroorden,
+	  Ts_depositos_base.ejercicio, Ts_depositos_base.Audit_Fecha,
+	  Ts_depositos_base.Audit_Usuario, Ts_detdepos_base.*,
+	  Ts_depositos_base.beneficiario, Ts_depositos_base.NroAsiento2,
+	  Ts_depositos_base.MesesAmort, Ts_depositos_base.NroProyecto
+	 FROM 
+	     dbo.ts_depositos_base Ts_depositos_base,
+	    dbo.ts_detdepos_base Ts_detdepos_base
+	 WHERE Ts_detdepos_base.idempresa = Ts_depositos_base.idempresa
+	   AND  Ts_depositos_base.iddeposito = Ts_detdepos_base.iddeposito
+	   AND  Ts_depositos_base.idempresa = ?oapp.empresa 
+	   AND  Ts_depositos_base.idoperacion = '2' 
+	   AND  Ts_detdepos_base.tipovalor = '2'
+	   and Ts_depositos_base.Fecha between ?ThisForm.Pageframe1.Page1.dFecha.Value and ?ThisForm.Pageframe1.Page1.hFecha.Value
+	 ORDER BY Ts_depositos_base.Fecha
+ENDTEXT 
+
+ this.runsql(cmdSQL,'vCheques')
+ SELECT vCheques
+
+IF RECCOUNT('vCheques')=0
+	MESSAGEBOX('No existe datos para procesar',64,TASTRADE_LOC)
+	RETURN
+ENDIF 
+
+ 
+ SCAN
+	 ThisForm.Pageframe1.Page2.Asiento1.asentar(this.idasiento)
+ ENDSCAN
+    
+ENDPROC
+PROCEDURE cobros
+*vt_vPagos
+TEXT TO cmdSQL NOSHOW 
+	SELECT *
+	 FROM dbo.vt_Pagos vt_Pagos
+	 WHERE  IdEmpresa=?oApp.Empresa and Fecha between ?ThisForm.Pageframe1.Page1.dFecha.Value and ?ThisForm.Pageframe1.Page1.hFecha.Value 
+	 and ISNULL(nroAsiento,0)=0
+	 ORDER BY Fecha
+ENDTEXT 
+
+
+
+
+ this.runsql(cmdSQL,'vt_vPagos')
+ SELECT vt_vPagos
+
+IF RECCOUNT('vt_vPagos')=0
+	MESSAGEBOX('No existe datos para procesar',64,TASTRADE_LOC)
+	RETURN
+ENDIF 
+
+ 
+ SCAN
+	 ThisForm.Pageframe1.Page2.Asiento1.asentar(this.idasiento)
+ ENDSCAN
+ 
+ENDPROC
+PROCEDURE compras
+TEXT TO cmdSQL NOSHOW 
+	SELECT Cp_factura.IdEmpresa, Cp_factura.IdFactura, Cp_factura.IdOrden,
+	  Cp_factura.IdComprobante, Cp_factura.FacturaProveedor,
+	  Cp_factura.NroRemision, Cp_factura.IdProveedor, Cp_factura.IdCondicion,
+	  Cp_factura.IdPedido, Cp_factura.NroAsiento, Cp_factura.Fecha,
+	  Cp_factura.Sucursal, Cp_factura.Descuento, Cp_factura.ImpDesc,
+	  Cp_factura.Vence, Cp_factura.Exenta, Cp_factura.Gravada, Cp_factura.Iva,
+	  Cp_factura.Iva10,
+	  Cp_factura.Iva5,
+	  Cp_factura.IdCuenta, Cp_factura.RetensionIva,
+	  Cp_factura.RetensionRenta, Cp_factura.Tipo, Cp_factura.TipoAplica,
+	  Cp_factura.IdMoneda, Cp_factura.Cotizacion, Cp_factura.Fletes,
+	  Cp_factura.ImpComision, Cp_factura.OtroGasto, Cp_factura.CentroCosto,
+	  Cp_factura.IdConcepto, Cp_factura.Anticipo, Cp_factura.Referencia,
+	  Cp_factura.Anulado, Cp_factura.AuditUsuario, Cp_factura.AuditFecha,
+	  Cp_factura.Total, Cp_factura.FACTURAPROVEEDOR_REF
+	 FROM dbo.cp_factura Cp_factura
+	 WHERE  IdEmpresa=?oApp.Empresa and Fecha between ?ThisForm.Pageframe1.Page1.dFecha.Value and ?ThisForm.Pageframe1.Page1.hFecha.Value 
+	 and ISNULL(nroAsiento,0)=0
+	 and Tipo='C'
+	 ORDER BY Cp_factura.Fecha
+ENDTEXT 
+
+
+
+
+ this.runsql(cmdSQL,'cp_vcompra')
+ SELECT cp_vcompra
+
+IF RECCOUNT('cp_vcompra')=0
+	MESSAGEBOX('No existe datos para procesar',64,TASTRADE_LOC)
+	RETURN
+ENDIF 
+
+ 
+ SCAN
+	 ThisForm.Pageframe1.Page2.Asiento1.asentar(this.idasiento)
+ ENDSCAN
+ 
+ 
+ 
+ENDPROC
+PROCEDURE depositos
+TEXT TO cmdSQL NOSHOW 
+	select * from ts_depositos_base a 
+	where a.idempresa=?oapp.empresa and idOperacion <> 2
+	   and a.Fecha between ?ThisForm.Pageframe1.Page1.dFecha.Value and ?ThisForm.Pageframe1.Page1.hFecha.Value
+	 ORDER BY a.Fecha
+ENDTEXT 
+
+ this.runsql(cmdSQL,'Depositos')
+ SELECT Depositos
+
+IF RECCOUNT('Depositos')=0
+	MESSAGEBOX('No existe datos para procesar',64,TASTRADE_LOC)
+	RETURN
+ENDIF 
+
+ 
+ SCAN
+	 ThisForm.Pageframe1.Page2.Asiento1.asentar(this.idasiento)
+ ENDSCAN
+ENDPROC
+PROCEDURE gastos
+TEXT TO cmdSQL NOSHOW 
+SELECT Cp_factura.IdEmpresa, Cp_factura.IdFactura, Cp_factura.IdOrden,
+  Cp_factura.IdComprobante, Cp_factura.FacturaProveedor,
+  Cp_factura.NroRemision, Cp_factura.IdProveedor, Cp_factura.IdCondicion,
+  Cp_factura.IdPedido, Cp_factura.NroAsiento, Cp_factura.Fecha,
+  Cp_factura.Sucursal, Cp_factura.Descuento, Cp_factura.ImpDesc,
+  Cp_factura.Vence, Cp_factura.Exenta, Cp_factura.Gravada, Cp_factura.Iva,
+  Cp_factura.Iva10,
+  Cp_factura.Iva5,
+  Cp_factura.Gravada5,
+  Cp_factura.IdCuenta, Cp_factura.RetensionIva,
+  Cp_factura.RetensionRenta, Cp_factura.Tipo, Cp_factura.TipoAplica,
+  Cp_factura.IdMoneda, Cp_factura.Cotizacion, Cp_factura.Fletes,
+  Cp_factura.ImpComision, Cp_factura.OtroGasto, Cp_factura.CentroCosto,
+  Cp_factura.IdConcepto, Cp_factura.Anticipo, Cp_factura.Referencia,
+  Cp_factura.Anulado, Cp_factura.AuditUsuario, Cp_factura.AuditFecha,
+  Cp_factura.Total, Cp_factura.FACTURAPROVEEDOR_REF
+ FROM dbo.cp_factura Cp_factura
+ WHERE  IdEmpresa=?oApp.Empresa and Fecha between ?ThisForm.Pageframe1.Page1.dFecha.Value and ?ThisForm.Pageframe1.Page1.hFecha.Value 
+ and ISNULL(nroAsiento,0)=0
+ and Tipo='G'
+ ORDER BY Cp_factura.Fecha
+ 
+ ENDTEXT
+
+
+ this.runsql(cmdSQL,'cp_Gastos',CURSORGETPROP("ConnectHandle",this.tabla1))
+ SELECT cp_Gastos
+
+IF RECCOUNT('cp_Gastos')=0
+	MESSAGEBOX('No existe datos para procesar',64,TASTRADE_LOC)
+	RETURN
+ENDIF 
+
+ 
+ SCAN
+	 ThisForm.Pageframe1.Page2.Asiento1.asentar(this.idasiento)
+ ENDSCAN
+ENDPROC
+PROCEDURE pagos
+*vt_vPagos
+TEXT TO cmdSQL NOSHOW 
+	SELECT *
+	 FROM dbo.cp_Pagos_base
+	 WHERE  IdEmpresa=?oApp.Empresa and Fecha between ?ThisForm.Pageframe1.Page1.dFecha.Value and ?ThisForm.Pageframe1.Page1.hFecha.Value 
+	 and ISNULL(nroAsiento,0)=0
+	 ORDER BY Fecha
+ENDTEXT 
+
+
+
+
+ this.runsql(cmdSQL,'cp_vPagos')
+ SELECT cp_vPagos
+
+IF RECCOUNT('cp_vPagos')=0
+	MESSAGEBOX('No existe datos para procesar',64,TASTRADE_LOC)
+	RETURN
+ENDIF 
+
+ 
+ SCAN
+	 ThisForm.Pageframe1.Page2.Asiento1.asentar(this.idasiento)
+ ENDSCAN
+ 
+ENDPROC
+PROCEDURE validar
+LOCAL lcAlias
+DO CASE 
+	CASE thisform.idasiento='01'	&&Gastos
+		lcAlias="cp_Gastos"
+	
+	CASE thisform.idasiento='14'	&&Compras
+		lcAlias="cp_vcompra"
+	CASE thisform.idasiento='04'	&&Ventas
+		lcAlias="vt_factura"
+	CASE thisform.idasiento='05'	&&Cobros
+		lcAlias="vt_vPagos"
+    CASE thisform.idasiento='06'	&&Pagos
+		lcAlias="cp_vPagos"	
+    CASE thisform.idasiento='02'	&&Cheques
+		lcAlias="vCheques"	
+    CASE thisform.idasiento='02'	&&Depositos
+		lcAlias="Depositos"	
+
+		
+ENDCASE
+
+this.tabla1='vxAsientos'
+this.tabla2='vxDetalle'
+*SET STEP ON
+
+SELECT vxAsientos
+	***Eliminamos los asientos no marcados
+COUNT FOR procesado= .t. TO tProcesado
+IF tProcesado=0
+	MESSAGEBOX("No se ha seleccionado ningun asiento para enviar." + CHR(13) + ;
+	"Verifique y vuelva a intentar.",64,TASTRADE_LOC)
+	RETURN .f.
+ENDIF
+	
+SCAN FOR NVL(procesado,.f.)=.f.
+		DELETE all FOR vxDetalle.IdAsiento = vxAsientos.IdAsiento IN vxDetalle
+		DELETE IN vxAsientos 
+		UPDATE (lcAlias) SET NroAsiento = 0 WHERE NroAsiento =  vxAsientos.IdAsiento
+ENDSCAN
+
+
+SELECT vxDetalle
+SET FILTER TO 
+SCAN
+	IF EMPTY(Cuenta)
+		MESSAGEBOX("Existen algunos detalles sin cuenta asignada",64,TASTRADE_LOC)
+		SET FILTER TO vxDetalle.IdAsiento = vxAsientos.IdAsiento
+		RETURN .F.
+	ENDIF	
+ENDSCAN
+SET FILTER TO vxDetalle.IdAsiento = vxAsientos.IdAsiento
+
+
+SELECT vxAsientos
+GO TOP 
+THISFORM.CAMPONRO = 'número,CN_Asientos,idempresa = ?oApp.Empresa and ejercicio = ' + STR(YEAR(VXASIENTOS.fecha))
+THISFORM.CAMPOTAM = 0
+UltimoNro = thisform.ULTIMONRO 
+
+SCAN
+	REPLACE VXASIENTOS.NÚMERO WITH UltimoNro  IN VXASIENTOS
+	UltimoNro = UltimoNro + 1
+ENDSCAN
+
+DO CASE 
+	CASE thisform.idasiento='01'	&&Gastos
+		SELECT cp_Gastos
+		cmdSQL = 'Update cp_factura Set NroAsiento = ?cp_Gastos.NroAsiento where IdFactura =?cp_Gastos.IdFactura'
+	
+	CASE thisform.idasiento='14'	&&Compras
+		SELECT cp_vcompra
+		cmdSQL = 'Update cp_factura Set NroAsiento = ?cp_vcompra.NroAsiento where IdFactura =?cp_vcompra.IdFactura'
+	CASE thisform.idasiento='04'	&&Ventas
+		SELECT vt_factura
+		cmdSQL = 'Update vt_factura Set NroAsiento = ?vt_factura.NroAsiento where IdFactura =?vt_factura.IdFactura'	
+	CASE thisform.idasiento='05'	&&Cobros
+		SELECT vt_vPagos
+		cmdSQL = 'Update vt_Pagos Set NroAsiento = ?vt_vPagos.NroAsiento where IdPago =?vt_vPagos.IdPago'	
+	CASE thisform.idasiento='06'	&&Pagos
+		SELECT cp_vPagos
+		cmdSQL = 'Update cp_Pagos_base Set NroAsiento = ?cp_vPagos.NroAsiento where IdPago =?cp_vPagos.IdPago'				
+	CASE thisform.idasiento='02'	&&Cheques
+		SELECT vCheques
+		cmdSQL = 'Update ts_depositos_Base Set NroAsiento = ?vCheques.NroAsiento where IdDeposito =?vCheques.IdDeposito '				
+	CASE thisform.idasiento='02'	&&Depositos
+		SELECT Depositos
+		cmdSQL = 'Update ts_depositos_Base Set NroAsiento = ?Depositos.NroAsiento where IdDeposito =?Depositos.IdDeposito '				
+
+		
+ENDCASE
+
+
+
+SCAN FOR !EMPTY(NVL(NroAsiento,0)) 
+	this.runsql(cmdSQL,'cc',this.hndconn)	
+ENDSCAN
+
+	
+
+
+
+
+ENDPROC
+PROCEDURE ventas
+TEXT TO cmdSQL NOSHOW 
+	SELECT *
+	 FROM dbo.vt_factura vt_Factura
+	 WHERE  IdEmpresa=?oApp.Empresa and Fecha between ?ThisForm.Pageframe1.Page1.dFecha.Value and ?ThisForm.Pageframe1.Page1.hFecha.Value 
+	 and ISNULL(nroAsiento,0)=0
+	 ORDER BY Fecha
+ENDTEXT 
+
+
+
+
+ this.runsql(cmdSQL,'vt_factura')
+ SELECT vt_factura
+
+IF RECCOUNT('vt_factura')=0
+	MESSAGEBOX('No existe datos para procesar',64,TASTRADE_LOC)
+	RETURN
+ENDIF 
+
+ 
+ SCAN
+	 ThisForm.Pageframe1.Page2.Asiento1.asentar(this.idasiento)
+ ENDSCAN
+ 
+ 
+ 
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*cheques 
+*cobros 
+*compras 
+*depositos 
+*gastos 
+*pagos 
+*ventas 
+idasiento
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAF5
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] Pageframe1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ErasePage = .T.
+Height = 550
+Left = 0
+Name = "Pageframe1"
+Page1.Caption = "Generar"
+Page1.FontSize = 8
+Page1.Name = "Page1"
+Page2.Caption = "Editar Asiento"
+Page2.FontSize = 8
+Page2.Name = "Page2"
+PageCount = 2
+Top = 0
+Width = 804
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFF
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] dFecha
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Format = "D"
+Height = 21
+InputMask = ""
+Left = 407
+Name = "dFecha"
+Top = 34
+Value = (oApp.InicioEjercicio)
+Width = 72
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFI
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdCnt_asientos
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ColumnOrder = 1
+Column1.ControlSource = "vxAsientos.Fecha"
+Column1.FontSize = 8
+Column1.Name = "Column5"
+Column1.Width = 57
+Column2.ColumnOrder = 3
+Column2.ControlSource = "vxAsientos.descripción"
+Column2.FontSize = 8
+Column2.Name = "Column6"
+Column2.Width = 325
+Column3.ColumnOrder = 2
+Column3.ControlSource = "vxAsientos.sucursal"
+Column3.FontSize = 8
+Column3.Name = "Column9"
+Column3.Width = 48
+Column4.ControlSource = "vxAsientos.cotizacion"
+Column4.FontSize = 8
+Column4.InputMask = "9999"
+Column4.Name = "Column11"
+Column4.Width = 73
+Column5.ControlSource = "vxAsientos.procesado"
+Column5.FontSize = 8
+Column5.Name = "Column1"
+Column5.Sparse = .F.
+Column5.Width = 42
+Column6.ControlSource = "vxAsientos.número"
+Column6.FontSize = 8
+Column6.Name = "Column2"
+Column6.Width = 71
+ColumnCount = 6
+FontSize = 8
+Height = 156
+Left = 23
+Name = "grdCnt_asientos"
+Panel = 1
+RecordSource = "vxAsientos"
+RecordSourceType = 1
+RowHeight = 17
+Top = 139
+Width = 695
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE AfterRowColChange
+LPARAMETERS nColIndex
+GO TOP IN vxDetalle
+This.parent.grdCnt_detalle.Refresh()
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0OXAWG
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column1
+[START PROPERTIES]
+Caption = "Enviar"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0OXAWH
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column1
+[START PROPERTIES]
+Alignment = 0
+Caption = ""
+Left = 32
+Name = "Tscheckbox1"
+Top = 25
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFR
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column11
+[START PROPERTIES]
+Caption = "Cotizacion"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFS
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column11
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxAsientos.cotizacion"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "9999"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2H013O59M
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column2
+[START PROPERTIES]
+Caption = "Nro Asiento"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2H013O59N
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFL
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column5
+[START PROPERTIES]
+Caption = "Fecha"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFM
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column5
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxAsientos.fecha"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFN
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column6
+[START PROPERTIES]
+Caption = "Descripción"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFO
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxAsientos.descripción"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFP
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column9
+[START PROPERTIES]
+Caption = "Sucursal"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFQ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_asientos.Column9
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxAsientos.sucursal"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFT
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdCnt_detalle
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "vxDetalle.cuenta"
+Column1.FontSize = 8
+Column1.Name = "Column5"
+Column1.Width = 85
+Column2.ColumnOrder = 3
+Column2.ControlSource = "vxDetalle.debe"
+Column2.FontSize = 8
+Column2.InputMask = "999,999,999,999"
+Column2.Name = "Column6"
+Column2.Width = 77
+Column3.ColumnOrder = 4
+Column3.ControlSource = "vxDetalle.haber"
+Column3.FontSize = 8
+Column3.InputMask = "999,999,999,999"
+Column3.Name = "Column7"
+Column3.Width = 71
+Column4.ColumnOrder = 6
+Column4.ControlSource = "vxDetalle.detalle"
+Column4.FontSize = 8
+Column4.Name = "Column10"
+Column4.Width = 91
+Column5.ColumnOrder = 5
+Column5.ControlSource = "vxDetalle.centro"
+Column5.FontSize = 8
+Column5.Name = "Column11"
+Column5.Width = 38
+Column6.ColumnOrder = 7
+Column6.ControlSource = "vxDetalle.documento"
+Column6.FontSize = 8
+Column6.Name = "Column12"
+Column6.Width = 96
+Column7.ColumnOrder = 2
+Column7.ControlSource = "vxDetalle.descripción"
+Column7.FontSize = 8
+Column7.Name = "Column14"
+Column7.Width = 203
+ColumnCount = 7
+FontSize = 8
+Height = 150
+Left = 23
+Name = "grdCnt_detalle"
+Panel = 1
+RecordSource = "vxDetalle"
+RecordSourceType = 1
+RowHeight = 17
+Top = 319
+Width = 696
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAG0
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column10
+[START PROPERTIES]
+Caption = "Detalle"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAG1
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column10
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxDetalle.detalle"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAG2
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column11
+[START PROPERTIES]
+Caption = "Centro"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAG3
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column11
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxDetalle.centro"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAG4
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column12
+[START PROPERTIES]
+Caption = "Documento"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAG5
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column12
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxDetalle.documento"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAG8
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column14
+[START PROPERTIES]
+Caption = "Descripción"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAG9
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column14
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxDetalle.descripción"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFU
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column5
+[START PROPERTIES]
+Caption = "Cuenta"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFV
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column5
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxDetalle.cuenta"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFW
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column6
+[START PROPERTIES]
+Caption = "Debe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFX
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxDetalle.debe"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999,999"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFY
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column7
+[START PROPERTIES]
+Caption = "Haber"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFZ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdCnt_detalle.Column7
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vxDetalle.haber"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999,999"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFG
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] hFecha
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Format = "D"
+Height = 21
+InputMask = ""
+Left = 407
+Name = "hFecha"
+Top = 58
+Value = (Date())
+Width = 72
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFB
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Height = 72
+Left = 347
+Name = "Ts3dshape1"
+Rotation = 20
+Style = 3
+Top = 22
+Width = 156
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFA
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Iniciar Generación"
+Height = 26
+Left = 551
+Name = "Tscommandbutton1"
+Top = 34
+Width = 112
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+m.IdAsiento = -1
+REQUERY("vxAsientos")
+thisform.editar()
+
+
+DO case
+
+CASE This.parent.Tsoptiongroup1.Value=1		&& Compras
+	thisform.idasiento='14'
+	This.parent.parent.Page2.Asiento1.controlSource='cp_vcompra.NroAsiento'
+	thisform.compras()	
+CASE This.parent.Tsoptiongroup1.Value=2 && Gastos
+	thisform.idasiento='01'
+	This.parent.parent.Page2.Asiento1.controlSource='cp_Gastos.NroAsiento'
+	thisform.Gastos()
+CASE This.parent.Tsoptiongroup1.Value=3 && Ventas
+	thisform.idasiento='04'
+	This.parent.parent.Page2.Asiento1.controlSource='vt_factura.NroAsiento'
+	thisform.ventas()
+CASE This.parent.Tsoptiongroup1.Value=4 && Cobros
+	thisform.idasiento='05'
+	This.parent.parent.Page2.Asiento1.controlSource='vt_vPagos.NroAsiento'
+	thisform.cobros()	
+CASE This.parent.Tsoptiongroup1.Value=5 && Pagos
+	thisform.idasiento='06'
+	This.parent.parent.Page2.Asiento1.controlSource='cp_vPagos.NroAsiento'
+	thisform.pagos()
+*!*		MESSAGEBOX("Esta opcion no está implementada." + CHR(13) ;
+*!*		+ "En cambio seleccione 'Cheques' para generar los asientos de pagos.",64,TASTRADE_LOC)
+CASE This.parent.Tsoptiongroup1.Value=6 && Cheques
+	thisform.idasiento='02'
+	This.parent.parent.Page2.Asiento1.controlSource='vCheques.NroAsiento'
+	thisform.Cheques()
+CASE This.parent.Tsoptiongroup1.Value=7 && Depositos y D/B
+*	MESSAGEBOX("Esta opcion no está implementada.",64,TASTRADE_LOC)
+*	RETURN
+	
+	thisform.idasiento='03'
+	This.parent.parent.Page2.Asiento1.controlSource='Depositos.NroAsiento'
+	thisform.Depositos()
+ENDCASE
+
+This.parent.grdCnt_asientos.Refresh()
+this.Refresh()
+SELECT (thisform.tabla1)
+
+
+ENDPROC
+PROCEDURE Refresh
+*this.Enabled = RECCOUNT('vxAsientos')=0
+this.Enabled=!thisform.editmode
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFH
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton2
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Confirmar"
+Height = 26
+Left = 599
+Name = "Tscommandbutton2"
+Top = 487
+Width = 112
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+
+
+thisform.save()
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAF7
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Tipos de Importación"
+Height = 22
+Left = 23
+Name = "Tslabel1"
+Top = 8
+Width = 120
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAF8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Asientos Generados"
+Height = 22
+Left = 23
+Name = "Tslabel2"
+Top = 127
+Width = 120
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAF9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Detalle de los Asientos"
+Height = 22
+Left = 23
+Name = "Tslabel3"
+Top = 307
+Width = 132
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFC
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Periodo"
+Height = 22
+Left = 347
+Name = "Tslabel4"
+Top = 10
+Width = 48
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFD
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Desde"
+Height = 12
+Left = 347
+Name = "Tslabel5"
+Top = 34
+Width = 48
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAFE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Hasta"
+Height = 12
+Left = 359
+Name = "Tslabel6"
+Top = 58
+Width = 36
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _27X16K2F1
+[CLASS] listbox
+[BASECLASS] listbox
+[OBJNAME] Tsoptiongroup1
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoHideScrollbar = 1
+BoundColumn = 2
+ColumnCount = 2
+ColumnLines = .F.
+ColumnWidths = "100,0"
+FontSize = 8
+Height = 96
+Left = 23
+Name = "Tsoptiongroup1"
+RowSource = "Compra,1,Gastos,2,Ventas,3,Cobros,4,Pagos,5,Cheques,6,Depositos,7"
+RowSourceType = 1
+Top = 22
+Value = (1)
+Width = 100
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MUAF6
+[CLASS] tsoptiongroup
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] optiongroup
+[OBJNAME] Tsoptiongroup11
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+ButtonCount = 5
+Height = 120
+Left = 707
+Name = "Tsoptiongroup11"
+Option1.Caption = "Compras "
+Option1.Left = 5
+Option1.Name = "Option1"
+Option1.Top = 5
+Option2.Caption = "Gastos"
+Option2.Left = 5
+Option2.Name = "Option2"
+Option2.Top = 25
+Option3.BackStyle = 0
+Option3.Caption = "Ventas"
+Option3.FontSize = 8
+Option3.Height = 17
+Option3.Left = 5
+Option3.Name = "Option3"
+Option3.Top = 45
+Option3.Width = 61
+Option4.BackStyle = 0
+Option4.Caption = "Cobros"
+Option4.FontSize = 8
+Option4.Height = 17
+Option4.Left = 5
+Option4.Name = "Option4"
+Option4.Top = 64
+Option4.Width = 61
+Option5.BackStyle = 0
+Option5.Caption = "Pagos"
+Option5.FontSize = 8
+Option5.Height = 17
+Option5.Left = 5
+Option5.Name = "Option5"
+Option5.Top = 83
+Option5.Width = 61
+Top = 10
+Visible = .F.
+Width = 84
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MWTFV
+[CLASS] asiento
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] container
+[OBJNAME] Asiento1
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+Bifurcar.Name = "Bifurcar"
+Bifurcar.Visible = .F.
+Cbosucursal1.Name = "Cbosucursal1"
+Enlazar.Name = "Enlazar"
+Enlazar.Visible = .F.
+IdDescripcion.Name = "IdDescripcion"
+Left = 23
+Name = "Asiento1"
+Top = 22
+Tscommandbutton1.Name = "Tscommandbutton1"
+Tscommandbutton1.Visible = .F.
+Tscommandbutton2.Name = "Tscommandbutton2"
+Tslabel2.Name = "Tslabel2"
+cotiza.Name = "cotiza"
+grdVdetalle.COLUMN0.Name = "COLUMN0"
+grdVdetalle.Centro.Cbocentro1.Name = "Cbocentro1"
+grdVdetalle.Centro.Header1.Name = "Header1"
+grdVdetalle.Centro.Name = "Centro"
+grdVdetalle.Concepto.Cboconcepto1.Name = "Cboconcepto1"
+grdVdetalle.Concepto.Header1.Name = "Header1"
+grdVdetalle.Concepto.Name = "Concepto"
+grdVdetalle.Cuenta.Campo_clave1.Name = "Campo_clave1"
+grdVdetalle.Cuenta.Header1.Name = "Header1"
+grdVdetalle.Cuenta.Name = "Cuenta"
+grdVdetalle.Debe.Header1.Name = "Header1"
+grdVdetalle.Debe.Name = "Debe"
+grdVdetalle.Debe.Text1.Name = "Text1"
+grdVdetalle.Descripcion.Header1.Name = "Header1"
+grdVdetalle.Descripcion.Name = "Descripcion"
+grdVdetalle.Descripcion.Text1.Name = "Text1"
+grdVdetalle.Detalle.Header1.Name = "Header1"
+grdVdetalle.Detalle.Name = "Detalle"
+grdVdetalle.Detalle.Text1.Name = "Text1"
+grdVdetalle.Documento.Header1.Name = "Header1"
+grdVdetalle.Documento.Name = "Documento"
+grdVdetalle.Documento.Text1.Name = "Text1"
+grdVdetalle.Haber.Header1.Name = "Header1"
+grdVdetalle.Haber.Name = "Haber"
+grdVdetalle.Haber.Text1.Name = "Text1"
+grdVdetalle.Name = "grdVdetalle"
+lblDescripción.Name = "lblDescripción"
+lblFecha.Name = "lblFecha"
+lblNúmero.Name = "lblNúmero"
+lblSucursal.Name = "lblSucursal"
+sufijotabla =  
+totales.Name = "totales"
+totales.Saldo.Name = "Saldo"
+totales.SaldoCuenta.Name = "SaldoCuenta"
+totales.TotalDebe.Name = "TotalDebe"
+totales.TotalHaber.Name = "TotalHaber"
+totales.Tslabel7.Name = "Tslabel7"
+txtDescripción.Name = "txtDescripción"
+txtFecha.Name = "txtFecha"
+txtNro_asiento.Name = "txtNro_asiento"
+txtNúmero.Name = "txtNúmero"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+LPARAMETERS LCSUFIJO
+DODEFAULT('')
+
+ENDPROC
+PROCEDURE Refresh
+***
+ENDPROC
+PROCEDURE traerdatos
+this.enlazardatos()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MWTG2
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page2.Asiento1.grdVdetalle.COLUMN0
+[START PROPERTIES]
+Caption = "Header1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21F0MWTG3
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page2.Asiento1.grdVdetalle.COLUMN0
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 255,255,255
+SelectedForeColor = 0,0,0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

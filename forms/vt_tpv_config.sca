@@ -1,0 +1,462 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0STPNN
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 0
+Left = 0
+Name = "Dataenvironment"
+Top = 0
+Width = 0
+[END PROPERTIES]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0STPNO
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+BorderStyle = 1
+Caption = "Configuracion de TPV"
+DataSession = 2
+DoCreate = .T.
+Height = 249
+Name = "Tsbaseform12"
+ShowWindow = 1
+Width = 522
+ctoolbar = 
+editmode = .T.
+lblRequerido.Name = "lblRequerido"
+lblRequerido.TabIndex = 11
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+PARAMETER LCESTADO
+
+IF PCOUNT()=1
+	THIS.TAG = LCESTADO
+ENDIF
+
+DODEFAULT()
+THISFORM.CBOSUCURSAL.VALUE = LEERINI('Sucursal', 'TPV-'+OAPP.EMPRESA)
+THISFORM.CBODEPOSITO.VALUE = LEERINI('Deposito', 'TPV-'+OAPP.EMPRESA)
+THISFORM.CBOCOMPROBANTE.VALUE = LEERINI('Comprobante', 'TPV-'+OAPP.EMPRESA)
+THISFORM.CBOCONDICION.VALUE = LEERINI('Condicion', 'TPV-'+OAPP.EMPRESA)
+THISFORM.CBOLISTAPRECIO.VALUE = LEERINI('ListaPrecio', 'TPV-'+OAPP.EMPRESA)
+THISFORM.CBOMONEDA.VALUE = LEERINI('Moneda', 'TPV-'+OAPP.EMPRESA)
+THISFORM.IDCLIENTE.VALUE = LEERINI('IdCliente', 'TPV-'+OAPP.EMPRESA)
+THISFORM.IDVENDEDOR.VALUE = LEERINI('IdVendedor', 'TPV-'+OAPP.EMPRESA)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0STPNO
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboComprobante
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BoundColumn = 2
+Left = 192
+Name = "cboComprobante"
+Style = 2
+TabIndex = 3
+Top = 60
+Width = 204
+cmdsql = select descripcion,idComprobante,cpbt_stk,tipo,Tipo_Iva as tipoiva from vt_cpbt where IdEmpresa=?oApp.Empresa order by descripcion 
+condicionvalidacion = 
+cursor = xVenta
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O00W9RL5
+[CLASS] cbocondventa
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbocondicion
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ControlSource = ""
+Left = 192
+Name = "Cbocondicion"
+TabIndex = 4
+Top = 84
+Width = 204
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O00W9RL4
+[CLASS] cbodeposito
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbodeposito
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ControlSource = ""
+Left = 192
+Name = "Cbodeposito"
+TabIndex = 2
+Top = 36
+Width = 204
+cmdsql = Select Deposito,idDeposito from dbo.st_depositos  where IdEmpresa=?oApp.Empresa
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O00W9RL6
+[CLASS] cbolistaprecio
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbolistaprecio
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ControlSource = ""
+Left = 192
+Name = "Cbolistaprecio"
+TabIndex = 5
+Top = 108
+Width = 204
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O00W9RL7
+[CLASS] cbomoneda
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbomoneda
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Left = 192
+Name = "Cbomoneda"
+TabIndex = 6
+Top = 132
+Width = 204
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O00W9RL3
+[CLASS] cbosucursal
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbosucursal
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 24
+Left = 192
+Name = "Cbosucursal"
+TabIndex = 1
+Top = 12
+Width = 204
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0STPNO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Cliente
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 21
+Left = 258
+Name = "Cliente"
+TabIndex = 21
+Top = 180
+Width = 240
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0T0OXL
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdAceptar
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "\<Aceptar"
+Left = 328
+Name = "cmdAceptar"
+TabIndex = 9
+Top = 216
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF THISFORM.TAG='TPV'
+THISFORM.HIDE()
+RETURN
+ENDIF
+= ESCRIBIRINI(THISFORM.CBOSUCURSAL.VALUE, 'Sucursal', 'TPV-'+OAPP.EMPRESA)
+= ESCRIBIRINI(THISFORM.CBODEPOSITO.VALUE, 'Deposito', 'TPV-'+OAPP.EMPRESA)
+= ESCRIBIRINI(THISFORM.CBOCOMPROBANTE.VALUE, 'Comprobante', 'TPV-'+OAPP.EMPRESA)
+= ESCRIBIRINI(THISFORM.CBOCONDICION.VALUE, 'Condicion', 'TPV-'+OAPP.EMPRESA)
+= ESCRIBIRINI(THISFORM.CBOLISTAPRECIO.VALUE, 'ListaPrecio', 'TPV-'+OAPP.EMPRESA)
+= ESCRIBIRINI(THISFORM.CBOMONEDA.VALUE, 'Moneda', 'TPV-'+OAPP.EMPRESA)
+= ESCRIBIRINI(THISFORM.IDCLIENTE.VALUE, 'IdCliente', 'TPV-'+OAPP.EMPRESA)
+= ESCRIBIRINI(THISFORM.IDVENDEDOR.VALUE, 'IdVendedor', 'TPV-'+OAPP.EMPRESA)
+THISFORM.RELEASE
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0STPNN
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancel
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Cancel = .T.
+Caption = "\<Cancelar"
+Left = 416
+Name = "cmdCancel"
+TabIndex = 10
+Top = 216
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF THISFORM.TAG='TPV'
+THISFORM.HIDE()
+ELSE
+THISFORM.RELEASE()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O00WFQQE
+[CLASS] idcliente
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ControlSource = ""
+Height = 22
+Left = 192
+Name = "Idcliente"
+TabIndex = 8
+Top = 180
+Width = 64
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _10L0VRBBX
+[CLASS] idvendedor
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idvendedor
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ControlSource = ""
+Height = 23
+Left = 192
+Name = "Idvendedor"
+TabIndex = 7
+Top = 156
+Width = 64
+objeto = this.parent.Nombrevendedor
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _10L0VRBBW
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NombreVendedor
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 21
+Left = 258
+Name = "NombreVendedor"
+TabIndex = 19
+Top = 156
+Width = 240
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0STPNN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Sucursal:"
+Left = 96
+Name = "Tslabel1"
+TabIndex = 12
+Top = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0STPNN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Comprobante de Venta:"
+Height = 22
+Left = 36
+Name = "Tslabel2"
+TabIndex = 14
+Top = 60
+Width = 141
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0STPNN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Lista de Precios:"
+Height = 22
+Left = 72
+Name = "Tslabel3"
+TabIndex = 16
+Top = 108
+Width = 101
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0STPNN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Cliente:"
+Height = 22
+Left = 108
+Name = "Tslabel4"
+TabIndex = 20
+Top = 180
+Width = 61
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0T0OXG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Moneda:"
+Height = 22
+Left = 120
+Name = "Tslabel5"
+TabIndex = 17
+Top = 132
+Width = 53
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0U73DS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Deposito:"
+Left = 96
+Name = "Tslabel6"
+TabIndex = 13
+Top = 36
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA11TQB3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Condicion de Venta:"
+Height = 22
+Left = 36
+Name = "Tslabel7"
+TabIndex = 15
+Top = 84
+Width = 141
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _10L0VRBBV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Vendedor:"
+Height = 22
+Left = 108
+Name = "Tslabel8"
+TabIndex = 18
+Top = 156
+Width = 61
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

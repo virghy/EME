@@ -1,0 +1,439 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\..\..\py_futura_\dirco\include\strings.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD8Z
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 220
+Left = 1
+Width = 520
+Height = 200
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0760IG8WD
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 10
+Height = 90
+Width = 95
+Alias = "horario"
+Database = ..\data\datos.dbc
+CursorSource = "rh_horarios"
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD91
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Height = 312
+Width = 415
+DoCreate = .T.
+BorderStyle = 3
+Caption = "Categoría de Horarios"
+camponro = idhorario,rh_horarios,IdEmpresa=?oApp.Empresa
+campotam = 4
+tabla1 = horario
+campos = IdEmpresa
+valores = oApp.Empresa
+Name = "Tsmaintform1"
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 0
+Pageframe1.Left = 0
+Pageframe1.Width = 416
+Pageframe1.Height = 312
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD96
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdfrecliqui
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "horario.idhorario"
+Enabled = .F.
+Height = 22
+Left = 131
+TabIndex = 2
+Top = 43
+Width = 72
+Name = "txtIdfrecliqui"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD9B
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdfrecliqui
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Código"
+Height = 16
+Left = 23
+Top = 43
+Width = 96
+TabIndex = 1
+Name = "lblIdfrecliqui"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD9C
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "horario.descripcion"
+Height = 22
+Left = 131
+TabIndex = 4
+Top = 70
+Width = 189
+editable = .T.
+Name = "txtDescripcion"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD9E
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Descripción"
+Height = 16
+Left = 23
+Top = 70
+Width = 96
+TabIndex = 3
+Name = "lblDescripcion"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD8Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDias
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "horario.dias"
+Height = 22
+InputMask = "999"
+Left = 131
+TabIndex = 6
+Top = 97
+Width = 72
+editable = .T.
+Name = "txtDias"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD90
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDias
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Dias laborables"
+Height = 16
+Left = 23
+Top = 97
+Width = 96
+TabIndex = 5
+Name = "lblDias"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD9J
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtHoras
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "horario.horas"
+Height = 22
+InputMask = "99,999.99"
+Left = 131
+TabIndex = 8
+Top = 124
+Width = 72
+editable = .T.
+Name = "txtHoras"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD8Z
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblHoras
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Horas laborables"
+Height = 16
+Left = 23
+Top = 124
+Width = 96
+TabIndex = 7
+Name = "lblHoras"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0760IG8WX
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Top = 163
+Left = 11
+Height = 75
+Width = 384
+Name = "Ts3dshape1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0760IG8WZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .F.
+Alignment = 2
+BackStyle = 1
+Caption = "Horarios"
+Height = 16
+Left = 23
+Top = 157
+Width = 60
+TabIndex = 9
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD8Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "horario.entrada1"
+Height = 22
+InputMask = "99:99"
+Left = 107
+TabIndex = 11
+Top = 178
+Width = 72
+editable = .T.
+Name = "Tstextbox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD90
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Entrada"
+Height = 16
+Left = 35
+Top = 178
+Width = 43
+TabIndex = 10
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD91
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "horario.salida1"
+Height = 22
+InputMask = "99:99"
+Left = 107
+TabIndex = 13
+Top = 202
+Width = 72
+editable = .T.
+Name = "Tstextbox2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0700IWD96
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Salida"
+Height = 16
+Left = 35
+Top = 202
+Width = 34
+TabIndex = 12
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0760IG8X7
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "horario.entrada2"
+Height = 22
+InputMask = "99:99"
+Left = 311
+TabIndex = 15
+Top = 178
+Width = 72
+editable = .T.
+Name = "Tstextbox3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0760IG8XA
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Entrada"
+Height = 16
+Left = 203
+Top = 178
+Width = 43
+TabIndex = 14
+Name = "Tslabel4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0760IG8XB
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "horario.salida2"
+Height = 22
+InputMask = "99:99"
+Left = 311
+TabIndex = 17
+Top = 202
+Width = 72
+editable = .T.
+Name = "Tstextbox4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0760IG8XE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Salida"
+Height = 16
+Left = 203
+Top = 202
+Width = 34
+TabIndex = 16
+Name = "Tslabel5"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

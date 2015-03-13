@@ -1,0 +1,240 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AY11OCJ1
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 200
+InitialSelectedAlias = "fn_tipocredito"
+Left = 79
+Name = "Dataenvironment"
+Top = 174
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SD19JIEN
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "fn_tipocredito"
+CursorSource = "fn_tipocredito"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SD19Z6YL
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "fn_vtasainteres"
+BufferModeOverride = 5
+CursorSource = "fn_tasainteres"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 150
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 19
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AY11OCJ5
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Tipos de Creditos"
+DoCreate = .T.
+Height = 264
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 265
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.TabStretch = 0
+Pageframe1.TabStyle = 0
+Pageframe1.Tabs = .T.
+Pageframe1.Top = 0
+Pageframe1.Width = 360
+Width = 359
+camponro = IdTipoCredito,fn_Tipocredito
+campotam = 2
+detalle = .T.
+tabla1 = fn_tipoCredito
+tabla2 = fn_vTasaInteres
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SD1A4DUB
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdCoeficiente
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "fn_vtasainteres.cuota"
+Column1.FontSize = 8
+Column1.Name = "Column1"
+Column1.Width = 53
+Column2.ControlSource = "fn_vtasainteres.interes"
+Column2.FontSize = 8
+Column2.Name = "Column2"
+Column2.Width = 83
+ColumnCount = 2
+FontSize = 8
+Height = 152
+Left = 95
+Name = "grdCoeficiente"
+Panel = 1
+RecordSource = "fn_vtasainteres"
+RecordSourceType = 1
+RowHeight = 17
+ScrollBars = 2
+Top = 58
+Width = 156
+campo = idTipoCredito
+valor = fn_TipoCredito.idTipoCredito
+valorvariable = fn_TipoCredito.idTipoCredito
+variablevista = m.idTipoCredito
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SD1A4DUC
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCoeficiente.Column1
+[START PROPERTIES]
+Caption = "Cuotas"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SD1A4DUD
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCoeficiente.Column1
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "fn_vtasainteres.cuota"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SD1A4DUE
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCoeficiente.Column2
+[START PROPERTIES]
+Caption = "Interes Anual"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SD1A4DUL
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdCoeficiente.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "fn_vtasainteres.interes"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AY11OCJO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNombre
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Tipo de Credito"
+Height = 16
+Left = 47
+Name = "lblNombre"
+TabIndex = 1
+Top = 22
+Width = 86
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AY11OCJL
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "fn_tipocredito.tipocredito"
+Height = 22
+Left = 143
+Name = "txtNombre"
+TabIndex = 1
+Top = 22
+Width = 192
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+[EOF]

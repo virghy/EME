@@ -1,0 +1,1013 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYE
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+InitialSelectedAlias = "exportar"
+Left = 7
+Name = "Dataenvironment"
+Top = 263
+Width = 535
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYK
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Imprimir
+[START PROPERTIES]
+AlwaysOnTop = .F.
+AutoCenter = .T.
+BorderStyle = 2
+Caption = "Exportar"
+DataSession = 2
+DoCreate = .T.
+FontSize = 8
+Height = 450
+HelpContextID = 106
+Icon = ..\
+KeyPreview = .T.
+LockScreen = .F.
+MaxButton = .F.
+MinButton = .F.
+Name = "Imprimir"
+Picture = ..\
+ShowTips = .T.
+ShowWindow = 0
+WhatsThisButton = .T.
+WhatsThisHelp = .T.
+Width = 590
+WindowState = 0
+WindowType = 0
+ctoolbar = 
+editmode = .T.
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+PARAMETER MGRUPO
+LOCAL FILTRO
+THISFORM.TIPO.VALUE = 'XLS'
+IF PARAMETERS()>0
+FILTRO = "FOR UPPER(GRUPO)=UPPER(mGrupo)"
+ELSE
+FILTRO = " "
+ENDIF
+DO SETEO
+IF TYPE("THIS.oleTreeview")<>"O" .OR. ISNULL(THIS.OLETREEVIEW)
+RETURN .F.
+ENDIF
+IF TYPE("THIS.oleImagesList")<>"O" .OR. ISNULL(THIS.OLEIMAGESLIST)
+RETURN .F.
+ENDIF
+THISFORM.OLETREEVIEW.DOVERB(-1)
+THIS.OLETREEVIEW.IMAGELIST = THIS.OLEIMAGESLIST
+O = THISFORM.OLETREEVIEW.NODES
+O.CLEAR
+SCAN &FILTRO
+IF IDOBJETO<>0
+REPLACE DISPONIBLE WITH OAPP.PERMISOS(IDOBJETO)
+ENDIF
+IF LCAGRUPACION='C'
+IF ALLTRIM(PARENT)='0_'
+O.ADD( , 1, ALLTRIM(KEY), ALLTRIM(TEXT), 1, 2)
+ELSE
+IF DISPONIBLE
+IF EMPTY(ORIGEN)
+O.ADD(ALLTRIM(PARENT), 4, ALLTRIM(KEY), ALLTRIM(TEXT), 1, 2)
+ELSE
+O.ADD(ALLTRIM(PARENT), 4, ALLTRIM(KEY), ALLTRIM(TEXT), 3, 3)
+ENDIF
+ELSE
+O.ADD(ALLTRIM(PARENT), 4, ALLTRIM(KEY), ALLTRIM(TEXT), 4, 4)
+ENDIF
+ENDIF
+ELSE
+IF DISPONIBLE
+O.ADD( , 1, ALLTRIM(KEY), ALLTRIM(TEXT), 3, 3)
+ELSE
+O.ADD( , 1, ALLTRIM(KEY), ALLTRIM(TEXT), 4, 4)
+ENDIF
+ENDIF
+ENDSCAN
+THISFORM.OLETREEVIEW.FONT.SIZE = 8
+THISFORM.OLETREEVIEW.LABELEDIT = 1
+THISFORM.OLETREEVIEW.LINESTYLE = 1
+THISFORM.OLETREEVIEW.SORTED = .T.
+PUBLIC CDOSNAME
+M.CDOSNAME = ' '
+THISFORM.REFRESH()
+THIS.FILTRAR()
+DEFINE WINDOW RESULTADO FROM 2, 1 TO 13, 75 GROW FLOAT CLOSE ZOOM TITLE 'Resultado'
+ENDPROC
+PROCEDURE Load
+DO SETEO
+USE SHARED datos!exportar ORDER key IN 0
+USE SHARED datos!control IN 0
+SELECT EXPORTAR
+CURSORSETPROP("Buffering", 5)
+ENDPROC
+PROCEDURE Release
+FOR X = 1 TO 6
+OBJETO = 'caja'+ALLTRIM(STR(X))
+IF THISFORM.&OBJETO..VISIBLE
+VARIABLE=THISFORM.&OBJETO..NOMBVAR
+RELEASE &VARIABLE
+ENDIF
+ENDFOR
+SELECT EXPORTAR
+= TABLEREVERT(.T.)
+RELEASE CDOSNAME
+ENDPROC
+PROCEDURE exportarpivot
+PARAMETER LCSQL
+LCCONEXION = "ODBC;"+LEERINI("DEFAULT", "ODBC")
+AA = CREATEOBJECT("excel.application")
+AA.WORKBOOKS.ADD()
+PT = AA.ACTIVEWORKBOOK.PIVOTCACHES.ADD(2)
+PT.CONNECTION = LCCONEXION
+PT.COMMANDTYPE = 2
+PT.COMMANDTEXT = LCSQL
+PT.CREATEPIVOTTABLE(AA.ACTIVECELL, "Tabla Dinamica1",  , 1)
+AA.VISIBLE = .T.
+ENDPROC
+PROCEDURE exportarxls
+PARAMETER LCSQL
+LCCONEXION = "ODBC;"+LEERINI("DEFAULT", "ODBC")
+AA = CREATEOBJECT("excel.application")
+AA.WORKBOOKS.ADD()
+QT = AA.ACTIVESHEET.QUERYTABLES.ADD(LCCONEXION, AA.ACTIVECELL)
+QT.COMMANDTEXT = LCSQL
+QT.NAME = "Consulta desde Futura Software"
+QT.FIELDNAMES = .T.
+QT.REFRESH()
+AA.VISIBLE = .T.
+ENDPROC
+PROCEDURE filtrar
+SELECT CONTROL
+SET FILTER TO UPPER(ALLTRIM(exportar.PARAM1))==UPPER(ALLTRIM(CONTROL.VARIABLE)) .OR. UPPER(ALLTRIM(exportar.PARAM2))==UPPER(ALLTRIM(CONTROL.VARIABLE)) .OR. UPPER(ALLTRIM(exportar.PARAM3))==UPPER(ALLTRIM(CONTROL.VARIABLE)) .OR. UPPER(ALLTRIM(exportar.PARAM4))==UPPER(ALLTRIM(CONTROL.VARIABLE)) .OR. UPPER(ALLTRIM(exportar.PARAM5))==UPPER(ALLTRIM(CONTROL.VARIABLE)) .OR. UPPER(ALLTRIM(exportar.PARAM6))==UPPER(ALLTRIM(CONTROL.VARIABLE)) .OR. UPPER(ALLTRIM(exportar.PARAM7))==UPPER(ALLTRIM(CONTROL.VARIABLE)) .OR. UPPER(ALLTRIM(exportar.PARAM8))==UPPER(ALLTRIM(CONTROL.VARIABLE)) 
+SELECT exportar
+GOTO TOP IN CONTROL
+*SET STEP ON
+FOR X = 1 TO 6
+	OBJETO = 'caja'+ALLTRIM(STR(X))
+	IF  .NOT. EOF('control')
+
+		THIS.&OBJETO..VISIBLE=.T.
+		THIS.&OBJETO..ETIQ.CAPTION=ALLTRIM(CONTROL.ETIQUETA)
+		VALOR = CONTROL.VALUE
+		VARIABLE = CONTROL.VARIABLE
+		THIS.&OBJETO..REQUERY=CONTROL.REQUERY
+
+		IF CONTROL.TIPO="L"
+
+			VRSOURCE = CONTROL.RSOURCE
+			IF CONTROL.ORIGEN='R'
+				THIS.&OBJETO..LISTA.CMDSQL=VRSOURCE
+				THIS.&OBJETO..LISTA.CURSOR=THIS.&OBJETO..NAME
+				THIS.&OBJETO..LISTA.INIT()
+			ELSE
+				THIS.&OBJETO..LISTA.ROWSOURCE=""
+				THIS.&OBJETO..LISTA.ROWSOURCETYPE=CONTROL.RSOURCETYP
+				THIS.&OBJETO..LISTA.ROWSOURCE=VRSOURCE
+				IF  .NOT. EMPTY(CONTROL.BOUNDCOL)
+					THIS.&OBJETO..LISTA.BOUNDCOLUMN=CONTROL.BOUNDCOL
+				ELSE
+					THIS.&OBJETO..LISTA.BOUNDCOLUMN=1
+				ENDIF
+			ENDIF
+			THIS.&OBJETO..LISTA.STYLE=CONTROL.STYLE
+			THIS.&OBJETO..LISTA.VISIBLE=.T.
+			THIS.&OBJETO..TEXTO.VISIBLE=.F.
+			IF TYPE(VARIABLE)<>"U"
+				THIS.&OBJETO..LISTA.VALUE = &VARIABLE
+			ELSE
+				THIS.&OBJETO..LISTA.VALUE=&VALOR
+			ENDIF
+		ELSE
+			THIS.&OBJETO..TEXTO.INPUTMASK=ALLTRIM(CONTROL.INPUTMASK)
+			THIS.&OBJETO..TEXTO.MAXLENGTH=CONTROL.MAXLENGTH
+			IF TYPE(VARIABLE)<>"U"
+				THIS.&OBJETO..TEXTO.VALUE = &VARIABLE
+			ELSE
+				THIS.&OBJETO..TEXTO.VALUE=&VALOR
+			ENDIF
+			THIS.&OBJETO..LISTA.VISIBLE=.F.
+			THIS.&OBJETO..TEXTO.VISIBLE=.T.
+		ENDIF
+		THIS.&OBJETO..TEXTO.STATUSBARTEXT = ''
+		IF  .NOT. EMPTY(CONTROL.DATOAYUDA)
+			THIS.&OBJETO..TEXTO.DATOAYUDA = CONTROL.DATOAYUDA
+			THIS.&OBJETO..TEXTO.INIT()
+		ELSE
+			THIS.&OBJETO..TEXTO.DATOAYUDA = ''
+			THIS.&OBJETO..TEXTO.STATUSBARTEXT = THIS.&OBJETO..ETIQ.CAPTION
+			THIS.&OBJETO..TEXTO.INIT()
+		ENDIF
+		THIS.&OBJETO..NOMBVAR=VARIABLE
+		IF TYPE(VARIABLE)="U"
+			PUBLIC &VARIABLE
+			&VARIABLE = &VALOR
+		ENDIF
+		SKIP IN CONTROL
+	ELSE
+		THIS.&OBJETO..VISIBLE=.F.
+	ENDIF
+ENDFOR
+
+ENDPROC
+PROCEDURE generardbf
+Local DESTINO, PROCEDIMIENTO, EXP_DEST
+PROCEDIMIENTO = EXPORTAR.ORIGEN
+CMDSQL = Execscript(PROCEDIMIENTO)
+EXP_DEST = EXPORTAR.DESTINO
+If  .Not. Empty(used(EXP_DEST))
+	Select (EXP_DEST)
+ENDIF
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*exportarpivot 
+*exportarxls 
+*filtrar 
+*generardbf 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _09712EM99
+[CLASS] optiongroup
+[BASECLASS] optiongroup
+[OBJNAME] Agrupar
+[PARENT] Imprimir
+[START PROPERTIES]
+AutoSize = .F.
+BackStyle = 0
+ButtonCount = 2
+Height = 24
+Left = 14
+Name = "Agrupar"
+Option1.Alignment = 0
+Option1.AutoSize = .F.
+Option1.BackStyle = 0
+Option1.Caption = "Por Categoría"
+Option1.FontBold = .F.
+Option1.FontSize = 8
+Option1.Height = 16
+Option1.Left = 20
+Option1.Name = "Option1"
+Option1.Top = 4
+Option1.Value = 1
+Option1.Width = 112
+Option2.AutoSize = .F.
+Option2.BackStyle = 0
+Option2.Caption = "Por Orden Alfabetico"
+Option2.FontBold = .F.
+Option2.FontSize = 8
+Option2.Height = 16
+Option2.Left = 149
+Option2.Name = "Option2"
+Option2.Top = 4
+Option2.Width = 139
+SpecialEffect = 0
+TabIndex = 23
+Top = 76
+Value = 1
+Width = 286
+ZOrderSet = 22
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+PUBLIC LCAGRUPACION
+LCAGRUPACION = 'C'
+ENDPROC
+PROCEDURE InteractiveChange
+SELECT EXPORTAR
+DO CASE
+CASE THIS.VALUE=1
+LCAGRUPACION = 'C'
+SET FILTER TO
+CASE THIS.VALUE=2
+LCAGRUPACION = 'A'
+SET FILTER TO PARENT<>'0_'
+ENDCASE
+THISFORM.INIT()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYE
+[CLASS] caja
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] container
+[OBJNAME] Caja1
+[PARENT] Imprimir
+[START PROPERTIES]
+ETIQ.Name = "ETIQ"
+LISTA.Name = "LISTA"
+Left = 314
+Name = "Caja1"
+SpecialEffect = 0
+TEXTO.Name = "TEXTO"
+TabIndex = 1
+Top = 77
+ZOrderSet = 11
+texto2.Name = "texto2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYE
+[CLASS] caja
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] container
+[OBJNAME] Caja2
+[PARENT] Imprimir
+[START PROPERTIES]
+ETIQ.Name = "ETIQ"
+LISTA.Name = "LISTA"
+Left = 314
+Name = "Caja2"
+SpecialEffect = 0
+TEXTO.Name = "TEXTO"
+TabIndex = 2
+Top = 117
+ZOrderSet = 12
+texto2.Name = "texto2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S7T0KU9SQ
+[CLASS] caja
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] container
+[OBJNAME] Caja3
+[PARENT] Imprimir
+[START PROPERTIES]
+ETIQ.Name = "ETIQ"
+LISTA.Name = "LISTA"
+Left = 314
+Name = "Caja3"
+TEXTO.Name = "TEXTO"
+TabIndex = 3
+Top = 157
+ZOrderSet = 13
+texto2.Name = "texto2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S7T0KU9SV
+[CLASS] caja
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] container
+[OBJNAME] Caja4
+[PARENT] Imprimir
+[START PROPERTIES]
+ETIQ.Name = "ETIQ"
+LISTA.Name = "LISTA"
+Left = 314
+Name = "Caja4"
+TEXTO.Name = "TEXTO"
+TabIndex = 4
+Top = 197
+ZOrderSet = 14
+texto2.Name = "texto2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S7T0KU9T0
+[CLASS] caja
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] container
+[OBJNAME] Caja5
+[PARENT] Imprimir
+[START PROPERTIES]
+ETIQ.Name = "ETIQ"
+LISTA.Name = "LISTA"
+Left = 314
+Name = "Caja5"
+TEXTO.Name = "TEXTO"
+TabIndex = 5
+Top = 237
+ZOrderSet = 15
+texto2.Name = "texto2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYE
+[CLASS] caja
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] container
+[OBJNAME] caja6
+[PARENT] Imprimir
+[START PROPERTIES]
+ETIQ.Name = "ETIQ"
+LISTA.Name = "LISTA"
+Left = 314
+Name = "caja6"
+TEXTO.Name = "TEXTO"
+TabIndex = 6
+Top = 277
+Width = 269
+ZOrderSet = 16
+texto2.Name = "texto2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05L09AONI
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command1
+[PARENT] Imprimir
+[START PROPERTIES]
+Caption = "\<Cerrar"
+ColorScheme = 1
+ColorSource = 4
+Enabled = .T.
+FontSize = 8
+Height = 53
+Left = 452
+MousePointer = 0
+Name = "Command1"
+Picture = ..\bitmaps\close.bmp
+Style = 0
+TabIndex = 10
+Top = 388
+Width = 122
+ZOrderSet = 19
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.RELEASE()
+ENDPROC
+PROCEDURE DragDrop
+LPARAMETERS OSOURCE, NXCOORD, NYCOORD
+THIS.SHOWWHATSTHIS
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RZ0KHGZ4
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command2
+[PARENT] Imprimir
+[START PROPERTIES]
+Caption = "..."
+Height = 24
+Left = 558
+Name = "Command2"
+TabIndex = 12
+Top = 345
+Width = 24
+ZOrderSet = 11
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF EMPTY(EXPORTAR.NOMBRE)
+CARCHIVO = ALLTRIM(THISFORM.TAG)+'\'+'exporta'+'_'+EXPORTAR.TEXT
+ELSE
+CARCHIVO = ALLTRIM(THISFORM.TAG)+'\'+EVALUATE(EXPORTAR.NOMBRE)
+ENDIF
+DO CASE
+CASE THISFORM.TIPO.VALUE='DBF'
+M.ARCHIVO = PUTFILE('Exportar:', CARCHIVO, 'DBF')
+CASE THISFORM.TIPO.VALUE='XLS'
+M.ARCHIVO = PUTFILE('Exportar:', CARCHIVO, 'XLS')
+CASE THISFORM.TIPO.VALUE='SDF'
+M.ARCHIVO = PUTFILE('Exportar:', CARCHIVO, 'SDF')
+ENDCASE
+IF  .NOT. EMPTY(M.ARCHIVO)
+THISFORM.DESTINO.VALUE = M.ARCHIVO
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYE
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] Container1
+[PARENT] Imprimir
+[START PROPERTIES]
+BackColor = 0,0,128
+BackStyle = 0
+Height = 268
+Left = 308
+Name = "Container1"
+SpecialEffect = 1
+TabIndex = 18
+Top = 58
+Width = 280
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _09712EM8N
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] Container2
+[PARENT] Imprimir
+[START PROPERTIES]
+BackColor = 0,128,192
+BackStyle = 0
+Height = 268
+Left = 7
+Name = "Container2"
+SpecialEffect = 1
+TabIndex = 19
+Top = 58
+Width = 299
+ZOrderSet = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S7N0PKHM4
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] descrip
+[PARENT] Imprimir
+[START PROPERTIES]
+BackStyle = 0
+Caption = "Descripción del informe"
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 41
+Left = 19
+Name = "descrip"
+TabIndex = 21
+Top = 398
+Width = 282
+WordWrap = .T.
+ZOrderSet = 6
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+THIS.CAPTION = ''
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RZ0M8GC8
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Destino
+[PARENT] Imprimir
+[START PROPERTIES]
+Enabled = .T.
+Height = 24
+InputMask = ""
+Left = 259
+Name = "Destino"
+ReadOnly = .T.
+TabIndex = 11
+Top = 345
+Width = 294
+ZOrderSet = 7
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYE
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] ejecutar
+[PARENT] Imprimir
+[START PROPERTIES]
+Caption = "\<Exportar"
+ColorScheme = 1
+ColorSource = 4
+Enabled = .F.
+FontSize = 8
+Height = 52
+Left = 320
+MousePointer = 0
+Name = "ejecutar"
+Picture = ..\bitmaps\exportar.bmp
+Style = 0
+TabIndex = 9
+Top = 389
+Width = 133
+ZOrderSet = 8
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+Thisform.CAJA1.LostFocus()
+Thisform.CAJA2.LostFocus()
+Thisform.CAJA3.LostFocus()
+Thisform.CAJA4.LostFocus()
+Thisform.CAJA5.LostFocus()
+Thisform.CAJA6.LostFocus()
+Local DESTINO, PROCEDIMIENTO, EXP_DEST
+*PROCEDIMIENTO = EXPORTAR.ORIGEN
+*CMDSQL = Execscript(PROCEDIMIENTO)
+*EXP_DEST = EXPORTAR.DESTINO
+*If  .Not. Empty(used(EXP_DEST))
+*	Select (EXP_DEST)
+*	If Reccount(EXP_DEST)>0
+		*DESTINO = '"'+Thisform.DESTINO.Value+'"'
+	    DESTINO = Thisform.DESTINO.Value
+		Do Case
+		Case Thisform.TIPO.Value='DBF'
+			thisform.generardbf()
+			Copy To  &DESTINO
+			=Messagebox('El archivo dbf fue creado en &destino',64,"Futura Software")
+		Case Thisform.TIPO.Value='XLS'
+			Thisform.EXPORTARXLS(TEXTMERGE(EXPORTAR.CMDSQL))
+		Case Thisform.TIPO.Value='TLS'
+			Thisform.EXPORTARPIVOT(TEXTMERGE(EXPORTAR.CMDSQL))
+		Case Thisform.TIPO.Value='SDF'
+			thisform.generardbf()
+			Destino=Destino+".CSV"
+			Copy To  (DESTINO) DELIMITED WITH " WITH CHARACTER ';'
+			=Messagebox('El archivo CSV fue creado en &destino',64,"Futura Software")
+		Case Thisform.TIPO.Value='TAB'
+			Copy To  &DESTINO  Delimited With Chr(9)
+			=Messagebox('El archivo TXT fue creado en &destino',64,"Futura Software")
+		Endcase
+*	Else
+*		= Messagebox('No se ha encontrado ningún resultado para exportar.', 64, "Futura Software")
+*	Endif
+*Endif
+Thisform.CAJA1.LostFocus()
+Thisform.CAJA2.LostFocus()
+Thisform.CAJA3.LostFocus()
+Thisform.CAJA4.LostFocus()
+Thisform.CAJA5.LostFocus()
+Thisform.CAJA6.LostFocus()
+EMPRESA = OAPP.NOMBREEMPRESA
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label1
+[PARENT] Imprimir
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .T.
+BackStyle = 1
+Caption = "\<Destino de la Exportación"
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 15
+Left = 258
+Name = "Label1"
+TabIndex = 11
+Top = 326
+Width = 121
+WordWrap = .T.
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S7N0PKHM6
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label2
+[PARENT] Imprimir
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Descripción"
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 15
+Left = 14
+Name = "Label2"
+TabIndex = 20
+Top = 381
+Width = 58
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S7N0PGBMQ
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label3
+[PARENT] Imprimir
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackColor = 0,0,128
+BackStyle = 1
+Caption = "\<Parámetros"
+FontBold = .T.
+FontName = "Arial"
+FontSize = 8
+ForeColor = 255,255,255
+Height = 15
+Left = 315
+Name = "Label3"
+TabIndex = 16
+Top = 62
+Width = 268
+WordWrap = .T.
+ZOrderSet = 17
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYE
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label4
+[PARENT] Imprimir
+[START PROPERTIES]
+BackStyle = 0
+Caption = "Haga click en un informe de la lista y complete los parámetros. Luego haga un click en 'Exportar."
+FontName = "MS Sans Serif"
+FontSize = 7
+Height = 33
+Left = 14
+Name = "Label4"
+TabIndex = 13
+Top = 19
+Width = 297
+WordWrap = .T.
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYK
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label5
+[PARENT] Imprimir
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "\<Instrucciones "
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 15
+Left = 18
+Name = "Label5"
+TabIndex = 12
+Top = 2
+Width = 68
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _09712EM8P
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label6
+[PARENT] Imprimir
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackColor = 0,0,128
+BackStyle = 1
+Caption = "\<Orígenes"
+FontBold = .T.
+FontName = "Arial"
+FontSize = 8
+ForeColor = 255,255,255
+Height = 15
+Left = 14
+Name = "Label6"
+TabIndex = 15
+Top = 61
+Width = 286
+WordWrap = .T.
+ZOrderSet = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RZ0LD38D
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label7
+[PARENT] Imprimir
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .T.
+BackStyle = 1
+Caption = "\<Tipo"
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 15
+Left = 17
+Name = "Label7"
+TabIndex = 11
+Top = 326
+Width = 21
+WordWrap = .T.
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _02I10OZGM
+[CLASS] olecontrol
+[BASECLASS] olecontrol
+[OBJNAME] oleImagesList
+[PARENT] Imprimir
+[START PROPERTIES]
+Height = 37
+Left = 276
+Name = "oleImagesList"
+Top = 0
+Width = 49
+ZOrderSet = 18
+[END PROPERTIES]
+[BINSTART OLE]
+CHECKSUM=10488
+[BINEND OLE]
+[BINSTART OLE2]
+CHECKSUM=5108
+[BINEND OLE2]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _02I10EU2S
+[CLASS] olecontrol
+[BASECLASS] olecontrol
+[OBJNAME] OleTreeView
+[PARENT] Imprimir
+[START PROPERTIES]
+Enabled = .T.
+Height = 213
+Left = 14
+Name = "OleTreeView"
+TabIndex = 17
+Top = 107
+Width = 286
+ZOrderSet = 26
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE NodeClick
+Lparameters Node
+Select EXPORTAR
+= Seek(Node.Key)
+If EXPORTAR.DISPONIBLE
+	Thisform.Descrip.Caption = EXPORTAR.Descrip
+	Thisform.FILTRAR()
+	If  .Not. Empty(EXPORTAR.ORIGEN)
+		Thisform.EJECUTAR.Enabled = .T.
+		Declare Integer SHGetFolderPath In "shfolder.dll" As _FFC_SHGetFolderPath Integer, Integer, Integer, Integer, String
+		LCFOLDER = Space(256)
+		LNFOLDER = 5
+		NRETVAL = _FFC_SHGetFolderPath(0, LNFOLDER, 0, 1, @LCFOLDER)
+		LCFOLDER = Chrtran(LCFOLDER, Chr(0), "")
+		Thisform.Tag = LCFOLDER
+		Clear Dlls  '_FFC_SHGETFOLDERPATH'
+		If Empty(EXPORTAR.NOMBRE)
+			Thisform.DESTINO.Value = Alltrim(LCFOLDER)+'\'+'exporta'+'_'+EXPORTAR.Text
+		Else
+			Thisform.DESTINO.Value = Alltrim(LCFOLDER)+'\'+Evaluate(EXPORTAR.NOMBRE)
+		Endif
+	Else
+		Thisform.EJECUTAR.Enabled = .F.
+	Endif
+Else
+	Thisform.EJECUTAR.Enabled = .F.
+	Thisform.Descrip.Caption = 'No está autorizado a acceder a este informe. Consulte con el Administrador de Sistemas'
+Endif
+ENDPROC
+[END METHODS]
+[BINSTART OLE]
+CHECKSUM=26997
+[BINEND OLE]
+[BINSTART OLE2]
+CHECKSUM=5108
+[BINEND OLE2]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _S7N0PKHM3
+[CLASS] shape
+[BASECLASS] shape
+[OBJNAME] Shape1
+[PARENT] Imprimir
+[START PROPERTIES]
+BackStyle = 0
+Height = 59
+Left = 12
+Name = "Shape1"
+SpecialEffect = 0
+Top = 387
+Width = 294
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYE
+[CLASS] shape
+[BASECLASS] shape
+[OBJNAME] Shape2
+[PARENT] Imprimir
+[START PROPERTIES]
+BackStyle = 0
+Height = 47
+Left = 7
+Name = "Shape2"
+SpecialEffect = 0
+Top = 9
+Width = 301
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RZ0LD38C
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tipo
+[PARENT] Imprimir
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "250,20"
+FirstElement = 1
+Height = 24
+Left = 15
+Name = "Tipo"
+NumberOfElements = 0
+RowSource = "Tablas de Visual FoxPro (DBF),DBF,Planilla electronica de Microsoft Excel (XLS),XLS,Tabla Dinamica de Microsoft Excel (XLS),TLS,Archivo de texto,SDF"
+RowSourceType = 1
+Style = 2
+TabIndex = 9
+Top = 344
+Value = ('XLS')
+Width = 234
+ZOrderSet = 12
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R9Z14KVYE
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape3
+[PARENT] Imprimir
+[START PROPERTIES]
+Height = 44
+Left = 7
+Name = "Ts3dshape3"
+Top = 334
+Width = 582
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,1268 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 26
+Left = 1
+Width = 792
+Height = 384
+InitialSelectedAlias = "cp_vorden_compra"
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+SET DELETED ON
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EW12K05H
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 10
+Height = 207
+Width = 124
+Alias = "cp_vdet_ord"
+BufferModeOverride = 5
+Database = ..\data\datos.dbc
+CursorSource = "cp_vdet_ord"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EW12K05I
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 19
+Left = 150
+Height = 280
+Width = 133
+Alias = "cp_vorden_compra"
+Database = ..\data\datos.dbc
+CursorSource = "cp_vorden_compra"
+NoDataOnLoad = .T.
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL4
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Height = 494
+Width = 625
+DoCreate = .T.
+Comment = "número,cn_Asientos,idempresa = ?oApp.Empresa and ejercicio = ?oApp.Ejercicio"
+BorderStyle = 3
+Caption = "Orden de Compra"
+valor_iva = 10
+tabla1 = cp_vorden_compra
+tabla2 = cp_vdet_ord
+detalle = .T.
+camponro = numero,cp_orden_compra,IdEmpresa=?oApp.Empresa
+grupoimpresion = 
+lallownew = .T.
+campos = idempresa,Idorden
+valores = oApp.Empresa,newid('cp_ord_compra')
+tablaconsulta = OrdenComp
+identidad = idorden
+idobjeto = 
+auditmarcahora = audit_fecha
+auditusuario = audit_usuario
+camponroorden = S
+Name = "Tsmaintform1"
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.PageCount = 2
+Pageframe1.PAGE1.Name = "PAGE1"
+Pageframe1.PAGE2.grdList.Left = 1
+Pageframe1.PAGE2.grdList.Top = 11
+Pageframe1.PAGE2.grdList.Name = "grdList"
+Pageframe1.PAGE2.Name = "PAGE2"
+Pageframe1.Top = 0
+Pageframe1.Left = 0
+Pageframe1.Width = 626
+Pageframe1.Height = 496
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+LOCAL strsql
+strsql = "Select valor from bs_constante where constante = " +  ;
+         "'" + "MONEDA_COMPRA" +  ;
+         "'" + "AND idempresa = " +  ;
+         "'" + oapp.empresa +  ;
+         "'"
+IF sql(strsql,'moneda_def') > 0
+     this.moneda_def = moneda_def.valor
+ENDIF
+ENDPROC
+PROCEDURE addnew
+DODEFAULT()
+this.pageframe1.page1.txtfecha.value =  ;
+ DATE()
+this.pageframe1.page1.estado.value =  ;
+ 'I'
+this.pageframe1.page1.sucursal.listindex =  ;
+ 1
+this.pageframe1.page1.cbomoneda1.listindex =  ;
+ 1
+this.pageframe1.page1.cotizacion.value =  ;
+ cotizacion(this.pageframe1.page1.cbomoneda1.value, ;
+ 'V', ;
+ this.pageframe1.page1.txtfecha.value)
+ENDPROC
+PROCEDURE imprimir
+LOCAL m.opcion
+DO FORM sys_opcionimpresion TO  ;
+   m.opcion
+m.idorden = cp_vorden_compra.idorden
+DO CASE
+     CASE m.opcion = 1
+          REPORT FORM  cp_ORdenCompra  TO  PRINTER PROMPT PREVIEW  NOCONSOLE
+     CASE m.opcion = 2
+          REPORT FORM  cp_ORdenCompra  TO PRINTER  PROMPT  NOCONSOLE
+ENDCASE
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+valor_iva valor del iva
+sucursal_def Sucursal por defecto
+estado_def Estado por defecto
+moneda_def moneda por defecto
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNúmero
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Comment = ""
+FontBold = .T.
+ControlSource = "cp_vorden_compra.numero"
+Enabled = .T.
+Height = 22
+Left = 513
+TabIndex = 12
+Top = 22
+Width = 104
+ForeColor = 0,0,128
+editable = .T.
+Name = "txtNúmero"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecha
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Comment = ""
+DateFormat = 13
+ControlSource = "cp_vorden_compra.fec_ord"
+Height = 22
+Left = 513
+TabIndex = 14
+Top = 70
+Width = 104
+editable = .T.
+Name = "txtFecha"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = DTOC(this.value)
+ENDPROC
+PROCEDURE LostFocus
+IF this.tag <> DTOC(this.value)
+     this.parent.cotizacion.value =  ;
+      cotizacion(this.parent.cbomoneda1.value, ;
+      'V',this.value)
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSucursal
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Sucursal"
+Height = 16
+Left = 25
+Top = 71
+Width = 50
+TabIndex = 6
+Name = "lblSucursal"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0C512XA1V
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNúmero
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+FontBold = .T.
+Caption = "Número"
+Height = 16
+Left = 464
+Top = 22
+Width = 46
+TabIndex = 11
+Name = "lblNúmero"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFecha
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Fecha"
+Height = 16
+Left = 476
+Top = 70
+Width = 34
+TabIndex = 13
+Name = "lblFecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] tsgrid1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+ColumnCount = 6
+FontSize = 8
+GridLines = 0
+HeaderHeight = 17
+Height = 168
+Left = 11
+Panel = 1
+RecordMark = .T.
+RecordSource = "cp_vdet_ord"
+RecordSourceType = 1
+RowHeight = 22
+ScrollBars = 3
+TabIndex = 19
+Top = 143
+Width = 600
+campo = idorden,idempresa,deposito_ent
+valor = cp_vorden_compra.idorden,oApp.Empresa,cp_vorden_compra.deposito_ent
+valorvariable = cp_vorden_compra.idorden
+variablevista = m.idorden
+cfieldtosum = iif(cp_vdet_ord.iva=0,cp_vdet_ord.cantidad*cp_vdet_ord.precio,0),iif(cp_vdet_ord.iva<>0,cp_vdet_ord.cantidad*cp_vdet_ord.precio,0),(precio*cantidad*iva)/(100 + iva)
+editable = .T.
+Name = "tsgrid1"
+Column1.FontSize = 8
+Column1.ControlSource = "cp_vdet_ord.idproducto"
+Column1.Width = 58
+Column1.Name = "producto"
+Column2.FontSize = 8
+Column2.ControlSource = "cp_vdet_ord.descripcion"
+Column2.Width = 215
+Column2.BackColor = 255,255,255
+Column2.Name = "Descripcion"
+Column3.FontSize = 8
+Column3.ControlSource = "cp_vdet_ord.cantidad"
+Column3.Width = 75
+Column3.InputMask = "999,999.99"
+Column3.Name = "cantidad"
+Column4.FontSize = 8
+Column4.ControlSource = "cp_vdet_ord.precio"
+Column4.Width = 101
+Column4.InputMask = "999,999,999.99"
+Column4.Name = "precio"
+Column5.FontSize = 8
+Column5.ControlSource = "cp_vdet_ord.iva"
+Column5.CurrentControl = "Text1"
+Column5.Width = 31
+Column5.ReadOnly = .F.
+Column5.InputMask = "999"
+Column5.Name = "iva"
+Column6.FontSize = 8
+Column6.ControlSource = "cp_vdet_ord.cantidad*cp_vdet_ord.precio"
+Column6.CurrentControl = "Text1"
+Column6.Width = 114
+Column6.InputMask = "999,999,999.99"
+Column6.Name = "total"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+this.total.enabled = .F.
+this.parent.totales.refresh()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL3
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.producto
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 8
+Alignment = 2
+Caption = "Producto"
+ForeColor = 244,244,244
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0KNT4X
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] producto
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.producto
+[START PROPERTIES]
+BackStyle = 0
+BorderStyle = 0
+ControlSource = "cp_vdet_ord.idproducto"
+Left = 359
+SpecialEffect = 1
+Top = 46
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+indice = idproducto
+condicionextra = a.iva = b.iva
+objeto = this.parent.parent.descripcion.text1
+retorna = a.descripcion
+tabla = st_producto a,   vt_iva b
+mensajeerror = El codigo de poroducto no existe
+actualizar = .F.
+datoayuda = Materia Prima
+retorna2 = isnull(b.valor,0)
+objeto2 = this.parent.parent.iva.text1
+indice1 = catalogo
+origen = R
+objeto3 = 
+retorna3 = 
+objeto4 = 
+retorna4 = 
+Name = "producto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0LEEJO
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.Descripcion
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 8
+Alignment = 2
+Caption = "Descripción"
+ForeColor = 244,244,244
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0LIV0I
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.Descripcion
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Enabled = .F.
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+DisabledBackColor = 228,228,228
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+LOCAL cod_prod, strsql
+cod_prod = cp_vdet_ord.idproducto
+strsql = "select idtipo from st_producto " +  ;
+         " where idproducto = " +  ;
+         "'" + cod_prod + "'"
+IF sql(strsql,'t_prod') > 0
+     IF t_prod.idtipo = "G"
+          RETURN .T.
+     ELSE
+          RETURN .F.
+     ENDIF
+ELSE
+     RETURN .F.
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0C512XA1V
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.cantidad
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 8
+Alignment = 2
+Caption = "Cantidad"
+ForeColor = 244,244,244
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CD0GUCZD
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.cantidad
+[START PROPERTIES]
+FontSize = 8
+Alignment = 3
+BorderStyle = 0
+InputMask = "999,999.99"
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+PROCEDURE LostFocus
+IF this.tag <> STR(this.value)
+     this.parent.parent.parent.totales.refresh()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL4
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.precio
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 8
+Alignment = 2
+Caption = "Precio"
+ForeColor = 244,244,244
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.precio
+[START PROPERTIES]
+FontSize = 8
+Alignment = 3
+BorderStyle = 0
+InputMask = "999,999,999.99"
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+PROCEDURE LostFocus
+IF this.tag <> STR(this.value)
+     this.parent.parent.parent.totales.refresh()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL3
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.iva
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 8
+Alignment = 2
+Caption = "IVA"
+ForeColor = 244,244,244
+BackColor = 0,0,128
+WordWrap = .T.
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0MAS69
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.iva
+[START PROPERTIES]
+FontSize = 8
+Alignment = 3
+ControlSource = "cp_vdet_ord.iva"
+Height = 23
+InputMask = "999"
+Left = 24
+ReadOnly = .F.
+Top = 35
+Width = 100
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+PROCEDURE LostFocus
+IF this.tag <> STR(this.value)
+     this.parent.parent.parent.totales.refresh()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PLG
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.total
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 8
+Alignment = 2
+Caption = "Total"
+ForeColor = 244,244,244
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0MAS6A
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.tsgrid1.total
+[START PROPERTIES]
+FontSize = 8
+Height = 23
+InputMask = "999,999,999.99"
+Left = 76
+Top = 35
+Width = 100
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL3
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] sucursal
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "125,0"
+RowSourceType = 6
+RowSource = "sucursal.descripción,sucursal"
+ControlSource = "cp_vorden_compra.deposito_ent"
+FirstElement = 1
+Height = 24
+Left = 85
+NumberOfElements = 0
+TabIndex = 7
+Top = 71
+Width = 202
+ItemTips = .T.
+BorderStyle = 1
+editable = .T.
+cmdsql = select descripción,ltrim(str(sucursal)) sucursal from sucursal where idempresa = ?oApp.Empresa order by sucursal 
+cursor = Sucursal
+Name = "sucursal"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Cotizacion
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cp_vorden_compra.cotizacion"
+Height = 22
+InputMask = "9,999.99"
+Left = 85
+TabIndex = 10
+Top = 119
+Width = 99
+editable = .T.
+Name = "Cotizacion"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Cotización"
+Height = 16
+Left = -90
+Top = 119
+Width = 165
+TabIndex = 21
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EW0MMI1R
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Moneda"
+Height = 16
+Left = 25
+Top = 95
+Width = 50
+TabIndex = 8
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EW0MMI1T
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] nombre
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Height = 22
+Left = 167
+TabIndex = 3
+Top = 23
+Width = 240
+editable = .T.
+Name = "nombre"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EW0MMI1U
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cod_prov
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+ControlSource = "cp_vorden_compra.proveedor"
+Height = 22
+Left = 85
+TabIndex = 2
+Top = 23
+Width = 82
+datoayuda = Proveedores
+indice = idproveedor
+mensajeerror = Proveedor no existe
+objeto = this.parent.nombre
+origen = R
+retorna = razon
+tabla = cp_proveedor
+solonuevo = .T.
+condicionextra = idempresa = ?oapp.empresa
+mensajevalidacion = Ingrese Proveedor
+validar = .F.
+condicionvalidacion = !empty(cp_vorden_compra.proveedor)
+Name = "cod_prov"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EW0MMI1V
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Proveedor"
+Height = 16
+Left = 13
+Top = 23
+Width = 62
+TabIndex = 1
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] fec_env
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Comment = ""
+DateFormat = 13
+ControlSource = "cp_vorden_compra.fec_envio"
+Height = 22
+Left = 513
+TabIndex = 16
+Top = 94
+Width = 104
+editable = .T.
+Name = "fec_env"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EW12K05H
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Fecha Envio"
+Height = 16
+Left = 440
+Top = 94
+Width = 70
+TabIndex = 15
+Name = "Tslabel4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0P4WCA
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] estado
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+RowSourceType = 6
+RowSource = "estados.descripcion, cod_esta"
+ControlSource = "cp_vorden_compra.est_ord"
+Height = 22
+Left = 513
+TabIndex = 18
+Top = 118
+Width = 104
+cmdsql = select descripcion, cod_esta from bs_estados where tipo = 'COMPRA' order by 1
+cursor = estados
+Name = "estado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0P4WCB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Estado"
+Height = 16
+Left = 440
+Top = 118
+Width = 70
+TabIndex = 17
+Name = "Tslabel5"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1F20U80X5
+[CLASS] cbomoneda
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbomoneda1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+ControlSource = "cp_vorden_compra.idmoneda"
+Left = 85
+TabIndex = 9
+Top = 96
+Width = 202
+cmdsql = Select descripcion, IdMoneda from bs_monedas order by 1
+cursor = Monedas
+origen = R
+Name = "Cbomoneda1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1X10YB3H8
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Contacto
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Comment = ""
+DateFormat = 13
+ControlSource = "cp_vorden_compra.contacto"
+Height = 22
+Left = 85
+TabIndex = 5
+Top = 47
+Width = 322
+editable = .T.
+Name = "Contacto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1X10YB3H9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Contacto"
+Height = 16
+Left = 12
+Top = 47
+Width = 70
+TabIndex = 4
+Name = "Tslabel6"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1X10YB3HA
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] Tseditbox1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Height = 55
+Left = 11
+TabIndex = 20
+Top = 404
+Width = 600
+ControlSource = "cp_vorden_compra.referencia"
+editable = .T.
+Name = "Tseditbox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1X10YB3HB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Obs."
+Height = 16
+Left = 14
+Top = 392
+Width = 24
+TabIndex = 22
+Name = "Tslabel7"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0O5T73
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] totales
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Top = 315
+Left = 11
+Width = 600
+Height = 79
+SpecialEffect = 1
+TabIndex = 23
+ZOrderSet = 22
+Style = 3
+Name = "totales"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+LOCAL lntotal, lndescuento,  ;
+      lnporcdescuento
+IF thisform.editmode
+     this.parent.tsgrid1.sumcolumn()
+     IF this.parent.tsgrid1.totales(1) >  ;
+        0
+          this.exento.value = this.parent.tsgrid1.totales(1)
+     ELSE
+          this.exento.value = 0
+     ENDIF
+     IF this.parent.tsgrid1.totales(2) >  ;
+        0
+          this.gravado.value = this.parent.tsgrid1.totales(2)
+          this.iva.value = this.parent.tsgrid1.totales(3)
+     ELSE
+          this.gravado.value = 0
+          this.iva.value = 0
+     ENDIF
+ENDIF
+this.subtotal.value = cp_vorden_compra.exenta +  ;
+                      cp_vorden_compra.gravada
+this.total.value = cp_vorden_compra.exenta +  ;
+                   cp_vorden_compra.gravada
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0MR2ZM
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] subtotal
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.totales
+[START PROPERTIES]
+Alignment = 3
+Value = 0
+ControlSource = ""
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 474
+TabIndex = 4
+Top = 4
+Width = 117
+BackColor = 255,255,255
+editable = .F.
+inputmaskdinamico = 
+Name = "subtotal"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0MR2ZN
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] exento
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.totales
+[START PROPERTIES]
+Alignment = 3
+Value = 0
+ControlSource = "cp_vorden_compra.exenta"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 274
+TabIndex = 3
+Top = 5
+Width = 117
+BackColor = 192,192,192
+editable = .F.
+inputmaskdinamico = 
+Name = "exento"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+PROCEDURE LostFocus
+IF this.tag <> STR(this.value)
+     this.parent.refresh()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0MR2ZO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Gravado
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.totales
+[START PROPERTIES]
+Alignment = 3
+Value = 0
+ControlSource = "cp_vorden_compra.gravada"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 274
+TabIndex = 2
+Top = 29
+Visible = .T.
+Width = 117
+BackColor = 192,192,192
+editable = .F.
+inputmaskdinamico = 
+Name = "Gravado"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+PROCEDURE LostFocus
+IF this.tag <> STR(this.value)
+     this.parent.refresh()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0MR2ZP
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] iva
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.totales
+[START PROPERTIES]
+Alignment = 3
+Value = 0
+ControlSource = "cp_vorden_compra.iva"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999.99"
+Left = 474
+TabIndex = 6
+Top = 28
+Width = 117
+BackColor = 255,255,255
+editable = .F.
+inputmaskdinamico = 
+Name = "iva"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.totales
+[START PROPERTIES]
+Caption = "Gravadas"
+Height = 16
+Left = 203
+Top = 29
+Visible = .T.
+Width = 58
+TabIndex = 13
+ZOrderSet = 6
+Name = "Tslabel6"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EW12K05H
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.totales
+[START PROPERTIES]
+Caption = "Exentas"
+Height = 16
+Left = 217
+Top = 8
+Width = 44
+TabIndex = 10
+ZOrderSet = 6
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0MR2ZS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.totales
+[START PROPERTIES]
+Caption = "Total"
+Height = 16
+Left = 395
+Top = 56
+Width = 68
+TabIndex = 10
+ZOrderSet = 6
+Name = "Tslabel4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0J9PL0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.totales
+[START PROPERTIES]
+Caption = "Sub-Total"
+Height = 16
+Left = 395
+Top = 8
+Width = 68
+TabIndex = 10
+ZOrderSet = 6
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0MR2ZR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.totales
+[START PROPERTIES]
+Caption = "IVA"
+Height = 16
+Left = 405
+Top = 29
+Visible = .T.
+Width = 58
+TabIndex = 13
+ZOrderSet = 6
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1EX0MR2ZQ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] total
+[PARENT] Tsmaintform1.Pageframe1.PAGE1.totales
+[START PROPERTIES]
+Alignment = 3
+Value = 0
+ControlSource = ""
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 474
+TabIndex = 7
+Top = 52
+Width = 117
+editable = .F.
+inputmaskdinamico = 
+Name = "total"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[START RESERVED1]
+  ..\include\tastrade.h~Põv†5@ ..\..\..\archivos de programa\microsoft visual foxpro 9\foxpro.h†Qš‰1 ..\include\strings.hŽRõv†5[END RESERVED1]
+[EOF]

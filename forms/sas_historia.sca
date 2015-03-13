@@ -1,0 +1,1030 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V2
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 271
+InitialSelectedAlias = "sas_histclinica"
+Left = 125
+Name = "Dataenvironment"
+Top = 141
+Width = 711
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GE0JFWW0
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sas_histclinica"
+CursorSource = "sas_historiadesp"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 101
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V7
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+Caption = "Historia Clinica de Atencion Domiciliaria"
+DataSession = 2
+DoCreate = .T.
+Height = 467
+Name = "Tsbaseform12"
+Width = 749
+campos = IdEmpresa
+lblRequerido.Name = "lblRequerido"
+tabla1 = sas_histclinica
+valores = oApp.Empresa
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+LPARAMETERS lnIdDespacho
+m.IdDespacho = lnIdDespacho
+REQUERY("sas_HistClinica")
+DODEFAULT()
+IF RECCOUNT("sas_HistClinica")=0
+	this.addnew()
+	this.runsql("Select IdPaciente,Paciente,IdSeguro,NroSeguro from sas_SolicitudServ s inner join sas_DespachoServ d on s.IdSolicitud = d.IdSolicitud where IdDespacho = " + STR(lnIdDespacho),"cDespacho")
+	replace IdDespacho WITH lnIdDespacho ,;
+			IdPaciente WITH cDespacho.IdPAciente,;
+			PAciente WITH cDespacho.Paciente,;
+			IdSeguro WITH cDespacho.IdSeguro,;
+			NroSeguro WITH cDespacho.NroSeguro;
+			IN sas_HistClinica
+ELSE
+	this.editar()	
+ENDIF
+	
+
+
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+^aerrormsg[3,0] 
+^grids[4,0] 
+^permisos[5,0] 
+^validarcontroles[1,0] 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0ZYYJW
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] chkAnt_acv
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "A.V.C."
+Comment = ""
+ControlSource = "sas_histclinica.ant_acv"
+Height = 17
+Left = 76
+Name = "chkAnt_acv"
+Top = 105
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0ZYYJU
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] chkAnt_asma
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "ASMA"
+Comment = ""
+ControlSource = "sas_histclinica.ant_asma"
+Height = 17
+Left = 16
+Name = "chkAnt_asma"
+Top = 126
+Width = 74
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0ZYYJV
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] chkAnt_card
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "CARD."
+Comment = ""
+ControlSource = "sas_histclinica.ant_card"
+Height = 16
+Left = 16
+Name = "chkAnt_card"
+Top = 148
+Width = 66
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0ZYYJX
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] chkAnt_conv
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "CONV."
+Comment = ""
+ControlSource = "sas_histclinica.ant_conv"
+Height = 17
+Left = 76
+Name = "chkAnt_conv"
+Top = 148
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0ZYYJT
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] chkAnt_dbt
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "DBT."
+Comment = ""
+ControlSource = "sas_histclinica.ant_dbt"
+Height = 17
+Left = 16
+Name = "chkAnt_dbt"
+Top = 105
+Width = 59
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0ZYYJZ
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] chkAnt_epoc
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "EPOC."
+Comment = ""
+ControlSource = "sas_histclinica.ant_epoc"
+Height = 17
+Left = 141
+Name = "chkAnt_epoc"
+Top = 105
+Width = 69
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0ZYYJY
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] chkAnt_hta
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "H.T.A."
+Comment = ""
+ControlSource = "sas_histclinica.ant_hta"
+Height = 17
+Left = 76
+Name = "chkAnt_hta"
+Top = 126
+Width = 59
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V2
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtDx_presuntivo
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.dx_presuntivo"
+Height = 90
+Left = 468
+Name = "edtDx_presuntivo"
+TabIndex = 1
+Top = 357
+Width = 246
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J14J98U
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtEpicrisis
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.epicrisis"
+Height = 92
+Left = 13
+Name = "edtEpicrisis"
+TabIndex = 1
+Top = 356
+Width = 370
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J10SW0S
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtHallazgo_exfisico
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Comment = ""
+ControlSource = "sas_histclinica.hallazgo_exfisico"
+Height = 114
+Left = 10
+Name = "edtHallazgo_exfisico"
+TabIndex = 1
+Top = 205
+Width = 375
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J10L28B
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAlergia
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Alergico a:"
+Height = 16
+Left = 282
+Name = "lblAlergia"
+TabIndex = 1
+Top = 103
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0ZYYK0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAnt_otros
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Otros"
+Height = 16
+Left = 141
+Name = "lblAnt_otros"
+TabIndex = 1
+Top = 129
+Width = 37
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0ZYYJS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdpaciente
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "Idpaciente"
+Height = 16
+Left = 17
+Name = "lblIdpaciente"
+TabIndex = 1
+Top = 29
+Width = 59
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GE0L1P8Q
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdseguro
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Seguro"
+Height = 16
+Left = 25
+Name = "lblIdseguro"
+TabIndex = 32
+Top = 51
+Width = 52
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GE0L1P8S
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNroseguro
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Nroseguro"
+Height = 16
+Left = 288
+Name = "lblNroseguro"
+TabIndex = 33
+Top = 48
+Width = 61
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J117P8J
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblResp_tratam
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 2
+Caption = "Respuesta del tratamiento"
+Height = 16
+Left = 477
+Name = "lblResp_tratam"
+TabIndex = 1
+Top = 302
+Width = 152
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J13Y72M
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSv_fc
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 2
+Caption = "F.C."
+Height = 16
+Left = 476
+Name = "lblSv_fc"
+TabIndex = 1
+Top = 149
+Width = 31
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J13Y72O
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSv_fresp
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "F. RESP."
+Height = 16
+Left = 596
+Name = "lblSv_fresp"
+TabIndex = 1
+Top = 149
+Width = 52
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J13Y72Q
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSv_ta
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "T.A."
+Height = 16
+Left = 480
+Name = "lblSv_ta"
+TabIndex = 1
+Top = 126
+Width = 27
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J13Y72S
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSv_tempe
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Tº"
+Height = 16
+Left = 629
+Name = "lblSv_tempe"
+TabIndex = 1
+Top = 126
+Width = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V2
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 86
+Left = 4
+Name = "Ts3dshape2"
+Style = 3
+Top = 89
+Width = 410
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V2
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape4
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 73
+Left = 3
+Name = "Ts3dshape4"
+Style = 3
+Top = 11
+Width = 730
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V2
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape5
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 144
+Left = 4
+Name = "Ts3dshape5"
+Style = 3
+Top = 188
+Width = 410
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V2
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape6
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 145
+Left = 452
+Name = "Ts3dshape6"
+Style = 3
+Top = 187
+Width = 285
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V2
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape7
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 111
+Left = 458
+Name = "Ts3dshape7"
+Style = 3
+Top = 342
+Width = 285
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J11N1RK
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape8
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 119
+Left = 10
+Name = "Ts3dshape8"
+Style = 3
+Top = 342
+Width = 410
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V2
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape9
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 86
+Left = 457
+Name = "Ts3dshape9"
+Style = 3
+Top = 90
+Width = 280
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GE0L1P8T
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "sas_histclinica.idseguro"
+Enabled = .F.
+Left = 84
+Name = "Tscombobox3"
+TabIndex = 11
+Top = 48
+Width = 195
+ZOrderSet = 28
+cmdsql = Select RazonSocial,IdSeguro from sas_Seguro order by 1
+cursor = cSeguros
+editable = .F.
+requerido = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GE0M5VWA
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] Tseditbox1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.tratadministrado"
+Height = 90
+Left = 468
+Name = "Tseditbox1"
+TabIndex = 1
+Top = 204
+Width = 246
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Hallazgos en el  exámen fisico  (Positivos o Negativos de importancia)"
+Height = 16
+Left = 10
+Name = "Tslabel1"
+Style = 3
+TabIndex = 37
+Top = 182
+Width = 384
+ZOrderSet = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Antecedentes"
+Height = 16
+Left = 10
+Name = "Tslabel2"
+Style = 3
+TabIndex = 37
+Top = 83
+Width = 96
+ZOrderSet = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J13Y72K
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Signos Vitales"
+Height = 16
+Left = 471
+Name = "Tslabel3"
+Style = 3
+TabIndex = 37
+Top = 83
+Width = 115
+ZOrderSet = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J13Y72T
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Cº"
+Height = 16
+Left = 706
+Name = "Tslabel4"
+TabIndex = 1
+Top = 126
+Width = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Tratamiento administrado (Droga o Dósis)"
+Height = 16
+Left = 471
+Name = "Tslabel6"
+Style = 3
+TabIndex = 37
+Top = 182
+Width = 252
+ZOrderSet = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Datos del Paciente"
+Height = 16
+Left = 20
+Name = "Tslabel7"
+Style = 3
+TabIndex = 37
+Top = 5
+Width = 115
+ZOrderSet = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Diagnostico Presuntivo"
+Height = 16
+Left = 471
+Name = "Tslabel8"
+Style = 3
+TabIndex = 37
+Top = 335
+Width = 132
+ZOrderSet = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J11N1RL
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Epicrisis"
+Height = 16
+Left = 10
+Name = "Tslabel9"
+Style = 3
+TabIndex = 37
+Top = 335
+Width = 55
+ZOrderSet = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GE0JFWW1
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.idpaciente"
+Enabled = .F.
+Height = 22
+Left = 84
+MaxLength = 20
+Name = "Tstextbox1"
+TabIndex = 1
+Top = 24
+Width = 60
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J10L28A
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAlergia
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.alergia"
+Height = 51
+Left = 282
+MaxLength = 50
+Name = "txtAlergia"
+TabIndex = 1
+Top = 117
+Width = 108
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0ZYYK1
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAnt_otros
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.ant_otros"
+Height = 22
+Left = 140
+MaxLength = 50
+Name = "txtAnt_otros"
+TabIndex = 1
+Top = 146
+Width = 122
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GE0L1P8R
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroseguro
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.nroseguro"
+Enabled = .F.
+Height = 22
+Left = 360
+Name = "txtNroseguro"
+TabIndex = 12
+Top = 48
+Width = 72
+ZOrderSet = 15
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0YF0V2
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtPaciente
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.paciente"
+Enabled = .F.
+Height = 22
+Left = 156
+MaxLength = 20
+Name = "txtPaciente"
+TabIndex = 1
+Top = 24
+Width = 276
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J117P8I
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtResp_tratam
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.resp_tratam"
+Height = 22
+Left = 632
+MaxLength = 20
+Name = "txtResp_tratam"
+TabIndex = 1
+Top = 299
+Width = 87
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J13Y72L
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSv_fc
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.sv_fc"
+Height = 22
+Left = 507
+MaxLength = 15
+Name = "txtSv_fc"
+TabIndex = 1
+Top = 146
+Width = 50
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J13Y72N
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSv_fresp
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.sv_fresp"
+Height = 22
+Left = 651
+MaxLength = 15
+Name = "txtSv_fresp"
+TabIndex = 1
+Top = 146
+Width = 50
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J13Y72P
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSv_ta
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.sv_ta"
+Height = 22
+Left = 506
+MaxLength = 15
+Name = "txtSv_ta"
+TabIndex = 1
+Top = 123
+Width = 50
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J13Y72R
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSv_tempe
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_histclinica.sv_tempe"
+Height = 22
+Left = 652
+MaxLength = 15
+Name = "txtSv_tempe"
+TabIndex = 1
+Top = 123
+Width = 50
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

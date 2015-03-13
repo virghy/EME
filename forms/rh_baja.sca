@@ -1,0 +1,299 @@
+SCCTEXT versión 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40PNLIF
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Left = 1
+Top = 220
+Width = 520
+Height = 200
+InitialSelectedAlias = "vbaja"
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40QKXNF
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "motbaja"
+Database = ..\..\..\py_futura\futurafox_2\data\datos.dbc
+CursorSource = "motbaja"
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40QOAVS
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Left = 150
+Top = 20
+Width = 95
+Height = 90
+Alias = "vbaja"
+Database = ..\..\..\py_futura\futurafox_2\data\datos.dbc
+CursorSource = "vbaja"
+NoDataOnLoad = .T.
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40PNLIG
+[CLASS] form
+[BASECLASS] form
+[OBJNAME] Form1
+[START PROPERTIES]
+Top = 0
+Left = 0
+Height = 269
+Width = 427
+DoCreate = .T.
+Caption = "Baja del Personal"
+editmode = .T.
+Name = "Form1"
+[END PROPERTIES]
+[START RESERVED3]
+editmode
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40PNLII
+[CLASS] tstextbox
+[CLASSLOC] ..\..\..\py_futura\futurafox_2\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecha
+[PARENT] Form1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vbaja.fecha_sali"
+Height = 22
+Left = 93
+TabIndex = 5
+Top = 96
+Width = 69
+Name = "txtFecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40PNLIJ
+[CLASS] tslabel
+[CLASSLOC] ..\..\..\py_futura\futurafox_2\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFecha
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Fecha"
+Height = 16
+Left = 21
+Top = 96
+Width = 34
+TabIndex = 4
+Name = "lblFecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40PNLIF
+[CLASS] tslabel
+[CLASSLOC] ..\..\..\py_futura\futurafox_2\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdempleado
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Legajo"
+Height = 16
+Left = 20
+Top = 59
+Width = 67
+TabIndex = 1
+Name = "lblIdempleado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40PNLIY
+[CLASS] tstextbox
+[CLASSLOC] ..\..\..\py_futura\futurafox_2\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Form1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vbaja.nombre"
+Enabled = .F.
+Height = 22
+Left = 168
+MaxLength = 30
+TabIndex = 3
+Top = 60
+Width = 245
+DisabledBackColor = 255,255,255
+Name = "txtNombre"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40POZ4A
+[CLASS] tstextbox
+[CLASSLOC] ..\..\..\py_futura\futurafox_2\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdempleado
+[PARENT] Form1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Height = 22
+Left = 92
+TabIndex = 2
+Top = 59
+Width = 69
+datoayuda = empleado
+Name = "txtIdempleado"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Valid
+m.idempleado = this.value
+= REQUERY('vbaja')
+thisform.refresh
+IF _TALLY > 0
+     RETURN 1
+ELSE
+     = MESSAGEBOX( ;
+       'No se encuentra el legajo' ;
+       )
+     RETURN -1
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40QKXNQ
+[CLASS] tslabel
+[CLASSLOC] ..\..\..\py_futura\futurafox_2\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Motivo"
+Height = 16
+Left = 21
+Top = 132
+Width = 67
+TabIndex = 6
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40PNLIF
+[CLASS] tscombobox
+[CLASSLOC] ..\..\..\py_futura\futurafox_2\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Form1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,50"
+RowSourceType = 6
+RowSource = "motbaja.motivo,idmotivo"
+ControlSource = "vbaja.motivo"
+FirstElement = 1
+Left = 93
+NumberOfElements = 0
+Style = 2
+TabIndex = 7
+Top = 132
+Name = "Tscombobox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40PNLIF
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command1
+[PARENT] Form1
+[START PROPERTIES]
+Top = 216
+Left = 204
+Height = 27
+Width = 168
+FontSize = 8
+Caption = "\<Dar de Baja"
+TabIndex = 9
+Name = "Command1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+REPLACE activo WITH .F.
+= TABLEUPDATE(.T.)
+= MESSAGEBOX( ;
+  'Se ha acctualizado la base de datos.' ;
+  )
+thisform.release
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB40QKXNW
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command2
+[PARENT] Form1
+[START PROPERTIES]
+Top = 216
+Left = 60
+Height = 27
+Width = 84
+FontSize = 8
+Caption = "\<Cancelar"
+TabIndex = 8
+Name = "Command2"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+= TABLEREVERT(.T.)
+thisform.release
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+[EOF]

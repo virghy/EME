@@ -1,0 +1,828 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP16
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 399
+InitialSelectedAlias = "prd_produccion"
+Left = 131
+Name = "Dataenvironment"
+Top = 55
+Width = 575
+[END PROPERTIES]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0XFSAR
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "prd_produccion"
+BufferModeOverride = 5
+CursorSource = "prd_produccion"
+Database = ..\data\datos.dbc
+Height = 225
+Left = 16
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 4
+Width = 112
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0XFSAS
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "prd_producciondet"
+BufferModeOverride = 5
+CursorSource = "prd_producciondet"
+Database = ..\data\datos.dbc
+Height = 274
+Left = 215
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 6
+Width = 198
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP17
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmovform12
+[START PROPERTIES]
+Caption = "Produccion"
+DoCreate = .T.
+Height = 396
+HelpContextID = 1000
+Icon = ..\bitmaps\default.ico
+Name = "Tsmovform12"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 396
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.TabIndex = 2
+Pageframe1.Top = 0
+Pageframe1.Width = 672
+Width = 672
+auditmarcahora = audit_fecha
+auditusuario = audit_usuario
+camponro = nroorden,prd_produccion,idempresa=?oapp.empresa
+campos = idempresa,idproduccion,Fecha
+identidad = idproduccion
+lblRequerido.Name = "lblRequerido"
+lblRequerido.TabIndex = 1
+repetirvalores = fecha
+tabla1 = prd_produccion
+tabla2 = prd_producciondet
+tablaconsulta = produccion
+valores = oapp.empresa,newid('prd_produccion'), date()
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP16
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdActualizar
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Confirmar Producción"
+Height = 26
+Left = 479
+Name = "cmdActualizar"
+TabStop = .F.
+Top = 22
+Width = 136
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF MESSAGEBOX("Esta seguro que quiere confirmar toda la producción de esta orden?", 036, "Futura Software")=6
+UPDATE prd_producciondet SET CANTIDADPRODUCIDA = CANTIDAD, IDESTADO = 'F' WHERE IDESTADO='P'
+IF THISFORM.SAVE()
+OAPP.DOFORM('st_movimiento', PRD_PRODUCCION.NROORDEN)
+ENDIF
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP16
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Fechaorden
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "prd_produccion.fecha"
+Left = 179
+Name = "Fechaorden"
+TabIndex = 2
+Top = 36
+Width = 100
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RB
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] nroorden
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "prd_produccion.nroorden"
+Left = 179
+Name = "nroorden"
+TabIndex = 1
+Top = 15
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RD
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] obs
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "prd_produccion.obs"
+Height = 48
+Left = 107
+Name = "obs"
+TabIndex = 3
+Top = 310
+Width = 516
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1TZ0LQ0HG
+[CLASS] tscombobox
+[CLASSLOC] ..\..\futura\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "prd_produccion.estado"
+Height = 22
+Left = 179
+Name = "Tscombobox1"
+Top = 58
+Width = 100
+cmdsql = select estado,idestado from prd_estado 
+cursor = cEstado1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP16
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] tsgrid1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "prd_producciondet.idproducto"
+Column1.FontSize = 8
+Column1.Name = "Column1"
+Column1.Sparse = .F.
+Column1.Width = 55
+Column10.ColumnOrder = 8
+Column10.ControlSource = "prd_producciondet.ratio"
+Column10.FontSize = 8
+Column10.InputMask = "999.99"
+Column10.Name = "Ratio"
+Column10.ReadOnly = .T.
+Column10.Width = 32
+Column2.ControlSource = "prd_producciondet.descripcion"
+Column2.FontSize = 8
+Column2.Name = "Column2"
+Column2.Sparse = .F.
+Column2.Width = 209
+Column3.ControlSource = "prd_producciondet.cantidad"
+Column3.FontSize = 8
+Column3.InputMask = "999,999.99"
+Column3.Name = "Column3"
+Column3.Sparse = .F.
+Column3.Width = 45
+Column4.ControlSource = "prd_producciondet.cantidadproducida"
+Column4.FontSize = 8
+Column4.InputMask = "999,999.99"
+Column4.Name = "Column4"
+Column4.ReadOnly = .F.
+Column4.Width = 51
+Column5.ControlSource = "prd_producciondet.idestado"
+Column5.FontSize = 8
+Column5.Name = "Column5"
+Column5.Sparse = .F.
+Column5.Width = 58
+Column6.ColumnOrder = 10
+Column6.ControlSource = "prd_producciondet.idformula"
+Column6.FontSize = 8
+Column6.Name = "Column6"
+Column6.Sparse = .F.
+Column6.Visible = .F.
+Column6.Width = 0
+Column7.ColumnOrder = 9
+Column7.ControlSource = "prd_producciondet.cantidadbase"
+Column7.FontSize = 8
+Column7.Name = "column7"
+Column7.Sparse = .T.
+Column7.Visible = .F.
+Column7.Width = 0
+Column8.ColumnOrder = 6
+Column8.ControlSource = "prd_producciondet.precio"
+Column8.FontSize = 8
+Column8.InputMask = "999,999,999.99"
+Column8.Name = "Precio"
+Column8.ReadOnly = .T.
+Column8.Width = 62
+Column9.ColumnOrder = 7
+Column9.ControlSource = "prd_producciondet.costo"
+Column9.FontSize = 8
+Column9.InputMask = "999,999,999.99"
+Column9.Name = "Costo"
+Column9.ReadOnly = .T.
+Column9.Width = 57
+ColumnCount = 10
+FontSize = 8
+HeaderHeight = 28
+Height = 189
+Left = 23
+Name = "tsgrid1"
+Panel = 1
+RecordSource = "prd_producciondet"
+RowHeight = 20
+ScrollBars = 2
+TabIndex = 7
+Top = 82
+Width = 596
+campo = idproduccion,idempresa,idestado
+cfieldtosum = precio,costo,ratio
+editable = .T.
+valor = prd_produccion.idproduccion,oapp.empresa,'P'
+valorvariable = idproduccion
+variablevista = m.idproduccion
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+THIS.COLUMN2.ENABLED = .F.
+THIS.PRECIO.ENABLED = .F.
+THIS.COSTO.ENABLED = .F.
+THIS.RATIO.ENABLED = .F.
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0XFSAR
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column1
+[START PROPERTIES]
+Caption = "IdProducto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0XFSAS
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_clave1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column1
+[START PROPERTIES]
+Comment = ""
+FontSize = 8
+Left = 23
+Name = "Campo_clave1"
+Top = 23
+condicion_en_edicion = Activo = 1
+condicionextra = a.idproducto=b.idproducto and a.IdEmpresa=b.IdEmpresa  and a.IdEmpresa=?oApp.Empresa
+copiarcampos = a.Ult_Costo as Costo, b.PrecioVenta as Precio, b.ratio
+datoayuda = Formulas
+indice = a.idproducto
+objeto = this.parent.Parent.column2.producto
+objeto2 = this.parent.Parent.column6.idformula
+objeto3 = this.parent.Parent.column7.cantbase
+origen = R
+pegarcampos = costo,precio,ratio
+resulrepe = .T.
+retayuda = idproducto
+retorna = a.descripcion
+retorna2 = b.idformula
+retorna3 = b.cantidad
+tabla = st_producto a,prd_formula b
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP17
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column2
+[START PROPERTIES]
+Caption = "Producto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RB
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] producto
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "prd_producciondet.descripcion"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "producto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP16
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column3
+[START PROPERTIES]
+Caption = "Cantidad"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RD
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cant
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column3
+[START PROPERTIES]
+ControlSource = "prd_producciondet.cantidad"
+InputMask = "999,999.99"
+Left = 33
+Name = "cant"
+Top = 23
+condicionvalidacion = !empty(prd_producciondet.cantidad)
+mensajevalidacion = Ingrese Cantidad
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP16
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column4
+[START PROPERTIES]
+Caption = "Cantidad Producida"
+FontSize = 8
+Name = "Header1"
+WordWrap = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP16
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] cantprod
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column4
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999.99"
+Margin = 0
+Name = "cantprod"
+ReadOnly = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RF
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column5
+[START PROPERTIES]
+Caption = "Estado"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RG
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column5
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "prd_producciondet.idestado"
+Enabled = .F.
+Left = 35
+Name = "Tscombobox1"
+Top = 23
+cmdsql = select estado,idestado from prd_estado 
+cursor = cestado
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RH
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column6
+[START PROPERTIES]
+Caption = "Header1"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RI
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] idformula
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "prd_producciondet.idformula"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "idformula"
+Visible = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RJ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.column7
+[START PROPERTIES]
+Caption = "Header1"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RK
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] cantbase
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.column7
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "cantbase"
+Visible = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RN
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Costo
+[START PROPERTIES]
+Caption = "Costo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RO
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Costo
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999.99"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RL
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Precio
+[START PROPERTIES]
+Caption = "Precio"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NF0TXXW4
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Precio
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999.99"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RP
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Ratio
+[START PROPERTIES]
+Caption = "Ratio"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NF0TEEBK
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.tsgrid1.Ratio
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999.99"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP16
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nro. de Orden:"
+Height = 15
+Left = 93
+Name = "Tslabel1"
+TabIndex = 4
+Top = 22
+Width = 81
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP16
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Fecha de Orden:"
+Height = 16
+Left = 82
+Name = "Tslabel2"
+TabIndex = 5
+Top = 42
+Width = 92
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0WI4RF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Observacion:"
+Height = 14
+Left = 23
+Name = "Tslabel3"
+TabIndex = 6
+Top = 310
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O21243JF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Promedio"
+Height = 16
+Left = 323
+Name = "Tslabel4"
+TabIndex = 5
+Top = 274
+Width = 92
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1TZ0LQ0HH
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Estado:"
+Height = 16
+Left = 83
+Name = "Tslabel5"
+TabIndex = 5
+Top = 62
+Width = 92
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GN0WUEF3
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCosto
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+InputMask = "999,999.99"
+Left = 509
+Name = "txtCosto"
+TabIndex = 2
+Top = 274
+Width = 60
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+LOCAL M.RATIO
+CALCULATE AVG(RATIO) TO M.RATIO IN PRD_PRODUCCIONDET
+THIS.VALUE = M.RATIO
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GN0WUEF2
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtPrecio
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+InputMask = "999,999.99"
+Left = 443
+Name = "txtPrecio"
+TabIndex = 2
+Top = 274
+Width = 67
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+LOCAL M.RATIO
+CALCULATE AVG(RATIO) TO M.RATIO IN PRD_PRODUCCIONDET
+THIS.VALUE = M.RATIO
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NA0VUP16
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtRatio
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+InputMask = "999.99"
+Left = 567
+Name = "txtRatio"
+TabIndex = 2
+Top = 274
+Width = 35
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+LOCAL M.RATIO
+CALCULATE AVG(RATIO) TO M.RATIO IN PRD_PRODUCCIONDET
+THIS.VALUE = M.RATIO
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

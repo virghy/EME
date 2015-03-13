@@ -1,0 +1,569 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Class     
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RS20YRC5X
+[CLASS] _custom
+[CLASSLOC] _base.vcx
+[BASECLASS] custom
+[OBJNAME] _runcode
+[START PROPERTIES]
+Name = "_runcode"
+cversion = 1.02
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Error
+LPARAMETERS NERROR, CMETHOD, NLINE
+IF THIS.LIGNOREERRORS .OR. _VFP.STARTMODE>0
+RETURN .F.
+ENDIF
+DODEFAULT(NERROR, CMETHOD, NLINE)
+RETURN
+ENDPROC
+PROCEDURE runcode
+Lparameters __TCCODE, __TLFILE, __TVIGNOREERRORS
+Local __LCCODE, __LCONERROR, __LLARRAYCODE, __LCLINE, __LNLINE, __LCLINE2, __LLVFP60
+Local __LCCOMMAND, __LCEXPR, __LCCHAR, __LNATPOS, __LNATPOS2, __LNOCCURRENCE
+Local __LNLINETOTAL, __LLTEXTMODE, __LCLASTONERROR, __LVRESULT
+Local __LCDOEXPR, __LNDOLINE, __LNDOLINETOTAL, __LNDOSTACKCOUNT
+Local __LCFOREXPR, __LNFORMAX, __LNFORSTEP, __LNFORLINE, __LNFORLINETOTAL, __LNFORSTACKCOUNT
+Local __LCIFEXPR, __LLIFEXPR, __LNIFLINE, __LNIFLINETOTAL, __LNIFSTACKCOUNT
+Local __LALINES[1], __LAFORLINES[1], __LAIFLINES[1], __LADOLINES[1]
+External Array __TCCODE, __LALINES, __LAFORLINES, __LAIFLINES, __LADOLINES
+If Vartype(__TVIGNOREERRORS)=="C"
+	__LCONERROR = Alltrim(__TVIGNOREERRORS)
+Else
+	__LCONERROR = Iif(__TVIGNOREERRORS, "=.F.", "__")
+Endif
+__LLVFP60 = " 06.0"$Version()
+If  .Not. __LLVFP60
+	__LCLASTONERROR = On("ERROR")
+	If __TVIGNOREERRORS
+		On Error =.F.
+	Else
+		On Error
+	Endif
+	__LVRESULT = .T.
+	If __TLFILE
+		__LCCODE = ""
+		__LCCODE = Alltrim(Filetostr(__TCCODE))
+	Else
+		__LCCODE = Iif(Vartype(__TCCODE)=="C", __TCCODE, "")
+	Endif
+	If Left(__LCCODE, 1)==";"
+		__LCCODE = Strtran(__LCCODE, ";", Chr(13)+Chr(10))
+	Endif
+	__LVRESULT = Evaluate("ExecScript(__lcCode)")
+	If Empty(__LCLASTONERROR)
+		On Error
+	Else
+		On Error &__LCLASTONERROR
+	Endif
+	Return __LVRESULT
+Endif
+__LLARRAYCODE = (Type("__tcCode[1]")=="C")
+If __LLARRAYCODE
+	__LNLINETOTAL = Acopy(__TCCODE, __LALINES)
+Else
+	If Vartype(__TCCODE)<>"C" .Or. Empty(__TCCODE)
+		Return
+	Endif
+	If __TLFILE
+		__LCCODE = ""
+		__LCCODE = Alltrim(Filetostr(__TCCODE))
+		If Empty(__LCCODE)
+			Return
+		Endif
+	Else
+		__LCCODE = Alltrim(__TCCODE)
+	Endif
+	If Left(__LCCODE, 1)==";"
+		__LCCODE = Strtran(__LCCODE, ";", Chr(13)+Chr(10))
+	Endif
+	__LNLINETOTAL = Alines(__LALINES, __LCCODE)
+	If __LNLINETOTAL=0
+		Return
+	Endif
+	Private __LCLASTLINE
+	__LCLASTLINE = ""
+	__LNLINE = 0
+	Do While __LNLINE<__LNLINETOTAL
+		__LNLINE = __LNLINE+1
+		__LCLINE = Alltrim(__LALINES(__LNLINE))
+		__LNATPOS = At("&"+"&", __LCLINE)
+		If __LNATPOS>0
+			__LCLINE = Alltrim(Left(__LCLINE, __LNATPOS-1))
+		Endif
+		Do While .T.
+			__LCCHAR = Left(__LCLINE, 1)
+			If __LCCHAR==" " .Or. __LCCHAR==Chr(9)
+				__LCLINE = Alltrim(Substr(__LCLINE, 2))
+				Loop
+			Endif
+			__LCCHAR = Right(__LCLINE, 1)
+			If __LCCHAR==" " .Or. __LCCHAR==Chr(9)
+				__LCLINE = Trim(Left(__LCLINE, Len(__LCLINE)-1))
+				Loop
+			Endif
+			Exit
+		Enddo
+		If Empty(__LCLINE) .Or. Left(__LCLINE, 1)=="*" .Or. Left(__LCLINE, 1)=="#" .Or. Left(__LCLINE, 2)==("&"+"&") .Or. Upper(Left(__LCLINE, 4))=="NOTE" .Or. Left(__LCLINE, 4)=="<!--"
+			Adel(__LALINES, __LNLINE)
+			__LNLINETOTAL = __LNLINETOTAL-1
+			Dimension __LALINES[__LNLINETOTAL]
+			__LNLINE = __LNLINE-1
+			Loop
+		Endif
+		If __LNLINE>=2 .And. Right(__LALINES(__LNLINE-1), 1)==";"
+			__LCLINE2 = Left(__LALINES(__LNLINE-1), Len(__LALINES(__LNLINE-1))-1)
+			Do While .T.
+				__LCCHAR = Right(__LCLINE2, 1)
+				If __LCCHAR==" " .Or. __LCCHAR==Chr(9)
+					__LCLINE2 = Trim(Left(__LCLINE2, Len(__LCLINE2)-1))
+					Loop
+				Endif
+				Exit
+			Enddo
+			__LNLINE = __LNLINE-1
+			__LCLINE = __LCLINE2+" "+__LCLINE
+			Adel(__LALINES, __LNLINE)
+			__LNLINETOTAL = __LNLINETOTAL-1
+			Dimension __LALINES[__LNLINETOTAL]
+			__LALINES[__LNLINE] = __LCLINE
+		Else
+			__LALINES[__LNLINE] = __LCLINE
+		Endif
+	Enddo
+Endif
+If __LNLINETOTAL=0
+	Return
+Endif
+__LCLASTONERROR = On("ERROR")
+If __TVIGNOREERRORS
+	On Error =.F.
+Else
+	On Error
+Endif
+__LVRESULT = .T.
+__LCLINE = ""
+Store .F. To __LLIFEXPR, __LLTEXTMODE
+Store "" To __LCDOEXPR, __LCFOREXPR, __LCIFEXPR
+Store 0 To __LNLINE, __LNDOLINE, __LNDOLINETOTAL, __LNDOSTACKCOUNT, __LNFORLINE, __LNFORLINETOTAL, __LNFORSTACKCOUNT, __LNFORMAX, __LNFORSTEP, __LNIFLINE, __LNIFLINETOTAL, __LNIFSTACKCOUNT
+Do While __LNLINE<__LNLINETOTAL
+	__LNLINE = __LNLINE+1
+	__LCLINE = __LALINES(__LNLINE)
+	If Empty(__LCLINE)
+		Loop
+	Endif
+	If Left(__LCLINE, 1)=="="
+		Evaluate(Substr(__LCLINE, 2))
+		Loop
+	Endif
+	__LCCOMMAND = Upper(Left(__LCLINE, 4))
+	If __LCCOMMAND=="DO W" .And. (Upper(Left(__LCLINE, 8))=="DO WHIL " .Or. Upper(Left(__LCLINE, 8))=="DO WHILE")
+		__LCCOMMAND = "DO_W"
+		__LNOCCURRENCE = 2
+	Else
+		__LNOCCURRENCE = 1
+	Endif
+	__LNATPOS = At(" ", __LCCOMMAND, __LNOCCURRENCE)
+	__LNATPOS2 = At(Chr(9), __LCCOMMAND, __LNOCCURRENCE)
+	If Between(__LNATPOS2, 1, __LNATPOS)
+		__LNATPOS = __LNATPOS2
+	Endif
+	If __LNATPOS>0
+		__LCCOMMAND = Left(__LCCOMMAND, __LNATPOS-1)
+	Endif
+	__LNATPOS = At(" ", __LCLINE, __LNOCCURRENCE)
+	__LNATPOS2 = At(Chr(9), __LCLINE, __LNOCCURRENCE)
+	If Between(__LNATPOS2, 1, __LNATPOS)
+		__LNATPOS = __LNATPOS2
+	Endif
+	If __LNATPOS=0
+		__LCEXPR = ""
+	Else
+		__LCEXPR = Alltrim(Substr(__LCLINE, __LNATPOS+1))
+	Endif
+	__LCLASTLINE = __LCLINE
+	Do Case
+	Case __LCCOMMAND=="ENDT"
+		__LLTEXTMODE = .F.
+		Loop
+	Case __LLTEXTMODE
+		__LCLINE = "\"+__LCLINE
+		__LCLASTLINE = __LCLINE
+		&__LCLINE
+		Loop
+	Case __LCCOMMAND=="DO_W"
+		If __LNFORSTACKCOUNT<=0 .And. __LNIFSTACKCOUNT<=0
+			__LNDOSTACKCOUNT = __LNDOSTACKCOUNT+1
+			If __LNDOSTACKCOUNT<=1
+				__LCDOEXPR = __LCEXPR
+				__LNDOLINE = __LNLINE
+				Loop
+			Endif
+		Endif
+	Case __LCCOMMAND=="FOR"
+		If __LNDOSTACKCOUNT<=0 .And. __LNIFSTACKCOUNT<=0
+			__LNFORSTACKCOUNT = __LNFORSTACKCOUNT+1
+			If __LNFORSTACKCOUNT<=1
+				__LNATPOS = Atc(" TO ", __LCEXPR)
+				If __LNATPOS=0
+					__LCFOREXPR = ""
+					__LNFORMAX = 0
+					__LNFORSTEP = 0
+					Loop
+				Endif
+				__LCFOREXPR = __LCEXPR
+				__LCFOREXPR = Alltrim(Left(__LCEXPR, __LNATPOS-1))
+				__LCEXPR = Alltrim(Substr(__LCEXPR, __LNATPOS+4))
+				__LNATPOS = Atc("=", __LCFOREXPR)
+				If __LNATPOS=0
+					Loop
+				Endif
+				&__LCFOREXPR
+				__LCFOREXPR = Alltrim(Left(__LCFOREXPR, __LNATPOS-1))
+				__LNATPOS = Atc(" STEP ", __LCEXPR)
+				If __LNATPOS=0
+					__LNFORMAX = Evaluate(__LCEXPR)
+					__LNFORSTEP = 1
+				Else
+					__LNFORMAX = Evaluate(Left(__LCEXPR, __LNATPOS-1))
+					__LNFORSTEP = Evaluate(Substr(__LCEXPR, __LNATPOS+6))
+				Endif
+				__LNFORLINE = __LNLINE
+				Loop
+			Endif
+		Endif
+	Case __LCCOMMAND=="IF"
+		If __LNDOSTACKCOUNT<=0 .And. __LNFORSTACKCOUNT<=0
+			__LNIFSTACKCOUNT = __LNIFSTACKCOUNT+1
+			If __LNIFSTACKCOUNT<=1
+				__LCIFEXPR = __LCEXPR
+				__LLIFEXPR = Evaluate(__LCIFEXPR)
+				__LNIFLINE = __LNLINE
+				Loop
+			Endif
+		Endif
+	Case __LCCOMMAND=="ELSE"
+		If __LNIFSTACKCOUNT=1 .And. __LNDOSTACKCOUNT<=0 .And. __LNFORSTACKCOUNT<=0
+			__LLIFEXPR = ( .Not. __LLIFEXPR)
+			Loop
+		Endif
+	Case __LCCOMMAND=="ENDD"
+		If __LNIFSTACKCOUNT<=0 .And. __LNFORSTACKCOUNT<=0
+			__LNDOSTACKCOUNT = __LNDOSTACKCOUNT-1
+			If __LNDOSTACKCOUNT<=0
+				Do While  .Not. Empty(__LCDOEXPR) .And. Evaluate(__LCDOEXPR)
+					__LVRESULT = This.RUNCODE(@__LADOLINES, .F., __TVIGNOREERRORS)
+					If Isnull(__LADOLINES(1))
+						If __LLARRAYCODE
+							__TCCODE[1] = .Null.
+						Endif
+						If Empty(__LCLASTONERROR)
+							On Error
+						Else
+							On Error &__LCLASTONERROR
+						Endif
+						Return __LVRESULT
+					Endif
+					If  .Not. __LVRESULT
+						Exit
+					Endif
+				Enddo
+				__LCDOEXPR = ""
+				__LLDOEXPR = .F.
+				__LNDOLINE = 0
+				Dimension __LADOLINES[1]
+				__LADOLINES = .F.
+				__LNDOLINETOTAL = 0
+				Loop
+			Endif
+		Endif
+	Case __LCCOMMAND=="ENDF"
+		If __LNIFSTACKCOUNT<=0 .And. __LNDOSTACKCOUNT<=0
+			__LNFORSTACKCOUNT = __LNFORSTACKCOUNT-1
+			If __LNFORSTACKCOUNT<=0
+				If __LNFORSTEP>0
+					Do While Evaluate(__LCFOREXPR)<=__LNFORMAX
+						__LVRESULT = This.RUNCODE(@__LAFORLINES, .F., __TVIGNOREERRORS)
+						If Isnull(__LAFORLINES(1))
+							If __LLARRAYCODE
+								__TCCODE[1] = .Null.
+							Endif
+							If Empty(__LCLASTONERROR)
+								On Error
+							Else
+								On Error &__LCLASTONERROR
+							Endif
+							Return __LVRESULT
+						Endif
+						If  .Not. __LVRESULT
+							Exit
+						Endif
+						__LCEXPR = __LCFOREXPR+"="+__LCFOREXPR+"+"+Transform(__LNFORSTEP)
+						&__LCEXPR
+					Enddo
+				Else
+					Do While Evaluate(__LCFOREXPR)>=__LNFORMAX
+						__LVRESULT = This.RUNCODE(@__LAFORLINES, .F., __TVIGNOREERRORS)
+						If Isnull(__LAFORLINES(1))
+							If __LLARRAYCODE
+								__TCCODE[1] = .Null.
+							Endif
+							If Empty(__LCLASTONERROR)
+								On Error
+							Else
+								On Error &__LCLASTONERROR
+							Endif
+							Return __LVRESULT
+						Endif
+						If  .Not. __LVRESULT
+							Exit
+						Endif
+						__LCEXPR = __LCFOREXPR+"="+__LCFOREXPR+"+"+Transform(__LNFORSTEP)
+						&__LCEXPR
+					Enddo
+				Endif
+				__LCFOREXPR = ""
+				__LNFORCOUNT = 0
+				__LNFORMAX = 0
+				__LNFORSTEP = 0
+				__LNFORLINE = 0
+				Dimension __LAFORLINES[1]
+				__LAFORLINES = .F.
+				__LNFORLINETOTAL = 0
+				Loop
+			Endif
+		Endif
+	Case __LCCOMMAND=="ENDI"
+		If __LNDOSTACKCOUNT<=0 .And. __LNFORSTACKCOUNT<=0
+			__LNIFSTACKCOUNT = __LNIFSTACKCOUNT-1
+			If __LNIFSTACKCOUNT<=0
+				__LVRESULT = This.RUNCODE(@__LAIFLINES, .F., __TVIGNOREERRORS)
+				If Isnull(__LAIFLINES(1))
+					If __LLARRAYCODE
+						__TCCODE[1] = .Null.
+					Endif
+					If Empty(__LCLASTONERROR)
+						On Error
+					Else
+						On Error &__LCLASTONERROR
+					Endif
+					Return __LVRESULT
+				Endif
+				__LCIFEXPR = ""
+				__LLIFEXPR = .F.
+				__LNIFLINE = 0
+				Dimension __LAIFLINES[1]
+				__LAIFLINES = .F.
+				__LNIFLINETOTAL = 0
+				Loop
+			Endif
+		Endif
+	Endcase
+	If __LNDOSTACKCOUNT>0
+		__LNDOLINETOTAL = __LNDOLINETOTAL+1
+		Dimension __LADOLINES[__LNDOLINETOTAL]
+		__LADOLINES[__LNDOLINETOTAL] = __LCLINE
+		Loop
+	Endif
+	If __LNFORSTACKCOUNT>0 .And. __LNDOSTACKCOUNT<=0
+		__LNFORLINETOTAL = __LNFORLINETOTAL+1
+		Dimension __LAFORLINES[__LNFORLINETOTAL]
+		__LAFORLINES[__LNFORLINETOTAL] = __LCLINE
+		Loop
+	Endif
+	If __LNIFSTACKCOUNT>0
+		If  .Not. __LLIFEXPR
+			Loop
+		Endif
+		__LNIFLINETOTAL = __LNIFLINETOTAL+1
+		Dimension __LAIFLINES[__LNIFLINETOTAL]
+		__LAIFLINES[__LNIFLINETOTAL] = __LCLINE
+		Loop
+	Endif
+	Do Case
+	Case __LCCOMMAND=="RETU"
+		If __LLARRAYCODE
+			__TCCODE[1] = .Null.
+		Endif
+		If  .Not. Empty(__LCEXPR)
+			__LVRESULT = Evaluate(__LCEXPR)
+		Endif
+		Exit
+	Case __LCCOMMAND=="EXIT"
+		If __LLARRAYCODE
+			__LVRESULT = .F.
+		Endif
+		Exit
+	Case __LCCOMMAND=="TEXT"
+		__LLTEXTMODE = .T.
+		Loop
+	Case __LCCOMMAND=="ENDT"
+		__LLTEXTMODE = .F.
+		Loop
+	Endcase
+	&__LCLINE
+Enddo
+If Empty(__LCLASTONERROR)
+	On Error
+Else
+	On Error &__LCLASTONERROR
+Endif
+Return __LVRESULT
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED3]
+*runcode RunCode(cCode[, lFile] [,llgnoreErrors])
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED7]
+Runs a block of VFP code via macros without compilation.[END RESERVED7]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] _runcode
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R5912ABLG
+[CLASS] _custom
+[CLASSLOC] _base.vcx
+[BASECLASS] custom
+[OBJNAME] _set
+[START PROPERTIES]
+Name = "_set"
+csetcommand = 
+uoldvalue = .NULL.
+uoldvalue1 = .NULL.
+uoldvalue2 = .NULL.
+[END PROPERTIES]
+[START PROTECTED]
+checkvalue
+csetcommand
+lerror
+lnorestore
+uoldvalue
+uoldvalue1
+uoldvalue2
+[END PROTECTED]
+[START METHODS]
+PROCEDURE Error
+LPARAMETERS NERROR, CMETHOD, NLINE
+THIS.LERROR = .T.
+ENDPROC
+**
+FUNCTION Init
+LPARAMETERS TCSETCOMMAND, TUARGUMENT1, TUARGUMENT2, TLDISABLERESTORE
+LOCAL LNPARAMETERS
+LNPARAMETERS = PCOUNT()
+IF LNPARAMETERS=0 .OR. EMPTY(TCSETCOMMAND) .OR. ISNULL(TCSETCOMMAND) .OR. TYPE("tcSetCommand")<>"C"
+RETURN
+ENDIF
+THIS.LERROR = .F.
+THIS.CSETCOMMAND = UPPER(ALLTRIM(TCSETCOMMAND))
+THIS.UOLDVALUE = THIS.CHECKVALUE(SET(THIS.CSETCOMMAND))
+IF THIS.LERROR
+RETURN .F.
+ENDIF
+THIS.UOLDVALUE1 = SET(THIS.CSETCOMMAND, 1)
+THIS.UOLDVALUE2 = SET(THIS.CSETCOMMAND, 2)
+IF LNPARAMETERS>=2 .AND.  .NOT. THIS.SET(TUARGUMENT1, TUARGUMENT2, TLDISABLERESTORE)
+RETURN .F.
+ENDIF
+ENDFUNC
+**
+FUNCTION Destroy
+IF  .NOT. THIS.LNORESTORE
+RETURN THIS.RESTORE()
+ENDIF
+ENDFUNC
+**
+PROCEDURE disablerestore
+THIS.LNORESTORE = .T.
+ENDPROC
+**
+FUNCTION checkvalue
+LPARAMETERS TCVALUE
+IF TYPE("tcValue")<>"C"
+RETURN TCVALUE
+ENDIF
+IF LEFT(THIS.CSETCOMMAND, 4)=="DEFA"
+RETURN TCVALUE+SYS(2003)
+ENDIF
+RETURN TCVALUE
+ENDFUNC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED3]
+*checkvalue Returns the proper SET(<command>) value baesd on the SET command name.
+*disablerestore Disables the automatic restore of settings when in object release mode.
+*get No parameter returns the current SET() value.  1 returns the current SET(,1) value.  2 returns the current SET(,2) value.  0 returns the original SET() value.  -1 returns the original SET(,1) value.  -2 returns the original SET(,2) value.
+*getsetcommand Returns the SET command name.
+*restore Restores the original SET settings.
+*set Sets environment setting. uArgument1 [, uArgument2] [, lNoRestore]
+csetcommand The SET command name.
+lerror Indicates an error occured during the execution of the SET command.
+lnorestore Specifies if the original SET values are restored when the object is released.
+uoldvalue The original setting of the SET command as SET(<command>).
+uoldvalue1 The original setting of the SET command as SET(<command>,1).
+uoldvalue2 The original setting of the SET command as SET(<command>,2).
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED7]
+Used to save, set, and restore SET commands.  Optional parameters:   uArgument1 [, uArgument2] [, lNoRestore].  This classes only handles SET commands that have a unique first four characters in their name and a few SET commands not fully supported.[END RESERVED7]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] _set
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RMI17T1WH
+[CLASS] _custom
+[CLASSLOC] _base.vcx
+[BASECLASS] custom
+[OBJNAME] _shellexecute
+[START PROPERTIES]
+Name = "_shellexecute"
+[END PROPERTIES]
+[START METHODS]
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED3]
+*shellexecute Runs ShellExecute API routine, which is simlar to double-clicking file in explorer.  Parameters: (cFileName, cWorkDir, cOperation, cParams)
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED7]
+Opens a file in the application that it's associated with.[END RESERVED7]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] _shellexecute
+[EOF]

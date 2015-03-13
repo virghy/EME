@@ -1,0 +1,1164 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+InitialSelectedAlias = "sas_solicitud"
+Left = -10
+Name = "Dataenvironment"
+Top = 234
+Width = 520
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0J43NN
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sas_solicitud"
+CursorSource = "sas_solicitud"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 159
+Left = 18
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 1
+Width = 127
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XU
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmovform12
+[START PROPERTIES]
+Caption = "Solicitud de Servicios"
+DataSession = 2
+DoCreate = .T.
+Height = 491
+Name = "Tsmovform12"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 490
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page3.Caption = "Costo Servicio"
+Pageframe1.Page3.FontSize = 8
+Pageframe1.Page3.Name = "Page3"
+Pageframe1.PageCount = 3
+Pageframe1.Top = 0
+Pageframe1.Width = 684
+Width = 683
+WindowState = 0
+campoempresa = IdEmpresa
+camponro = NroSolicitud,sas_SolicitudServ,IdEmpresa=?oApp.Empresa
+camponroorden = S
+campos = FechaLlamada,HoraLlamada, Estado,IdSolicitud
+identidad = IdSolicitud
+idobjeto = 445
+lblRequerido.Name = "lblRequerido"
+tablaconsulta = Solicitud
+valores = getdate(0),Getdate(1), 'P',NewID('sas_Solicitud')
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+LPARAMETERS NroTelefono
+DODEFAULT()
+IF PCOUNT()=1
+	this.addnew()
+	ThisForm.Pageframe1.Page1.txtTelefono.Value=NroTelefono
+ENDIF
+
+ThisForm.Pageframe1.Page3.Enabled=OAPP.PERMISOS(466)
+	
+ENDPROC
+PROCEDURE validar
+
+*!*	*m.idseguro = thisFORM.pageframe1.page1.tscombobox3.Value
+*!*	*m.idtiposervicio = thisform.pageframe1.page1.tscombobox1.Value
+*!*	m.idseguro = sas_solicitud.idseguro
+*!*	m.idtiposervicio = sas_solicitud.idtiposervicio
+*SET STEP ON 
+
+*VG Recuperamos la cantidad de servicios realizados a este paciente en el mes
+TEXT TO cmdSQL noshow
+	Select COUNT(*) Cantidad from Sas_solicitudServ 
+	where IdEmpresa=?oApp.Empresa and IdSeguro=?sas_solicitud.idseguro and NroSeguroSocial = ?sas_solicitud.nroseguro
+	and MONTH(fechaAgenda)=<<MONTH(DATE())>> and YEAR(fechaAgenda)=<<YEAR(DATE()))>>
+ENDTEXT
+
+	cmdSQL = "Select COUNT(*) Cantidad from Sas_solicitudServ where IdEmpresa=?oApp.Empresa and IdSeguro=?sas_solicitud.idseguro and NroSeguro = ?sas_solicitud.nroseguro " +;
+	" and IdSolicitud<> ?sas_solicitud.IdSolicitud "
+	thisform.runsql(cmdSQL,'cCantidad')
+								
+TEXT TO CMDSQL NOSHOW
+	SELECT cs.precio,s.Cantidad
+	FROM sas_costoservicio cs inner join sas_Seguro s on cs.IdSeguro = s.IdSeguro
+	WHERE cs.idseguro = ?sas_solicitud.idseguro and cs.idtiposervicio = ?sas_solicitud.idtiposervicio and cs.idempresa = ?oApp.Empresa
+ENDTEXT
+
+sql (cmdsql, "ccs")
+
+IF EMPTY(sas_solicitud.IdSeguro)
+	replace sas_solicitud.IdSeguro WITH null IN sas_solicitud
+	replace sas_solicitud.importe WITH null IN sas_solicitud
+ELSE 
+	
+	*VG Vemos si la cantidad todavia no supero el limite fijado, si supera se cobra, si no, no.
+	IF cCantidad.Cantidad>ccs.Cantidad 
+		replace sas_solicitud.importe WITH ccs.precio IN sas_solicitud
+		*thisFORM.pageframe1.page3.txtImporte.Value = ccs.precio
+	ELSE
+		replace sas_solicitud.importe WITH 0,Comentario WITH "Exonerado" IN sas_solicitud
+		*thisFORM.pageframe1.page3.txtImporte.Value = ccs.precio
+		
+	ENDIF
+		
+ENDIF
+
+
+
+IF EMPTY(sas_Solicitud.FechaAgenda)
+	replace FechaAgenda WITH getdate()
+ENDIF
+
+
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0M82M8
+[CLASS] campo_busca
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_busca1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+ControlSource = "sas_solicitud.nrosolicitud"
+DisabledForeColor = 0,64,128
+FontBold = .T.
+FontSize = 10
+Height = 25
+Left = 551
+Name = "Campo_busca1"
+TabIndex = 1
+Top = 43
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+this.Enabled= !thisform.editmode
+DODEFAULT()
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtObs
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.obs"
+Height = 75
+Left = 107
+Name = "edtObs"
+TabIndex = 16
+Top = 379
+Width = 563
+ZOrderSet = 29
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25H0YNF9M
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] IdPaciente
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "sas_solicitud.idpaciente"
+Height = 23
+Left = 107
+Name = "IdPaciente"
+Top = 68
+Width = 72
+actualizar = .F.
+condicionextra = IdEmpresa=?oApp.Empresa
+copiarcampos = datediff(yy,fechaNAc,GetDate()) as Edad,Direccion as DireccionRef,Telefono,IdSeguro,NroSeguroSocial as NroSeguro
+datoayuda = Pacientes
+indice = IdPaciente
+objeto = this.parent.txtPaciente
+origen = R
+pegarcampos = Edad,DireccionRef,Telefono,IdSeguro,NroSeguro
+retorna = rtrim(Nombre)+' ' + Apellido
+tabla = sas_pacientes
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDireccionref
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Direccion 1"
+Height = 16
+Left = 31
+Name = "lblDireccionref"
+TabIndex = 30
+Top = 193
+Width = 69
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblEdad
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Edad"
+Height = 16
+Left = 72
+Name = "lblEdad"
+TabIndex = 24
+Top = 121
+Width = 28
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGO4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFechaagenda
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Fecha Agenda"
+Height = 16
+Left = 202
+Name = "lblFechaagenda"
+TabIndex = 38
+Top = 22
+Width = 94
+ZOrderSet = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFechallamada
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Fecha"
+Height = 16
+Left = 24
+Name = "lblFechallamada"
+TabIndex = 18
+Top = 22
+Width = 76
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNL
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblHorallamada
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Hora"
+Height = 16
+Left = 31
+Name = "lblHorallamada"
+TabIndex = 21
+Top = 45
+Width = 69
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdseguro
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Seguro"
+Height = 16
+Left = 48
+Name = "lblIdseguro"
+TabIndex = 32
+Top = 288
+Width = 52
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGO5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdtiposervicio
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Tipo Servicio"
+Height = 16
+Left = 23
+Name = "lblIdtiposervicio"
+TabIndex = 35
+Top = 360
+Width = 77
+ZOrderSet = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGO9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdzona
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Zona"
+Height = 16
+Left = 62
+Name = "lblIdzona"
+TabIndex = 31
+Top = 264
+Width = 38
+ZOrderSet = 25
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGO2
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblMotivo
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Síntomas"
+Height = 16
+Left = 43
+Name = "lblMotivo"
+TabIndex = 34
+Top = 336
+Width = 57
+ZOrderSet = 18
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGO0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNroseguro
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nroseguro"
+Height = 16
+Left = 39
+Name = "lblNroseguro"
+TabIndex = 33
+Top = 312
+Width = 61
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0KQOQ3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNrosolicitud
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro Solicitud"
+Height = 16
+Left = 563
+Name = "lblNrosolicitud"
+TabIndex = 19
+Top = 26
+Width = 71
+ZOrderSet = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0J43NN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblObs
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Observaciones"
+Height = 16
+Left = 14
+Name = "lblObs"
+TabIndex = 36
+Top = 379
+Width = 86
+ZOrderSet = 30
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGO7
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblOtroservicio
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Otro Tipo de Servicio"
+Height = 16
+Left = 303
+Name = "lblOtroservicio"
+TabIndex = 37
+Top = 360
+Width = 118
+ZOrderSet = 23
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblPaciente
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nombre"
+Height = 16
+Left = 51
+Name = "lblPaciente"
+TabIndex = 23
+Top = 97
+Width = 49
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSolicitante
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Solicitante"
+Height = 16
+Left = 41
+Name = "lblSolicitante"
+TabIndex = 26
+Top = 169
+Width = 59
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTelefono
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Telefono"
+Height = 16
+Left = 49
+Name = "lblTelefono"
+TabIndex = 25
+Top = 145
+Width = 51
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0KU9LL
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Height = 60
+Left = 539
+Name = "Ts3dshape1"
+Style = 3
+Top = 19
+Width = 120
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "sas_solicitud.idtiposervicio"
+Left = 107
+Name = "Tscombobox1"
+TabIndex = 14
+Top = 357
+Width = 195
+ZOrderSet = 26
+cmdsql = Select Descripcion, IdTipoServicio from sas_TipoServicios where IdEmpresa = ?oApp.Empresa order by 1
+cursor = cTipoServicio
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox2
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "sas_solicitud.idzona"
+Left = 107
+Name = "Tscombobox2"
+TabIndex = 10
+Top = 261
+Width = 195
+ZOrderSet = 27
+cmdsql = Select Descripcion, IdZona from sas_Zona where IdEmpresa = ?oApp.Empresa order by 1
+cursor = cZonas
+requerido = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGOA
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "sas_solicitud.idseguro"
+Left = 107
+Name = "Tscombobox3"
+TabIndex = 11
+Top = 284
+Width = 195
+ZOrderSet = 28
+cmdsql = Select RazonSocial,IdSeguro from sas_Seguro order by 1
+cursor = cSeguros
+requerido = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Despachar"
+Height = 26
+Left = 539
+Name = "Tscommandbutton1"
+TabIndex = 17
+Top = 91
+Width = 120
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL lnIdSolicitud
+
+IF NVL(sas_Solicitud.Estado, '') <>"P"
+	MESSAGEBOX('Esta solicitud ya fue despachado',64,TASTRADE_LOC)
+	RETURN	
+ENDIF
+
+lnIdSolicitud = sas_solicitud.IdSolicitud
+THISFORM.Release()
+oapp.doform('sas_despacho',lnIdSolicitud)
+
+
+ENDPROC
+PROCEDURE Refresh
+this.Enabled= !thisform.editmode
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2BY0L7CJG
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton2
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Ver Llamadas..."
+Height = 26
+Left = 539
+Name = "Tscommandbutton2"
+TabIndex = 17
+Top = 118
+Width = 120
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+oapp.doform('sas_llamadas')
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGO8
+[CLASS] tshora
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] tshora1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "sas_solicitud.horallamada"
+Enabled = .T.
+Height = 21
+Left = 107
+Name = "tshora1"
+ReadOnly = .F.
+TabIndex = 22
+Top = 43
+Width = 72
+ZOrderSet = 24
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Direccion 2"
+Height = 16
+Left = 31
+Name = "Tslabel1"
+TabIndex = 28
+Top = 217
+Width = 69
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nro. Casa"
+Height = 16
+Left = 510
+Name = "Tslabel2"
+TabIndex = 29
+Top = 193
+Width = 57
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22M0XYBIU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Referencia"
+Height = 16
+Left = 31
+Name = "Tslabel3"
+TabIndex = 27
+Top = 240
+Width = 69
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25H0YNF9N
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Id Paciente"
+Height = 16
+Left = 23
+Name = "Tslabel4"
+TabIndex = 23
+Top = 70
+Width = 77
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDireccion1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.direccionref"
+Height = 22
+Left = 107
+MaxLength = 100
+Name = "txtDireccion1"
+TabIndex = 6
+Top = 190
+Width = 385
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0IS8XT
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDireccion2
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.direccionref2"
+Height = 22
+Left = 107
+MaxLength = 100
+Name = "txtDireccion2"
+TabIndex = 7
+Top = 214
+Width = 385
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtEdad
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.edad"
+Height = 22
+InputMask = "99.99"
+Left = 107
+MaxLength = 3
+Name = "txtEdad"
+TabIndex = 3
+Top = 118
+Width = 70
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGO3
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFechaagenda
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.fechaagenda"
+Height = 22
+Left = 299
+Name = "txtFechaagenda"
+TabIndex = 39
+Top = 19
+Width = 116
+ZOrderSet = 19
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNM
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFechallamada
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.fechallamada"
+Enabled = .T.
+Height = 22
+Left = 107
+Name = "txtFechallamada"
+ReadOnly = .F.
+TabIndex = 20
+Top = 19
+Width = 72
+ZOrderSet = 2
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGO1
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtMotivo
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.motivo"
+Height = 22
+Left = 107
+MaxLength = 50
+Name = "txtMotivo"
+TabIndex = 13
+Top = 333
+Width = 563
+ZOrderSet = 17
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22M0XYBIT
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroCasa
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.nrocasa"
+Height = 22
+Left = 571
+MaxLength = 100
+Name = "txtNroCasa"
+TabIndex = 8
+Top = 190
+Width = 97
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNZ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroseguro
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.nroseguro"
+Height = 22
+Left = 107
+Name = "txtNroseguro"
+TabIndex = 12
+Top = 309
+Width = 76
+ZOrderSet = 15
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF this.Tag<> this.Value
+	cmdSQL = "Select IdPaciente from Sas_Pacientes where IdEmpresa=?oApp.Empresa and IdSeguro=?sas_solicitud.idseguro and NroSeguroSocial = ?sas_solicitud.nroseguro"
+	IF thisform.runsql(cmdSQL,'cPaciente')	> 0
+		IF RECCOUNT('cPaciente')>0
+			REPLACE idpaciente WITH cPaciente.IdPaciente IN sas_solicitud
+		ELSE
+			MESSAGEBOX("No se encuentra al asegurado indicado.",64,TASTRADE_LOC)
+		ENDIF
+	ENDIF
+ENDIF
+				
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGO6
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtOtroservicio
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.otroservicio"
+Height = 22
+Left = 425
+MaxLength = 50
+Name = "txtOtroservicio"
+TabIndex = 15
+Top = 357
+Width = 245
+ZOrderSet = 22
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNQ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtPaciente
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.paciente"
+Height = 22
+Left = 107
+MaxLength = 50
+Name = "txtPaciente"
+TabIndex = 2
+Top = 94
+Width = 312
+ZOrderSet = 6
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22M0XYBIS
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtReferencia
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.referencia"
+Height = 22
+Left = 107
+MaxLength = 100
+Name = "txtReferencia"
+TabIndex = 9
+Top = 237
+Width = 560
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSolicitante
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.solicitante"
+Height = 22
+Left = 107
+MaxLength = 40
+Name = "txtSolicitante"
+TabIndex = 5
+Top = 166
+Width = 312
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22E0JRGNS
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTelefono
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.telefono"
+Height = 22
+Left = 107
+MaxLength = 50
+Name = "txtTelefono"
+TabIndex = 4
+Top = 142
+Width = 195
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IX0XILQ8
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtComentario
+[PARENT] Tsmovform12.Pageframe1.Page3
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_solicitud.comentario"
+Height = 75
+Left = 92
+Name = "edtComentario"
+TabIndex = 16
+Top = 91
+Width = 563
+ZOrderSet = 29
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IX0XILQ9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblObs
+[PARENT] Tsmovform12.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Comentario"
+Height = 16
+Left = -1
+Name = "lblObs"
+TabIndex = 36
+Top = 91
+Width = 86
+ZOrderSet = 30
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IX0XILQB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmovform12.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Importe"
+Left = 8
+Name = "Tslabel5"
+Top = 63
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IX0XILQA
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtImporte
+[PARENT] Tsmovform12.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "sas_solicitud.importe"
+Height = 21
+InputMask = "999,999,999"
+Left = 92
+Name = "txtImporte"
+TabIndex = 15
+Top = 62
+Width = 168
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 10, 6, 16, 13, 34, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

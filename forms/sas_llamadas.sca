@@ -1,0 +1,292 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2BY0KWUFO
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 0
+Left = 0
+Name = "Dataenvironment"
+Top = 0
+Width = 0
+[END PROPERTIES]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2BY0KWUFP
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Form1
+[START PROPERTIES]
+BindControls = .F.
+Caption = "Monitor de Llamadas"
+DoCreate = .T.
+Dockable = 1
+Height = 155
+MaxButton = .F.
+MinButton = .F.
+Name = "Form1"
+Width = 367
+ctoolbar = 
+editmode = .T.
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DO seteo
+this.recuperar()
+ENDPROC
+PROCEDURE recuperar
+this.lblError.Visible= .F.
+hnd=SQLCONNECT("SASA")
+this.grid1.RecordSource=""
+IF hnd>0
+	IF sql("Select top 10 Fecha,Numero,LineaCO as Linea from llamadas where duracion IS NULL order by id desc",'cDetalle',hnd)>0
+		this.grid1.RecordSourceType= 1
+		this.grid1.RecordSource="cDetalle"
+		this.BindControls= .T.
+	ENDIF
+ELSE
+	this.lblError.Visible= .T.
+	this.timer1.Enabled=.f.
+ENDIF
+
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*recuperar 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2BY0KWUFS
+[CLASS] grid
+[BASECLASS] grid
+[OBJNAME] Grid1
+[PARENT] Form1
+[START PROPERTIES]
+Column1.ControlSource = "cDetalle.Fecha"
+Column1.CurrentControl = "Text1"
+Column1.FontSize = 8
+Column1.Name = "Column1"
+Column1.ReadOnly = .T.
+Column1.Width = 101
+Column2.ControlSource = "cDetalle.Numero"
+Column2.FontSize = 8
+Column2.Name = "Column2"
+Column2.ReadOnly = .T.
+Column2.Width = 86
+Column3.ControlSource = "cDetalle.Linea"
+Column3.FontSize = 8
+Column3.Name = "Column3"
+Column3.ReadOnly = .T.
+Column3.Width = 32
+Column4.FontSize = 8
+Column4.Name = "Column4"
+Column4.ReadOnly = .T.
+Column4.Sparse = .F.
+Column4.Width = 90
+ColumnCount = 4
+DeleteMark = .F.
+FontSize = 8
+GridLines = 0
+Height = 120
+Left = 12
+Name = "Grid1"
+Panel = 1
+ReadOnly = .T.
+RecordSource = "cDetalle"
+RowHeight = 22
+Top = 12
+Width = 344
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FT0M9J5K
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Form1.Grid1.Column1
+[START PROPERTIES]
+Caption = "Fecha"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FT0M9J5L
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Form1.Grid1.Column1
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FT0M9J5M
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Form1.Grid1.Column2
+[START PROPERTIES]
+Caption = "Numero"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FT0M9J5N
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Form1.Grid1.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FT0M9J5O
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Form1.Grid1.Column3
+[START PROPERTIES]
+Caption = "Linea"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FT0M9J5P
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Form1.Grid1.Column3
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FT0M9J5Q
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Form1.Grid1.Column4
+[START PROPERTIES]
+Caption = "Atender"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FT0M9J5R
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command1
+[PARENT] Form1.Grid1.Column4
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Atender..."
+Height = 27
+Left = 25
+Name = "Command1"
+Top = 35
+Width = 69
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+oApp.DoForm('sas_solicitud',cDetalle.Numero)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2BY0KWUFR
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblError
+[PARENT] Form1
+[START PROPERTIES]
+Caption = "No se pudo conectar a la central telefonica"
+FontBold = .T.
+ForeColor = 255,0,0
+Height = 24
+Left = 72
+Name = "lblError"
+Top = 132
+Visible = .F.
+Width = 276
+WordWrap = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2BY0KWUFQ
+[CLASS] timer
+[BASECLASS] timer
+[OBJNAME] Timer1
+[PARENT] Form1
+[START PROPERTIES]
+Height = 23
+Interval = 5000
+Left = 372
+Name = "Timer1"
+Top = 12
+Width = 23
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Timer
+THISFORM.recuperar()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

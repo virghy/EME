@@ -1,0 +1,194 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG118PXB
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Left = 1
+Top = 220
+Width = 520
+Height = 200
+InitialSelectedAlias = "bs_constante"
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IS0VAXYT
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Left = 10
+Top = 20
+Width = 90
+Height = 90
+Alias = "bs_constante"
+BufferModeOverride = 5
+Database = \\venus\sistemas\futura\data\datos.dbc
+CursorSource = "bs_constante"
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG118PXD
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Height = 204
+Width = 585
+DoCreate = .T.
+Caption = "Configuracion de Sistema"
+tabla1 = bs_constante
+Name = "Tsmaintform1"
+lblRequerido.Name = "lblRequerido"
+appconfig.Name = "appconfig"
+Pageframe1.ErasePage = .T.
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 0
+Pageframe1.Left = 0
+Pageframe1.Width = 588
+Pageframe1.Height = 204
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG118PXE
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCod_docu
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_constante.constante"
+Height = 22
+Left = 119
+TabIndex = 1
+Top = 31
+Width = 216
+solonuevo = .T.
+Name = "txtCod_docu"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG118PXF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCod_docu
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Constante"
+Height = 16
+Left = 23
+Top = 31
+Width = 88
+TabIndex = 1
+Name = "lblCod_docu"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG118PXG
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_constante.descripcion"
+Height = 22
+Left = 119
+TabIndex = 1
+Top = 58
+Width = 336
+Name = "txtDescripcion"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG118PXH
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Descripción"
+Height = 16
+Left = 44
+Top = 58
+Width = 67
+TabIndex = 1
+Name = "lblDescripcion"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IS0UYD0E
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] ult_nro
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_constante.valor"
+Height = 22
+Left = 119
+TabIndex = 1
+Top = 82
+Width = 216
+Name = "ult_nro"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IS0UYD0F
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Valor"
+Height = 16
+Left = 11
+Top = 82
+Width = 100
+TabIndex = 1
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+[EOF]

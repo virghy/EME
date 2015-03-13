@@ -1,0 +1,1756 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 302
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 637
+[END PROPERTIES]
+[START RESERVED2]
+6[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70XCGG9
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rs_pisos"
+CursorSource = "rs_pisos"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70XCGGA
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rs_mesas"
+CursorSource = "rs_mesas"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 161
+Name = "Cursor3"
+Top = 23
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710GPW8
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rs_servicios"
+CursorSource = "rs_servicios"
+Database = ..\data\datos.dbc
+Height = 112
+Left = 276
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 23
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710L6JL
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor4
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rs_serviciosdet"
+BufferModeOverride = 5
+CursorSource = "rs_serviciosdet"
+Database = ..\data\datos.dbc
+Height = 170
+Left = 397
+Name = "Cursor4"
+NoDataOnLoad = .T.
+Top = 25
+Width = 171
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V711WMXJ
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor5
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "st_familia"
+CursorSource = "st_familia"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 14
+Name = "Cursor5"
+Top = 151
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4U
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+Caption = "TPV"
+DataSession = 2
+DoCreate = .T.
+Height = 622
+KeyPreview = .T.
+Name = "Tsbaseform12"
+Width = 783
+ctoolbar = 
+editmode = .T.
+lblRequerido.Name = "lblRequerido"
+lblRequerido.ZOrderSet = 1
+tabla1 = rs_mesas
+tabla2 = rs_servicios
+tabla3 = rs_ServiciosDet
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+LOCAL nPisos,nPiso
+DODEFAULT()
+
+SELECT rs_pisos
+nPisos = RECCOUNT()
+this.pageframe1.PageCount=nPisos
+
+
+*Cargamos las mesas
+SCAN
+	nPiso=RECNO()
+	this.pageframe1.Pages(nPiso).Caption=Piso
+	this.pageframe1.pages(nPiso).Picture="logotpv.jpg"
+	SELECT rs_mesas
+	SCAN FOR rs_mesas.IdPiso = rs_pisos.IdPiso
+		cNombre="cmdMesa"+IdMesa
+		this.pageframe1.pages(nPiso).AddObject(cNombre,"rs_BotonMesa",Mesa,Posicionx,PosicionY)
+		this.pageframe1.pages(nPiso).&cNombre..Visible=.t.
+		this.pageframe1.pages(nPiso).&cNombre..IdMesa=IdMesa
+		IF Activo
+			this.pageframe1.pages(nPiso).&cNombre..Picture="MesaOcupado.bmp"
+		ENDIF
+		
+	ENDSCAN
+	
+	SELECT rs_pisos
+ENDSCAN 
+
+
+IF OAPP.PRODUCTO_DECIMAL>0
+	THISFORM.PAGEFRAME2.PAGE1.grdRs_serviciosdet.caNTIDAD.INPUTMASK = "999,999."+REPLICATE('9', OAPP.PRODUCTO_DECIMAL)
+	THISFORM.PAGEFRAME2.PAGE1.grdRs_serviciosdet.CANTIDAD.TXTCANTIDAD.INPUTMASK = "999,999."+REPLICATE('9', OAPP.PRODUCTO_DECIMAL)
+ELSE
+	THISFORM.PAGEFRAME2.PAGE1.grdRs_serviciosdet.CANTIDAD.INPUTMASK = "999,999"
+	THISFORM.PAGEFRAME2.PAGE1.grdRs_serviciosdet.CANTIDAD.TXTCANTIDAD.INPUTMASK = "999,999"
+ENDIF
+
+m.Lista='001'
+TEXT TO cmdSQL noshow
+	Select p.*,l.Precio as PrecioFinal,ISNULL(p.Grupo1,'ZZZZ'+Descripcion) as OrdenGrupo from st_producto p left join vt_Precios l 
+		on p.IdEmpresa=l.IdEmpresa and p.IdProducto=l.IdProducto AND l.IdLista=?m.Lista 
+		where p.IdEmpresa=?oApp.Empresa and Idtipo in('P','S','G') and Activo=1
+ENDTEXT
+
+this.runsql(cmdSQL,"cProductos")
+
+
+*!*	LOCAL oBMP AS xfcBitmap
+*!*	LOCAL oGFX AS xfcGraphics
+*!*	LOCAL oBrush AS xfcLinearGradientBrush
+*!*	 
+*!*	WITH _SCREEN.System.Drawing
+*!*	   oBmp = .Bitmap.New(1, this.Height)
+*!*	   oGfx = .Graphics.FromImage(oBMP)
+*!*	   oBrush = .Drawing2D.LinearGradientBrush.New( ;
+*!*	                  .Rectangle.New(0,0,1,this.Height), ;
+*!*	                  .Color.Black, ;
+*!*	                  .Color.Gray, ;
+*!*	                  .Drawing2D.LineargradientMode.Vertical )
+*!*	 
+*!*	   oGfx.FillRectangle(oBrush, 0,0, 1, this.Height)
+*!*	   oBmp.Save("backfill.bmp",.Imaging.ImageFormat.Bmp)
+*!*	 
+*!*	  this.Picture = "backfill.bmp"
+*!*	 
+*!*	ENDWITH
+
+this.runsql("Select IdLinea,Descripcion,OrdenTPV from st_linea where IdEmpresa=?oApp.Empresa and ISNULL(ordenTPV,'')<>'' order by OrdenTPV,Descripcion",'cLinea')
+
+ThisForm.Pageframe2.Page1.List1.RowSource="cLinea"
+
+ENDPROC
+PROCEDURE KeyPress
+LPARAMETERS nKeyCode, nShiftAltCtrl
+IF isdigit(CHR(nKeyCode))
+	thisform.agregarcodigo(CHR(nKeyCode))
+ENDIF
+IF nKeyCode=13
+	ThisForm.Pageframe2.Page1.bntEnter.Click()
+ENDIF
+
+IF nKeyCode=43
+	ThisForm.Pageframe2.Page1.Container1.teclaMas.Click()
+ENDIF
+
+IF nKeyCode=61
+	ThisForm.Pageframe2.Page1.Container1.teclaIgual.Click()
+ENDIF
+
+IF nKeyCode=42
+	ThisForm.Pageframe2.Page1.Container1.teclaX.Click()
+ENDIF
+
+
+IF nKeyCode=27
+	ThisForm.Pageframe2.Page1.Container1.teclaCE.Click()
+ENDIF
+
+ENDPROC
+PROCEDURE Load
+DO system.app
+ENDPROC
+PROCEDURE actualizardetalle
+	this.save()
+	ThisForm.Pageframe2.Page1.grdRs_serviciosdet.Refresh()
+	ThisForm.Pageframe2.Page1.txtTotal.Refresh()
+*	This.parent.parent.txtTotal.Refresh()
+
+	
+
+ENDPROC
+PROCEDURE agregarcantidad
+LPARAMETERS lcCantidad
+ThisForm.Pageframe2.Page1.txtCantidad.Value = ThisForm.Pageframe2.Page1.txtCantidad.Value + lcCantidad
+
+ENDPROC
+PROCEDURE agregarcodigo
+LPARAMETERS lcCaracter
+IF EMPTY(ThisForm.Pageframe2.Page1.txtCantidad.Value)
+	ThisForm.Pageframe2.Page1.txtCodigo.Value = ThisForm.Pageframe2.Page1.txtCodigo.Value + lcCaracter
+ELSE
+	ThisForm.Pageframe2.Page1.txtCantidad.Value = ThisForm.Pageframe2.Page1.txtCantidad.Value + lcCaracter
+ENDIF 	
+
+ENDPROC
+PROCEDURE agregarproducto
+LPARAMETERS lcIdProducto,lcProducto,lcPrecio
+IF len(ThisForm.Pageframe2.Page1.txtCantidad.value)>1
+	lnCantidad=	VAL(SUBSTR(ThisForm.Pageframe2.Page1.txtCantidad.value,2))
+	ThisForm.Pageframe2.Page1.txtCantidad.value=""
+	
+ELSE
+	lnCantidad=1
+ENDIF
+
+INSERT INTO rs_ServiciosDet(IdServicio,IdEmpresa,IdProducto,Descripcion,Cantidad,Precio,Importe);
+Values(rs_Servicios.IdServicio,oApp.Empresa,lcIdProducto,lcProducto,lnCantidad,lcPrecio,lnCantidad*lcPrecio)
+
+this.actualizardetalle()
+
+ENDPROC
+PROCEDURE cargardetalle
+LPARAMETERS lIdMesa
+m.IdMesa=lIdMesa
+REQUERY('rs_Servicios')
+IF RECCOUNT('rs_Servicios')=0
+	INSERT INTO rs_Servicios(IdEmpresa,IdServicio,IdMesa,Estado,Fecha);
+		values(oApp.Empresa,newID("rs_Servicios"),lIdMesa,'A',Getdate()) 
+		
+		UPDATE rs_Mesas SET Activo=.t. WHERE IdMesa=lIdMesa 
+		this.save()
+ENDIF
+		
+m.IdServicio=rs_Servicios.IdServicio
+REQUERY('rs_ServiciosDet')
+
+thisform.editmode=.f.
+thisform.pageframe1.visible=.f.
+thisform.pageframe2.visible=.t.
+thisform.pageframe2.Page1.refresh()
+
+
+
+
+
+ENDPROC
+PROCEDURE imprimir
+LPARAMETERS lnIdFactura
+
+=THIS.RUNSQL("Select convert(int,dbo.LeerConstante(?oApp.Empresa,'VT_IDFORMATOTPV')) as IdFormato", 'cConfig')
+IF RECCOUNT('cConfig')=0
+ MESSAGEBOX("No se encuentra la constante VT_IDFORMATOTPV")
+	RETURN
+ENDIF
+
+M.IDFACTURA = lnIdFactura
+m.IdFormato=cConfig.IdFormato
+=ImpresionFactura(cConfig.IdFormato)
+
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*actualizardetalle 
+*agregarcantidad 
+*agregarcodigo 
+*agregarproducto 
+*cargardetalle 
+^aerrormsg[3,0] 
+^grids[4,0] 
+^permisos[5,0] 
+^validarcontroles[1,0] 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] image
+[BASECLASS] image
+[OBJNAME] Image1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 54
+Left = -6
+Name = "Image1"
+Picture = ..\bitmaps\logotpv.jpg
+Stretch = 1
+Top = 0
+Width = 70
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2VD0QIWNU
+[CLASS] image
+[BASECLASS] image
+[OBJNAME] Image2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Anchor = 520
+Height = 72
+Left = 673
+Name = "Image2"
+Picture = ..\bitmaps\futura-small.jpg
+Stretch = 1
+Top = -8
+Width = 108
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4V
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] Pageframe1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ActivePage = 1
+Anchor = 15
+ErasePage = .T.
+Height = 565
+Left = 0
+Name = "Pageframe1"
+Page1.Caption = "Page1"
+Page1.Name = "Page1"
+Page1.Picture = ..\bitmaps\logotpv.jpg
+PageCount = 1
+Top = 57
+Width = 787
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V7105ZAU
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] Pageframe2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Anchor = 15
+ErasePage = .T.
+Height = 565
+Left = 0
+Name = "Pageframe2"
+Page1.Caption = "Detalle"
+Page1.Name = "Page1"
+PageCount = 1
+Tabs = .F.
+Top = 58
+Visible = .F.
+Width = 787
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V915B7NT
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] bntEnter
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Anchor = 8
+Height = 36
+Left = 693
+Name = "bntEnter"
+Picture = ..\..\..\users\vgonza~1\appdata\local\temp\69486272.bmp
+Top = 322
+Width = 86
+cbuttoncaption = (".")
+cfontname = Wingdings 3
+nfontcolour = 16760576
+nfontsize =         30.00
+nglowcolour = 16680760
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF !EMPTY(This.parent.txtCodigo.Value)
+	SELECT * FROM cProductos WHERE IdProducto = This.parent.txtCodigo.Value INTO CURSOR xBuscaProd
+	IF RECCOUNT('xBuscaProd')>0
+		thisform.agregarproducto(xBuscaProd.IdProducto,xBuscaProd.Descripcion,xBuscaProd.PrecioFinal)
+		This.parent.txtCodigo.Value=""
+	ELSE
+		MESSAGEBOX("No se encuentra el producto indicado",64,"Futura Software")
+	ENDIF
+ENDIF
+			
+ENDPROC
+PROCEDURE Init
+this.cButtonCaption=CHR(56)
+DODEFAULT()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Cliente
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Enabled = .F.
+FontSize = 9
+Height = 25
+Left = 3
+Name = "Cliente"
+Top = 32
+Width = 193
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command1
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Caption = "Cliente"
+Height = 40
+Left = 199
+Name = "Command1"
+Picture = ..\bitmaps\customer.bmp
+Top = 2
+Width = 47
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+This.parent.idcliente1.ayuda()
+thisform.save()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2VB174A9F
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command2
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Caption = "Partir"
+Height = 40
+Left = 247
+Name = "Command2"
+Picture = ..\bitmaps\cuths.png
+Top = 2
+Width = 47
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.pageframe1.Visible=.t.
+thisform.pageframe2.Visible=.f.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2VB174A9G
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command3
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Caption = "Eliminar"
+Height = 40
+Left = 295
+Name = "Command3"
+Picture = ..\bitmaps\delete.bmp
+Top = 2
+Width = 47
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.pageframe1.Visible=.t.
+thisform.pageframe2.Visible=.f.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command4
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Caption = "Mover"
+Height = 40
+Left = 343
+Name = "Command4"
+Top = 2
+Width = 47
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.pageframe1.Visible=.t.
+thisform.pageframe2.Visible=.f.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2VB18E4ST
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command5
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Caption = "Mesas"
+Height = 40
+Left = 391
+Name = "Command5"
+Top = 2
+Width = 47
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.pageframe1.Visible=.t.
+thisform.pageframe2.Visible=.f.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81CTMUI
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] Container1
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Anchor = 8
+BackColor = 128,128,128
+BorderColor = 255,255,255
+Height = 320
+Left = 440
+Name = "Container1"
+Top = 2
+Width = 339
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton1
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 74
+Name = "Glowingbutton1"
+Top = 251
+Width = 124
+cbuttoncaption = ("0")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo("0")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton10
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 203
+Name = "Glowingbutton10"
+Top = 71
+Width = 60
+cbuttoncaption = ("9")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo("9")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81CTN2N
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton11
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 138
+Name = "Glowingbutton11"
+Top = 71
+Width = 60
+cbuttoncaption = ("8")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo("8")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710GPW8
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton12
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 74
+Name = "Glowingbutton12"
+Top = 71
+Width = 60
+cbuttoncaption = ("7")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo("7")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81E19XR
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton17
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 10
+Name = "Glowingbutton17"
+Picture = ..\..\..\users\vgonza~1\appdata\local\temp\83547444.bmp
+Top = 251
+Width = 60
+cbuttoncaption = ("0")
+cfontname = Webdings
+nfontcolour = 16760576
+nfontsize =         30.00
+nglowcolour = 16680760
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+this.cButtonCaption=CHR(76)
+DODEFAULT()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81E19YT
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton18
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 10
+Name = "Glowingbutton18"
+Top = 191
+Width = 60
+cbuttoncaption = ("1")
+cfontname = Webdings
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+this.cButtonCaption=CHR(105)
+DODEFAULT()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81E19ZO
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton19
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 10
+Name = "Glowingbutton19"
+Picture = ..\..\..\users\vgonza~1\appdata\local\temp\83833186.bmp
+Top = 131
+Width = 60
+cbuttoncaption = f                                    
+cfontname = Wingdings
+nfontcolour = 16760576
+nfontsize =         30.00
+nglowcolour = 16680760
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF RECNO('rs_serviciosdet')<>0
+	DELETE IN rs_serviciosdet
+	thisform.actualizardetalle()
+ENDIF
+ENDPROC
+PROCEDURE Init
+this.cButtonCaption=CHR(214)
+DODEFAULT()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton2
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 203
+Name = "Glowingbutton2"
+Top = 251
+Width = 60
+cbuttoncaption = (".")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo(".")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81E1A0L
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton20
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 10
+Name = "Glowingbutton20"
+Picture = ..\..\..\users\vgonza~1\appdata\local\temp\39307765.bmp
+Top = 71
+Width = 60
+cbuttoncaption = ("6")
+cfontname = Webdings
+nfontcolour = 16760576
+nfontsize =         30.00
+nglowcolour = 16680760
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+*This.parent.parent.grdRs_serviciosdet.DoScroll(3)
+This.parent.parent.grdRs_serviciosdet.SetFocus()
+KEYBOARD '{DNARROW}'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81E1A1F
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton21
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 10
+Name = "Glowingbutton21"
+Picture = ..\..\..\users\vgonza~1\appdata\local\temp\38349425.bmp
+Top = 11
+Width = 60
+cbuttoncaption = ("5")
+cfontname = Webdings
+nfontcolour = 16760576
+nfontsize =         30.00
+nglowcolour = 16680760
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+
+This.parent.parent.grdRs_serviciosdet.SetFocus()
+KEYBOARD '{UPARROW}'
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton4
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 203
+Name = "Glowingbutton4"
+Top = 191
+Width = 60
+cbuttoncaption = ("3")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo("3")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70XCGG9
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton5
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 138
+Name = "Glowingbutton5"
+Top = 191
+Width = 60
+cbuttoncaption = ("2")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo("2")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70XCGG9
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton6
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 74
+Name = "Glowingbutton6"
+Top = 191
+Width = 60
+cbuttoncaption = ("1")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo("1")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81CTMZD
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton7
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 203
+Name = "Glowingbutton7"
+Top = 131
+Width = 60
+cbuttoncaption = ("6")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo("6") 
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81CTN07
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton8
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 138
+Name = "Glowingbutton8"
+Top = 131
+Width = 60
+cbuttoncaption = ("5")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo("5")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70XCGGA
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] Glowingbutton9
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 74
+Name = "Glowingbutton9"
+Top = 131
+Width = 60
+cbuttoncaption = ("4")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.agregarcodigo("4")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710L6JL
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] TeclaCE
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 74
+Name = "TeclaCE"
+Top = 11
+Width = 124
+cbuttoncaption = ("CE")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+This.parent.parent.txtCodigo.Value=""
+This.parent.parent.txtCantidad.Value=""
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] TeclaIgual
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 117
+Left = 268
+Name = "TeclaIgual"
+Top = 191
+Width = 60
+cbuttoncaption = ("=")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL lcResultado
+
+DO FORM rs_cobro WITH rs_Servicios.IdServicio,This.parent.parent.txtTotal.Value TO lcResultado
+IF lcResultado>0
+			UPDATE rs_Mesas SET Activo=.F. WHERE IdMesa=rs_servicios.IdMesa
+			thisform.pageframe1.Visible=.t.
+			thisform.pageframe2.Visible=.f.	
+			thisform.imprimir(lcResultado)	
+ENDIF
+	
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81CZET6
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] teclaMas
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 117
+Left = 268
+Name = "teclaMas"
+Top = 71
+Width = 60
+cbuttoncaption = ("+")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+
+IF !EMPTY(This.parent.parent.txtCodigo.value)
+	thisform.agregarproducto("","",VAL(This.parent.parent.txtCodigo.value))
+	This.parent.parent.txtCodigo.Value=""
+	RETURN 
+ENDIF
+	
+IF RECNO('rs_serviciosdet')<>0
+	SELECT rs_serviciosdet
+
+	replace cantidad WITH rs_serviciosdet.cantidad + 1, Importe WITH rs_serviciosdet.precio * rs_serviciosdet.cantidad 
+
+	thisform.actualizardetalle()
+ENDIF
+	
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81DB8SF
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] TeclaMenos
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 268
+Name = "TeclaMenos"
+Top = 11
+Width = 60
+cbuttoncaption = ("-")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF !EMPTY(This.parent.parent.txtCodigo.value)
+	thisform.agregarproducto("","",VAL(This.parent.parent.txtCodigo.value)*-1)
+	This.parent.parent.txtCodigo.Value=""
+	RETURN 
+ENDIF
+
+IF RECNO('rs_serviciosdet')<>0
+	replace cantidad WITH rs_serviciosdet.cantidad - 1, Importe WITH rs_serviciosdet.precio * rs_serviciosdet.cantidad IN rs_serviciosdet
+	IF rs_serviciosdet.cantidad=0
+		DELETE IN rs_serviciosdet
+	ENDIF 	
+	thisform.actualizardetalle()
+ENDIF
+	
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V81DB8RK
+[CLASS] glowingbutton
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\bbglowingbuttonv1\bbglowingbutton.vcx
+[BASECLASS] image
+[OBJNAME] TeclaX
+[PARENT] Tsbaseform12.Pageframe2.Page1.Container1
+[START PROPERTIES]
+Height = 57
+Left = 203
+Name = "TeclaX"
+Top = 11
+Width = 60
+cbuttoncaption = ("*")
+nfontsize = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+This.parent.parent.txtCantidad.Value='x'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2VD0PYYDG
+[CLASS] sbscrollcontainer
+[CLASSLOC] ..\..\..\instalar\developers\vfp\gdiplusx\vfpscrollbar\vfpscrollbar.vcx
+[BASECLASS] container
+[OBJNAME] Ctl32_scontainer1
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Anchor = 15
+Height = 187
+Left = 209
+Name = "Ctl32_scontainer1"
+Scrollbarhorizontal1.Name = "Scrollbarhorizontal1"
+Scrollbarhorizontal1.Sbshape1.Name = "Sbshape1"
+Scrollbarhorizontal1.Scrollendleft1.Name = "Scrollendleft1"
+Scrollbarhorizontal1.Scrollendleft1.Sbshape1.Name = "Sbshape1"
+Scrollbarhorizontal1.Scrollendleft1.Sbshape2.Name = "Sbshape2"
+Scrollbarhorizontal1.Scrollendleft1.Sbshape3.Name = "Sbshape3"
+Scrollbarhorizontal1.Scrollendleft1.Sbshape4.Name = "Sbshape4"
+Scrollbarhorizontal1.Scrollendleft1.Splabel1.Name = "Splabel1"
+Scrollbarhorizontal1.Scrollendleft1.Spline10.Name = "Spline10"
+Scrollbarhorizontal1.Scrollendleft1.Spline11.Name = "Spline11"
+Scrollbarhorizontal1.Scrollendleft1.Spline12.Name = "Spline12"
+Scrollbarhorizontal1.Scrollendleft1.Spline13.Name = "Spline13"
+Scrollbarhorizontal1.Scrollendleft1.Spline14.Name = "Spline14"
+Scrollbarhorizontal1.Scrollendleft1.Spline9.Name = "Spline9"
+Scrollbarhorizontal1.Scrollendright1.Name = "Scrollendright1"
+Scrollbarhorizontal1.Scrollendright1.Sbshape1.Name = "Sbshape1"
+Scrollbarhorizontal1.Scrollendright1.Sbshape2.Name = "Sbshape2"
+Scrollbarhorizontal1.Scrollendright1.Sbshape3.Name = "Sbshape3"
+Scrollbarhorizontal1.Scrollendright1.Sbshape4.Name = "Sbshape4"
+Scrollbarhorizontal1.Scrollendright1.Splabel1.Name = "Splabel1"
+Scrollbarhorizontal1.Scrollendright1.Spline10.Name = "Spline10"
+Scrollbarhorizontal1.Scrollendright1.Spline11.Name = "Spline11"
+Scrollbarhorizontal1.Scrollendright1.Spline12.Name = "Spline12"
+Scrollbarhorizontal1.Scrollendright1.Spline13.Name = "Spline13"
+Scrollbarhorizontal1.Scrollendright1.Spline14.Name = "Spline14"
+Scrollbarhorizontal1.Scrollendright1.Spline9.Name = "Spline9"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Name = "Scrollthumbhorizontal1"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbcontainer1.Name = "Sbcontainer1"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbcontainer1.Spline1.Name = "Spline1"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbcontainer1.Spline2.Name = "Spline2"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbcontainer1.Spline3.Name = "Spline3"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbcontainer1.Spline4.Name = "Spline4"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbcontainer1.Spline5.Name = "Spline5"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbcontainer1.Spline6.Name = "Spline6"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbcontainer1.Spline7.Name = "Spline7"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbcontainer1.Spline8.Name = "Spline8"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbshape1.Name = "Sbshape1"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbshape2.Name = "Sbshape2"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbshape3.Name = "Sbshape3"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Sbshape4.Name = "Sbshape4"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Spline10.Name = "Spline10"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Spline11.Name = "Spline11"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Spline12.Name = "Spline12"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Spline13.Name = "Spline13"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Spline14.Name = "Spline14"
+Scrollbarhorizontal1.Scrollthumbhorizontal1.Spline9.Name = "Spline9"
+Scrollbarvertical1.Name = "Scrollbarvertical1"
+Scrollbarvertical1.Sbshape1.Name = "Sbshape1"
+Scrollbarvertical1.Scrollenddown1.Name = "Scrollenddown1"
+Scrollbarvertical1.Scrollenddown1.Sbshape1.Name = "Sbshape1"
+Scrollbarvertical1.Scrollenddown1.Sbshape2.Name = "Sbshape2"
+Scrollbarvertical1.Scrollenddown1.Sbshape3.Name = "Sbshape3"
+Scrollbarvertical1.Scrollenddown1.Sbshape4.Name = "Sbshape4"
+Scrollbarvertical1.Scrollenddown1.Splabel1.Name = "Splabel1"
+Scrollbarvertical1.Scrollenddown1.Spline10.Name = "Spline10"
+Scrollbarvertical1.Scrollenddown1.Spline11.Name = "Spline11"
+Scrollbarvertical1.Scrollenddown1.Spline12.Name = "Spline12"
+Scrollbarvertical1.Scrollenddown1.Spline13.Name = "Spline13"
+Scrollbarvertical1.Scrollenddown1.Spline14.Name = "Spline14"
+Scrollbarvertical1.Scrollenddown1.Spline9.Name = "Spline9"
+Scrollbarvertical1.Scrollendup1.Name = "Scrollendup1"
+Scrollbarvertical1.Scrollendup1.Sbshape1.Name = "Sbshape1"
+Scrollbarvertical1.Scrollendup1.Sbshape2.Name = "Sbshape2"
+Scrollbarvertical1.Scrollendup1.Sbshape3.Name = "Sbshape3"
+Scrollbarvertical1.Scrollendup1.Sbshape4.Name = "Sbshape4"
+Scrollbarvertical1.Scrollendup1.Splabel1.Name = "Splabel1"
+Scrollbarvertical1.Scrollendup1.Spline10.Name = "Spline10"
+Scrollbarvertical1.Scrollendup1.Spline11.Name = "Spline11"
+Scrollbarvertical1.Scrollendup1.Spline12.Name = "Spline12"
+Scrollbarvertical1.Scrollendup1.Spline13.Name = "Spline13"
+Scrollbarvertical1.Scrollendup1.Spline14.Name = "Spline14"
+Scrollbarvertical1.Scrollendup1.Spline9.Name = "Spline9"
+Scrollbarvertical1.Scrollthumbvertical1.Name = "Scrollthumbvertical1"
+Scrollbarvertical1.Scrollthumbvertical1.Sbcontainer1.Name = "Sbcontainer1"
+Scrollbarvertical1.Scrollthumbvertical1.Sbcontainer1.Spline1.Name = "Spline1"
+Scrollbarvertical1.Scrollthumbvertical1.Sbcontainer1.Spline2.Name = "Spline2"
+Scrollbarvertical1.Scrollthumbvertical1.Sbcontainer1.Spline3.Name = "Spline3"
+Scrollbarvertical1.Scrollthumbvertical1.Sbcontainer1.Spline4.Name = "Spline4"
+Scrollbarvertical1.Scrollthumbvertical1.Sbcontainer1.Spline5.Name = "Spline5"
+Scrollbarvertical1.Scrollthumbvertical1.Sbcontainer1.Spline6.Name = "Spline6"
+Scrollbarvertical1.Scrollthumbvertical1.Sbcontainer1.Spline7.Name = "Spline7"
+Scrollbarvertical1.Scrollthumbvertical1.Sbcontainer1.Spline8.Name = "Spline8"
+Scrollbarvertical1.Scrollthumbvertical1.Sbshape1.Name = "Sbshape1"
+Scrollbarvertical1.Scrollthumbvertical1.Sbshape2.Name = "Sbshape2"
+Scrollbarvertical1.Scrollthumbvertical1.Sbshape3.Name = "Sbshape3"
+Scrollbarvertical1.Scrollthumbvertical1.Sbshape4.Name = "Sbshape4"
+Scrollbarvertical1.Scrollthumbvertical1.Spline10.Name = "Spline10"
+Scrollbarvertical1.Scrollthumbvertical1.Spline11.Name = "Spline11"
+Scrollbarvertical1.Scrollthumbvertical1.Spline12.Name = "Spline12"
+Scrollbarvertical1.Scrollthumbvertical1.Spline13.Name = "Spline13"
+Scrollbarvertical1.Scrollthumbvertical1.Spline14.Name = "Spline14"
+Scrollbarvertical1.Scrollthumbvertical1.Spline9.Name = "Spline9"
+Top = 364
+Width = 565
+scrollbars = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2VD0PYYDM
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] PFBotones
+[PARENT] Tsbaseform12.Pageframe2.Page1.Ctl32_scontainer1
+[START PROPERTIES]
+Anchor = 15
+ErasePage = .T.
+Height = 185
+Left = 1
+Name = "PFBotones"
+Page1.Caption = "Page1"
+Page1.Name = "Page1"
+Page1.Picture = ..\bitmaps\back.jpg
+PageCount = 1
+Tabs = .F.
+Top = 1
+Width = 548
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCUR
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdRs_serviciosdet
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Anchor = 10
+Column1.ControlSource = "rs_serviciosdet.idproducto"
+Column1.Enabled = .F.
+Column1.Name = "Column4"
+Column1.ReadOnly = .T.
+Column1.Width = 66
+Column2.ColumnOrder = 3
+Column2.ControlSource = "rs_serviciosdet.cantidad"
+Column2.Enabled = .F.
+Column2.Name = "Cantidad"
+Column2.ReadOnly = .T.
+Column2.Width = 36
+Column3.ColumnOrder = 4
+Column3.ControlSource = "rs_serviciosdet.precio"
+Column3.Enabled = .F.
+Column3.InputMask = "9,999,999.99"
+Column3.Name = "Column6"
+Column3.ReadOnly = .T.
+Column3.Width = 62
+Column4.ColumnOrder = 5
+Column4.ControlSource = "rs_serviciosdet.importe"
+Column4.Enabled = .F.
+Column4.InputMask = "999,999,999.99"
+Column4.Name = "Column7"
+Column4.ReadOnly = .T.
+Column4.Width = 81
+Column5.ColumnOrder = 2
+Column5.ControlSource = "rs_serviciosdet.descripcion"
+Column5.Enabled = .F.
+Column5.Name = "Column8"
+Column5.ReadOnly = .T.
+Column5.Width = 165
+ColumnCount = 5
+GridLines = 1
+Height = 220
+Highlight = .T.
+Left = 3
+Name = "grdRs_serviciosdet"
+Panel = 1
+ReadOnly = .T.
+RecordSource = "rs_serviciosdet"
+RecordSourceType = 1
+RowHeight = 40
+ScrollBars = 2
+Top = 88
+Width = 433
+campo = IdServicio
+cfieldtosum = Importe
+valor = rs_Servicios.IdServicio
+valorvariable = rs_Servicios.IdServicio
+variablevista = m.IdServicio
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Resize
+this.AutoFit()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCUU
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe2.Page1.grdRs_serviciosdet.Cantidad
+[START PROPERTIES]
+Caption = "Cant."
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCUV
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtCantidad
+[PARENT] Tsbaseform12.Pageframe2.Page1.grdRs_serviciosdet.Cantidad
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+Enabled = .F.
+ForeColor = 0,0,0
+Margin = 0
+Name = "txtCantidad"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCUS
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe2.Page1.grdRs_serviciosdet.Column4
+[START PROPERTIES]
+Caption = "Cod."
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCUT
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe2.Page1.grdRs_serviciosdet.Column4
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+Enabled = .F.
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCUW
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe2.Page1.grdRs_serviciosdet.Column6
+[START PROPERTIES]
+Caption = "Precio"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCUX
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe2.Page1.grdRs_serviciosdet.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+Enabled = .F.
+ForeColor = 0,0,0
+InputMask = "9,999,999.99"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCUY
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe2.Page1.grdRs_serviciosdet.Column7
+[START PROPERTIES]
+Caption = "Importe"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCUZ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe2.Page1.grdRs_serviciosdet.Column7
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+Enabled = .F.
+ForeColor = 0,0,0
+InputMask = "999,999,999.99"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCV0
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe2.Page1.grdRs_serviciosdet.Column8
+[START PROPERTIES]
+Caption = "Descripción"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V710SCV1
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe2.Page1.grdRs_serviciosdet.Column8
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+Enabled = .F.
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2VF0Z5BCL
+[CLASS] idcliente
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente1
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+ControlSource = "rs_servicios.idcliente"
+Left = 94
+Name = "Idcliente1"
+Top = 12
+Visible = .F.
+aplicarretorno = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V711EYA8
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label1
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Anchor = 8
+BackStyle = 0
+Caption = "Total"
+FontBold = .T.
+Height = 17
+Left = 297
+Name = "Label1"
+Top = 316
+Width = 40
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V711L9NQ
+[CLASS] listbox
+[BASECLASS] listbox
+[OBJNAME] List1
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Anchor = 5
+AutoHideScrollbar = 1
+ColumnCount = 2
+ColumnLines = .F.
+ColumnWidths = "0"
+ControlSource = ""
+Height = 238
+Left = 2
+MoverBars = .F.
+Name = "List1"
+Picture = ..\bitmaps\folderopen.ico
+RowSource = "st_familia"
+RowSourceType = 2
+Top = 312
+Width = 204
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+SELECT * FROM cProductos WHERE Linea=cLinea.IdLinea ORDER BY OrdenGrupo INTO CURSOR cBotones
+
+SELECT cBotones
+nLeft=0
+nTop=0
+This.parent.Ctl32_scontainer1.PFBotones.RemoveObject("Page1")
+This.parent.Ctl32_scontainer1.PFBotones.PageCount=1
+This.parent.Ctl32_scontainer1.PFBotones.page1.Picture="back.jpg"
+*This.parent.Ctl32_scontainer1.PFBotones.page1.RemoveObject
+
+nContador=0
+SCAN
+	nContador = nContador + 1
+	lcNombre="cmd"+ALLTRIM(STR(RECNO()))
+	
+	This.parent.Ctl32_scontainer1.PFBotones.Page1.AddObject(lcNombre, "rs_botonProducto")
+	WITH This.parent.Ctl32_scontainer1.PFBotones.Page1.&lcNombre.
+		*.cButtonCaption = Descripcion
+		.Caption = ALLTRIM(Descripcion)
+		.ToolTipText=ALLTRIM(Descripcion)
+		.IdProducto=IdProducto
+		.Producto = Descripcion
+		.Precio=PrecioFinal
+		.Top=nTop
+		.Left=nLeft
+		.width=80
+		.height=80
+*		.TabStop=.f.
+		.Visible=.t. 
+		.draw()
+	ENDWITH 
+	nLeft = nLeft + 80
+	IF nleft+80>This.parent.Ctl32_scontainer1.PFBotones.Width
+	*IF nContador=7
+		nLeft =0
+		nTop = nTop + 80
+		nContador=0
+	ENDIF 
+	
+ENDSCAN
+
+IF nTop+80>This.parent.Ctl32_scontainer1.PFBotones.height
+	This.parent.Ctl32_scontainer1.PFBotones.Height=nTop + 80
+	This.parent.Ctl32_scontainer1.scrollBars=2
+	This.parent.Ctl32_scontainer1.scrollableheight=nTop + 80
+ELSE
+		This.parent.Ctl32_scontainer1.scrollBars=0
+ENDIF
+	
+*This.parent.PFBotones.Page1.Refresh()
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2VF0ZYJ2Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+ControlSource = "rs_servicios.fecha"
+Enabled = .F.
+FontSize = 9
+Height = 25
+Left = 3
+Name = "Tstextbox1"
+Top = 60
+Width = 193
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V913HMSJ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtCantidad
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Anchor = 8
+DisabledBackColor = 255,255,255
+DisabledForeColor = 0,0,0
+Enabled = .F.
+FontBold = .T.
+FontSize = 12
+Height = 36
+Left = 643
+Name = "txtCantidad"
+ReadOnly = .F.
+Top = 322
+Width = 37
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtCodigo
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Anchor = 8
+DisabledBackColor = 255,255,255
+DisabledForeColor = 0,0,0
+Enabled = .F.
+FontBold = .T.
+FontSize = 12
+Height = 36
+Left = 514
+Name = "txtCodigo"
+ReadOnly = .F.
+Top = 322
+Width = 123
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V70WZX4T
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtMesa
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+ControlSource = "rs_servicios.mesa"
+Height = 25
+Left = 3
+Name = "txtMesa"
+ReadOnly = .T.
+Top = 4
+Width = 193
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2V711EYA7
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtTotal
+[PARENT] Tsbaseform12.Pageframe2.Page1
+[START PROPERTIES]
+Anchor = 8
+ControlSource = ""
+Height = 25
+InputMask = "999,999,999.99"
+Left = 339
+Name = "txtTotal"
+ReadOnly = .T.
+Top = 310
+Width = 97
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+This.parent.grdRs_serviciosdet.sumcolumn()
+this.Value=This.parent.grdRs_serviciosdet.totales(1)
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 12, 8, 20, 15, 42, 4, 1
+[END PROPERTIES]
+[EOF]

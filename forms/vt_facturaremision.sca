@@ -1,0 +1,283 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EC17F700
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 0
+Left = 0
+Width = 0
+Height = 0
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EC19HV7P
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+DataSession = 2
+BorderStyle = 3
+Height = 232
+Width = 206
+DoCreate = .T.
+Caption = "Remisiones a Facturar"
+MaxButton = .F.
+MinButton = .F.
+WindowType = 1
+facturada = .F.
+otrocliente = .F.
+tabla1 = vt_FacturaRemision
+editmode = .T.
+Name = "Tsbaseform12"
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Activate
+this.BindControls= .T.
+ENDPROC
+PROCEDURE Init
+LPARAMETERS dsId
+this.DataSessionId=dsId
+DODEFAULT()
+this.tsgrid1.RecordSource="vt_FacturaRemision"
+this.tsgrid1.column1.ControlSource="vt_FacturaRemision.NroRemision"
+ENDPROC
+PROCEDURE aplicarfiltro
+
+IF ThisForm.Tscheckbox1.Value=.t.
+	condicionFacturado = " "
+ELSE
+	condicionFacturado = " and IdFactura is null "
+ENDIF
+
+
+IF ThisForm.Tscheckbox2.Value=.t.
+	condicionOtroCliente = " "
+ELSE
+	condicionOtroCliente = " and IdCliente = ?vt_vFactura.IdCliente "
+ENDIF
+
+ThisForm.Tsgrid1.Column1.Campo_clave1.condicionextra="IdEmpresa=?oApp.Empresa " + condicionFacturado + condicionOtroCliente
+
+
+
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+facturada
+otrocliente
+*aplicarfiltro 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EC19HV7Q
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ColumnCount = 1
+FontSize = 8
+Height = 155
+Left = 12
+Panel = 1
+RecordSource = "vt_FacturaRemision"
+RowHeight = 17
+ScrollBars = 2
+Top = 12
+Width = 96
+campo = IdEmpresa
+valor = oApp.Empresa
+Name = "Tsgrid1"
+Column1.FontSize = 8
+Column1.ControlSource = ""
+Column1.Width = 74
+Column1.Name = "Column1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EC19HV7R
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.Column1
+[START PROPERTIES]
+FontSize = 8
+Caption = "Nro Remision"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EC1DKPVF
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_clave1
+[PARENT] Tsbaseform12.Tsgrid1.Column1
+[START PROPERTIES]
+Left = 108
+Top = 12
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+parametroayuda = vt_vFactura.IdCliente
+origen = R
+tabla = os_Remision
+indice = NroRemision
+condicionextra = IdEmpresa=?oApp.Empresa and IdFactura is null and IdCliente = ?vt_vFactura.IdCliente
+datoayuda = Remision
+Name = "Campo_clave1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EC19HV7T
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 144
+Left = 120
+Caption = "\<Aceptar"
+Default = .T.
+Name = "Tscommandbutton1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.Release
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EC19HV7U
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 36
+Left = 120
+Caption = "Agregar"
+Name = "Tscommandbutton2"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.tsgrid1.agregaritem(.f.)
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EC19HV7V
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton3
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 72
+Left = 120
+Caption = "Eliminar"
+Name = "Tscommandbutton3"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.tsgrid1.borraritem()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EC17F700
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 184
+Left = 8
+Height = 15
+Width = 183
+Alignment = 0
+Caption = "Permitir Remisiones ya facturadas"
+ControlSource = "thisform.facturada"
+Name = "Tscheckbox1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+*!*	IF this.Value=.t.
+*!*		ThisForm.Tsgrid1.Column1.Campo_clave1.condicionextra="IdEmpresa=?oApp.Empresa and IdCliente = ?vt_vFactura.IdCliente"
+*!*	ELSE
+*!*		ThisForm.Tsgrid1.Column1.Campo_clave1.condicionextra="IdEmpresa=?oApp.Empresa and IdFactura is null and IdCliente = ?vt_vFactura.IdCliente"
+*!*	ENDIF
+thisform.aplicarfiltro()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2G80OK81U
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 208
+Left = 8
+Height = 15
+Width = 194
+Alignment = 0
+Caption = "Permitir Remisiones de Otros Clientes"
+ControlSource = "thisform.OtroCliente"
+Name = "Tscheckbox2"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+*!*	IF this.Value=.t.
+*!*		ThisForm.Tsgrid1.Column1.Campo_clave1.condicionextra="IdEmpresa=?oApp.Empresa and IdCliente = ?vt_vFactura.IdCliente"
+*!*	ELSE
+*!*		ThisForm.Tsgrid1.Column1.Campo_clave1.condicionextra="IdEmpresa=?oApp.Empresa and IdFactura is null and IdCliente = ?vt_vFactura.IdCliente"
+*!*	ENDIF
+thisform.aplicarfiltro()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

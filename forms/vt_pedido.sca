@@ -1,0 +1,1401 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG101LAC
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 293
+InitialSelectedAlias = "vt_pedido"
+Left = 33
+Name = "Dataenvironment"
+Top = 161
+Width = 604
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+OAPP.SETDATABASE(THIS)
+DODEFAULT()
+ENDPROC
+**
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASB
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_pedido"
+BufferModeOverride = 5
+CursorSource = "vt_pedido"
+Database = ..\data\datos.dbc
+Height = 145
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 125
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASC
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_pedidodet"
+BufferModeOverride = 5
+CursorSource = "vt_pedidodet"
+Database = ..\data\datos.dbc
+Height = 161
+Left = 181
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 0
+Width = 108
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG101LAE
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+APPCONFIG.Name = "APPCONFIG"
+Caption = "Pedidos"
+DoCreate = .T.
+Height = 466
+Icon = ..\bitmaps\default1.ico
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 468
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.TabIndex = 2
+Pageframe1.Top = 0
+Pageframe1.Width = 696
+Width = 695
+WindowState = 0
+auditmarcahora = audit_Fecha
+auditusuario = audit_Usuario
+camponro = NroPedido,vt_Pedido,IdEmpresa=?oApp.Empresa
+camponroorden = S
+campos = IdEmpresa,IdPedido,idestado,fechapedido,horapedido
+detalle = .T.
+enlaces = Clientes,Repartidores,Recepcionistas
+identidad = IdPedido
+idobjeto = 56
+lallowanular = .T.
+lblRequerido.Name = "lblRequerido"
+lblRequerido.TabIndex = 1
+repetirvalores = idrepartidor,idreceptor,IdNegocio,FechaPedido,idvendedor
+tabla1 = vt_Pedido
+tabla2 = vt_PEdidoDet
+tablaconsulta = VT_Pedidos
+valores = oApp.Empresa,newId('vt_Pedido'),'P',getdate(),time()
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+ENDPROC
+**
+FUNCTION lallowedits_access
+RETURN VT_PEDIDO.IDESTADO='P' .AND. THIS.PERMISOS(3)
+DODEFAULT()
+ENDFUNC
+**
+FUNCTION validar
+IF VT_PEDIDO.FECHAPEDIDO<GETDATE(0)
+IF MESSAGEBOX('La fecha del pedido es inferior a la fecha actual.'+CHR(13)+'Desea continuar de todos modos?.', 0292, "Futura Software")=7
+RETURN .F.
+ENDIF
+ENDIF
+IF VT_PEDIDO.FECHAPEDIDO>GETDATE(0)+5
+IF MESSAGEBOX('La fecha del pedido es muy superior a la fecha actual.'+CHR(13)+'Desea continuar de todos modos?.', 0292, "Futura Software")=7
+RETURN .F.
+ENDIF
+ENDIF
+THISFORM.PAGEFRAME1.PAGE1.TOTALES.REFRESH
+ENDFUNC
+**
+PROCEDURE anular
+THISFORM.EDITAR
+REPLACE VT_PEDIDO.IDESTADO WITH 'A'
+THISFORM.SAVE
+THISFORM.REFRESH
+ENDPROC
+**
+PROCEDURE editar
+DODEFAULT()
+ENDPROC
+**
+PROCEDURE imprimir
+THISFORM.RUNSQL('exec vt_pedido_Detalle ?vt_Pedido.NroPedido,?oApp.Empresa', 'rpedido')
+SELECT RPEDIDO
+THIS.POST1.IMPRIMIR()
+ENDPROC
+**
+PROCEDURE save
+IF DODEFAULT()
+IF VT_PEDIDO.IDESTADO='P'
+THIS.IMPRIMIR()
+ENDIF
+THISFORM.ADDNEW()
+ENDIF
+ENDPROC
+**
+PROCEDURE traermenu
+LPARAMETERS LCPRODUCTO
+IF THIS.RUNSQL(" Exec vt_TraerMenu ?oApp.Empresa, '001', ?vt_pedidodet.idproducto, ?vt_pedido.fechaPedido", "cMenu")>0
+IF RECCOUNT("cMenu")>0
+SELECT VT_PEDIDODET
+SCATTER MEMO MEMVAR
+SELECT CMENU
+SCAN
+REPLACE IDPRODUCTO WITH CMENU.IDPRODUCTO, DESCRIPCION WITH CMENU.DESCRIPCION, PRECIO WITH CMENU.PRECIO IN VT_PEDIDODET
+SELECT VT_PEDIDODET
+APPEND BLANK
+GATHER MEMO MEMVAR
+SELECT CMENU
+ENDSCAN
+SELECT VT_PEDIDODET
+DELETE
+GOTO RECNO()
+GOTO TOP IN CMENU
+REPLACE OBS WITH RTRIM(M.IDPRODUCTO)+'-'+M.DESCRIPCION IN VT_PEDIDO
+ENDIF
+ENDIF
+THISFORM.PAGEFRAME1.PAGE1.GRDVT_PEDIDODET.REFRESH()
+THISFORM.PAGEFRAME1.PAGE1.TXTOBS.REFRESH()
+THISFORM.PAGEFRAME1.PAGE1.TOTALES.REFRESH()
+ENDPROC
+**
+[END METHODS]
+[START RESERVED3]
+*traermenu 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG101LAC
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cliente
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Enabled = .F.
+Height = 22
+Left = 203
+Name = "cliente"
+TabIndex = 22
+Top = 58
+Width = 274
+ZOrderSet = 16
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1P919GF4C
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] condicion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "vt_pedido.idcondicion"
+Enabled = .F.
+Height = 22
+Left = 117
+Name = "condicion"
+RowSource = ""
+RowSourceType = 0
+Style = 2
+TabIndex = 8
+Top = 178
+Width = 156
+cmdsql = select descripcion,idcondicion, plazo from vt_condicion  Where IdEmpresa = ?oApp.Empresa order by descripcion
+cursor = vt_Condicion
+editable = .F.
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT12JRFT
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Direccion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_pedido.direccion"
+Height = 22
+Left = 117
+Name = "Direccion"
+TabIndex = 4
+Top = 82
+Width = 360
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASX
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdVt_pedidodet
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "vt_pedidodet.idproducto"
+Column1.FontSize = 8
+Column1.Name = "Column4"
+Column1.Width = 66
+Column2.BackColor = 227,235,238
+Column2.ColumnOrder = 4
+Column2.ControlSource = "vt_pedidodet.precio"
+Column2.FontSize = 8
+Column2.InputMask = "999,999,999.99"
+Column2.Name = "Column5"
+Column2.ReadOnly = .F.
+Column2.Width = 64
+Column3.ColumnOrder = 3
+Column3.ControlSource = "vt_pedidodet.cantidad"
+Column3.FontSize = 8
+Column3.InputMask = "999,999.99"
+Column3.Name = "Column6"
+Column3.Width = 46
+Column4.ColumnOrder = 6
+Column4.ControlSource = "vt_pedidodet.obs"
+Column4.FontSize = 8
+Column4.Name = "Column7"
+Column4.Width = 141
+Column5.BackColor = 227,235,238
+Column5.ColumnOrder = 2
+Column5.ControlSource = "vt_pedidodet.descripcion"
+Column5.FontSize = 8
+Column5.Name = "Column1"
+Column5.ReadOnly = .T.
+Column5.Width = 221
+Column6.BackColor = 227,235,238
+Column6.ColumnOrder = 5
+Column6.ControlSource = "vt_PedidoDet.Cantidad*vt_PedidoDet.Precio"
+Column6.Enabled = .F.
+Column6.FontSize = 8
+Column6.InputMask = "999,999,999.99"
+Column6.Name = "Importe"
+Column6.ReadOnly = .T.
+Column6.Width = 75
+ColumnCount = 6
+FontSize = 8
+Height = 156
+Left = 35
+Name = "grdVt_pedidodet"
+Panel = 1
+RecordSource = "vt_pedidodet"
+RecordSourceType = 1
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 12
+Top = 214
+Width = 639
+ZOrderSet = 23
+campo = idempresa,idpedido,cantidad
+cfieldtosum = cantidad*precio
+editable = .T.
+valor = oapp.empresa,vt_pedido.idpedido,1
+valorvariable = vt_pedido.idpedido
+variablevista = m.idpedido
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+THIS.COLUMN1.ENABLED = .F.
+THIS.IMPORTE.ENABLED = .F.
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZAT6
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Column1
+[START PROPERTIES]
+Caption = "Producto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZAT7
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] producto
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Column1
+[START PROPERTIES]
+BackColor = 227,235,238
+BorderStyle = 0
+ControlSource = "vt_pedidodet.descripcion"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "producto"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASY
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Column4
+[START PROPERTIES]
+Caption = "Id Producto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU0MUW93
+[CLASS] idproducto
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idproducto
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Column4
+[START PROPERTIES]
+Left = 26
+Name = "Idproducto"
+Top = 23
+actualizar = .F.
+condicionextra = a.IdEmpresa=?oApp.Empresa and a.IdTipo='P'
+indice = a.IdProducto
+indice1 = a.Catalogo
+objeto = this.Parent.Parent.column1.producto
+objeto2 = this.parent.parent.column5.precio
+resulrepe = .T.
+retorna = a.descripcion
+retorna2 = dbo.VT_TraerPrecioCliente(?oApp.Empresa, a.IdProducto, ?vt_pedido.IdCliente) 
+tabla = st_producto a
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Valid
+LLBUSCARMENU = .F.
+IF LEFT(THIS.VALUE, 1)=THIS.PREFIJO
+LLBUSCARMENU = .T.
+ENDIF
+IF DODEFAULT()=1 .AND.  .NOT. EMPTY(THIS.VALUE) .AND. LLBUSCARMENU
+THISFORM.TRAERMENU()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZAT0
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Column5
+[START PROPERTIES]
+Caption = "Precio"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZAT1
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] precio
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Column5
+[START PROPERTIES]
+BackColor = 227,235,238
+BorderStyle = 0
+ControlSource = "vt_pedidodet.precio"
+Enabled = .T.
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999.99"
+Margin = 0
+Name = "precio"
+ReadOnly = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THISFORM.PAGEFRAME1.PAGE1.TOTALES.REFRESH
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZAT2
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Column6
+[START PROPERTIES]
+Caption = "Cantidad"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZAT3
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] cantidad
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999.99"
+Margin = 0
+Name = "cantidad"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE, 10, 2)
+ENDPROC
+**
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE, 10, 2)
+THISFORM.PAGEFRAME1.PAGE1.TOTALES.REFRESH
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZAT4
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Column7
+[START PROPERTIES]
+Caption = "Obs"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZAT5
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] obs
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Column7
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vt_pedidodet.obs"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "obs"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OE13QWPL
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Importe
+[START PROPERTIES]
+Caption = "Importe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OE13QWPM
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_pedidodet.Importe
+[START PROPERTIES]
+BackColor = 227,235,238
+BorderStyle = 0
+Enabled = .F.
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999.99"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASC
+[CLASS] idcliente
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "vt_pedido.idcliente"
+Height = 22
+Left = 117
+Name = "Idcliente1"
+TabIndex = 3
+Top = 58
+Width = 84
+ZOrderSet = 25
+copiarcampos = IdCondicion,IdVendedor
+objeto2 = this.parent.direccion
+pegarcampos = IdCondicion,IdVendedor
+requerido = .T.
+retorna2 = Direccion
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+DODEFAULT()
+THIS.PARENT.IDVENDEDOR1.REFRESH()
+THIS.PARENT.CONDICION.REFRESH()
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASC
+[CLASS] idnegocio
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idnegocio1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Left = 117
+Name = "Idnegocio1"
+TabIndex = 2
+Top = 34
+Width = 84
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASC
+[CLASS] idrecepcionista
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idrecepcionista1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "vt_pedido.idreceptor"
+Height = 23
+Left = 117
+Name = "Idrecepcionista1"
+TabIndex = 6
+Top = 130
+Width = 84
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT13QIIZ
+[CLASS] idrepartidor
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idrepartidor1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "vt_pedido.idrepartidor"
+Height = 23
+Left = 117
+Name = "Idrepartidor1"
+TabIndex = 5
+Top = 106
+Width = 84
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1P918B6YA
+[CLASS] idvendedor
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idvendedor1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "vt_pedido.idvendedor"
+Height = 23
+Left = 117
+Name = "Idvendedor1"
+TabIndex = 7
+Top = 154
+Width = 84
+datoayuda = Vendedor 
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFechaentrega
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Fecha"
+Height = 16
+Left = 527
+Name = "lblFechaentrega"
+TabIndex = 31
+Top = 118
+Width = 34
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASL
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFechapedido
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Fecha"
+Height = 16
+Left = 527
+Name = "lblFechapedido"
+TabIndex = 13
+Top = 34
+Width = 34
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblHoraentrega
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Hora"
+Height = 16
+Left = 527
+Name = "lblHoraentrega"
+TabIndex = 32
+Top = 145
+Width = 27
+ZOrderSet = 15
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblHorapedido
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Hora"
+Height = 16
+Left = 527
+Name = "lblHorapedido"
+TabIndex = 14
+Top = 58
+Width = 27
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcliente
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Cliente"
+Height = 16
+Left = 69
+Name = "lblIdcliente"
+TabIndex = 19
+Top = 58
+Width = 41
+ZOrderSet = 17
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG101LAC
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdestado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Estado"
+Height = 16
+Left = 298
+Name = "lblIdestado"
+TabIndex = 29
+Top = 177
+Width = 50
+ZOrderSet = 19
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdreceptor
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Recepcionista"
+Height = 16
+Left = 30
+Name = "lblIdreceptor"
+TabIndex = 24
+Top = 130
+Width = 79
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdrepartidor
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Repartidor"
+Height = 16
+Left = 49
+Name = "lblIdrepartidor"
+TabIndex = 27
+Top = 106
+Width = 60
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNropedido
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro Pedido"
+Height = 16
+Left = 48
+Name = "lblNropedido"
+TabIndex = 17
+Top = 10
+Width = 62
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblObs
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Obs"
+Height = 16
+Left = 59
+Name = "lblObs"
+TabIndex = 34
+Top = 406
+Width = 24
+ZOrderSet = 22
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG101LAC
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Negocio
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Enabled = .F.
+Height = 22
+Left = 203
+Name = "Negocio"
+TabIndex = 21
+Top = 34
+Width = 274
+ZOrderSet = 16
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1PN0UX78C
+[CLASS] campo_busca
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NroPedido
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "vt_pedido.nropedido"
+Height = 22
+Left = 117
+Name = "NroPedido"
+Top = 10
+Width = 84
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+THIS.ENABLED =  .NOT. THISFORM.EDITMODE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG101LAC
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] recepcionista
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Height = 23
+Left = 203
+Name = "recepcionista"
+TabIndex = 25
+Top = 130
+Width = 274
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASI
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] repartidor
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Height = 23
+Left = 203
+Name = "repartidor"
+TabIndex = 28
+Top = 106
+Width = 274
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU0Z1JRV
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] totales
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BorderColor = 169,185,211
+Height = 32
+Left = 35
+Name = "totales"
+TabIndex = 37
+Top = 370
+Width = 639
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+IF THISFORM.EDITMODE
+THIS.PARENT.GRDVT_PEDIDODET.SUMCOLUMN()
+THIS.TXTIMPORTE.VALUE = THIS.PARENT.GRDVT_PEDIDODET.TOTALES(1)
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU0Z1JRX
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Caption = "Importe"
+Height = 16
+Left = 325
+Name = "Tslabel1"
+TabIndex = 28
+Top = 4
+Width = 49
+ZOrderSet = 24
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU0Z1JRW
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtImporte
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_pedido.importe"
+Height = 22
+InputMask = "999,999,999.99"
+Left = 390
+Name = "txtImporte"
+ReadOnly = .T.
+TabIndex = 25
+Top = 4
+Width = 88
+ZOrderSet = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GG101LAC
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BorderColor = 169,185,211
+Height = 68
+Left = 515
+Name = "Ts3dshape1"
+Top = 106
+Width = 159
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT12H9GG
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 68
+Left = 515
+Name = "Ts3dshape2"
+Top = 22
+Width = 159
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1PM0ZEHQ6
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Anular"
+FontBold = .T.
+Height = 15
+Left = 515
+Name = "Tscheckbox1"
+Top = 178
+Visible = .F.
+Width = 12
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.TAG = 'si'
+IF THIS.VALUE=1
+REPLACE VT_PEDIDO.IDESTADO WITH 'A'
+THISFORM.REFRESH
+ELSE
+ENDIF
+ENDPROC
+**
+PROCEDURE Refresh
+IF THISFORM.ESNUEVO .OR. VT_PEDIDO.IDESTADO='A'
+THIS.ENABLED = .F.
+ELSE
+IF VT_PEDIDO.IDESTADO='P'
+THIS.ENABLED = .T.
+ELSE
+DODEFAULT()
+ENDIF
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NV0ZADBQ
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "100,0"
+ControlSource = "vt_pedido.idestado"
+Enabled = .F.
+Height = 22
+Left = 359
+Name = "Tscombobox1"
+RowSource = "Pendiente,P,Entregado,E,Anulado,A"
+RowSourceType = 1
+TabIndex = 9
+Top = 178
+Width = 120
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Negocio"
+Height = 16
+Left = 58
+Name = "Tslabel1"
+TabIndex = 20
+Top = 33
+Width = 52
+ZOrderSet = 17
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 1
+Caption = "Entrega"
+Height = 16
+Left = 520
+Name = "Tslabel2"
+TabIndex = 35
+Top = 98
+Width = 52
+ZOrderSet = 26
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT12H9GQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 1
+Caption = "Pedido"
+Height = 16
+Left = 520
+Name = "Tslabel3"
+TabIndex = 36
+Top = 14
+Width = 52
+ZOrderSet = 27
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT12JRFU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Dirección"
+Height = 16
+Left = 33
+Name = "Tslabel4"
+TabIndex = 18
+Top = 82
+Width = 77
+ZOrderSet = 17
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1P918B6Y9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Vendedor"
+Height = 16
+Left = 30
+Name = "Tslabel5"
+TabIndex = 23
+Top = 154
+Width = 79
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1P919GF4D
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Condición"
+Left = 60
+Name = "Tslabel9"
+TabIndex = 30
+Top = 181
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFechaentrega
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_pedido.fechaentrega"
+Format = "KD"
+Height = 22
+Left = 563
+Name = "txtFechaentrega"
+TabIndex = 15
+Top = 118
+Width = 96
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASK
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFechapedido
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_pedido.fechapedido"
+Height = 22
+Left = 563
+Name = "txtFechapedido"
+TabIndex = 10
+Top = 34
+Width = 96
+ZOrderSet = 8
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASQ
+[CLASS] tshora
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtHoraentrega
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_pedido.horaentrega"
+Height = 22
+InputMask = "99:99"
+Left = 563
+Name = "txtHoraentrega"
+TabIndex = 16
+Top = 142
+Width = 96
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASM
+[CLASS] tshora
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtHorapedido
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_pedido.horapedido"
+Height = 22
+Left = 563
+Name = "txtHorapedido"
+TabIndex = 11
+Top = 58
+Width = 96
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT11ZASV
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtObs
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_pedido.obs"
+Height = 22
+Left = 107
+Name = "txtObs"
+TabIndex = 33
+Top = 406
+Width = 567
+ZOrderSet = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1P918B6Y8
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] vendedor
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Height = 23
+Left = 203
+Name = "vendedor"
+TabIndex = 26
+Top = 154
+Width = 274
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OG141G8L
+[CLASS] post
+[CLASSLOC] ..\libs\tpv.vcx
+[BASECLASS] custom
+[OBJNAME] Post1
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Height = 12
+Left = 27
+Name = "Post1"
+Top = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,934 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DG0GQWOC
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DG0HIWGJ
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "iva"
+CursorSource = "cnt_iva_tickets"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 9
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 95
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SH0TE4VV
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "cn_viva_detalle"
+BufferModeOverride = 5
+CursorSource = "cnt_iva_detalle"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 290
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DG0GQWOD
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform12
+[START PROPERTIES]
+BorderStyle = 3
+Caption = "Iva Ventas - Comprobantes/Tickets"
+DoCreate = .T.
+Height = 422
+Name = "Tsmaintform12"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 422
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.PageCount = 2
+Pageframe1.TabIndex = 2
+Pageframe1.Top = 0
+Pageframe1.Width = 684
+Width = 683
+WindowState = 0
+camponro = Orden,cn_Iva,IdEmpresa=?oApp.Empresa and TipoIva='T'
+campos = idEmpresa,IdIva,Sucursal,TipoIva,PorcIva,TIPO,FormaIva
+detalle = .T.
+identidad = idIVa
+lblRequerido.Name = "lblRequerido"
+lblRequerido.TabIndex = 1
+tabla1 = iva
+tabla2 = cn_vIva_detalle
+tablaconsulta = Iva Tickets
+valores = oApp.Empresa,NewId('CN_IVA'),'01','T',thisform.Iva, 'D','I'
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+SQL('SELECT Iva,RetenciónIva, RetenciónRenta,Decimales'+' FROM Empresa '+' WHERE idempresa=?oApp.Empresa ', 'xcEmpresa', SQLCONNECT('datos_sql'))
+THIS.IVA = XCEMPRESA.IVA
+THIS.RET_IVA = XCEMPRESA.RETENCIÓNIVA
+THIS.RET_RENTA = XCEMPRESA.RETENCIÓNRENTA
+THIS.DECIMALES = XCEMPRESA.DECIMALES
+USE IN XCEMPRESA
+ENDPROC
+PROCEDURE calcular
+WITH THISFORM.PAGEFRAME1.PAGE1
+.TXTIVA.VALUE = ROUND(.TXTGRAVADAS.VALUE*THIS.IVA/100, THIS.DECIMALES)
+.TOTALFACTURA.REFRESH()
+ENDWITH
+ENDPROC
+PROCEDURE save
+IF DODEFAULT() .AND. OAPP.ASENTAR .AND. EMPTY(IVA.ASIENTO)
+LCMENSAJE = 'Desea asentar esta operacion?'
+LNANSWER = MESSAGEBOX(LCMENSAJE, 036, "Futura Software")
+DO CASE
+CASE LNANSWER=6
+THISFORM.EDITAR()
+THISFORM.PAGEFRAME1.PAGE3.ASIENTO1.ASENTAR('09')
+RETURN .F.
+ENDCASE
+ENDIF
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*calcular 
+decimales
+iva
+ret_iva
+ret_renta
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XB0WFB15
+[CLASS] cbosucursal
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbosucursal1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "iva.sucursal"
+Left = 119
+Name = "Cbosucursal1"
+TabIndex = 1
+Top = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DG0HIWGJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFechacomprobante
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Fecha"
+Height = 16
+Left = 23
+Name = "lblFechacomprobante"
+TabIndex = 9
+Top = 46
+Width = 34
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DG0HIWHX
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSucursal
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Sucursal"
+Height = 16
+Left = 23
+Name = "lblSucursal"
+TabIndex = 6
+Top = 22
+Width = 50
+ZOrderSet = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SH0TBE28
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Orden
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "iva.orden"
+Enabled = .F.
+Height = 22
+Left = 491
+Name = "Orden"
+TabIndex = 13
+Top = 22
+Width = 97
+ZOrderSet = 6
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SH0TE4Y6
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] totales
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 1
+BorderWidth = 1
+Comment = ""
+Height = 84
+Left = 23
+Name = "totales"
+SpecialEffect = 1
+TabIndex = 14
+Top = 304
+Width = 652
+ZOrderSet = 22
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+Local LNTOTAL
+If Thisform.EDITMODE
+	This.Parent.TSGRID1.SUMCOLUMN()
+	If This.Parent.TSGRID1.TOTALES(1)>0
+		This.EXENTO.Value = This.Parent.TSGRID1.TOTALES(1)
+	Else
+		This.EXENTO.Value = 0
+	Endif
+	If This.Parent.TSGRID1.TOTALES(2)>0
+		This.GRAVADO.Value = This.Parent.TSGRID1.TOTALES(2)
+	Else
+		This.GRAVADO.Value = 0
+	Endif
+	If This.Parent.TSGRID1.TOTALES(3)>0
+		This.IVA.Value = This.Parent.TSGRID1.TOTALES(3)
+	Else
+		This.IVA.Value = 0
+	Endif
+Endif
+This.Total.Value = IVA.GRAVADAS+IVA.EXENTAS+IVA.IVA
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SH0TE4YB
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] exento
+[PARENT] Tsmaintform12.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 192,192,192
+ControlSource = "iva.exentas"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999"
+Left = 372
+Name = "exento"
+TabIndex = 8
+Top = 12
+Value = 0
+Width = 96
+editable = .F.
+inputmaskdinamico = iif(thisform.decimales>0,"999,999,999.99","999,999,999,999")
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SH0TE4YF
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Gravado
+[PARENT] Tsmaintform12.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 192,192,192
+ControlSource = "iva.gravadas"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999"
+Left = 468
+Name = "Gravado"
+TabIndex = 7
+Top = 12
+Value = 0
+Visible = .T.
+Width = 89
+editable = .F.
+inputmaskdinamico = iif(thisform.decimales>0,"999,999,999.99","999,999,999,999")
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SH0TE4YJ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] iva
+[PARENT] Tsmaintform12.Pageframe1.Page1.totales
+[START PROPERTIES]
+BackColor = 255,255,255
+ControlSource = "iva.iva"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999"
+Left = 557
+Name = "iva"
+TabIndex = 9
+Top = 12
+Width = 80
+editable = .F.
+inputmaskdinamico = iif(thisform.decimales>0,"999,999,999.99","999,999,999,999")
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SH0TE4YU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] total
+[PARENT] Tsmaintform12.Pageframe1.Page1.totales
+[START PROPERTIES]
+ControlSource = ""
+DisabledForeColor = 0,0,160
+Enabled = .F.
+FontBold = .T.
+Height = 22
+InputMask = "999,999,999,999"
+Left = 528
+Name = "total"
+TabIndex = 10
+Top = 45
+Width = 108
+editable = .F.
+inputmaskdinamico = iif(thisform.decimales>0,"999,999,999.99","999,999,999,999")
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SH0TE4YP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform12.Pageframe1.Page1.totales
+[START PROPERTIES]
+Caption = "Total"
+Height = 16
+Left = 480
+Name = "Tslabel7"
+TabIndex = 11
+Top = 45
+Width = 36
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2G00NZP0O
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "120,0"
+ControlSource = "iva.formaiva"
+FirstElement = 1
+Height = 22
+Left = 491
+Name = "Tscombobox1"
+NumberOfElements = 0
+RowSource = "Discriminado,D,Incluido,I"
+RowSourceType = 1
+Style = 2
+TabIndex = 10
+Top = 46
+Width = 96
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+THIS.PARENT.TSGRID1.REFRESH()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM4W
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] tsgrid1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ColumnOrder = 1
+Column1.ControlSource = "cn_viva_detalle.idconcepto"
+Column1.FontSize = 8
+Column1.InputMask = ""
+Column1.Name = "idConcepto"
+Column1.ReadOnly = .F.
+Column1.Visible = .T.
+Column1.Width = 48
+Column2.BackColor = 226,226,226
+Column2.ColumnOrder = 2
+Column2.ControlSource = "cn_viva_detalle.concepto"
+Column2.FontSize = 8
+Column2.Name = "Concepto"
+Column2.ReadOnly = .T.
+Column2.Visible = .T.
+Column2.Width = 212
+Column3.BackColor = 255,255,255
+Column3.ColumnOrder = 5
+Column3.ControlSource = "cn_viva_detalle.gravada"
+Column3.DynamicCurrentControl = ""
+Column3.FontSize = 8
+Column3.InputMask = "999,999,999,999"
+Column3.Name = "Gravadas"
+Column3.ReadOnly = .F.
+Column3.Visible = .T.
+Column3.Width = 93
+Column4.ColumnOrder = 4
+Column4.ControlSource = "cn_viva_detalle.exentas"
+Column4.CurrentControl = "Tstextbox1"
+Column4.FontSize = 8
+Column4.InputMask = "99,999,999,999"
+Column4.Name = "Exentas"
+Column4.ReadOnly = .F.
+Column4.Visible = .T.
+Column4.Width = 99
+Column5.ColumnOrder = 6
+Column5.ControlSource = "cn_viva_detalle.iva"
+Column5.FontSize = 8
+Column5.InputMask = "999,999,999"
+Column5.Name = "Iva"
+Column5.ReadOnly = .F.
+Column5.Width = 74
+Column6.ColumnOrder = 3
+Column6.ControlSource = "cn_viva_detalle.porcentaje"
+Column6.FontSize = 8
+Column6.InputMask = "999.99"
+Column6.Name = "Porcentaje"
+Column6.ReadOnly = .F.
+Column6.Width = 30
+ColumnCount = 6
+FontSize = 8
+GridLines = 2
+Height = 168
+Left = 22
+Name = "tsgrid1"
+Panel = 1
+ReadOnly = .F.
+RecordMark = .F.
+RecordSource = "cn_viva_detalle"
+RecordSourceType = 1
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 5
+Top = 118
+Width = 654
+campo = idiva,idEmpresa
+cfieldtosum = exentas, gravada, iva
+editable = .T.
+titulo = Conceptos
+valor = iva.idiva,oApp.Empresa
+valorvariable = iva.idiva
+variablevista = m.idiva
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+IF IVA.FORMAIVA='D'
+THIS.GRAVADAS.CONTROLSOURCE = 'cn_viva_detalle.Gravada'
+THIS.IVA.ENABLED = .T.
+ELSE
+THIS.GRAVADAS.CONTROLSOURCE = 'cn_viva_detalle.GravadaIncluido'
+THIS.IVA.ENABLED = .F.
+ENDIF
+ENDPROC
+PROCEDURE borraritem
+DODEFAULT()
+THIS.PARENT.TOTALES.REFRESH()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM58
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.Concepto
+[START PROPERTIES]
+Caption = "Descripción"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM59
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.Concepto
+[START PROPERTIES]
+BackColor = 226,226,226
+BackStyle = 0
+BorderStyle = 0
+ControlSource = "cn_viva_detalle.concepto"
+DisabledBackColor = 228,228,228
+Enabled = .T.
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM5C
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Htotal
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.Exentas
+[START PROPERTIES]
+Alignment = 2
+Caption = "Exentas"
+FontSize = 8
+Name = "Htotal"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM5D
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.Exentas
+[START PROPERTIES]
+BackColor = 255,255,255
+BackStyle = 0
+BorderStyle = 0
+FontSize = 8
+Height = 12
+InputMask = "99,999,999,999"
+Left = 21
+Name = "Tstextbox1"
+ReadOnly = .F.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Top = 23
+Width = 24
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+Local LNPORCENTAJE
+If This.Tag<>Str(This.Value)
+	If IVA.FORMAIVA='I'
+		LNPORCENTAJE = Round((100+CN_VIVA_DETALLE.PORCENTAJE)/CN_VIVA_DETALLE.PORCENTAJE, 3)
+		Replace IVA With Round(This.Value/(LNPORCENTAJE), 0) In CN_VIVA_DETALLE
+		Replace GRAVADA With This.Value-CN_VIVA_DETALLE.IVA
+	Else
+		Replace IVA With Round(This.Value*CN_VIVA_DETALLE.PORCENTAJE/100, 0) In CN_VIVA_DETALLE
+	Endif
+	This.Parent.Parent.Parent.TOTALES.Refresh()
+Endif
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM5A
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.Gravadas
+[START PROPERTIES]
+Alignment = 2
+Caption = "Gravadas"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM5B
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.Gravadas
+[START PROPERTIES]
+BackStyle = 0
+BorderStyle = 0
+ControlSource = "cn_viva_detalle.gravada"
+FontSize = 8
+Height = 12
+InputMask = ""
+Left = 24
+Margin = 0
+Name = "Tstextbox1"
+ReadOnly = .F.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Top = 23
+Width = 24
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+Local LNPORCENTAJE
+If This.Tag<>Str(This.Value)
+	If IVA.FORMAIVA='I'
+		LNPORCENTAJE = Round((100+CN_VIVA_DETALLE.PORCENTAJE)/CN_VIVA_DETALLE.PORCENTAJE, 3)
+		Replace IVA With Round(This.Value/(LNPORCENTAJE), 0) In CN_VIVA_DETALLE
+		Replace GRAVADA With This.Value-CN_VIVA_DETALLE.IVA
+	Else
+		Replace IVA With Round(This.Value*CN_VIVA_DETALLE.PORCENTAJE/100, 0) In CN_VIVA_DETALLE
+	Endif
+	This.Parent.Parent.Parent.TOTALES.Refresh()
+Endif
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM56
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.idConcepto
+[START PROPERTIES]
+Caption = "Concepto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM57
+[CLASS] idconcepto
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idconcepto1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.idConcepto
+[START PROPERTIES]
+ControlSource = "cn_viva_detalle.idconcepto"
+FontSize = 8
+Left = 31
+Name = "Idconcepto1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Top = 27
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM5E
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.Iva
+[START PROPERTIES]
+Caption = "Iva"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM5F
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.Iva
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+Local LNPORCENTAJE
+If This.Tag<>Str(This.Value)
+	If IVA.FORMAIVA='I'
+		LNPORCENTAJE = Round((100+CN_VIVA_DETALLE.PORCENTAJE)/CN_VIVA_DETALLE.PORCENTAJE, 3)
+		Replace IVA With Round(This.Value/(LNPORCENTAJE), 0) In CN_VIVA_DETALLE
+		Replace GRAVADA With This.Value-CN_VIVA_DETALLE.IVA
+	Else
+		Replace IVA With Round(This.Value*CN_VIVA_DETALLE.PORCENTAJE/100, 0) In CN_VIVA_DETALLE
+	Endif
+	This.Parent.Parent.Parent.TOTALES.Refresh()
+Endif
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM5G
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.Porcentaje
+[START PROPERTIES]
+Caption = "% Iva"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QL0SLM5H
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform12.Pageframe1.Page1.tsgrid1.Porcentaje
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999.99"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2G00NZP0N
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .F.
+Caption = "Forma IVA"
+Height = 16
+Left = 383
+Name = "Tslabel1"
+TabIndex = 11
+Top = 46
+Width = 85
+ZOrderSet = 23
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0SH0TBE2A
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Nº Orden"
+Height = 16
+Left = 419
+Name = "Tslabel2"
+TabIndex = 12
+Top = 22
+Width = 60
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2G20QQO26
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Desde Nro."
+Height = 16
+Left = 23
+Name = "Tslabel3"
+TabIndex = 7
+Top = 70
+Width = 84
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2G20QQO28
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Hasta Nro."
+Height = 16
+Left = 23
+Name = "Tslabel4"
+TabIndex = 8
+Top = 94
+Width = 72
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2G20QQO25
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "iva.comprobante"
+Height = 22
+Left = 119
+Name = "Tstextbox1"
+TabIndex = 3
+Top = 70
+Width = 97
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2G20QQO27
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox2
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "iva.comprobante1"
+Height = 22
+Left = 119
+Name = "Tstextbox2"
+TabIndex = 4
+Top = 94
+Width = 97
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DG0GQWOC
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFechacomprobante
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "iva.fechacomprobante"
+Height = 22
+Left = 119
+Name = "txtFechacomprobante"
+TabIndex = 2
+Top = 46
+Width = 97
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

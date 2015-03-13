@@ -1,0 +1,682 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAX0RCE30
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 29
+Left = 2
+Width = 520
+Height = 196
+InitialSelectedAlias = "rh_complemento"
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0Z2TTR
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 10
+Height = 90
+Width = 90
+Alias = "rh_complemento"
+Database = ..\data\datos.dbc
+CursorSource = "rh_complemento"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAX0RCE31
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform12
+[START PROPERTIES]
+DataSession = 2
+Height = 349
+Width = 528
+DoCreate = .T.
+BufferMode = 2
+Caption = "Deducciones y Beneficios"
+lallowedits = .T.
+tabla1 = rh_complemento
+tabla2 = 
+lallownew = .T.
+camponro = nro,rh_complemento,IdEmpresa=?oApp.Empresa
+campos = IdEmpresa,Fecha,Total,cuota,aplicado,saldo
+valores = oApp.Empresa,date(),0,0,0,0
+identidad = idcomplemento
+tablaconsulta = RH COMPLEM
+repetirvalores = Fecha,IdConcepto,dFecha,Tipo
+Name = "Tsmaintform12"
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.Height = 214
+Pageframe1.Page2.grdList.Left = 0
+Pageframe1.Page2.grdList.Top = 0
+Pageframe1.Page2.grdList.Width = 563
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 0
+Pageframe1.Left = 0
+Pageframe1.Width = 528
+Pageframe1.Height = 348
+Pageframe1.TabIndex = 1
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE validar
+IF EMPTY(rh_complemento.dfecha)
+	replace rh_complemento.dfecha WITH rh_complemento.fecha
+ENDIF
+
+*!*	IF EMPTY(rh_complemento.total)
+*!*		replace rh_complemento.total WITH rh_complemento.cuota
+*!*	ENDIF
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAX0RCE30
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdempleado
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Legajo"
+Height = 16
+Left = 86
+Top = 62
+Width = 39
+TabIndex = 3
+ZOrderSet = 3
+Name = "lblIdempleado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAX0RCE30
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Concepto"
+Height = 16
+Left = 47
+Top = 86
+Width = 78
+TabIndex = 5
+ZOrderSet = 3
+Name = "Tslabel4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS10G0NM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Tipo"
+Height = 16
+Left = 47
+Top = 106
+Width = 78
+TabIndex = 7
+ZOrderSet = 3
+Name = "Tslabel7"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0Z2TTR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+BackStyle = 0
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 203
+MaxLength = 40
+TabIndex = 22
+Top = 58
+Width = 252
+DisabledForeColor = 0,0,0
+ZOrderSet = 4
+editable = .F.
+Name = "txtNombre"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0ZCJJX
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtConcepto
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+BackStyle = 0
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 203
+MaxLength = 40
+TabIndex = 23
+Top = 82
+Width = 252
+DisabledForeColor = 0,0,0
+ZOrderSet = 4
+editable = .F.
+Name = "txtConcepto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAX0RCE30
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Importe Total"
+Height = 16
+Left = 47
+Top = 214
+Width = 78
+TabIndex = 13
+ZOrderSet = 7
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAX0RCE30
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Fecha"
+Height = 16
+Left = 80
+Top = 38
+Width = 45
+TabIndex = 1
+ZOrderSet = 7
+Name = "Tslabel6"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21G0OVSOY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Iniciar a aplicar desde"
+Height = 16
+Left = -1
+Top = 134
+Width = 126
+TabIndex = 9
+ZOrderSet = 7
+Name = "Tslabel9"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21G0OVSOZ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Alignment = 3
+Value = 
+ControlSource = "rh_complemento.dfecha"
+Enabled = .T.
+Height = 22
+Left = 131
+MaxLength = 4
+ReadOnly = .F.
+TabIndex = 10
+Top = 130
+Width = 72
+ZOrderSet = 8
+Name = "Tstextbox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS10JQ6J
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Importe Aplicado"
+Height = 16
+Left = 23
+Top = 238
+Width = 102
+TabIndex = 15
+ZOrderSet = 7
+Name = "Tslabel8"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS10JQ6L
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Aplicado
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Alignment = 3
+Value = 0
+ControlSource = "rh_complemento.aplicado"
+Height = 22
+InputMask = "999,999,999,999"
+Left = 131
+MaxLength = 0
+ReadOnly = .F.
+TabIndex = 16
+Top = 238
+Width = 108
+ZOrderSet = 8
+editable = .T.
+solonuevo = .T.
+Name = "Aplicado"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF STR(this.value) <> this.tag
+     this.parent.saldo.value = this.Parent.importe.value - This.Value
+     IF this.parent.saldo.value<0
+     	this.parent.saldo.value=0
+     ENDIF
+
+ENDIF
+ENDPROC
+PROCEDURE Refresh
+this.Enabled= thisform.editmode and NVL(this.Value,0)=0
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAX0RCE30
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Saldo"
+Height = 16
+Left = 35
+Top = 262
+Width = 90
+TabIndex = 17
+ZOrderSet = 7
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0ZVASO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cuota
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Alignment = 3
+Value = 0
+ControlSource = "rh_complemento.cuota"
+Enabled = .T.
+Height = 22
+InputMask = "999,999,999,999"
+Left = 131
+MaxLength = 0
+ReadOnly = .F.
+TabIndex = 12
+Top = 190
+Width = 108
+ZOrderSet = 8
+requerido = .T.
+Name = "cuota"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0MQ0YTTM5
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] prestamo
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Alignment = 3
+Value = 
+ControlSource = "rh_complemento.nro"
+Enabled = .F.
+Height = 22
+Left = 438
+MaxLength = 4
+TabIndex = 21
+Top = 22
+Width = 72
+ZOrderSet = 8
+solonuevo = .T.
+editable = .F.
+Name = "prestamo"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0Z2TTR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] fecha
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Alignment = 3
+Value = 
+ControlSource = "rh_complemento.fecha"
+Enabled = .T.
+Height = 22
+Left = 131
+MaxLength = 4
+ReadOnly = .F.
+TabIndex = 2
+Top = 34
+Width = 72
+ZOrderSet = 8
+requerido = .T.
+Name = "fecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0Z2TTR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] saldo
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Alignment = 3
+Value = 0
+ControlSource = "rh_complemento.saldo"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999"
+Left = 131
+MaxLength = 0
+ReadOnly = .T.
+TabIndex = 18
+Top = 262
+Width = 108
+ZOrderSet = 8
+editable = .F.
+Name = "saldo"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0ZCJJK
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Importe a Aplicar"
+Height = 16
+Left = 11
+Top = 190
+Width = 114
+TabIndex = 11
+ZOrderSet = 7
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0Z2TTR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] importe
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Alignment = 3
+Value = 0
+ControlSource = "rh_complemento.total"
+Enabled = .T.
+Height = 22
+InputMask = "999,999,999,999"
+Left = 131
+MaxLength = 0
+ReadOnly = .F.
+TabIndex = 14
+Top = 214
+Width = 108
+ZOrderSet = 8
+Name = "importe"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF STR(this.value) <> this.tag
+     this.parent.saldo.value = this.value - This.parent.Aplicado.Value
+     IF this.parent.saldo.value<0
+     	this.parent.saldo.value=0
+     ENDIF
+     	
+ENDIF
+ENDPROC
+PROCEDURE Refresh
+this.enabled = thisform.editmode  .AND.  (rh_complemento.saldo =  rh_complemento.total)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0MQ0YTTM4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro.:"
+Height = 16
+Left = 347
+Top = 24
+Width = 85
+TabIndex = 20
+ZOrderSet = 7
+Name = "Tslabel5"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0MR0U207P
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox2
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 285
+Left = 69
+Height = 16
+Width = 75
+FontBold = .T.
+AutoSize = .T.
+Alignment = 1
+BackStyle = 0
+Caption = "Cancelado"
+ControlSource = "rh_complemento.cancelado"
+TabIndex = 19
+Name = "Tscheckbox2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAX0RCE31
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] IdEmpleado
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "rh_complemento.idempleado"
+Height = 21
+Left = 131
+TabIndex = 4
+Top = 59
+Width = 72
+parametroayuda = 
+datoayuda = empleado
+indice = idempleado
+mensajeerror = No existe el Personal
+objeto = this.parent.txtnombre
+retorna2 = 
+tabla = rh_empleado
+retorna = fNombre
+condicionextra = idempresa = ?oApp.Empresa and activo = 1
+solonuevo = .T.
+origen = R
+requerido = .T.
+Name = "IdEmpleado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0ZCJK1
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] IdConcepto
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "rh_complemento.idconcepto"
+Height = 21
+Left = 131
+TabIndex = 6
+Top = 83
+Width = 72
+parametroayuda = 
+datoayuda = Conceptos D/B
+indice = IdConcepto
+mensajeerror = No se encuentra el Concepto o no es válido.
+objeto = this.parent.txtconcepto
+retorna2 = tipo
+tabla = rh_conceptos
+retorna = concepto
+condicionextra = unid_Valor = 'V' and Acept_Mov = 1
+objeto2 = this.parent.Tipo
+solonuevo = .T.
+origen = R
+requerido = .T.
+Name = "IdConcepto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS10G0NJ
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tipo
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+RowSourceType = 1
+RowSource = "Ingreso,I,Egreso,E"
+ControlSource = "rh_complemento.tipo"
+Enabled = .F.
+Height = 21
+Left = 131
+TabIndex = 8
+Top = 106
+Width = 108
+editable = .F.
+Name = "Tipo"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

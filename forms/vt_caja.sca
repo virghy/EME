@@ -1,0 +1,691 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0TJEIU
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 169
+Left = 129
+Width = 520
+Height = 200
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0UG4FM
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 10
+Height = 90
+Width = 91
+Alias = "vt_caja"
+Database = ..\data\datos.dbc
+CursorSource = "vt_caja"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0UG4FN
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 150
+Height = 90
+Width = 91
+Alias = "vt_cajadet"
+BufferModeOverride = 5
+Database = ..\data\datos.dbc
+CursorSource = "vt_cajadet"
+Filter = "Operacion = 'C'"
+NoDataOnLoad = .T.
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0TJEIV
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmovform12
+[START PROPERTIES]
+DataSession = 2
+Height = 386
+Width = 545
+DoCreate = .T.
+Caption = "Apertura/Cierre de Caja"
+lallowdelete = .F.
+tabla1 = vt_Caja
+tabla2 = vt_cajaDet
+identidad = IdCaja
+lallownew = .F.
+tablaconsulta = Caja
+Name = "Tsmovform12"
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 2
+Pageframe1.Left = 0
+Pageframe1.Width = 550
+Pageframe1.Height = 388
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+TEXT TO CMDSQL TEXTMERGE NOSHOW
+SELECT IdCaja FROM vt_caja
+	where idEmpresa=?oApp.Empresa
+	and IdUsuario = <<oApp.GetEmployeeId()>>
+	and Estado is null
+ENDTEXT
+IF SQL(CMDSQL, 'cCaja')>0 .AND. RECCOUNT('cCaja')>0
+THISFORM.REFRESHFORM(CCAJA.IDCAJA)
+ENDIF
+ENDPROC
+PROCEDURE imprimir
+LOCAL LCDIRECTORY, LOLISTENER, LOSHELL, REPORTNAME
+REPORTNAME = 'reports\st_politicaInv_fam.frx'
+M.DFECHA = GOMONTH(DATE(), -1)
+M.HFECHA = DATE()
+SQL('Select IdDeposito from sucursal where IdEmpresa=?oApp.Empresa and Sucursal =?oApp.Sucursal', 'cDeposito')
+M.DEPOSITO = CDEPOSITO.IDDEPOSITO
+M.DPRODUCTO = ''
+M.HPRODUCTO = 'ZZZ'
+M.EMPRESA = OAPP.NOMBREEMPRESA
+LCDIRECTORY = SYS(16)
+LCDIRECTORY = ADDBS(JUSTPATH(SUBSTR(LCDIRECTORY, AT(' ', LCDIRECTORY, 2)+1)))
+LOLISTENER = .NULL.
+DO (_ReportOutput) WITH 5, LOLISTENER
+LOLISTENER.TARGETFILENAME = FORCEPATH('Resultado.html', SYS(2023))
+LOLISTENER.QUIETMODE = .T.
+WAIT WINDOW NOWAIT 'Generando HTML...'
+ERASE (LOLISTENER.TARGETFILENAME)
+REPORT FORM (REPORTNAME) OBJECT LOLISTENER
+LOSHELL = NEWOBJECT('_shellexecute', HOME()+'ffc\_environ.vcx')
+LOSHELL.SHELLEXECUTE(LOLISTENER.TARGETFILENAME)
+WAIT CLEAR
+ENDPROC
+PROCEDURE save
+IF DODEFAULT()
+THISFORM.IMPRIMIR()
+ENDIF
+ENDPROC
+PROCEDURE validar
+IF VT_CAJA.ESTADO='C'
+REPLACE FIN WITH GETDATE() IN VT_CAJA
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0UG4GC
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 32
+Left = 419
+Height = 26
+Width = 110
+Caption = "Abrir Caja"
+Name = "Tscommandbutton1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LHORA, LIDCAJA
+LHORA = GETDATE()
+LIDCAJA = NEWID('vt_caja')
+INSERT INTO vt_Caja (IDEMPRESA, IDCAJA, IDUSUARIO, FECHA, INICIO) VALUES (OAPP.EMPRESA, LIDCAJA, OAPP.GETEMPLOYEEID(), GETDATE(0), LHORA)
+IF SQL("Select IdForma,Forma from vt_tpvForma where IdEmpresa=?oApp.Empresa", 'cTipoValor')>0
+INSERT INTO vt_CajaDet (IDEMPRESA, IDCAJA, IDFORMA, FORMA, IMPORTE, OPERACION) SELECT OAPP.EMPRESA, LIDCAJA, IDFORMA, FORMA, 0, 'I' FROM cTipoValor
+ENDIF
+THISFORM.EDITAR()
+ENDPROC
+PROCEDURE Refresh
+THIS.ENABLED = RECCOUNT('vt_Caja')=0 .AND. THISFORM.EDITMODE=.F.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0UG4GD
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton2
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 62
+Left = 419
+Height = 26
+Width = 110
+Caption = "Cerrar Caja"
+Name = "Tscommandbutton2"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+REPLACE ESTADO WITH 'C' IN VT_CAJA
+IF SQL("Select IdForma,Forma from vt_tpvForma where IdEmpresa=?oApp.Empresa", 'cTipoValor')>0
+INSERT INTO vt_CajaDet (IDEMPRESA, IDCAJA, IDFORMA, FORMA, IMPORTE, OPERACION, IDOPERACION) SELECT OAPP.EMPRESA, VT_CAJA.IDCAJA, IDFORMA, FORMA, 0, 'C', '10' FROM cTipoValor
+ENDIF
+SET FILTER TO OPERACION='C' IN VT_CAJADET
+GOTO TOP IN VT_CAJADET
+THISFORM.EDITAR()
+ENDPROC
+PROCEDURE Refresh
+THIS.ENABLED = RECCOUNT('vt_Caja')<>0 .AND. ISNULL(VT_CAJA.ESTADO) .AND. THISFORM.EDITMODE=.F.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481R
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdusuario
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_caja.idusuario"
+Height = 22
+Left = 89
+MaxLength = 10
+ReadOnly = .T.
+TabIndex = 1
+Top = 1
+Width = 70
+Name = "txtIdusuario"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481S
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdusuario
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Usuario"
+Height = 16
+Left = 19
+Top = 1
+Width = 54
+TabIndex = 1
+Name = "lblIdusuario"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481T
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecha
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_caja.fecha"
+Height = 22
+Left = 89
+ReadOnly = .T.
+TabIndex = 1
+Top = 28
+Width = 125
+Name = "txtFecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481U
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFecha
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Fecha"
+Height = 16
+Left = 39
+Top = 28
+Width = 34
+TabIndex = 1
+Name = "lblFecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481V
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtInicio
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_caja.inicio"
+Height = 22
+Left = 89
+ReadOnly = .T.
+TabIndex = 1
+Top = 55
+Width = 125
+Name = "txtInicio"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481W
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblInicio
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Inicio"
+Height = 16
+Left = 42
+Top = 55
+Width = 31
+TabIndex = 1
+Name = "lblInicio"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481X
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFin
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_caja.fin"
+Height = 22
+Left = 89
+ReadOnly = .T.
+TabIndex = 1
+Top = 82
+Width = 125
+Name = "txtFin"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481Y
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFin
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Fin"
+Height = 16
+Left = 55
+Top = 82
+Width = 18
+TabIndex = 1
+Name = "lblFin"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtEstado
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_caja.estado"
+Height = 22
+Left = 89
+MaxLength = 1
+ReadOnly = .T.
+TabIndex = 1
+Top = 109
+Width = 28
+Name = "txtEstado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V4820
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblEstado
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Estado"
+Height = 16
+Left = 34
+Top = 109
+Width = 39
+TabIndex = 1
+Name = "lblEstado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V4821
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtObs
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_caja.obs"
+Height = 22
+Left = 89
+MaxLength = 200
+TabIndex = 1
+Top = 136
+Width = 440
+Name = "txtObs"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V4822
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblObs
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Obs"
+Height = 16
+Left = 49
+Top = 136
+Width = 24
+TabIndex = 1
+Name = "lblObs"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V4823
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdVt_cajadet
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ColumnCount = 5
+FontSize = 8
+Height = 174
+Left = 19
+Panel = 1
+RecordSource = "vt_cajadet"
+RecordSourceType = 1
+RowHeight = 17
+Top = 165
+Width = 510
+valorvariable = vt_Caja.IdCaja
+variablevista = m.IdCaja
+editable = .T.
+campo = IdEmpresa,IdCaja
+valor = oApp.Empresa,vt_Caja.IdCaja
+Name = "grdVt_cajadet"
+Column1.FontSize = 8
+Column1.ColumnOrder = 2
+Column1.ControlSource = "vt_cajadet.forma"
+Column1.Width = 87
+Column1.ReadOnly = .T.
+Column1.Name = "Column4"
+Column2.FontSize = 8
+Column2.ColumnOrder = 3
+Column2.ControlSource = "vt_cajadet.importe"
+Column2.Width = 91
+Column2.InputMask = "999,999,999"
+Column2.Name = "Column5"
+Column3.FontSize = 8
+Column3.ColumnOrder = 4
+Column3.ControlSource = "vt_cajadet.operacion"
+Column3.Width = 52
+Column3.ReadOnly = .T.
+Column3.Name = "Column3"
+Column4.FontSize = 8
+Column4.ColumnOrder = 1
+Column4.ControlSource = "vt_cajadet.idoperacion"
+Column4.Width = 145
+Column4.Sparse = .F.
+Column4.Name = "Column1"
+Column5.FontSize = 8
+Column5.ColumnOrder = 5
+Column5.ControlSource = "vt_cajadet.obs"
+Column5.Width = 135
+Column5.Name = "Column2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V4824
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdVt_cajadet.Column4
+[START PROPERTIES]
+FontSize = 8
+Caption = "Tipo Valor"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V4825
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdVt_cajadet.Column4
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V4826
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdVt_cajadet.Column5
+[START PROPERTIES]
+FontSize = 8
+Caption = "Importe"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V4827
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdVt_cajadet.Column5
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+InputMask = "999,999,999"
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0W63WG
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdVt_cajadet.Column3
+[START PROPERTIES]
+FontSize = 8
+Caption = "Operacion"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0W63WH
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdVt_cajadet.Column3
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UY0SDIZ5
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdVt_cajadet.Column1
+[START PROPERTIES]
+FontSize = 8
+Caption = "Operacion"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UY0SIQSJ
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdVt_cajadet.Column1
+[START PROPERTIES]
+BoundColumn = 2
+Left = 289
+Top = 92
+DisabledForeColor = 0,0,0
+BorderStyle = 0
+cmdsql = Select Descripcion, IdOperacion,TipoOperacion from vt_OperacionCaja where IdEmpresa=?oApp.Empresa
+condicionvalidacion = 
+cursor = cTipoOperacion
+Name = "Tscombobox1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+REPLACE OPERACION WITH CTIPOOPERACION.TIPOOPERACION
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UY0SIQSK
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdVt_cajadet.Column2
+[START PROPERTIES]
+FontSize = 8
+Caption = "Obs"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UY0SIQSL
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdVt_cajadet.Column2
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V4828
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Value = (oApp.NombreUsuario)
+Height = 22
+Left = 164
+MaxLength = 10
+ReadOnly = .T.
+TabIndex = 1
+Top = 1
+Width = 180
+Name = "Tstextbox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

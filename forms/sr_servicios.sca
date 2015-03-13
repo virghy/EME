@@ -1,0 +1,440 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP86
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+InitialSelectedAlias = "sr_servicios"
+Left = 479
+Name = "Dataenvironment"
+Top = 158
+Width = 519
+[END PROPERTIES]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40LADZJ
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sr_servicios"
+CursorSource = "sr_servicios"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40LADZK
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sr_serviciosdet"
+BufferModeOverride = 5
+CursorSource = "sr_serviciosdet"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 150
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP88
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Servicios"
+DoCreate = .T.
+Height = 371
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 372
+Pageframe1.Left = 2
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Top = 0
+Pageframe1.Width = 514
+Width = 515
+camponro = IdServicio,sr_Servicios,IdEmpresa=?oApp.Empresa
+campos = IdEmpresa
+lblRequerido.Name = "lblRequerido"
+tabla1 = sr_Servicios
+tabla2 = sr_ServiciosDet
+valores = oApp.Empresa
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBN
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdSr_serviciosdet
+[PARENT] Tsmaintform1
+[START PROPERTIES]
+Column1.ControlSource = "sr_serviciosdet.idproducto"
+Column1.FontSize = 8
+Column1.Name = "Column4"
+Column1.Width = 68
+Column2.ColumnOrder = 3
+Column2.ControlSource = "sr_serviciosdet.cantidad"
+Column2.FontSize = 8
+Column2.InputMask = "999.99"
+Column2.Name = "Column5"
+Column2.Width = 88
+Column3.ColumnOrder = 2
+Column3.ControlSource = "sr_serviciosdet.descripcion"
+Column3.FontSize = 8
+Column3.Name = "Column6"
+Column3.Width = 191
+ColumnCount = 3
+FontSize = 8
+Height = 200
+Left = 24
+Name = "grdSr_serviciosdet"
+Panel = 1
+RecordSource = "sr_serviciosdet"
+RecordSourceType = 1
+RowHeight = 17
+Top = 144
+Width = 452
+campo = IdEmpresa,IdServicio,Cantidad
+titulo = Servicios
+valor = oApp.Empresa,sr_Servicios.IdServicio,1
+valorvariable = sr_Servicios.IdServicio
+variablevista = m.IdServicio
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBO
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.grdSr_serviciosdet.Column4
+[START PROPERTIES]
+Caption = "Servicio"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBP
+[CLASS] idproducto
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] idproducto1
+[PARENT] Tsmaintform1.grdSr_serviciosdet.Column4
+[START PROPERTIES]
+Left = 269
+Name = "idproducto1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Top = 35
+objeto = this.parent.parent.column6.text1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBQ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.grdSr_serviciosdet.Column5
+[START PROPERTIES]
+Caption = "Cantidad"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBR
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.grdSr_serviciosdet.Column5
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999.99"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBS
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.grdSr_serviciosdet.Column6
+[START PROPERTIES]
+Caption = "Descripcion"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBT
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.grdSr_serviciosdet.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHC1
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cliente
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 165
+Name = "cliente"
+TabIndex = 1
+Top = 34
+Width = 240
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBZ
+[CLASS] idcliente
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "sr_servicios.idcliente"
+Height = 22
+Left = 93
+Name = "Idcliente1"
+Top = 34
+Width = 72
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Descripcion"
+Height = 16
+Left = 9
+Name = "lblDescripcion"
+TabIndex = 1
+Top = 82
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcliente
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Cliente"
+Height = 16
+Left = 9
+Name = "lblIdcliente"
+TabIndex = 1
+Top = 34
+Width = 41
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdservicio
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Nro. Servicio"
+Height = 16
+Left = 9
+Name = "lblIdservicio"
+TabIndex = 1
+Top = 10
+Width = 71
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdtiposervicio
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Tipo Servicio"
+Height = 16
+Left = 9
+Name = "lblIdtiposervicio"
+TabIndex = 1
+Top = 58
+Width = 73
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHC2
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Activo"
+ControlSource = "sr_servicios.activo"
+Height = 15
+Left = 417
+Name = "Tscheckbox1"
+Top = 10
+Width = 84
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHC0
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "sr_servicios.idtiposervicio"
+Left = 93
+Name = "Tscombobox1"
+Top = 58
+cmdsql = Select TipoServicio,IdTipoServicio from sr_TipoServicio where IdEmpresa=?oApp.Empresa
+cursor = cTipoServicio
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2B40MEHBX
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sr_servicios.descripcion"
+Height = 22
+Left = 93
+MaxLength = 50
+Name = "txtDescripcion"
+TabIndex = 1
+Top = 82
+Width = 312
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP86
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdservicio
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sr_servicios.idservicio"
+Height = 22
+Left = 93
+Name = "txtIdservicio"
+ReadOnly = .T.
+TabIndex = 1
+Top = 10
+Width = 72
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

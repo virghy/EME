@@ -1,0 +1,420 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11IZS9
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+InitialSelectedAlias = "sas_seguro"
+Left = 192
+Name = "Dataenvironment"
+Top = 30
+Width = 520
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22K0UST75
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sas_seguro"
+CursorSource = "sas_seguro"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IX0MN27F
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sas_costoservicio"
+BufferModeOverride = 5
+CursorSource = "sas_costoservicio"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 110
+Left = 150
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 109
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11IZSB
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Seguros"
+Comment = "idempresa = ?oApp.Empresa"
+DoCreate = .T.
+Height = 358
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 360
+Pageframe1.Left = -2
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Top = 0
+Pageframe1.Width = 410
+Width = 409
+auditmarcahora = 
+auditusuario = 
+campoempresa = 
+camponro = IdSeguro,Sas_seguro
+campos = 
+campotam = 3
+detalle = .T.
+idobjeto = 443
+lblRequerido.Name = "lblRequerido"
+tabla1 = sas_seguro
+tabla2 = sas_costoservicio
+valores = 
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22K0UST75
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Descripcion"
+Height = 16
+Left = 32
+Name = "lblDescripcion"
+TabIndex = 1
+Top = 58
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11KDWZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdmovil
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Codigo"
+Height = 16
+Left = 32
+Name = "lblIdmovil"
+TabIndex = 1
+Top = 34
+Width = 42
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IT0ZKTE0
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "sas_costoservicio.idtiposervicio"
+Column1.FontSize = 8
+Column1.Name = "Column1"
+Column1.Sparse = .F.
+Column1.Visible = .T.
+Column1.Width = 125
+Column2.ControlSource = "sas_costoservicio.precio"
+Column2.FontSize = 8
+Column2.InputMask = "999,999,999"
+Column2.Name = "Column2"
+Column2.Visible = .T.
+Column2.Width = 122
+Column3.Alignment = 3
+Column3.ControlSource = "sas_costoservicio.incluido"
+Column3.FontSize = 8
+Column3.Name = "Column3"
+Column3.Sparse = .F.
+Column3.Visible = .T.
+Column3.Width = 99
+Column4.ControlSource = ""
+Column4.Name = "Column4"
+Column4.Visible = .F.
+ColumnCount = 4
+Comment = ""
+GridLines = 2
+Height = 200
+Left = 11
+Name = "Tsgrid1"
+Panel = 1
+RecordSource = "sas_costoservicio"
+RowHeight = 20
+Top = 118
+Visible = .T.
+Width = 396
+campo = idempresa,idseguro,Incluido
+editable = .T.
+valor = oApp.Empresa,sas_seguro.idseguro,.f.
+valorvariable = sas_seguro.idseguro
+variablevista = m.idseguro
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IT0ZKTE1
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column1
+[START PROPERTIES]
+Caption = "Servicio"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IT106R13
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "sas_costoservicio.idtiposervicio"
+FirstElement = 1
+Height = 22
+Left = 216
+Name = "Tscombobox1"
+Top = 36
+Visible = .T.
+Width = 96
+cmdsql = select descripcion, idtiposervicio from sas_tipoServicios where IdEmpresa=?oApp.Empresa
+cursor = cTipoServicio
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IT0ZKTE3
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column2
+[START PROPERTIES]
+Caption = "Precio"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IT0ZKTE4
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "sas_costoservicio.precio"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IT0ZKTE5
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column3
+[START PROPERTIES]
+Caption = "Incluido"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IT106R14
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column3
+[START PROPERTIES]
+Alignment = 0
+Caption = ""
+Centered = .T.
+Left = 327
+Name = "Tscheckbox1"
+SpecialEffect = 1
+Top = 101
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IW0WDOCM
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column4
+[START PROPERTIES]
+Caption = "Header1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IW0WDOCN
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column4
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "sas_costoservicio.idseguro"
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IT0Z2B95
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Cantidad"
+Height = 16
+Left = 31
+Name = "Tslabel1"
+TabIndex = 1
+Top = 82
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IT0Z2B94
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCantidad
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_seguro.cantidad"
+Height = 22
+Left = 106
+MaxLength = 25
+Name = "txtCantidad"
+TabIndex = 1
+Top = 82
+Width = 159
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11IZS9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_seguro.razonsocial"
+Height = 22
+Left = 107
+MaxLength = 25
+Name = "txtDescripcion"
+TabIndex = 1
+Top = 58
+Width = 159
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11KDWY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdmovil
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_seguro.idseguro"
+Height = 22
+Left = 107
+MaxLength = 4
+Name = "txtIdmovil"
+TabIndex = 1
+Top = 34
+Width = 39
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,970 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RY6
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MY0PYXSZ
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "bancos"
+BufferModeOverride = 5
+CursorSource = "bs_bancos"
+Database = \\venus\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF7T
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "ts_formatocheque"
+BufferModeOverride = 5
+CursorSource = "ts_formatocheque"
+Database = \\venus\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 151
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RY8
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Bancos"
+DoCreate = .T.
+Height = 460
+Icon = ..\bitmaps\default.ico
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 459
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Top = 0
+Pageframe1.Width = 512
+Width = 511
+campos = idempresa
+idobjeto = 419
+lblRequerido.Name = "lblRequerido"
+tabla1 = bancos
+tabla2 = ts_formatoCheque
+valores = oapp.empresa
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RY6
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdCopiar
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = ""
+Height = 26
+Left = 299
+Name = "cmdCopiar"
+Picture = ..\bitmaps\copyhs.bmp
+ToolTipText = "Copiar"
+Top = 370
+Width = 30
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+SELECT TS_FORMATOCHEQUE
+SCATTER MEMVAR FIELDS EXCEPT IdBanco
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0X41UC
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdPegar
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = ""
+Height = 26
+Left = 335
+Name = "cmdPegar"
+Picture = ..\bitmaps\pastehs.bmp
+ToolTipText = "Pegar"
+Top = 370
+Width = 30
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+SELECT TS_FORMATOCHEQUE
+GATHER MEMVAR FIELDS EXCEPT IdBanco
+THIS.PARENT.GRDTS_FORMATOCHEQUE.AFTERROWCOLCHANGE()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF8F
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdTs_formatocheque
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "ts_formatocheque.idmoneda"
+Column1.FontSize = 8
+Column1.Name = "IdMoneda"
+Column1.Width = 65
+Column2.ControlSource = "ts_formatocheque.tipo"
+Column2.FontSize = 8
+Column2.Name = "Tipo"
+Column2.Sparse = .F.
+Column2.Width = 71
+ColumnCount = 2
+FontSize = 8
+Height = 223
+Left = 42
+Name = "grdTs_formatocheque"
+Panel = 1
+RecordSource = "ts_formatocheque"
+RecordSourceType = 1
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 4
+Top = 127
+Width = 157
+ZOrderSet = 27
+campo = IdBanco
+editable = .T.
+valor = Bancos.IdBanco
+valorvariable = Bancos.IdBanco
+variablevista = m.idBanco
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE AfterRowColChange
+LPARAMETERS NCOLINDEX
+THIS.PARENT.TXTDIA.REFRESH()
+THIS.PARENT.TXTMES.REFRESH()
+THIS.PARENT.TXTAÑO.REFRESH()
+THIS.PARENT.TXTDIAPAGO.REFRESH()
+THIS.PARENT.TXTMESPAGO.REFRESH()
+THIS.PARENT.TXTAÑOPAGO.REFRESH()
+THIS.PARENT.TXTIMPORTE.REFRESH()
+THIS.PARENT.TXTIMPORTELETRAS.REFRESH()
+THIS.PARENT.TXTIMPORTELETRAS1.REFRESH()
+THIS.PARENT.TXTBENEFICIARIO.REFRESH()
+ENDPROC
+PROCEDURE Refresh
+DODEFAULT()
+THIS.AFTERROWCOLCHANGE()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF8G
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_formatocheque.IdMoneda
+[START PROPERTIES]
+Caption = "Moneda"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RJXVS
+[CLASS] cbomoneda
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbomoneda1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_formatocheque.IdMoneda
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 1
+Left = 8
+Name = "Cbomoneda1"
+Top = 77
+cmdsql = Select IdMoneda,Decimales from bs_monedas order by 1
+objetocotizacion = 
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF8I
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_formatocheque.Tipo
+[START PROPERTIES]
+Caption = "Tipo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RJXVT
+[CLASS] cbomoneda
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] cboTipo
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_formatocheque.Tipo
+[START PROPERTIES]
+BorderStyle = 0
+ColumnCount = 2
+ColumnWidths = "50,0"
+Left = 8
+Name = "cboTipo"
+RowSource = "Normal,N,Diferido,D"
+RowSourceType = 1
+Top = 77
+cmdsql = 
+cursor = 
+objetocotizacion = 
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF82
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAño
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Año"
+Height = 16
+Left = 263
+Name = "lblAño"
+TabIndex = 19
+Top = 178
+Width = 98
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF88
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAñopago
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Año Pago"
+Height = 16
+Left = 263
+Name = "lblAñopago"
+TabIndex = 15
+Top = 250
+Width = 98
+ZOrderSet = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RY6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblBanco
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Banco"
+Height = 16
+Left = 47
+Name = "lblBanco"
+TabIndex = 24
+Top = 34
+Width = 35
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF8E
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblBeneficiario
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Beneficiario"
+Height = 16
+Left = 263
+Name = "lblBeneficiario"
+TabIndex = 21
+Top = 346
+Width = 98
+ZOrderSet = 26
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF7Y
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDia
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Dia"
+Height = 16
+Left = 263
+Name = "lblDia"
+TabIndex = 17
+Top = 130
+Width = 98
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF84
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDiapago
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Dia Pago"
+Height = 16
+Left = 263
+Name = "lblDiapago"
+TabIndex = 20
+Top = 202
+Width = 98
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RYG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdbanco
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Código"
+Height = 16
+Left = 37
+Name = "lblIdbanco"
+TabIndex = 23
+Top = 10
+Visible = .F.
+Width = 45
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF8A
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblImporte
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Importe"
+Height = 16
+Left = 263
+Name = "lblImporte"
+TabIndex = 16
+Top = 274
+Width = 98
+ZOrderSet = 22
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RY6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblImporteletras
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Importe en letras"
+Height = 16
+Left = 263
+Name = "lblImporteletras"
+TabIndex = 22
+Top = 298
+Width = 98
+ZOrderSet = 24
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF80
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblMes
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Mes"
+Height = 16
+Left = 263
+Name = "lblMes"
+TabIndex = 18
+Top = 154
+Width = 98
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF86
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblMespago
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Mes Pago"
+Height = 16
+Left = 263
+Name = "lblMespago"
+TabIndex = 14
+Top = 226
+Width = 98
+ZOrderSet = 18
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF7U
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 324
+Left = 11
+Name = "Ts3dshape1"
+Top = 94
+Width = 492
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RY6
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 294
+Left = 239
+Name = "Ts3dshape2"
+Top = 112
+Width = 252
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RNFX6
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 294
+Left = 27
+Name = "Ts3dshape3"
+Top = 112
+Width = 188
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O00XCJJ8
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "100,20"
+ControlSource = "bancos.tipo"
+Height = 22
+Left = 95
+Name = "Tscombobox1"
+RowSource = "Tarjeta,T,Banco,B"
+RowSourceType = 1
+TabIndex = 3
+Top = 58
+Width = 186
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RY6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Tipo"
+Height = 16
+Left = 47
+Name = "Tslabel1"
+TabIndex = 25
+Top = 58
+Width = 35
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RY6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 2
+BackStyle = 1
+Caption = "Formato de Cheques"
+Height = 16
+Left = 23
+Name = "Tslabel2"
+TabIndex = 26
+Top = 88
+Width = 140
+ZOrderSet = 28
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MY0PYXSZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 2
+BackStyle = 1
+Caption = "Posiciones en mm. (x,y) "
+Height = 16
+Left = 260
+Name = "Tslabel3"
+TabIndex = 27
+Top = 107
+Width = 140
+ZOrderSet = 29
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RNFX7
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 1
+Caption = "Formatos"
+Height = 16
+Left = 36
+Name = "Tslabel4"
+TabIndex = 28
+Top = 105
+Width = 62
+ZOrderSet = 30
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1T80MMQCX
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Importe en letras 1"
+Height = 16
+Left = 263
+Name = "Tslabel5"
+TabIndex = 22
+Top = 322
+Width = 108
+ZOrderSet = 24
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF81
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAño
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ts_formatocheque.año"
+Height = 20
+InputMask = "9999,9999"
+Left = 371
+Name = "txtAño"
+TabIndex = 7
+Top = 178
+Width = 92
+ZOrderSet = 13
+condicionvalidacion = empty(nvl(this.value,'')) or TYPE(SUBSTR(nvl(THIS.VALUE,''),1,AT(',',nvl(THIS.VALUE,''))-1))='N' AND TYPE(SUBSTR(nvl(THIS.VALUE,''),AT(',',nvl(THIS.VALUE,''))+1))='N'
+mensajevalidacion = El valor no es válido. El valor debe ser de la forma (x,y)
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF87
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAñopago
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ts_formatocheque.añopago"
+Height = 20
+InputMask = "9999,9999"
+Left = 371
+Name = "txtAñopago"
+TabIndex = 10
+Top = 250
+Width = 92
+ZOrderSet = 19
+condicionvalidacion = empty(nvl(this.value,'')) or (TYPE(SUBSTR(nvl(THIS.VALUE,''),1,AT(',',nvl(THIS.VALUE,''))-1))='N' AND TYPE(SUBSTR(nvl(THIS.VALUE,''),AT(',',nvl(THIS.VALUE,''))+1))='N')
+mensajevalidacion = El valor no es válido. El valor debe ser de la forma (x,y)
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RYI
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtBanco
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bancos.descripcion"
+Height = 22
+Left = 95
+Name = "txtBanco"
+TabIndex = 2
+Top = 34
+Width = 189
+ZOrderSet = 5
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF8D
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtBeneficiario
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ts_formatocheque.beneficiario"
+Height = 20
+InputMask = "9999,9999"
+Left = 371
+Name = "txtBeneficiario"
+TabIndex = 13
+Top = 346
+Width = 92
+ZOrderSet = 25
+condicionvalidacion = empty(nvl(this.value,'')) or TYPE(SUBSTR(nvl(THIS.VALUE,''),1,AT(',',nvl(THIS.VALUE,''))-1))='N' AND TYPE(SUBSTR(nvl(THIS.VALUE,''),AT(',',nvl(THIS.VALUE,''))+1))='N'
+mensajevalidacion = El valor no es válido. El valor debe ser de la forma (x,y)
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF7X
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDia
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ts_formatocheque.dia"
+Height = 20
+InputMask = "9999,9999"
+Left = 371
+Name = "txtDia"
+TabIndex = 5
+Top = 130
+Width = 92
+ZOrderSet = 9
+condicionvalidacion = empty(nvl(this.value,'')) or TYPE(SUBSTR(nvl(THIS.VALUE,''),1,AT(',',nvl(THIS.VALUE,''))-1))='N' AND TYPE(SUBSTR(nvl(THIS.VALUE,''),AT(',',nvl(THIS.VALUE,''))+1))='N'
+mensajevalidacion = El valor no es válido. El valor debe ser de la forma (x,y)
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF83
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDiapago
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ts_formatocheque.diapago"
+Height = 20
+InputMask = "9999,9999"
+Left = 371
+Name = "txtDiapago"
+TabIndex = 8
+Top = 202
+Width = 92
+ZOrderSet = 15
+condicionvalidacion = empty(nvl(this.value,'')) or (TYPE(SUBSTR(nvl(THIS.VALUE,''),1,AT(',',nvl(THIS.VALUE,''))-1))='N' AND TYPE(SUBSTR(nvl(THIS.VALUE,''),AT(',',nvl(THIS.VALUE,''))+1))='N')
+mensajevalidacion = El valor no es válido. El valor debe ser de la forma (x,y)
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RYD
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdbanco
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bancos.idbanco"
+Height = 22
+Left = 95
+Name = "txtIdbanco"
+TabIndex = 1
+Top = 10
+Visible = .F.
+Width = 39
+ZOrderSet = 3
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF89
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtImporte
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ts_formatocheque.importe"
+Height = 20
+InputMask = "9999,9999"
+Left = 371
+Name = "txtImporte"
+TabIndex = 11
+Top = 274
+Width = 92
+ZOrderSet = 21
+condicionvalidacion = empty(nvl(this.value,'')) or TYPE(SUBSTR(nvl(THIS.VALUE,''),1,AT(',',nvl(THIS.VALUE,''))-1))='N' AND TYPE(SUBSTR(nvl(THIS.VALUE,''),AT(',',nvl(THIS.VALUE,''))+1))='N'
+mensajevalidacion = El valor no es válido. El valor debe ser de la forma (x,y)
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BT0I5RY6
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtImporteletras
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ts_formatocheque.importeletras"
+Height = 20
+InputMask = "9999,9999"
+Left = 371
+Name = "txtImporteletras"
+TabIndex = 12
+Top = 298
+Width = 92
+ZOrderSet = 23
+condicionvalidacion = empty(nvl(this.value,'')) or TYPE(SUBSTR(nvl(THIS.VALUE,''),1,AT(',',nvl(THIS.VALUE,''))-1))='N' AND TYPE(SUBSTR(nvl(THIS.VALUE,''),AT(',',nvl(THIS.VALUE,''))+1))='N'
+mensajevalidacion = El valor no es válido. El valor debe ser de la forma (x,y)
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1T80MMQCW
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtImporteletras1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ts_formatocheque.importeletras1"
+Height = 20
+InputMask = "9999,9999"
+Left = 371
+Name = "txtImporteletras1"
+TabIndex = 12
+Top = 322
+Width = 92
+ZOrderSet = 23
+condicionvalidacion = empty(nvl(this.value,'')) or TYPE(SUBSTR(nvl(THIS.VALUE,''),1,AT(',',nvl(THIS.VALUE,''))-1))='N' AND TYPE(SUBSTR(nvl(THIS.VALUE,''),AT(',',nvl(THIS.VALUE,''))+1))='N'
+mensajevalidacion = El valor no es válido. El valor debe ser de la forma (x,y)
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF7Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtMes
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ts_formatocheque.mes"
+Height = 20
+InputMask = "9999,9999"
+Left = 371
+Name = "txtMes"
+TabIndex = 6
+Top = 154
+Width = 92
+ZOrderSet = 11
+condicionvalidacion = empty(nvl(this.value,'')) or TYPE(SUBSTR(nvl(THIS.VALUE,''),1,AT(',',nvl(THIS.VALUE,''))-1))='N' AND TYPE(SUBSTR(nvl(THIS.VALUE,''),AT(',',nvl(THIS.VALUE,''))+1))='N'
+mensajevalidacion = El valor no es válido. El valor debe ser de la forma (x,y)
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RG0RCF85
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtMespago
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ts_formatocheque.mespago"
+Height = 20
+InputMask = "9999,9999"
+Left = 371
+Name = "txtMespago"
+TabIndex = 9
+Top = 226
+Width = 92
+ZOrderSet = 17
+condicionvalidacion = empty(nvl(this.value,'')) or (TYPE(SUBSTR(nvl(THIS.VALUE,''),1,AT(',',nvl(THIS.VALUE,''))-1))='N' AND TYPE(SUBSTR(nvl(THIS.VALUE,''),AT(',',nvl(THIS.VALUE,''))+1))='N')
+mensajevalidacion = El valor no es válido. El valor debe ser de la forma (x,y)
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

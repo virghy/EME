@@ -1,0 +1,1237 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Class     
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0OK1J6
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdcal
+[START PROPERTIES]
+Caption = ""
+Height = 24
+Name = "cmdcal"
+Picture = lmcal.bmp
+TabIndex = 27
+Width = 24
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF NOT EMPTY(THIS.txtNombre)
+  lcTxtValor = "This.Parent." + THIS.txtNombre + ".Value"
+ELSE
+  lcTxtValor = "DATE()"
+ENDIF
+loLMCal = NEWOBJECT("frmCal",THIS.CLASSLIBRARY,NULL,EVALUATE(lcTxtValor))
+loLMCal.SHOW(1)
+IF NOT EMPTY(THIS.txtNombre)
+  lcTxtValor = "This.Parent." + THIS.txtNombre
+  &lcTxtValor..VALUE = loLMCal.VALUE
+  &lcTxtValor..SETFOCUS
+ENDIF
+RELEASE loLMCal
+
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED3]
+txtnombre Nombre del objeto Text que recibirá el valor Date o DateTime retornado
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED7]
+Boton que llama al calendario[END RESERVED7]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cmdcal
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _14818MRF1
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] diacal
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderWidth = 0
+Height = 16
+MousePointer = 14
+Name = "diacal"
+SpecialEffect = 0
+Width = 32
+value = {}
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THIS.PARENT.VALUE = THIS.VALUE
+THIS.PARENT._Refresh()
+
+ENDPROC
+PROCEDURE DblClick
+THIS.PARENT.VALUE = THIS.VALUE
+THIS.PARENT._Release()
+
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED3]
+value Especifica el estado actual de un control.
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED7]
+Objeto Día[END RESERVED7]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _148193K7Q
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lbl
+[PARENT] diacal
+[START PROPERTIES]
+Alignment = 2
+BackStyle = 0
+Caption = "31"
+Height = 14
+Left = 2
+MousePointer = 14
+Name = "lbl"
+Top = 0
+Width = 30
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THIS.PARENT.CLICK
+
+ENDPROC
+PROCEDURE DblClick
+THIS.PARENT.DBLCLICK
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] diacal
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0OVG03
+[CLASS] form
+[BASECLASS] form
+[OBJNAME] frmcal
+[START PROPERTIES]
+AutoCenter = .T.
+BorderStyle = 2
+Caption = "Seleccione una fecha"
+ControlBox = .F.
+DoCreate = .T.
+Height = 176
+MaxButton = .F.
+MinButton = .F.
+Name = "frmcal"
+Width = 234
+WindowType = 1
+value = (date())
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+LPARAMETERS td
+IF NOT EMPTY(td) AND VARTYPE(td) $ "DT"
+  THIS.OldValue = td
+  IF VARTYPE(td)="D"
+    THIS.VALUE = td
+  ELSE
+    THIS.VALUE = TTOD(td)
+    THIS.FechaHora = .T.
+  ENDIF
+ELSE
+  THIS.VALUE = DATE()
+ENDIF
+THIS._Refresh()
+
+ENDPROC
+PROCEDURE _refresh
+LOCAL ldIni, lnI, lnJ, lc, lo
+THIS.cmbMes.VALUE = MONTH(THIS.VALUE)
+THIS.spnAnio.VALUE = YEAR(THIS.VALUE)
+ldIni = DATE(YEAR(THIS.VALUE),MONTH(THIS.VALUE),1) - DOW(DATE(YEAR(THIS.VALUE),MONTH(THIS.VALUE),1),1) + 1
+FOR lnI = 1 TO 6
+  FOR lnJ = 1 TO 7
+    lc = "This.cnt" + STR(lnI,1) + STR(lnj,1)
+    lo = &lc
+    lo.VALUE = ldIni
+    lo.lbl.CAPTION = ALLTRIM(STR(DAY(ldIni)))
+    lo.BACKCOLOR = IIF(ldIni = THIS.VALUE, 13948116, 16777215)
+    IF ldIni = DATE()
+      lo.lbl.FORECOLOR = 255 && rojo
+      lo.lbl.FONTBOLD = .T.
+    ELSE
+      lo.lbl.FORECOLOR = IIF(MONTH(ldIni) = MONTH(THIS.VALUE), 0, 12632256)
+      lo.lbl.FONTBOLD = .F.
+    ENDIF
+    ldIni = ldIni + 1
+  ENDFOR
+ENDFOR
+
+ENDPROC
+PROCEDURE _release
+IF THIS.FechaHora
+  THIS.VALUE = DTOT(THIS.VALUE)
+ENDIF
+THIS.HIDE()
+
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+57[END RESERVED2]
+[START RESERVED3]
+*_refresh 
+*_release 
+fechahora .T. si recibe y retorna DateTime
+oldvalue
+value Valor que retorna el calendario (Date ó DateTime)
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED7]
+Formulario Calendario[END RESERVED7]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6G2C
+[CLASS] combobox
+[BASECLASS] combobox
+[OBJNAME] cmbMes
+[PARENT] frmcal
+[START PROPERTIES]
+ColumnCount = 0
+ColumnWidths = ""
+FirstElement = 1
+FontBold = .T.
+FontSize = 9
+Height = 22
+Left = 31
+Name = "cmbMes"
+NumberOfElements = 0
+RowSource = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Setiembre,Octubre,Noviembre,Diciembre"
+RowSourceType = 1
+Style = 2
+TabIndex = 57
+Top = 3
+Width = 110
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+THIS.VALUE = MONTH(THIS.PARENT.VALUE)
+
+ENDPROC
+PROCEDURE InteractiveChange
+LOCAL ld, ln
+WITH THIS.PARENT
+  ld = DATE(YEAR(.VALUE),THIS.VALUE,DAY(.VALUE))
+  ln = 1
+  DO WHILE EMPTY(ld)
+    ld = DATE(YEAR(.VALUE),THIS.VALUE,DAY(.VALUE)-ln)
+    ln = ln + 1
+  ENDDO
+  .VALUE = ld
+ENDWITH
+THIS.PARENT._Refresh()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6FO0
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdAnt
+[PARENT] frmcal
+[START PROPERTIES]
+Caption = ""
+Height = 22
+Left = 7
+Name = "cmdAnt"
+Picture = lmizq.bmp
+TabIndex = 4
+Top = 3
+Width = 22
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THIS.PARENT.VALUE = GOMONTH(THIS.PARENT.VALUE, -1)
+THIS.PARENT._Refresh()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _147181TUW
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancelar
+[PARENT] frmcal
+[START PROPERTIES]
+Cancel = .T.
+Caption = "\<Cancelar"
+FontSize = 8
+Height = 24
+Left = 105
+Name = "cmdCancelar"
+TabIndex = 2
+Top = 148
+Width = 60
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THIS.PARENT.VALUE = THIS.PARENT.OldValue
+THIS.PARENT.HIDE()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GD0PMNM5
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdHoy
+[PARENT] frmcal
+[START PROPERTIES]
+Caption = ("\<Hoy: " + dtoc(date()))
+FontBold = .T.
+FontSize = 8
+ForeColor = 255,0,0
+Height = 24
+Left = 4
+Name = "cmdHoy"
+TabIndex = 3
+Top = 148
+Width = 96
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THIS.PARENT.VALUE = DATE()
+THIS.PARENT._Refresh()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GD0PMNLP
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdOk
+[PARENT] frmcal
+[START PROPERTIES]
+Caption = "\<Aceptar"
+FontSize = 8
+Height = 24
+Left = 170
+Name = "cmdOk"
+TabIndex = 1
+Top = 148
+Width = 60
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THIS.PARENT._Release()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6FNL
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdSig
+[PARENT] frmcal
+[START PROPERTIES]
+Caption = ""
+Height = 22
+Left = 206
+Name = "cmdSig"
+Picture = lmder.bmp
+TabIndex = 5
+Top = 3
+Width = 22
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THIS.PARENT.VALUE = GOMONTH(THIS.PARENT.VALUE, 1)
+THIS.PARENT._Refresh()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0OK1J6
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt11
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 5
+Name = "cnt11"
+Top = 47
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt12
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 37
+Name = "cnt12"
+Top = 47
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _147181TUW
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt13
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 69
+Name = "cnt13"
+Top = 47
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _14818MRF1
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt14
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 101
+Name = "cnt14"
+Top = 47
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _14719BX8R
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt15
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 133
+Name = "cnt15"
+Top = 47
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _147181TUW
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt16
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 165
+Name = "cnt16"
+Top = 47
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _14719BX8S
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt17
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 197
+Name = "cnt17"
+Top = 47
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4V3
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt21
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 5
+Name = "cnt21"
+Top = 63
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4VJ
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt22
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 37
+Name = "cnt22"
+Top = 63
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4VK
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt23
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 69
+Name = "cnt23"
+Top = 63
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4VY
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt24
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 101
+Name = "cnt24"
+Top = 63
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4VZ
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt25
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 133
+Name = "cnt25"
+Top = 63
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4WE
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt26
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 165
+Name = "cnt26"
+Top = 63
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4WU
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt27
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 197
+Name = "cnt27"
+Top = 63
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4WV
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt31
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 5
+Name = "cnt31"
+Top = 79
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4X9
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt32
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 37
+Name = "cnt32"
+Top = 79
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4XP
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt33
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 69
+Name = "cnt33"
+Top = 79
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4XQ
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt34
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 101
+Name = "cnt34"
+Top = 79
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4Y4
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt35
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 133
+Name = "cnt35"
+Top = 79
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4YK
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt36
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 165
+Name = "cnt36"
+Top = 79
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4Z0
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt37
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 197
+Name = "cnt37"
+Top = 79
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4Z1
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt41
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 5
+Name = "cnt41"
+Top = 95
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4ZF
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt42
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 37
+Name = "cnt42"
+Top = 95
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4ZV
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt43
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 69
+Name = "cnt43"
+Top = 95
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y4ZW
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt44
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 101
+Name = "cnt44"
+Top = 95
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y50B
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt45
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 133
+Name = "cnt45"
+Top = 95
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y50Q
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt46
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 165
+Name = "cnt46"
+Top = 95
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y50R
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt47
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 197
+Name = "cnt47"
+Top = 95
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y516
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt51
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 5
+Name = "cnt51"
+Top = 111
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y51L
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt52
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 37
+Name = "cnt52"
+Top = 111
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y521
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt53
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 69
+Name = "cnt53"
+Top = 111
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y522
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt54
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 101
+Name = "cnt54"
+Top = 111
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y52H
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt55
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 133
+Name = "cnt55"
+Top = 111
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y52W
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt56
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 165
+Name = "cnt56"
+Top = 111
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y52X
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt57
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 197
+Name = "cnt57"
+Top = 111
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y53C
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt61
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 5
+Name = "cnt61"
+Top = 127
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y53S
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt62
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 37
+Name = "cnt62"
+Top = 127
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y53T
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt63
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 69
+Name = "cnt63"
+Top = 127
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y547
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt64
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 101
+Name = "cnt64"
+Top = 127
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y579
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt65
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 133
+Name = "cnt65"
+Top = 127
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y57O
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt66
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 165
+Name = "cnt66"
+Top = 127
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1Q912Y584
+[CLASS] diacal
+[CLASSLOC] lmcal.vcx
+[BASECLASS] container
+[OBJNAME] cnt67
+[PARENT] frmcal
+[START PROPERTIES]
+Left = 197
+Name = "cnt67"
+Top = 127
+lbl.Name = "lbl"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6FO1
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblD1
+[PARENT] frmcal
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 0
+Caption = "Dom"
+Height = 16
+Left = 5
+Name = "lblD1"
+TabIndex = 6
+Top = 31
+Width = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6FOG
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblD2
+[PARENT] frmcal
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 0
+Caption = "Lun"
+Height = 16
+Left = 37
+Name = "lblD2"
+TabIndex = 7
+Top = 31
+Width = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6FOH
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblD3
+[PARENT] frmcal
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 0
+Caption = "Mar"
+Height = 16
+Left = 69
+Name = "lblD3"
+TabIndex = 8
+Top = 31
+Width = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6FOW
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblD4
+[PARENT] frmcal
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 0
+Caption = "Mié"
+Height = 16
+Left = 101
+Name = "lblD4"
+TabIndex = 9
+Top = 31
+Width = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6FOX
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblD5
+[PARENT] frmcal
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 0
+Caption = "Jue"
+Height = 16
+Left = 133
+Name = "lblD5"
+TabIndex = 10
+Top = 31
+Width = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6FOY
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblD6
+[PARENT] frmcal
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 0
+Caption = "Vie"
+Height = 16
+Left = 165
+Name = "lblD6"
+TabIndex = 11
+Top = 31
+Width = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6FPB
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblD7
+[PARENT] frmcal
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 0
+Caption = "Sáb"
+Height = 16
+Left = 197
+Name = "lblD7"
+TabIndex = 12
+Top = 31
+Width = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FX0P6G1X
+[CLASS] spinner
+[BASECLASS] spinner
+[OBJNAME] spnAnio
+[PARENT] frmcal
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 9
+Height = 22
+InputMask = "9999"
+KeyboardHighValue = 9999
+KeyboardLowValue = 100
+Left = 141
+Name = "spnAnio"
+SpinnerHighValue = 9999.00
+SpinnerLowValue = 100.00
+TabIndex = 56
+Top = 3
+Value = 2005
+Width = 62
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE DownClick
+LOCAL ld
+WITH THIS.PARENT
+  ld = DATE(This.VALUE,MONTH(.VALUE),DAY(.VALUE))
+  IF EMPTY(ld)
+    ld = DATE(This.VALUE,MONTH(.VALUE),DAY(.VALUE)-1)
+  ENDIF
+  .VALUE = ld
+ENDWITH
+THIS.PARENT._Refresh()
+ENDPROC
+PROCEDURE Init
+THIS.VALUE = YEAR(THIS.PARENT.VALUE)
+
+ENDPROC
+PROCEDURE UpClick
+LOCAL ld
+WITH THIS.PARENT
+  ld = DATE(This.VALUE,MONTH(.VALUE),DAY(.VALUE))
+  IF EMPTY(ld)
+    ld = DATE(This.VALUE,MONTH(.VALUE),DAY(.VALUE)-1)
+  ENDIF
+  .VALUE = ld
+ENDWITH
+THIS.PARENT._Refresh()
+ENDPROC
+PROCEDURE Valid
+LOCAL ld
+WITH THIS.PARENT
+  ld = DATE(This.VALUE,MONTH(.VALUE),DAY(.VALUE))
+  IF EMPTY(ld)
+    ld = DATE(This.VALUE,MONTH(.VALUE),DAY(.VALUE)-1)
+  ENDIF
+  .VALUE = ld
+ENDWITH
+THIS.PARENT._Refresh()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] frmcal
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

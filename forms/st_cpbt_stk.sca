@@ -1,0 +1,500 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\strings.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQFL
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+AutoOpenTables = .T.
+DataSource = .NULL.
+Height = 200
+InitialSelectedAlias = "st_cpbt_stk"
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQFM
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "st_cpbt_stk"
+CursorSource = "st_cpbt_stk"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Order = ""
+Top = 20
+Width = 95
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQFN
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Comprobantes de Stock"
+DoCreate = .T.
+Height = 324
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 323
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Top = 0
+Pageframe1.Width = 578
+Width = 578
+campos = idempresa
+lblRequerido.Name = "lblRequerido"
+tabla1 = ST_CPBT_STK
+valores = oapp.empresa
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQGA
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkAct_stk
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .F.
+Caption = "Actualiza Stock"
+Comment = ""
+ControlSource = "st_cpbt_stk.act_stk"
+FontBold = .T.
+Height = 16
+Left = 78
+Name = "chkAct_stk"
+TabIndex = 9
+Top = 118
+Width = 186
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+RETURN ST_CPBT_STK.TIPO<>'TR'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQGH
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkAct_stk_comprometido
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .F.
+Caption = "Actualiza Stock comprometido"
+Comment = ""
+ControlSource = "st_cpbt_stk.act_stk_comprometido"
+FontBold = .T.
+Height = 16
+Left = 78
+Name = "chkAct_stk_comprometido"
+TabIndex = 13
+Top = 190
+Width = 186
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQGC
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkAct_valor_stk
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .F.
+Caption = "Actualiza valor del Stock"
+Comment = ""
+ControlSource = "st_cpbt_stk.act_valor"
+FontBold = .T.
+Height = 16
+Left = 78
+Name = "chkAct_valor_stk"
+TabIndex = 10
+Top = 142
+Width = 186
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+RETURN ST_CPBT_STK.TIPO<>'TR'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQH4
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkCtrl_vence
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .F.
+Caption = "Control de Vencimiento"
+Comment = ""
+ControlSource = "st_cpbt_stk.ctrl_vence"
+FontBold = .T.
+Height = 16
+Left = 78
+Name = "chkCtrl_vence"
+TabIndex = 16
+Top = 238
+Width = 186
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQH7
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkImprime
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .F.
+Caption = "Imprime Comprobante"
+Comment = ""
+ControlSource = "st_cpbt_stk.imprime"
+FontBold = .T.
+Height = 16
+Left = 77
+Name = "chkImprime"
+TabIndex = 17
+Top = 262
+Width = 186
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQFL
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Compra_repos
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "240,0"
+ControlSource = "st_cpbt_stk.act_compra_repos"
+FirstElement = 1
+ItemTips = .T.
+Left = 251
+Name = "Compra_repos"
+NumberOfElements = 0
+RowSource = "Actualiza Ultima Compra,C,Actualiza Ultima Compra y Reposición,R,(Nada)"
+RowSourceType = 1
+Style = 2
+TabIndex = 12
+Top = 166
+Width = 200
+editable = .T.
+solonuevo = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+RETURN ST_CPBT_STK.TIPO='EN'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQFZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Descripción"
+Height = 16
+Left = 60
+Name = "lblDescripcion"
+TabIndex = 3
+Top = 46
+Width = 186
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQFV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcpbt_stk
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Código"
+Height = 16
+Left = 60
+Name = "lblIdcpbt_stk"
+TabIndex = 1
+Top = 22
+Width = 186
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQG8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTipo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Tipo"
+Height = 16
+Left = 61
+Name = "lblTipo"
+TabIndex = 7
+Top = 95
+Width = 186
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQG6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTitulo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Titulo"
+Height = 16
+Left = 60
+Name = "lblTitulo"
+TabIndex = 5
+Top = 71
+Width = 186
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQFL
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblValor_costo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Valor del costo"
+Height = 16
+Left = 59
+Name = "lblValor_costo"
+TabIndex = 14
+Top = 214
+Width = 186
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQH9
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tipo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "120,0"
+ControlSource = "st_cpbt_stk.tipo"
+FirstElement = 1
+Left = 251
+Name = "Tipo"
+NumberOfElements = 0
+RowSource = "ENTRADA,EN,SALIDA,SA,TRANSFERENCIA,TR"
+RowSourceType = 1
+Style = 2
+TabIndex = 8
+Top = 94
+Width = 200
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+DO CASE
+CASE THIS.VALUE='SA'
+THIS.PARENT.COMPRA_REPOS.VALUE = ''
+CASE THIS.VALUE='EN'
+THIS.PARENT.VALOR_COSTO.VALUE = ''
+CASE THIS.VALUE='TR'
+THIS.PARENT.COMPRA_REPOS.VALUE = ''
+THIS.PARENT.VALOR_COSTO.VALUE = ''
+THIS.PARENT.CHKACT_STK.VALUE = .T.
+THIS.PARENT.CHKACT_VALOR_STK.VALUE = .F.
+ENDCASE
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0MQH7W
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Actualiza Compra/Reposición"
+Height = 16
+Left = 59
+Name = "Tslabel1"
+TabIndex = 11
+Top = 166
+Width = 186
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQFX
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "st_cpbt_stk.descripcion"
+Height = 22
+Left = 251
+Name = "txtDescripcion"
+TabIndex = 4
+Top = 46
+Width = 200
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQFS
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdcpbt_stk
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "st_cpbt_stk.cpbt_stk"
+Height = 22
+Left = 251
+Name = "txtIdcpbt_stk"
+TabIndex = 2
+Top = 22
+Width = 35
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQG4
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTitulo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "st_cpbt_stk.titulo"
+Height = 22
+Left = 251
+Name = "txtTitulo"
+TabIndex = 6
+Top = 70
+Width = 44
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BP0LZQFM
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Valor_costo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "175,0"
+ControlSource = "st_cpbt_stk.valor_costo"
+FirstElement = 1
+Left = 251
+Name = "Valor_costo"
+NumberOfElements = 0
+RowSource = "Precio Reposición,R,Precio Promedio Ponderado,P,Precio Ultima Compra,C,(Nada)"
+RowSourceType = 1
+Style = 2
+TabIndex = 15
+Top = 214
+Width = 200
+editable = .T.
+solonuevo = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+RETURN ST_CPBT_STK.TIPO='SA'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,442 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413DJK3
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 220
+Left = 1
+Width = 520
+Height = 200
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413DJK4
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+DataSession = 1
+Height = 285
+Width = 387
+DoCreate = .T.
+Caption = "Cierre de Periodo"
+MaxButton = .F.
+MinButton = .F.
+ctoolbar = 
+idobjeto = 421
+Name = "Tsbaseform12"
+lblRequerido.ZOrderSet = 2
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+DO CASE
+CASE OAPP.PERIODO=12
+THISFORM.PAGEFRAME1.PAGE1.TSCBO_PERIODO.VALUE = 13
+THISFORM.PAGEFRAME1.PAGE2.TSCBO_PERIODO.VALUE = 12
+THISFORM.PAGEFRAME1.PAGE1.CMDOK.ENABLED = .F.
+CASE OAPP.PERIODO=13
+THISFORM.PAGEFRAME1.PAGE1.TSCBO_PERIODO.VALUE = 1
+THISFORM.PAGEFRAME1.PAGE2.TSCBO_PERIODO.VALUE = 13
+THISFORM.PAGEFRAME1.PAGE2.CMDOK.ENABLED = .F.
+OTHERWISE
+THISFORM.PAGEFRAME1.PAGE1.TSCBO_PERIODO.VALUE = OAPP.PERIODO+1
+THISFORM.PAGEFRAME1.PAGE2.TSCBO_PERIODO.VALUE = OAPP.PERIODO
+ENDCASE
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413Q0KG
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] Pageframe1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ErasePage = .T.
+PageCount = 2
+Top = 0
+Left = 0
+Width = 383
+Height = 275
+ZOrderSet = 0
+Name = "Pageframe1"
+Page1.FontSize = 8
+Page1.Caption = "Cierre de Periodo"
+Page1.Name = "Page1"
+Page2.FontSize = 8
+Page2.Caption = "Reversion de Cierre"
+Page2.Name = "Page2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413DJK3
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 10
+Left = 11
+Height = 204
+Width = 360
+ZOrderSet = 1
+Name = "Ts3dshape1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413Q0KH
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+FontBold = .F.
+FontSize = 8
+WordWrap = .T.
+Alignment = 0
+Caption = "Esta operación confirma definitivamente los asientos provisorios. Al confirmar un asiento ya no se podrá modificar ni borrar."
+Height = 48
+Left = 35
+Top = 22
+Width = 324
+TabIndex = 1
+ForeColor = 0,0,128
+ZOrderSet = 6
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413DJK3
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscbo_periodo
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "115,0"
+RowSourceType = 1
+RowSource = "Enero,1,Febrero,2,Marzo,3,Abril,4,Mayo,5,Junio,6,Julio,7,Agosto,8,Setiembre,9,Octubre,10,Noviembre,11,Diciembre,12,Ninguno,13"
+Enabled = .F.
+FirstElement = 1
+Height = 22
+Left = 131
+NumberOfElements = 0
+Style = 2
+Top = 70
+Width = 204
+ZOrderSet = 7
+editable = .F.
+Name = "Tscbo_periodo"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413DJK4
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancel
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 220
+Left = 294
+Height = 23
+Width = 76
+Caption = "\<Cancelar"
+ZOrderSet = 4
+Name = "cmdCancel"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.RELEASE()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413H89B
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Periodo a Cerrar"
+Height = 22
+Left = 23
+Top = 70
+Width = 96
+ZOrderSet = 8
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413H89A
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdOk
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 220
+Left = 198
+Height = 23
+Width = 76
+Caption = "\<Aceptar"
+ZOrderSet = 5
+Name = "cmdOk"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+SET TEXTMERGE ON
+LNPERIODO = OAPP.PERIODO
+TEXT TO CMDSQL NOSHOW
+	Declare @Nro int, @IdAsiento int
+	Select top 1 @Nro = Nro_Asiento
+	from cn_Asientos
+	where IdEmpresa = '050'
+		and Ejercicio = 2006
+	order by Nro_Asiento Desc
+
+	DECLARE cAsiento Cursor for
+		Select IdAsiento
+		from cn_Asientos a	
+		where a.IdEmpresa = ?oApp.Empresa
+			and a.Ejercicio = ?oApp.Ejercicio
+			and month(a.fecha)= <<lnPeriodo + 1>>
+		order by a.fecha,IdAsiento
+
+	OPEN cAsiento
+	FETCH NEXT FROM cAsiento into @IdAsiento
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+
+		update cn_Asientos
+		set Nro_Asiento=@Nro ,
+			@Nro = @Nro + 1
+		where cn_Asientos.IdAsiento = @IdAsiento
+		
+		FETCH NEXT FROM cAsiento into @IdAsiento
+	END
+	CLOSE cAsiento
+	DEALLOCATE cAsiento
+
+	
+	IF 	@@ERROR <> 0
+	begin
+		ROLLBACK
+		RAISERROR('Ha ocurrido un error al confirmar el cierre del periodo',16,1)
+		RETURN
+	END
+	UPDATE Ejercicios
+		SET UltimoCierre = case when <<lnPeriodo>> = 12 then 14 else <<lnPeriodo + 1>> end
+		where idEmpresa = ?oApp.Empresa
+			and Ejercicio = ?oApp.Ejercicio
+	IF 	@@ERROR <> 0
+		begin
+			ROLLBACK
+			RAISERROR('Ha ocurrido un error al confirmar el cierre del periodo',16,1)
+			RETURN
+		END
+	ELSE
+		commit	
+
+
+ENDTEXT
+IF SQL(CMDSQL, 'Cursor')>0
+MESSAGEBOX('El cierre de periodo se realizó correctamente', 64, "Futura Software")
+THISFORM.RELEASE()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413Q0KI
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+Top = 10
+Left = 11
+Height = 204
+Width = 360
+ZOrderSet = 1
+Name = "Ts3dshape1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413Q0KK
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdOk
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+Top = 220
+Left = 198
+Height = 23
+Width = 76
+Caption = "\<Aceptar"
+ZOrderSet = 5
+Name = "cmdOk"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+TEXT TO CMDSQL NOSHOW
+BEGIN TRANSACTION
+	UPDATE cn_Asientos
+		SET nro_Asiento = 0,
+		procesado = 0
+	where idEmpresa = ?oApp.Empresa
+		and Ejercicio = ?oApp.Ejercicio
+		and MONTH(fecha)= ?oApp.Periodo;
+	IF 	@@ERROR <> 0
+		begin
+			ROLLBACK
+			RAISERROR('Ha ocurrido un error al revertir el cierre del periodo',16,1)
+			RETURN
+		END
+	UPDATE Ejercicios
+		SET UltimoCierre = case when ?oApp.Periodo = 1 then 13 else ?oApp.Periodo-1 end
+		where idEmpresa = ?oApp.Empresa
+			and Ejercicio = ?oApp.Ejercicio
+	IF 	@@ERROR <> 0
+		begin
+			ROLLBACK
+			RAISERROR('Ha ocurrido un error al revertir el cierre del periodo',16,1)
+			RETURN
+		END
+	ELSE
+		commit
+ENDTEXT
+IF SQL(CMDSQL, 'Cursor')>0
+MESSAGEBOX('La reversion del cierre de periodo se realizó correctamente', 64, "Futura Software")
+THISFORM.RELEASE()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413Q0KL
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscbo_periodo
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "115,0"
+RowSourceType = 1
+RowSource = "Enero,1,Febrero,2,Marzo,3,Abril,4,Mayo,5,Junio,6,Julio,7,Agosto,8,Setiembre,9,Octubre,10,Noviembre,11,Diciembre,12,Ninguno,13"
+Enabled = .F.
+FirstElement = 1
+Height = 22
+Left = 131
+NumberOfElements = 0
+Style = 2
+Top = 70
+Width = 204
+ZOrderSet = 7
+editable = .F.
+Name = "Tscbo_periodo"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413Q0KM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+Alignment = 0
+Caption = "Periodo a Revertir"
+Height = 22
+Left = 23
+Top = 70
+Width = 108
+ZOrderSet = 8
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R413Q0KJ
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancel
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+Top = 220
+Left = 294
+Height = 23
+Width = 76
+Caption = "\<Cancelar"
+ZOrderSet = 4
+Name = "cmdCancel"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.RELEASE()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[START RESERVED1]
+  ..\include\tastrade.hŽ?õv†5@ ..\..\..\archivos de programa\microsoft visual foxpro 9\foxpro.h–@š‰1 ..\include\strings.hžAõv†5[END RESERVED1]
+[EOF]

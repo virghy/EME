@@ -1,0 +1,3030 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Class     
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z35QH
+[CLASS] condicion
+[CLASSLOC] tpv.vcx
+[BASECLASS] form
+[OBJNAME] cmdcredito
+[START PROPERTIES]
+DoCreate = .T.
+Name = "cmdcredito"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+titulo.Caption = "CREDITOS/VALES"
+titulo.Name = "titulo"
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cmdcredito
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y0WGW
+[CLASS] condicion
+[CLASSLOC] tpv.vcx
+[BASECLASS] form
+[OBJNAME] condasociacion
+[START PROPERTIES]
+DoCreate = .T.
+Height = 290
+Name = "condasociacion"
+Width = 305
+cmdCancel.Left = 222
+cmdCancel.Name = "cmdCancel"
+cmdCancel.TabIndex = 27
+cmdCancel.Top = 261
+cmdCancel.ZOrderSet = 4
+cmdOk.FontSize = 8
+cmdOk.Left = 134
+cmdOk.Name = "cmdOk"
+cmdOk.TabIndex = 26
+cmdOk.Top = 261
+cmdOk.ZOrderSet = 3
+titulo.Caption = "ASOCIACIONES"
+titulo.Height = 27
+titulo.Left = 3
+titulo.Name = "titulo"
+titulo.TabIndex = 1
+titulo.Top = 2
+titulo.Width = 293
+titulo.ZOrderSet = 2
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE cmdOk.Click
+THISFORM.TAG = "Credito: "+ALLTRIM(STR(THISFORM.IDASOCIACION1.VALUE))+"-"
+THISFORM.TAG = THISFORM.TAG+""+RTRIM(THISFORM.ASOCIACION.VALUE)
+THISFORM.TAG = THISFORM.TAG+" /Cuotas: "+ALLTRIM(STR(THISFORM.TXTNROCUOTAS.VALUE))
+THISFORM.COMMENT = THISFORM.Cliente.VALUE
+thisform.idcliente=thisform.idcliente_aso.Value
+DODEFAULT()
+ENDPROC
+PROCEDURE enlazardatos
+WITH THISFORM
+.IDASOCIACION1.CONTROLSOURCE = "thisform.data.idAsociacion"
+.IDCLIENTE_ASO.CONTROLSOURCE = "thisform.data.idSocio"
+.CI.CONTROLSOURCE = "thisform.data.ci"
+.TXTNROORDEN.CONTROLSOURCE = "thisform.data.nroorden"
+.TXTNROCUOTAS.CONTROLSOURCE = "thisform.data.cuotas"
+.TXTNROPAGARE.CONTROLSOURCE = "thisform.data.nropagare"
+.IMPORTE.CONTROLSOURCE = "thisform.data.importe"
+.TXTVTO.CONTROLSOURCE = "thisform.data.fecha"
+ENDWITH
+THISFORM.TOTAL.VALUE = THISFORM.DATA.IMPORTE
+THISFORM.DESCUENTO.VALUE = (ROUND(THISFORM.DATA.IMPORTE*THIS.DESC/100, 0))
+THISFORM.NETO.VALUE = THISFORM.DATA.IMPORTE-THISFORM.DESCUENTO.VALUE
+THISFORM.IMPORTE.VALUE = THISFORM.NETO.VALUE
+IF MONTH(DATE())=12
+THISFORM.TXTVTO.VALUE = DATE(YEAR(DATE())+1, 1, 1)-1
+ELSE
+THISFORM.TXTVTO.VALUE = DATE(YEAR(DATE()), MONTH(DATE())+1, 1)-1
+ENDIF
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+27[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020YBS7Y
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Asociacion
+[PARENT] condasociacion
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+FontSize = 8
+Height = 22
+Left = 128
+Name = "Asociacion"
+TabIndex = 12
+Top = 128
+Width = 160
+ZOrderSet = 12
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1010X2HSB
+[CLASS] ci_cliente_aso
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] ci
+[PARENT] condasociacion
+[START PROPERTIES]
+Height = 22
+Left = 218
+Name = "ci"
+TabIndex = 16
+Top = 152
+Width = 70
+ZOrderSet = 16
+objeto2 = this.parent.idcliente_aso
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020YBS88
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Cliente
+[PARENT] condasociacion
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 72
+Name = "Cliente"
+TabIndex = 17
+Top = 176
+Width = 216
+ZOrderSet = 13
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y272S
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] descuento
+[PARENT] condasociacion
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 208
+Name = "descuento"
+TabIndex = 5
+Top = 40
+Width = 80
+ZOrderSet = 22
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _101105IXL
+[CLASS] idasociacion
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idasociacion1
+[PARENT] condasociacion
+[START PROPERTIES]
+Height = 22
+Left = 72
+Name = "Idasociacion1"
+TabIndex = 11
+Top = 128
+Width = 54
+ZOrderSet = 17
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1010VX1LY
+[CLASS] idcliente_aso
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente_aso
+[PARENT] condasociacion
+[START PROPERTIES]
+Height = 22
+Left = 72
+Name = "Idcliente_aso"
+TabIndex = 14
+Top = 152
+Width = 56
+ZOrderSet = 15
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y4BM4
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Importe
+[PARENT] condasociacion
+[START PROPERTIES]
+Height = 22
+InputMask = "999,999,999"
+Left = 72
+Name = "Importe"
+TabIndex = 9
+Top = 104
+Width = 96
+ZOrderSet = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y273C
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Neto
+[PARENT] condasociacion
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 208
+Name = "Neto"
+TabIndex = 7
+Top = 64
+Width = 80
+ZOrderSet = 24
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y272I
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] total
+[PARENT] condasociacion
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 48
+Name = "total"
+TabIndex = 3
+Top = 40
+Width = 80
+ZOrderSet = 20
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y2709
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] condasociacion
+[START PROPERTIES]
+Height = 157
+Left = 6
+Name = "Ts3dshape1"
+Top = 99
+Width = 292
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z35QH
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] condasociacion
+[START PROPERTIES]
+Height = 64
+Left = 6
+Name = "Ts3dshape2"
+Top = 32
+Width = 292
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y6I9S
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] condasociacion
+[START PROPERTIES]
+Alignment = 0
+Caption = "Nro Orden"
+Height = 22
+Left = 11
+Name = "Tslabel1"
+TabIndex = 18
+Top = 200
+Width = 61
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y4BLU
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel10
+[PARENT] condasociacion
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Importe"
+Height = 22
+Left = 13
+Name = "Tslabel10"
+TabIndex = 8
+Top = 104
+Width = 56
+ZOrderSet = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _10M0T6KUA
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel11
+[PARENT] condasociacion
+[START PROPERTIES]
+Alignment = 0
+Caption = "1er. Venc."
+Height = 22
+Left = 144
+Name = "Tslabel11"
+TabIndex = 24
+Top = 224
+Width = 61
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0Z20XSBGV
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] condasociacion
+[START PROPERTIES]
+Alignment = 0
+Caption = "Asociacion"
+Height = 22
+Left = 11
+Name = "Tslabel2"
+TabIndex = 10
+Top = 128
+Width = 61
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] condasociacion
+[START PROPERTIES]
+Alignment = 0
+Caption = "Id. Cliente"
+Height = 22
+Left = 11
+Name = "Tslabel3"
+TabIndex = 13
+Top = 152
+Width = 61
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y6IAW
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] condasociacion
+[START PROPERTIES]
+Alignment = 0
+Caption = "Nro Pagare"
+Height = 22
+Left = 144
+Name = "Tslabel4"
+TabIndex = 20
+Top = 200
+Width = 61
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] condasociacion
+[START PROPERTIES]
+Alignment = 0
+Caption = "Nro Cuotas"
+Height = 22
+Left = 11
+Name = "Tslabel5"
+TabIndex = 22
+Top = 224
+Width = 61
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020YBS8I
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] condasociacion
+[START PROPERTIES]
+Caption = "Ced. Identidad"
+Height = 22
+Left = 133
+Name = "Tslabel6"
+TabIndex = 15
+Top = 152
+Width = 80
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y272H
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] condasociacion
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Total"
+ForeColor = 0,64,128
+Height = 22
+Left = 8
+Name = "Tslabel7"
+TabIndex = 2
+Top = 40
+Width = 32
+ZOrderSet = 19
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y272R
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] condasociacion
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Descuento"
+ForeColor = 0,64,128
+Height = 22
+Left = 139
+Name = "Tslabel8"
+TabIndex = 4
+Top = 40
+Width = 66
+ZOrderSet = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y2731
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] condasociacion
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Neto"
+ForeColor = 0,64,128
+Height = 22
+Left = 165
+Name = "Tslabel9"
+TabIndex = 6
+Top = 64
+Width = 40
+ZOrderSet = 23
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z35QH
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroCuotas
+[PARENT] condasociacion
+[START PROPERTIES]
+Alignment = 3
+Height = 22
+InputMask = "999"
+Left = 72
+Name = "txtNroCuotas"
+TabIndex = 23
+Top = 224
+Value = (0)
+Width = 54
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _101105IXM
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroOrden
+[PARENT] condasociacion
+[START PROPERTIES]
+Alignment = 3
+Height = 22
+InputMask = "999999"
+Left = 72
+Name = "txtNroOrden"
+TabIndex = 19
+Top = 200
+Value = (0)
+Width = 54
+ZOrderSet = 18
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0Z20XSBGV
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroPagare
+[PARENT] condasociacion
+[START PROPERTIES]
+Alignment = 3
+Height = 22
+InputMask = "999999"
+Left = 208
+Name = "txtNroPagare"
+TabIndex = 21
+Top = 200
+Value = (0)
+Width = 80
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _10M0T6KU9
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtVto
+[PARENT] condasociacion
+[START PROPERTIES]
+Alignment = 3
+Height = 22
+InputMask = "999"
+Left = 208
+Name = "txtVto"
+TabIndex = 25
+Top = 224
+Value = (0)
+Width = 80
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] condasociacion
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020S1G1E
+[CLASS] condicion
+[CLASSLOC] tpv.vcx
+[BASECLASS] form
+[OBJNAME] condcheque
+[START PROPERTIES]
+DoCreate = .T.
+Height = 320
+Name = "condcheque"
+Width = 291
+cmdCancel.Left = 204
+cmdCancel.Name = "cmdCancel"
+cmdCancel.TabIndex = 8
+cmdCancel.Top = 288
+cmdCancel.ZOrderSet = 4
+cmdOk.Left = 116
+cmdOk.Name = "cmdOk"
+cmdOk.TabIndex = 7
+cmdOk.Top = 288
+cmdOk.ZOrderSet = 3
+titulo.Caption = "CHEQUE"
+titulo.Height = 22
+titulo.Left = 3
+titulo.Name = "titulo"
+titulo.TabIndex = 9
+titulo.Top = 2
+titulo.Width = 285
+titulo.ZOrderSet = 2
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE cmdOk.Click
+THISFORM.TAG = "Cheque Banco: "+ALLTRIM(THISFORM.BANCO.VALUE)+" Nro: "+THISFORM.TXTNROCHEQUE.VALUE
+THISFORM.IDCLIENTE = THISFORM.IDCLIENTE_ASO1.VALUE
+DODEFAULT()
+ENDPROC
+**
+PROCEDURE enlazardatos
+THISFORM.IDBANCO1.CONTROLSOURCE = "thisform.data.idbanco"
+THISFORM.TXTNROCHEQUE.CONTROLSOURCE = "thisform.data.NroCheque"
+THISFORM.TXTFECHACHEQUE.CONTROLSOURCE = "thisform.data.FchEmision"
+THISFORM.TXTFECHACOBRO.CONTROLSOURCE = "thisform.data.fchCheque"
+THISFORM.IMPORTE.CONTROLSOURCE = "thisform.data.importe"
+THISFORM.TOTAL.VALUE = THISFORM.DATA.IMPORTE
+THISFORM.DESCUENTO.VALUE = (ROUND(THISFORM.DATA.IMPORTE*THIS.DESC/100, 0))
+THISFORM.NETO.VALUE = THISFORM.DATA.IMPORTE-THISFORM.DESCUENTO.VALUE
+THISFORM.IMPORTE.VALUE = THISFORM.NETO.VALUE
+THISFORM.IDCLIENTE_ASO1.VALUE = THIS.IDCLIENTE
+ENDPROC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+23[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0Z20XSBGV
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Banco
+[PARENT] condcheque
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 120
+Name = "Banco"
+TabIndex = 20
+Top = 180
+Width = 157
+ZOrderSet = 10
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] descuento
+[PARENT] condcheque
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 197
+Name = "descuento"
+TabIndex = 14
+Top = 32
+Width = 80
+ZOrderSet = 17
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _10413MU3X
+[CLASS] idbanco
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idbanco1
+[PARENT] condcheque
+[START PROPERTIES]
+Height = 22
+Left = 84
+Name = "Idbanco1"
+TabIndex = 3
+Top = 180
+Width = 32
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Y0WGW
+[CLASS] idcliente_aso
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente_aso1
+[PARENT] condcheque
+[START PROPERTIES]
+Height = 22
+Left = 84
+Name = "Idcliente_aso1"
+TabIndex = 1
+Top = 108
+Width = 56
+ZOrderSet = 15
+objeto = this.parent.socio
+retorna2 = RUC
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XHUHK
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Importe
+[PARENT] condcheque
+[START PROPERTIES]
+Height = 22
+InputMask = "999,999,999"
+Left = 84
+Name = "Importe"
+TabIndex = 2
+Top = 156
+Width = 96
+ZOrderSet = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Neto
+[PARENT] condcheque
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 197
+Name = "Neto"
+TabIndex = 16
+Top = 56
+Width = 80
+ZOrderSet = 19
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Socio
+[PARENT] condcheque
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 84
+Name = "Socio"
+TabIndex = 17
+Top = 132
+Width = 194
+ZOrderSet = 13
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0Z3W25
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] total
+[PARENT] condcheque
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 48
+Name = "total"
+TabIndex = 12
+Top = 32
+Width = 80
+ZOrderSet = 15
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XMEX7
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] condcheque
+[START PROPERTIES]
+Height = 182
+Left = 4
+Name = "Ts3dshape1"
+Top = 94
+Width = 281
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z35QH
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] condcheque
+[START PROPERTIES]
+Height = 64
+Left = 4
+Name = "Ts3dshape2"
+Top = 24
+Width = 281
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z13B3
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] condcheque
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Fecha Cobro"
+Left = 4
+Name = "Tslabel1"
+TabIndex = 23
+Top = 252
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] condcheque
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Total"
+ForeColor = 0,64,128
+Height = 22
+Left = 8
+Name = "Tslabel2"
+TabIndex = 11
+Top = 32
+Width = 32
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z35QH
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] condcheque
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro Cheque"
+Left = 4
+Name = "Tslabel3"
+TabIndex = 21
+Top = 204
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] condcheque
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Banco"
+Left = 0
+Name = "Tslabel4"
+TabIndex = 19
+Top = 180
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] condcheque
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Fecha Cheque"
+Height = 22
+Left = -4
+Name = "Tslabel5"
+TabIndex = 22
+Top = 228
+Width = 85
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0Z5MFV
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] condcheque
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Descuento"
+ForeColor = 0,64,128
+Height = 22
+Left = 128
+Name = "Tslabel6"
+TabIndex = 13
+Top = 32
+Width = 66
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1040YF0OS
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] condcheque
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Neto"
+ForeColor = 0,64,128
+Height = 22
+Left = 154
+Name = "Tslabel7"
+TabIndex = 15
+Top = 56
+Width = 40
+ZOrderSet = 18
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XHUH0
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] condcheque
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Importe"
+Height = 22
+Left = 24
+Name = "Tslabel8"
+TabIndex = 18
+Top = 156
+Width = 56
+ZOrderSet = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z35QH
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] condcheque
+[START PROPERTIES]
+Alignment = 0
+Caption = "Id. Cliente"
+Height = 22
+Left = 24
+Name = "Tslabel9"
+TabIndex = 10
+Top = 108
+Width = 56
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0Z20XSBGV
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFechaCheque
+[PARENT] condcheque
+[START PROPERTIES]
+Alignment = 3
+Height = 22
+Left = 84
+Name = "txtFechaCheque"
+TabIndex = 5
+Top = 228
+Width = 96
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z13B2
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFechaCobro
+[PARENT] condcheque
+[START PROPERTIES]
+Alignment = 3
+Height = 22
+Left = 84
+Name = "txtFechaCobro"
+TabIndex = 6
+Top = 252
+Width = 96
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroCheque
+[PARENT] condcheque
+[START PROPERTIES]
+Height = 22
+Left = 84
+Name = "txtNroCheque"
+TabIndex = 4
+Top = 204
+Width = 96
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] condcheque
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XJ1Q4
+[CLASS] condicion
+[CLASSLOC] tpv.vcx
+[BASECLASS] form
+[OBJNAME] condcredito
+[START PROPERTIES]
+DoCreate = .T.
+Name = "condcredito"
+cmdCancel.Name = "cmdCancel"
+cmdCancel.TabIndex = 7
+cmdOk.Name = "cmdOk"
+cmdOk.TabIndex = 6
+data = 
+desc = 
+idcondicion = 
+titulo.Caption = "CREDITO"
+titulo.Height = 27
+titulo.Left = 3
+titulo.Name = "titulo"
+titulo.TabIndex = 8
+titulo.Top = 2
+titulo.Width = 285
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Activate
+THISFORM.CBOCONDVENTA1.CMDSQL = "Select descripcion, idcondicion from vt_condicion where idempresa = ?oApp.Empresa order by 1 "
+THISFORM.CBOCONDVENTA1.REQUERY()
+ENDPROC
+**
+PROCEDURE cmdOk.Click
+THISFORM.IDCLIENTE = THISFORM.IDCLIENTE1.VALUE
+THISFORM.IDCONDICION = THISFORM.CBOCONDVENTA1.VALUE
+DODEFAULT()
+ENDPROC
+**
+PROCEDURE enlazardatos
+THISFORM.TOTAL.VALUE = THISFORM.DATA.IMPORTE
+THISFORM.DESCUENTO.VALUE = (ROUND(THISFORM.DATA.IMPORTE*THIS.DESC/100, 0))
+THISFORM.NETO.VALUE = THISFORM.DATA.IMPORTE-THISFORM.DESCUENTO.VALUE
+ENDPROC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+14[END RESERVED2]
+[START RESERVED3]
+idcondicion
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1HC
+[CLASS] cbocondventa
+[CLASSLOC] futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbocondventa1
+[PARENT] condcredito
+[START PROPERTIES]
+ControlSource = ""
+Height = 22
+Left = 96
+Name = "Cbocondventa1"
+TabIndex = 5
+Top = 170
+Width = 180
+cmdsql = 
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1HA
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Cliente
+[PARENT] condcredito
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 96
+Name = "Cliente"
+TabIndex = 3
+Top = 140
+Width = 194
+ZOrderSet = 13
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1GT
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] descuento
+[PARENT] condcredito
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 205
+Name = "descuento"
+TabIndex = 12
+Top = 40
+Width = 80
+ZOrderSet = 17
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XP4Z5
+[CLASS] idcliente
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente1
+[PARENT] condcredito
+[START PROPERTIES]
+Left = 96
+Name = "Idcliente1"
+TabIndex = 2
+Top = 110
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1H1
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Neto
+[PARENT] condcredito
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 205
+Name = "Neto"
+TabIndex = 14
+Top = 64
+Width = 80
+ZOrderSet = 19
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1GR
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] total
+[PARENT] condcredito
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 56
+Name = "total"
+TabIndex = 10
+Top = 40
+Width = 80
+ZOrderSet = 15
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1GG
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] condcredito
+[START PROPERTIES]
+Height = 138
+Left = 12
+Name = "Ts3dshape1"
+Top = 102
+Width = 281
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1GH
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] condcredito
+[START PROPERTIES]
+Height = 64
+Left = 12
+Name = "Ts3dshape2"
+Top = 32
+Width = 281
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1HD
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] condcredito
+[START PROPERTIES]
+Alignment = 0
+Caption = "Condicion"
+Height = 22
+Left = 24
+Name = "Tslabel1"
+TabIndex = 4
+Top = 170
+Width = 56
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1GQ
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] condcredito
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Total"
+ForeColor = 0,64,128
+Height = 22
+Left = 16
+Name = "Tslabel2"
+TabIndex = 9
+Top = 40
+Width = 32
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1GS
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] condcredito
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Descuento"
+ForeColor = 0,64,128
+Height = 22
+Left = 136
+Name = "Tslabel6"
+TabIndex = 11
+Top = 40
+Width = 66
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VI0XL1H0
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] condcredito
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Neto"
+ForeColor = 0,64,128
+Height = 22
+Left = 162
+Name = "Tslabel7"
+TabIndex = 13
+Top = 64
+Width = 40
+ZOrderSet = 18
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z35QH
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] condcredito
+[START PROPERTIES]
+Alignment = 0
+Caption = "Id. Cliente"
+Height = 22
+Left = 32
+Name = "Tslabel9"
+TabIndex = 1
+Top = 116
+Width = 56
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] condcredito
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0Z7P7T
+[CLASS] condicion
+[CLASSLOC] tpv.vcx
+[BASECLASS] form
+[OBJNAME] condefectivo
+[START PROPERTIES]
+DoCreate = .T.
+Height = 290
+Name = "condefectivo"
+Width = 334
+cmdCancel.Left = 240
+cmdCancel.Name = "cmdCancel"
+cmdCancel.TabIndex = 6
+cmdCancel.Top = 260
+cmdCancel.ZOrderSet = 4
+cmdOk.Left = 152
+cmdOk.Name = "cmdOk"
+cmdOk.TabIndex = 5
+cmdOk.Top = 260
+cmdOk.ZOrderSet = 3
+decimales = 0
+titulo.Caption = "EFECTIVO"
+titulo.Height = 27
+titulo.Left = 3
+titulo.Name = "titulo"
+titulo.TabIndex = 9
+titulo.Top = 2
+titulo.Width = 321
+titulo.ZOrderSet = 2
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE cmdOk.Click
+IF THISFORM.NETO.VALUE<=THISFORM.EFECTIVO.VALUE
+THISFORM.IDCLIENTE = THISFORM.IDCLIENTE_ASO.VALUE
+CMDOK::CLICK()
+ELSE
+THISFORM.EFECTIVO.VALUE = 0
+THISFORM.EFECTIVO.SETFOCUS()
+ENDIF
+ENDPROC
+PROCEDURE enlazardatos
+THISFORM.NETO.CONTROLSOURCE = "thisform.data.importe"
+THISFORM.TOTAL.VALUE = THISFORM.DATA.IMPORTE
+THISFORM.DESCUENTO.VALUE = (ROUND(THISFORM.DATA.IMPORTE*THIS.DESC/100, 0))
+THISFORM.IDCLIENTE_ASO.CONTROLSOURCE = "thisform.data.nrocheque"
+THISFORM.IDCLIENTE_ASO.VALUE = THIS.IDCLIENTE
+THISFORM.SOCIO.VALUE = "Particulares"
+THISFORM.NETO.VALUE = THISFORM.TOTAL.VALUE-THISFORM.DESCUENTO.VALUE
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+18[END RESERVED2]
+[START RESERVED3]
+decimales
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1HU14GDJR
+[CLASS] ci_cliente_aso
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] ci
+[PARENT] condefectivo
+[START PROPERTIES]
+Height = 22
+Left = 247
+Name = "ci"
+TabIndex = 3
+Top = 36
+Visible = .F.
+Width = 70
+ZOrderSet = 16
+objeto = this.parent.socio
+objeto2 = this.parent.idcliente_aso
+retorna2 = IdCliente
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020X4TO9
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Descuento
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 3
+BackColor = 0,0,128
+BackStyle = 0
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+FontSize = 12
+ForeColor = 0,0,128
+Height = 23
+InputMask = "999,999,999,999"
+Left = 120
+Name = "Descuento"
+TabIndex = 12
+Top = 114
+Value = 0
+Width = 198
+ZOrderSet = 12
+editable = .F.
+inputmaskdinamico = iif(thisform.decimales>0,"999,999,999,999.99","999,999,999,999")
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0ZM3IW
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Efectivo
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 3
+BackStyle = 1
+Enabled = .T.
+FontBold = .T.
+FontSize = 12
+ForeColor = 0,0,128
+Height = 23
+InputMask = "999,999,999,999"
+Left = 120
+Name = "Efectivo"
+TabIndex = 4
+Top = 182
+Value = 0
+Width = 198
+ZOrderSet = 9
+editable = .F.
+inputmaskdinamico = iif(thisform.decimales>0,"999,999,999,999.99","999,999,999,999")
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE KeyPress
+LPARAMETERS NKEYCODE, NSHIFTALTCTRL
+**
+** ReFox - este procedimiento es vacío **
+**
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.VALUE>=THISFORM.NETO.VALUE
+THISFORM.VUELTO.VALUE = THIS.VALUE-THISFORM.NETO.VALUE
+ELSE
+THISFORM.VUELTO.VALUE = 0
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1HU14GDJQ
+[CLASS] idcliente_aso
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente_aso
+[PARENT] condefectivo
+[START PROPERTIES]
+Height = 22
+Left = 72
+Name = "Idcliente_aso"
+TabIndex = 2
+Top = 36
+Width = 56
+ZOrderSet = 15
+objeto = this.parent.socio
+retorna2 = RUC
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020X4TOJ
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Neto
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 3
+BackColor = 0,0,128
+BackStyle = 0
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+FontSize = 12
+ForeColor = 0,0,128
+Height = 23
+InputMask = "999,999,999,999"
+Left = 120
+Name = "Neto"
+TabIndex = 14
+Top = 138
+Value = 0
+Width = 198
+ZOrderSet = 14
+editable = .F.
+inputmaskdinamico = iif(thisform.decimales>0,"999,999,999,999.99","999,999,999,999")
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1HU14GDJG
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Socio
+[PARENT] condefectivo
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 72
+Name = "Socio"
+TabIndex = 8
+Top = 60
+Width = 245
+ZOrderSet = 13
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Total
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 3
+BackColor = 0,0,128
+BackStyle = 0
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+FontSize = 12
+ForeColor = 0,0,128
+Height = 23
+InputMask = "999,999,999,999"
+Left = 120
+Name = "Total"
+TabIndex = 10
+Top = 90
+Value = 0
+Width = 198
+ZOrderSet = 8
+editable = .F.
+inputmaskdinamico = iif(thisform.decimales>0,"999,999,999,999.99","999,999,999,999")
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XLGK5
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] condefectivo
+[START PROPERTIES]
+Height = 84
+Left = 8
+Name = "Ts3dshape1"
+Top = 84
+Width = 320
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XLGKF
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] condefectivo
+[START PROPERTIES]
+Height = 76
+Left = 8
+Name = "Ts3dshape2"
+Top = 174
+Width = 320
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020X4TNZ
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Descuento"
+FontSize = 12
+Height = 17
+Left = 13
+Name = "Tslabel1"
+TabIndex = 13
+Top = 122
+Width = 104
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z35QH
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Total"
+FontSize = 12
+Height = 17
+Left = 13
+Name = "Tslabel2"
+TabIndex = 11
+Top = 98
+Width = 77
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0ZCJRK
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Efectivo"
+FontSize = 12
+Height = 17
+Left = 13
+Name = "Tslabel3"
+TabIndex = 16
+Top = 182
+Width = 77
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0ZCJRL
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Vuelto"
+FontSize = 12
+Height = 17
+Left = 13
+Name = "Tslabel4"
+TabIndex = 17
+Top = 218
+Width = 77
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020X4TOA
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Neto"
+FontSize = 12
+Height = 17
+Left = 13
+Name = "Tslabel5"
+TabIndex = 15
+Top = 146
+Width = 104
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1HU14GDJF
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 0
+Caption = "Id. Cliente"
+Height = 22
+Left = 11
+Name = "Tslabel6"
+TabIndex = 1
+Top = 36
+Width = 61
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1HU14GDJP
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] condefectivo
+[START PROPERTIES]
+Caption = "Ced. Identidad"
+Height = 22
+Left = 162
+Name = "Tslabel7"
+TabIndex = 7
+Top = 36
+Visible = .F.
+Width = 80
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0ZM3J5
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Vuelto
+[PARENT] condefectivo
+[START PROPERTIES]
+Alignment = 3
+BackColor = 0,0,128
+BackStyle = 0
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+FontSize = 12
+ForeColor = 0,0,128
+Height = 23
+InputMask = "999,999,999,999"
+Left = 120
+Name = "Vuelto"
+TabIndex = 18
+Top = 218
+Value = 0
+Width = 198
+ZOrderSet = 10
+editable = .F.
+inputmaskdinamico = iif(thisform.decimales>0,"999,999,999,999.99","999,999,999,999")
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] condefectivo
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 12, 8, 20, 15, 42, 4, 1
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0WK8K8
+[CLASS] form
+[BASECLASS] form
+[OBJNAME] condicion
+[START PROPERTIES]
+AutoCenter = .T.
+BorderStyle = 1
+Caption = "condicionventa"
+DataSession = 2
+DoCreate = .T.
+Height = 290
+Name = "condicion"
+ShowWindow = 1
+TitleBar = 0
+Width = 291
+WindowType = 1
+editmode = .T.
+valor = 
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+PARAMETER LODATA, LNDESCUENTO
+THIS.DATA = LODATA
+THIS.DESC = LNDESCUENTO
+THIS.ENLAZARDATOS()
+DO SETEO
+THIS.TITULO.WIDTH = THIS.WIDTH-1
+THIS.TITULO.LEFT = 1
+THIS.TITULO.TOP = 1
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+4[END RESERVED2]
+[START RESERVED3]
+*enlazardatos 
+*validar 
+data
+desc
+editmode
+idcliente
+mensajenovalido
+valido
+valor
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020SBJTQ
+[CLASS] tscommandbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancel
+[PARENT] condicion
+[START PROPERTIES]
+Cancel = .T.
+Caption = "\<Cancelar"
+Height = 21
+Left = 200
+Name = "cmdCancel"
+TabIndex = 3
+Top = 256
+Width = 76
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.VALOR = " "
+THISFORM.HIDE()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020SBJTG
+[CLASS] tscommandbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdOk
+[PARENT] condicion
+[START PROPERTIES]
+Caption = "\<Aceptar"
+Height = 21
+Left = 112
+Name = "cmdOk"
+TabIndex = 2
+Top = 256
+Width = 76
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF THISFORM.VALIDAR()
+THISFORM.VALOR = "OK"
+THISFORM.HIDE()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0XIDR3
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] titulo
+[PARENT] condicion
+[START PROPERTIES]
+Alignment = 2
+BackColor = 128,128,192
+BackStyle = 1
+Caption = "FORMA DE PAGO"
+FontSize = 11
+ForeColor = 255,255,255
+Height = 27
+Left = 3
+Name = "titulo"
+Style = 0
+TabIndex = 1
+Top = 2
+Width = 183
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] condicion
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0Z3W25
+[CLASS] condicion
+[CLASSLOC] tpv.vcx
+[BASECLASS] form
+[OBJNAME] condicionventa
+[START PROPERTIES]
+DoCreate = .T.
+Height = 240
+Name = "condicionventa"
+Width = 200
+cmdCancel.Left = 104
+cmdCancel.Name = "cmdCancel"
+cmdCancel.TabIndex = 4
+cmdCancel.Top = 208
+cmdOk.Left = 16
+cmdOk.Name = "cmdOk"
+cmdOk.TabIndex = 3
+cmdOk.Top = 208
+titulo.Name = "titulo"
+titulo.TabIndex = 1
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+SQL("SELECT forma, idforma, tipobase, descuento FROM vt_TPVforma WHERE idempresa = ?oapp.empresa", "cFormaPago")
+THIS.LISTCONDICION.COLUMNCOUNT = 2
+THIS.LISTCONDICION.COLUMNLINES = .F.
+THIS.LISTCONDICION.COLUMNWIDTHS = "30,100"
+THIS.LISTCONDICION.ROWSOURCETYPE = 3
+THIS.LISTCONDICION.ROWSOURCE = 'SELECT ALLTRIM(STR(RECNO()))+"-" as id, * from cFormaPago 	INTO CURSOR cFormaPago'
+IF RECCOUNT('cFormaPago')>0
+THIS.LISTCONDICION.LISTINDEX = 1
+ENDIF
+ENDPROC
+**
+PROCEDURE cmdOk.Click
+THISFORM.VALOR = CFORMAPAGO.IDFORMA+","+CFORMAPAGO.TIPOBASE+","+STR(CFORMAPAGO.DESCUENTO, 5, 2)
+THISFORM.HIDE()
+ENDPROC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ZA0Z5MFV
+[CLASS] tslistbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] listbox
+[OBJNAME] listCondicion
+[PARENT] condicionventa
+[START PROPERTIES]
+FontSize = 9
+Height = 158
+Left = 8
+Name = "listCondicion"
+RowSourceType = 3
+SpecialEffect = 1
+TabIndex = 2
+Top = 42
+Width = 176
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE KeyPress
+LPARAMETERS NKEYCODE, NSHIFTALTCTRL
+IF NKEYCODE=13
+THISFORM.CMDOK.CLICK()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] condicionventa
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020SHHVT
+[CLASS] condicion
+[CLASSLOC] tpv.vcx
+[BASECLASS] form
+[OBJNAME] condtarjeta
+[START PROPERTIES]
+BorderStyle = 3
+DoCreate = .T.
+Height = 285
+Name = "condtarjeta"
+Width = 291
+cmdCancel.Left = 208
+cmdCancel.Name = "cmdCancel"
+cmdCancel.TabIndex = 14
+cmdCancel.Top = 256
+cmdCancel.ZOrderSet = 4
+cmdOk.Left = 120
+cmdOk.Name = "cmdOk"
+cmdOk.TabIndex = 13
+cmdOk.Top = 256
+cmdOk.ZOrderSet = 3
+titulo.Caption = "TARJETAS DE CREDITO"
+titulo.Height = 27
+titulo.Left = 3
+titulo.Name = "titulo"
+titulo.TabIndex = 1
+titulo.Top = 2
+titulo.Width = 285
+titulo.ZOrderSet = 2
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE cmdOk.Click
+THISFORM.TAG = "Tarjeta : ("+ALLTRIM(THISFORM.IDTARJETA.VALUE)+")"+ALLTRIM(THISFORM.TARJETA.VALUE)+" Nro Cupon : "+THISFORM.TXTNROTARJETA.VALUE
+THISFORM.IDCLIENTE = THISFORM.IDCLIENTE_ASO1.VALUE
+DODEFAULT()
+ENDPROC
+PROCEDURE enlazardatos
+THISFORM.IDTARJETA.CONTROLSOURCE = "thisform.data.idbanco"
+THISFORM.TXTNROTARJETA.CONTROLSOURCE = "thisform.data.nrocheque"
+THISFORM.NETO.CONTROLSOURCE = "thisform.data.importe"
+THISFORM.TOTAL.VALUE = THISFORM.DATA.IMPORTE
+THISFORM.DESCUENTO.VALUE = (ROUND(THISFORM.DATA.IMPORTE*THIS.DESC/100, 0))
+THISFORM.NETO.VALUE = THISFORM.DATA.IMPORTE-THISFORM.DESCUENTO.VALUE
+THISFORM.IDCLIENTE_ASO1.VALUE = THIS.IDCLIENTE
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+17[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XKGG8
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] descuento
+[PARENT] condtarjeta
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 200
+Name = "descuento"
+TabIndex = 5
+Top = 40
+Width = 80
+ZOrderSet = 13
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O10UAOI8
+[CLASS] idcliente_aso
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente_aso1
+[PARENT] condtarjeta
+[START PROPERTIES]
+Height = 22
+Left = 90
+Name = "Idcliente_aso1"
+TabIndex = 1
+Top = 116
+Width = 56
+ZOrderSet = 15
+objeto = this.parent.socio
+retorna2 = RUC
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1AW0MSH28
+[CLASS] idbanco
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] IdTarjeta
+[PARENT] condtarjeta
+[START PROPERTIES]
+Height = 22
+Left = 88
+Name = "IdTarjeta"
+TabIndex = 9
+Top = 168
+Width = 54
+ZOrderSet = 13
+condicionextra = Tipo='T'
+datoayuda = Tarjetas
+objeto = this.parent.tarjeta
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XKGGI
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Neto
+[PARENT] condtarjeta
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 200
+Name = "Neto"
+TabIndex = 7
+Top = 64
+Width = 80
+ZOrderSet = 15
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O10UAOHZ
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Socio
+[PARENT] condtarjeta
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 90
+Name = "Socio"
+TabIndex = 17
+Top = 140
+Width = 189
+ZOrderSet = 13
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020SM08W
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] tarjeta
+[PARENT] condtarjeta
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 88
+Name = "tarjeta"
+TabIndex = 10
+Top = 192
+Width = 192
+ZOrderSet = 9
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XKGFY
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] total
+[PARENT] condtarjeta
+[START PROPERTIES]
+DisabledForeColor = 0,0,128
+Enabled = .F.
+FontBold = .T.
+ForeColor = 0,64,128
+Height = 22
+InputMask = "999,999,999"
+Left = 40
+Name = "total"
+TabIndex = 3
+Top = 40
+Width = 80
+ZOrderSet = 11
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z35QH
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] condtarjeta
+[START PROPERTIES]
+Height = 64
+Left = 0
+Name = "Ts3dshape1"
+Top = 32
+Width = 288
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XKGGR
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] condtarjeta
+[START PROPERTIES]
+Height = 140
+Left = 0
+Name = "Ts3dshape2"
+Top = 108
+Width = 288
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XKGFX
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] condtarjeta
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Total"
+ForeColor = 0,64,128
+Height = 22
+Left = 0
+Name = "Tslabel2"
+TabIndex = 2
+Top = 40
+Width = 32
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020Z35QH
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] condtarjeta
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro Cupon"
+Left = 8
+Name = "Tslabel3"
+TabIndex = 11
+Top = 216
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020SM08M
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] condtarjeta
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Tarjeta"
+Height = 22
+Left = 8
+Name = "Tslabel4"
+TabIndex = 8
+Top = 168
+Width = 69
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XKGG7
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] condtarjeta
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Descuento"
+ForeColor = 0,64,128
+Height = 22
+Left = 128
+Name = "Tslabel6"
+TabIndex = 4
+Top = 40
+Width = 69
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1020XKGGH
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] condtarjeta
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Neto"
+ForeColor = 0,64,128
+Height = 22
+Left = 157
+Name = "Tslabel7"
+TabIndex = 6
+Top = 64
+Width = 40
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O10UAOHY
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] condtarjeta
+[START PROPERTIES]
+Alignment = 0
+Caption = "Id. Cliente"
+Height = 22
+Left = 30
+Name = "Tslabel9"
+TabIndex = 10
+Top = 116
+Width = 56
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] RESERVED  
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroTarjeta
+[PARENT] condtarjeta
+[START PROPERTIES]
+Height = 22
+Left = 88
+Name = "txtNroTarjeta"
+TabIndex = 12
+Top = 216
+Width = 192
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] condtarjeta
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0ZCWON
+[CLASS] custom
+[BASECLASS] custom
+[OBJNAME] impresion
+[START PROPERTIES]
+Name = "impresion"
+cursorname = 
+destino = c:\PrintJob.txt
+idformato = 
+printername = Epson LX
+totallineas = 40
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE imprimir
+LOCAL cTexto
+SET TALK OFF
+SET TEXTMERGE ON
+
+
+IF EMPTY(this.destino)
+	this.destino="c:\printjob.txt"
+ENDIF
+IF FILE(this.destino)
+	DELETE FILE (this.destino)
+ENDIF
+SELECT cmd FROM SYSFORMATO WHERE IDFORMATO=this.idformato INTO CURSOR cmd
+SELECT * FROM SYSFORMATO_DET WHERE IDFORMATO=this.idformato ORDER BY TIPO, ORDEN INTO CURSOR cformato
+SELECT * FROM p_codes WHERE P_NAME==this.printername INTO CURSOR pc
+
+EXECSCRIPT(cmd.cmd)
+
+
+     
+STORE FCREATE(this.destino) TO _TEXT     
+IF _TEXT = -1  
+   WAIT WINDOW 'Cannot create an output file. Press a key to exit.'
+   CANCEL
+ENDIF
+
+SELECT cFormato
+SCAN FOR tipo="1"
+	SELECT (this.cursorname)
+	cTexto = "TEXT" + CHR(13) + cFormato.Contenido2 + CHR(13) + "ENDTEXT"
+	EXECSCRIPT(cTexto)
+	SELECT cFormato
+ENDSCAN
+
+SELECT (this.cursorname)
+SCAN
+	SELECT cFormato
+	SCAN FOR tipo="2"
+		SELECT (this.cursorname)
+		cTexto = "TEXT" + CHR(13) + cFormato.Contenido2 + CHR(13) + "ENDTEXT"
+		EXECSCRIPT(cTexto)
+		SELECT cFormato
+	ENDSCAN
+	SELECT (this.cursorname)
+ENDSCAN
+SELECT cFormato
+SCAN FOR tipo="3"
+	SELECT (this.cursorname)
+	cTexto = "TEXT" + CHR(13) + cFormato.Contenido2 + CHR(13) + "ENDTEXT"
+	EXECSCRIPT(cTexto)
+	SELECT cFormato
+ENDSCAN
+
+
+FCLOSE(_TEXT)
+MODIFY FILE (this.destino)
+RETURN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PARAMETER LCIDFACTURA
+SET TALK OFF
+SET TEXTMERGE ON
+SET SAFETY OFF
+SET CENTURY ON
+SET DATE TO DMY
+IF FILE("c:\factura.txt")
+	DELETE FILE c:\factura.txt
+ENDIF
+_ASCIIROWS = 63
+_ASCIICOLS = 132
+STORE FCREATE('c:\factura.txt') TO _TEXT
+IF _TEXT=-1
+WAIT WINDOW 'Cannot create an output file; press a key to exit'
+CANCEL
+ENDIF
+SET CURRENCY TO ' '
+SET DECIMALS TO 0
+SET TALK OFF
+LOCAL LLPRIMERAVEZ
+SELECT * FROM SYSFORMATO_DET WHERE IDFORMATO=2 ORDER BY TIPO, ORDEN INTO CURSOR cformato
+SELECT * FROM p_codes WHERE P_NAME=="Epson LX" INTO CURSOR pc
+SELECT RPEDIDO
+LNLINEAS = RECCOUNT()
+LNTOTAL = 14
+CR_FF = CHR(10)
+CR_LF = CHR(13)
+CR_TAB = CHR(9)
+CR_SPACE = SPACE(1)
+GOTO TOP
+SELECT CFORMATO
+LLPRIMERAVEZ = .T.
+SCAN FOR TIPO="1"
+SELECT RPEDIDO
+IF LLPRIMERAVEZ
+= FWRITE(_TEXT, EXECSCRIPT("RETURN("+CFORMATO.CONTENIDO1+IIF(EMPTY(CFORMATO.CONTENIDO1), "", "+")+CFORMATO.CONTENIDO2+")"))
+LLPRIMERAVEZ = .F.
+LOOP
+ENDIF
+TEXT NOSHOW
+<<EXECSCRIPT("RETURN("+ cFormato.contenido1+IIF(EMPTY(cFormato.Contenido1),"","+")+ cFormato.contenido2+")")>>
+ENDTEXT
+SELECT CFORMATO
+ENDSCAN
+SELECT RPEDIDO
+SCAN
+SELECT CFORMATO
+SCAN FOR TIPO="2"
+SELECT RPEDIDO
+TEXT NOSHOW
+<<EXECSCRIPT("RETURN("+ cFormato.contenido1+IIF(EMPTY(cFormato.Contenido1),"","+")+ cFormato.contenido2+")")>>
+ENDTEXT
+ENDSCAN
+SELECT CFORMATO
+ENDSCAN
+SELECT RPEDIDO
+GOTO TOP
+CALCULATE SUM(PRECIO*CANTIDAD) TO TOTALFACTURA 
+GOTO TOP
+SELECT CFORMATO
+SCAN FOR TIPO="3"
+SELECT RPEDIDO
+TEXT NOSHOW
+<<EXECSCRIPT("RETURN("+ cFormato.contenido1+IIF(EMPTY(cFormato.Contenido1),"","+")+ cFormato.contenido2+")")>>
+ENDTEXT
+SELECT CFORMATO
+ENDSCAN
+FCLOSE(_TEXT)
+SELECT RPEDIDO
+GOTO TOP
+THIS.NROCOPIAS = INPUTBOX("Ingrese la cantidad de copias a imprimir.", "Impresion de Facturas", THIS.NROCOPIAS)
+IF THIS.NROCOPIAS='0'
+M.NROCOPIAS = 1
+ELSE
+M.NROCOPIAS = VAL(THIS.NROCOPIAS)
+ENDIF
+FOR I = 1 TO M.NROCOPIAS
+RUN "Copy c:\factura.txt lpt1"
+ENDFOR
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED3]
+*imprimir 
+cursorname Nombre del cursor a utilizar
+destino
+idformato
+printername
+totallineas Nro Total de lineas de la hoja
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] impresion
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0Z20XSBGV
+[CLASS] custom
+[BASECLASS] custom
+[OBJNAME] post
+[START PROPERTIES]
+Name = "post"
+caja = Caja 01 - Cajero: (22)  Virginio Gonzalez
+cliente = 
+cpbte = 
+data = 
+descripcion = 
+descuento = 
+idcliente = 
+idcondicion = 
+idproducto = 
+listaprecio = 
+nrocopias = ('1')
+precio = 
+tabla = 
+[END PROPERTIES]
+[START PROTECTED]
+AddObject^
+AddProperty^
+BaseClass^
+Class^
+CloneObject^
+Comment^
+ControlCount^
+Controls^
+Error^
+Height^
+HelpContextID^
+Name^
+NewObject^
+Objects^
+ParentClass^
+Parent^
+Picture^
+ReadExpression^
+ReadMethod^
+RemoveObject^
+ResetToDefault^
+SaveAsClass^
+ShowWhatsThis^
+Tag^
+Width^
+WriteExpression^
+WriteMethod^
+[END PROTECTED]
+[START METHODS]
+PROCEDURE Init
+THIS.CAJA = "Cajero : "+ALLTRIM(OAPP.GETEMPLOYEEID())+" "+OAPP.NOMBREUSUARIO
+ENDPROC
+PROCEDURE formapago
+Parameter LNIMPORTE
+Local FRMCONDICION As Form, LCCONDICION, LCTIPOBASE, FRM, LODATA
+FRMCONDICION = Createobject('condicionVenta')
+FRMCONDICION.Show()
+LCCONDICION = FRMCONDICION.VALOR
+If Empty(LCCONDICION)
+	Return .F.
+Endif
+LCTIPOBASE = Substr(LCCONDICION, At(",", LCCONDICION)+1, 1)
+This.DESCUENTO = Val(Substr(LCCONDICION, At(",", LCCONDICION, 2)+1))
+Do Case
+Case LCTIPOBASE="1"
+	Select VT_VALORES
+	This.TABLA = Alias()
+	Scatter Blank Name LODATA Fields IDEMPRESA, IDTIPOVALOR, NROCHEQUE, IDBANCO, IDMONEDA, FCHEMISION, FCHCHEQUE, IMPORTE, IDFACTURA
+	LODATA.IMPORTE = LNIMPORTE
+	LODATA.IDTIPOVALOR = "01"
+	FRM = Createobject('condEfectivo', LODATA, This.DESCUENTO)
+	FRM.IDCLIENTE_ASO.Value = This.IDCLIENTE
+	FRM.Show()
+Case LCTIPOBASE="2"
+	Select VT_VALORES
+	This.TABLA = Alias()
+	Scatter Blank Name LODATA Fields IDEMPRESA, IDTIPOVALOR, NROCHEQUE, IDBANCO, IDMONEDA, FCHEMISION, FCHCHEQUE, IMPORTE, IDFACTURA
+	LODATA.IMPORTE = LNIMPORTE
+	LODATA.IDTIPOVALOR = "02"
+	FRM = Createobject('condCheque', LODATA, This.DESCUENTO)
+	FRM.IDCLIENTE_ASO1.Value = This.IDCLIENTE
+	FRM.Show()
+Case LCTIPOBASE="3"
+	Select VT_VALORES
+	This.TABLA = Alias()
+	Scatter Blank Name LODATA Fields IDEMPRESA, IDTIPOVALOR, NROCHEQUE, IDBANCO, IDMONEDA, FCHEMISION, FCHCHEQUE, IMPORTE, IDFACTURA
+	LODATA.IMPORTE = LNIMPORTE
+	LODATA.IDTIPOVALOR = "03"
+	FRM = Createobject('condTarjeta', LODATA, This.DESCUENTO)
+	FRM.IDCLIENTE_ASO1.Value = This.IDCLIENTE
+	FRM.Show()
+Case LCTIPOBASE="4"
+	Select VT_ORDENCOMPRA
+	This.TABLA = Alias()
+	Scatter Blank Name LODATA Fields IDEMPRESA, IDFACTURA, IDASOCIACION, IDSOCIO, CI, IMPORTE, CUOTAS, NROPAGARE, NROORDEN, FECHA
+	LODATA.IMPORTE = LNIMPORTE
+	FRM = Createobject('condAsociacion', LODATA, This.DESCUENTO)
+	FRM.Show()
+	this.idcondicion="CR"
+Case LCTIPOBASE="5"
+	Select VT_VALORES
+	This.TABLA = ""
+	Scatter Blank Name LODATA Fields IMPORTE, IDEMPRESA
+	LODATA.IMPORTE = LNIMPORTE
+	FRM = Createobject('condCredito', LODATA, This.DESCUENTO)
+	FRM.Show()
+	This.IDCONDICION = FRM.IDCONDICION
+Endcase
+LCCONDICION = FRM.VALOR
+LODATA = FRM.Data
+This.IDCLIENTE = FRM.IDCLIENTE
+This.NOTAS = FRM.Tag
+This.CLIENTE = FRM.Comment
+Release FRM
+If Empty(LCCONDICION)
+	Return .F.
+Else
+	LODATA.IDEMPRESA = OAPP.EMPRESA
+	This.Data = LODATA
+	Release LODATA
+	Return .T.
+Endif
+
+ENDPROC
+PROCEDURE idproducto_assign
+LPARAMETERS VNEWVAL
+THIS.IDPRODUCTO = M.VNEWVAL
+IF EMPTY(M.VNEWVAL)
+THIS.DESCRIPCION = ''
+THIS.PRECIO = 0
+ENDIF
+ENDPROC
+PROCEDURE imprimir
+PARAMETER LCIDFACTURA
+SET TALK OFF
+SET TEXTMERGE ON
+SET SAFETY OFF
+SET CENTURY ON
+SET DATE TO DMY
+IF FILE("c:\factura.txt")
+DELETE FILE c:\factura.txt
+ENDIF
+_ASCIIROWS = 63
+_ASCIICOLS = 132
+STORE FCREATE('c:\factura.txt') TO _TEXT
+IF _TEXT=-1
+WAIT WINDOW 'Cannot create an output file; press a key to exit'
+CANCEL
+ENDIF
+SET CURRENCY TO ' '
+SET DECIMALS TO 0
+SET TALK OFF
+LOCAL LLPRIMERAVEZ
+SELECT * FROM SYSFORMATO_DET WHERE IDFORMATO=2 ORDER BY TIPO, ORDEN INTO CURSOR cformato
+SELECT * FROM p_codes WHERE P_NAME=="Epson LX" INTO CURSOR pc
+SELECT RPEDIDO
+LNLINEAS = RECCOUNT()
+LNTOTAL = 14
+CR_FF = CHR(10)
+CR_LF = CHR(13)
+CR_TAB = CHR(9)
+CR_SPACE = SPACE(1)
+GOTO TOP
+SELECT CFORMATO
+LLPRIMERAVEZ = .T.
+SCAN FOR TIPO="1"
+SELECT RPEDIDO
+IF LLPRIMERAVEZ
+= FWRITE(_TEXT, EXECSCRIPT("RETURN("+CFORMATO.CONTENIDO1+IIF(EMPTY(CFORMATO.CONTENIDO1), "", "+")+CFORMATO.CONTENIDO2+")"))
+LLPRIMERAVEZ = .F.
+LOOP
+ENDIF
+TEXT NOSHOW
+<<EXECSCRIPT("RETURN("+ cFormato.contenido1+IIF(EMPTY(cFormato.Contenido1),"","+")+ cFormato.contenido2+")")>>
+ENDTEXT
+SELECT CFORMATO
+ENDSCAN
+SELECT RPEDIDO
+SCAN
+SELECT CFORMATO
+SCAN FOR TIPO="2"
+SELECT RPEDIDO
+TEXT NOSHOW
+<<EXECSCRIPT("RETURN("+ cFormato.contenido1+IIF(EMPTY(cFormato.Contenido1),"","+")+ cFormato.contenido2+")")>>
+ENDTEXT
+ENDSCAN
+SELECT CFORMATO
+ENDSCAN
+SELECT RPEDIDO
+GOTO TOP
+CALCULATE SUM(PRECIO*CANTIDAD) TO TOTALFACTURA 
+GOTO TOP
+SELECT CFORMATO
+SCAN FOR TIPO="3"
+SELECT RPEDIDO
+TEXT NOSHOW
+<<EXECSCRIPT("RETURN("+ cFormato.contenido1+IIF(EMPTY(cFormato.Contenido1),"","+")+ cFormato.contenido2+")")>>
+ENDTEXT
+SELECT CFORMATO
+ENDSCAN
+FCLOSE(_TEXT)
+SELECT RPEDIDO
+GOTO TOP
+THIS.NROCOPIAS = INPUTBOX("Ingrese la cantidad de copias a imprimir.", "Impresion de Facturas", THIS.NROCOPIAS)
+IF THIS.NROCOPIAS='0'
+M.NROCOPIAS = 1
+ELSE
+M.NROCOPIAS = VAL(THIS.NROCOPIAS)
+ENDIF
+FOR I = 1 TO M.NROCOPIAS
+RUN "Copy c:\factura.txt lpt1"
+ENDFOR
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED3]
+*formapago 
+*grabar 
+*idproducto_assign 
+*imprimir 
+caja
+cliente
+cpbte
+data
+descripcion
+descuento
+idcliente Codigo del Cliente
+idcondicion Condicion de Venta
+idproducto
+listaprecio
+notas
+nrocopias
+precio
+tabla
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] post
+[EOF]

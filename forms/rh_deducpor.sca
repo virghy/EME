@@ -1,0 +1,353 @@
+SCCTEXT versión 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0MA37I
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Left = 92
+Top = 178
+Width = 520
+Height = 200
+InitialSelectedAlias = "empleado"
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+4[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0NHQ0X
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Left = 10
+Top = 20
+Width = 95
+Height = 90
+Alias = "empleado"
+Database = \\venus\sistemas\futura\data\datos.dbc
+CursorSource = "rh_empleados"
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0OM7PJ
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Left = 182
+Top = 119
+Width = 95
+Height = 90
+Alias = "concepto_disp"
+Database = \\venus\sistemas\futura\data\datos.dbc
+CursorSource = "concepto_disp"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0OM7PK
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor4
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Left = 10
+Top = 140
+Width = 95
+Height = 90
+Alias = "deduc_a_realiz"
+Database = \\venus\sistemas\futura\data\datos.dbc
+CursorSource = "deduc_a_realiz"
+NoDataOnLoad = .T.
+Name = "Cursor4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0MA37J
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform12
+[START PROPERTIES]
+DataSession = 2
+Height = 313
+Width = 590
+DoCreate = .T.
+Caption = "Deducciones Porcentuales"
+tabla1 = empleado
+Name = "Tsmaintform12"
+lblRequerido.Name = "lblRequerido"
+appconfig.Name = "appconfig"
+Pageframe1.ErasePage = .T.
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.Height = 266
+Pageframe1.Page2.grdList.Left = 3
+Pageframe1.Page2.grdList.Top = 3
+Pageframe1.Page2.grdList.Width = 567
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 1
+Pageframe1.Left = 1
+Pageframe1.Width = 577
+Pageframe1.Height = 299
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0NF0SO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdempleado
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "empleado.idempleado"
+Height = 22
+Left = 118
+TabIndex = 1
+Top = 21
+Width = 69
+Name = "txtIdempleado"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+m.idempleado = this.value
+= REQUERY('deduc_a_realiz')
+= REQUERY('concepto_disp')
+this.parent.list1.requery
+this.parent.list1.refresh
+this.parent.tsgrid1.refresh
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0NF0SQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdempleado
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Idempleado"
+Height = 16
+Left = 43
+Top = 21
+Width = 67
+TabIndex = 2
+Name = "lblIdempleado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0MR5OW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .F.
+Alignment = 0
+Caption = "\<Conceptos Disponibles"
+Height = 22
+Left = 22
+Top = 63
+Width = 180
+TabIndex = 3
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0NF0SU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .F.
+Alignment = 0
+Caption = "\<Deducciones a realizar"
+Height = 22
+Left = 310
+Top = 63
+Width = 204
+TabIndex = 4
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0NF0SW
+[CLASS] listbox
+[BASECLASS] listbox
+[OBJNAME] List1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+FontSize = 8
+RowSourceType = 6
+RowSource = "concepto_disp.concepto,idconcepto"
+Height = 157
+Left = 22
+TabIndex = 7
+Top = 81
+Width = 180
+Name = "List1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0MA37I
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Value = 
+ControlSource = "empleado.nombre"
+Enabled = .F.
+Format = "K"
+Height = 22
+InputMask = ""
+Left = 214
+MaxLength = 30
+ReadOnly = .T.
+TabIndex = 5
+Top = 21
+Width = 336
+Name = "txtNombre"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0MA37I
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+ColumnCount = 2
+FontSize = 8
+GridLines = 0
+Height = 156
+Left = 310
+Panel = 1
+RecordSource = "deduc_a_realiz"
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 6
+Top = 81
+Width = 240
+Name = "Tsgrid1"
+Column1.FontSize = 8
+Column1.ControlSource = "deduc_a_realiz.concepto"
+Column1.Width = 159
+Column1.ReadOnly = .T.
+Column1.Name = "Column1"
+Column2.FontSize = 8
+Column2.ControlSource = "deduc_a_realiz.porcentaje"
+Column2.Width = 63
+Column2.Name = "Column2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0NF0SF
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform12.Pageframe1.Page1.Tsgrid1.Column1
+[START PROPERTIES]
+FontSize = 8
+Alignment = 2
+Caption = "Concepto"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0NHQ0X
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform12.Pageframe1.Page1.Tsgrid1.Column1
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0S7ILR
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform12.Pageframe1.Page1.Tsgrid1.Column2
+[START PROPERTIES]
+FontSize = 8
+Alignment = 2
+Caption = "Porcentaje"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAQ0S7ILT
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform12.Pageframe1.Page1.Tsgrid1.Column2
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+InputMask = "99.9"
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+[EOF]

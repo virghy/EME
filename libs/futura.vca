@@ -1,0 +1,2299 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Class     
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XB0XP5NT
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbocarteracliente
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "bs_clientes.idcartera"
+FirstElement = 1
+Height = 22
+Left = 391
+Name = "Tscombobox2"
+NumberOfElements = 0
+Style = 2
+TabIndex = 36
+Top = 250
+Width = 144
+cmdsql = Select vt_carteras.descripcion,idcartera from vt_carteras where idempresa = ?oApp.Empresa order by 1
+cursor = vt_carteras
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbocarteracliente
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XB0XK6D9
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbocategoriacliente
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "bs_clientes.idcategoria"
+FirstElement = 1
+Height = 22
+Left = 391
+Name = "Tscombobox1"
+NumberOfElements = 0
+Style = 2
+TabIndex = 34
+Top = 226
+Width = 144
+cmdsql = select vt_categoria.descripcion,idcategoria from vt_categoria where idempresa =?oApp.Empresa order by 1
+cursor = vt_Categoria
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbocategoriacliente
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X10KVJF8
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbocentro
+[START PROPERTIES]
+ColumnCount = 2
+ColumnWidths = "50,100"
+Name = "cbocentro"
+cmdsql = select centro, descripción from centros where idempresa= ?oApp.Empresa order by centro
+cursor = Centros
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbocentro
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XB0X649G
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbocobrador
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "bs_clientes.idcobrador"
+FirstElement = 1
+Height = 22
+Name = "cbocobrador"
+NumberOfElements = 0
+Style = 2
+TabIndex = 30
+Width = 144
+cmdsql = Select nombre, idCobrador from vt_cobradores where idempresa = ?oApp.Empresa order by 1
+cursor = vt_cobradores
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbocobrador
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X10KZBZR
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboconcepto
+[START PROPERTIES]
+ColumnCount = 2
+ColumnWidths = "40,150"
+Name = "cboconcepto"
+cmdsql = Select idconcepto, concepto,CuentaContable from cn_conceptos where idempresa= ?oApp.Empresa order by idconcepto
+cursor = Conceptos
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cboconcepto
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X80MNK55
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbocondicioncompra
+[START PROPERTIES]
+BoundColumn = 3
+ColumnCount = 3
+ColumnWidths = "150,35,65"
+ControlSource = "cp_vproveedores.idcondicion"
+FirstElement = 1
+Name = "cbocondicioncompra"
+NumberOfElements = 0
+RowSourceType = 2
+Style = 2
+TabIndex = 26
+cmdsql = Select descripcion,plazo,idcondicion from cp_condicion where idempresa=?oApp.Empresa
+cursor = cp_condicion
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbocondicioncompra
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XB0XBOCL
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbocondventa
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "bs_clientes.idcondicion"
+FirstElement = 1
+Height = 22
+Name = "cbocondventa"
+NumberOfElements = 0
+Style = 2
+TabIndex = 32
+Width = 144
+cmdsql = Select descripcion, idcondicion from vt_condicion where idempresa = ?oApp.Empresa order by 1 
+cursor = xcCondicion
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbocondventa
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O00W9PIT
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbocpbt_venta
+[START PROPERTIES]
+BoundColumn = 2
+Name = "cbocpbt_venta"
+RowSource = "select descripcion,idComprobante,cpbt_stk,tipo,tipoiva from vt_cpbt_vta order by descripcion into cursor xventa"
+RowSourceType = 3
+Style = 2
+TabIndex = 6
+Width = 204
+cmdsql = select descripcion,idComprobante,cpbt_stk,tipo,tipoiva from vt_cpbt where IdEmpresa=?oApp.Empresa order by descripcion 
+condicionvalidacion = 
+cursor = xVenta
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED7]
+Comprobante de Venta[END RESERVED7]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbocpbt_venta
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YQ0ZDOJ2
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbodeposito
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "175,43"
+ControlSource = "Sucursal.Iddeposito"
+FirstElement = 1
+Name = "cbodeposito"
+NumberOfElements = 0
+Style = 2
+cmdsql = Select Deposito,idDeposito from dbo.st_depositos where idEmpresa=?oApp.Empresa
+cursor = cDeposito
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbodeposito
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XB0XR3DJ
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbolistaprecio
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "bs_clientes.idlista"
+FirstElement = 1
+Height = 22
+Name = "cbolistaprecio"
+NumberOfElements = 0
+Style = 2
+TabIndex = 38
+Width = 144
+cmdsql = select vt_listaprecio.descripcion,idlista from vt_listaprecio where idempresa = ?oApp.Empresa order by 1
+cursor = vt_listaprecio
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbolistaprecio
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1C90N6VVB
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbomoneda
+[START PROPERTIES]
+BoundColumn = 2
+Name = "cbomoneda"
+cmdsql = Select descripcion, IdMoneda,Decimales from bs_monedas order by 1
+cursor = Cu_Moneda
+objetocotizacion = this.parent.cotizacion.value
+tipo = V
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+LOCAL LCOBJETO AS CHARACTER
+LCOBJETO = THIS.OBJETOCOTIZACION
+&LCOBJETO = COTIZACION(THIS.VALUE, THIS.TIPO)
+ENDPROC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED3]
+objetocotizacion
+tipo
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbomoneda
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1SN0K0GVS
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbopaises
+[START PROPERTIES]
+Name = "cbopaises"
+cmdsql = Select Descripcion, IdPais from bs_paises order by descripcion
+cursor = cPaises
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbopaises
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X10KT13C
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbosucursal
+[START PROPERTIES]
+BorderStyle = 1
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "125,0"
+FirstElement = 1
+ItemTips = .T.
+Name = "cbosucursal"
+NumberOfElements = 0
+TabIndex = 7
+Width = 180
+cmdsql = select descripción,sucursal,IdDeposito from sucursal where idempresa = ?oApp.Empresa order by sucursal 
+cursor = Sucursal
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbosucursal
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XB0X42OX
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbovendedor
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = ""
+FirstElement = 1
+Height = 22
+Name = "cbovendedor"
+NumberOfElements = 0
+Style = 2
+TabIndex = 28
+Width = 144
+cmdsql = Select nombre, idvendedor from vt_vendedores where idempresa = ?oApp.Empresa order by 1 
+cursor = cboVendedores
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbovendedor
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XB0XT7RC
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbozonacomercial
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "bs_clientes.idzonacom"
+FirstElement = 1
+Height = 22
+Left = 391
+Name = "Tscombobox3"
+NumberOfElements = 0
+Style = 2
+TabIndex = 40
+Top = 298
+Width = 144
+cmdsql = select vt_zonacom.descripcion,idzonacom from vt_zonacom where idempresa=?oApp.empresa order by 1
+cursor = vt_zonaCom
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbozonacomercial
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XB0XUXAG
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbozonageog
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "bs_clientes.idzonageog"
+FirstElement = 1
+Height = 22
+Left = 391
+Name = "Tscombobox4"
+NumberOfElements = 0
+Style = 2
+TabIndex = 42
+Top = 322
+Width = 144
+cmdsql = select vt_zonageog.descripcion,idzonageog from vt_zonageog where idempresa=?oApp.Empresa order by 1
+cursor = vt_zonaGeog
+editable = .T.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cbozonageog
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O010QESK
+[CLASS] idcliente
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] ci_cliente_aso
+[START PROPERTIES]
+Name = "ci_cliente_aso"
+actualizar = .F.
+indice = RUC
+objeto2 = this.parent.IdCliente_Aso
+retorna2 = IdCliente
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] ci_cliente_aso
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0Z5GWS
+[CLASS] tsbaseform
+[CLASSLOC] tsbase.vcx
+[BASECLASS] form
+[OBJNAME] cn_cuentas
+[START PROPERTIES]
+AlwaysOnTop = .T.
+BackColor = 238,234,219
+BorderStyle = 2
+Caption = "Cuentas Contables"
+DoCreate = .T.
+HalfHeightCaption = .T.
+Height = 171
+Icon = ..\bitmaps\default.ico
+MaxButton = .F.
+MinButton = .F.
+Name = "cn_cuentas"
+Width = 471
+WindowType = 1
+editmode = .T.
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Activate
+IF THIS.TAG<>'N' .AND. RECCOUNT('CuentasSQL')=0
+MESSAGEBOX('No se encontró la cuenta especificada. Favor cierre el formulario y vuelva a abrir.', 64, "Futura Software")
+THISFORM.RELEASE()
+ENDIF
+ENDPROC
+PROCEDURE Init
+PARAMETER LONODO, LNDATASESSIONID, LCACCION
+LOCAL LCCODIGO, LCDESCRIPCION, LCTAG
+THIS.NODOACTIVO = LONODO
+SET DATASESSION TO LNDATASESSIONID
+IF LCACCION<>'N'
+	LOCATE FOR CUENTA=STRTRAN(LONODO.SELECTEDITEM.KEY, '_', '')
+	THIS.RUNSQL('select * from cn_cuentas where idempresa = ?oApp.Empresa and Ejercicio = ?oApp.Ejercicio and Cuenta = ?cCuentas.Cuenta', 'CuentasSQL')
+	REPLACE CUENTA WITH CUENTASSQL.CUENTA, DESCRIPCIÓN WITH CUENTASSQL.DESCRIPCIÓN, ABREVIATURA WITH CUENTASSQL.ABREVIATURA, ASENTABLE WITH CUENTASSQL.ASENTABLE, INTEGRADORA WITH CUENTASSQL.INTEGRADORA, VIGENTE WITH CUENTASSQL.VIGENTE IN CCUENTAS
+ENDIF
+SELECT CCUENTAS
+THIS.TABLA1 = 'cCuentas'
+CURSORSETPROP("Buffering", 3)
+THIS.TAG = LCACCION
+THIS.TXTCUENTA.CONTROLSOURCE = 'cCuentas.Cuenta'
+THIS.TXTDESCRIPCION.CONTROLSOURCE = 'cCuentas.Descripción'
+THIS.TXTABREVIATURA.CONTROLSOURCE = 'cCuentas.Abreviatura'
+THIS.CHKASENTABLE.CONTROLSOURCE = 'cCuentas.Asentable'
+THIS.CHKVIGENTE.CONTROLSOURCE = 'cCuentas.Vigente'
+THIS.CHKASENTABLE.ENABLED = LONODO.SELECTEDITEM.CHILDREN=0
+DODEFAULT()
+ENDPROC
+PROCEDURE afterupdatetabla1
+LOCAL CMDSQL AS STRING
+IF THISFORM.TAG='N'
+CMDSQL = 'EXEC dbo.app_cn_Cuentas_insert '
+ELSE
+CMDSQL = 'EXEC dbo.app_cn_Cuentas_update ?cCuentas.IdCuenta,  '
+ENDIF
+PUBLIC SECUENCIAL
+SECUENCIAL = CCUENTAS.ABREVIATURA
+CMDSQL = CMDSQL+'?cCuentas.idEmpresa, ?cCuentas.Cuenta,?cCuentas.ejercicio, ?cCuentas.descripción,?@Secuencial, ?cCuentas.Asentable,?cCuentas.Nivel, ?cCuentas.integradora, ?cCuentas.IdGrupoPres, ?cCuentas.Vigente'
+IF SQL(CMDSQL,  )>0
+
+	THISFORM.TXTABREVIATURA.VALUE = SECUENCIAL
+	= TABLEUPDATE(.T.)
+	THISFORM.NODOACTIVO.SELECTEDITEM.TEXT = ALLTRIM(THISFORM.TXTCUENTA.VALUE)+' - '+ALLTRIM(THISFORM.TXTDESCRIPCION.VALUE)
+	THISFORM.NODOACTIVO.SELECTEDITEM.KEY = ALLTRIM(THISFORM.TXTCUENTA.VALUE)+'_'
+	THISFORM.NODOACTIVO.SELECTEDITEM.TAG = '|A='+IIF(ASENTABLE, 'S', 'N')
+	THISFORM.NODOACTIVO.SELECTEDITEM.TAG = THISFORM.NODOACTIVO.SELECTEDITEM.TAG+'|N='+ALLTRIM(STR(NIVEL))
+	THISFORM.NODOACTIVO.SELECTEDITEM.TAG = THISFORM.NODOACTIVO.SELECTEDITEM.TAG+'|B='+ALLTRIM(IIF(ISNULL(ABREVIATURA), '', ABREVIATURA))
+	IF CCUENTAS.ASENTABLE
+		THISFORM.NODOACTIVO.SELECTEDITEM.SELECTEDIMAGE = 3
+		THISFORM.NODOACTIVO.SELECTEDITEM.IMAGE = 3
+	ELSE
+		THISFORM.NODOACTIVO.SELECTEDITEM.SELECTEDIMAGE = 2
+		THISFORM.NODOACTIVO.SELECTEDITEM.IMAGE = 1
+	ENDIF
+ELSE
+	IF THISFORM.TAG='N'
+	THISFORM.NODOACTIVO.NODES.REMOVE(THISFORM.NODOACTIVO.SELECTEDITEM.KEY)
+	ENDIF
+ENDIF
+THIS.HNDCONN = 0
+THISFORM.HIDE()
+ENDPROC
+PROCEDURE restore
+DODEFAULT()
+IF THISFORM.TAG='N'
+THISFORM.NODOACTIVO.NODES.REMOVE(THISFORM.NODOACTIVO.SELECTEDITEM.KEY)
+ENDIF
+THIS.HIDE()
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+9[END RESERVED2]
+[START RESERVED3]
+abreviatura
+nodoactivo
+secuencial
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X10KT13C
+[CLASS] tscheckbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkAsentable
+[PARENT] cn_cuentas
+[START PROPERTIES]
+Alignment = 1
+Caption = "Asentable "
+Comment = ""
+FontBold = .T.
+Height = 16
+Left = 11
+Name = "chkAsentable"
+TabIndex = 7
+Top = 104
+Width = 90
+ZOrderSet = 7
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YK149SU9
+[CLASS] tscheckbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkVigente
+[PARENT] cn_cuentas
+[START PROPERTIES]
+Alignment = 1
+Caption = "Vigente"
+Comment = ""
+FontBold = .T.
+Height = 16
+Left = 11
+Name = "chkVigente"
+TabIndex = 8
+Top = 128
+Width = 90
+ZOrderSet = 7
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HZ
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAbreviatura
+[PARENT] cn_cuentas
+[START PROPERTIES]
+Caption = "Abreviatura"
+Height = 16
+Left = 17
+Name = "lblAbreviatura"
+TabIndex = 5
+Top = 80
+Width = 66
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HF
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCuenta
+[PARENT] cn_cuentas
+[START PROPERTIES]
+Caption = "Cuenta"
+Height = 16
+Left = 42
+Name = "lblCuenta"
+TabIndex = 1
+Top = 32
+Width = 41
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HP
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripción
+[PARENT] cn_cuentas
+[START PROPERTIES]
+Caption = "Descripción"
+Height = 16
+Left = 16
+Name = "lblDescripción"
+TabIndex = 3
+Top = 56
+Width = 67
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HY
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAbreviatura
+[PARENT] cn_cuentas
+[START PROPERTIES]
+Comment = ""
+Height = 22
+Left = 88
+Name = "txtAbreviatura"
+TabIndex = 6
+Top = 80
+Width = 65
+ZOrderSet = 5
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HE
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCuenta
+[PARENT] cn_cuentas
+[START PROPERTIES]
+Comment = ""
+Enabled = .F.
+Height = 22
+Left = 88
+Name = "txtCuenta"
+TabIndex = 2
+Top = 32
+Width = 65
+ZOrderSet = 1
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HO
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] cn_cuentas
+[START PROPERTIES]
+Comment = ""
+Height = 22
+Left = 88
+Name = "txtDescripcion"
+TabIndex = 4
+Top = 56
+Width = 368
+ZOrderSet = 3
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cn_cuentas
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0Z5GWS
+[CLASS] tsbaseform
+[CLASSLOC] tsbase.vcx
+[BASECLASS] form
+[OBJNAME] cn_cuentasmodelo
+[START PROPERTIES]
+AlwaysOnTop = .T.
+BackColor = 238,234,219
+BorderStyle = 2
+Caption = "Cuentas Contables Modelo"
+DoCreate = .T.
+HalfHeightCaption = .T.
+Height = 171
+Icon = ..\bitmaps\default.ico
+MaxButton = .F.
+MinButton = .F.
+Name = "cn_cuentasmodelo"
+Width = 471
+WindowType = 1
+editmode = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+PARAMETER LONODO, LNDATASESSIONID, LCACCION
+LOCAL LCCODIGO, LCDESCRIPCION, LCTAG
+THIS.NODOACTIVO = LONODO
+SET DATASESSION TO LNDATASESSIONID
+SELECT CCUENTASMODELO
+THIS.TABLA1 = 'cCuentasModelo'
+CURSORSETPROP("Buffering", 3)
+THIS.TAG = LCACCION
+THIS.TXTCUENTA.CONTROLSOURCE = 'cCuentasModelo.Cuenta'
+THIS.TXTDESCRIPCION.CONTROLSOURCE = 'cCuentasModelo.Descripción'
+THIS.TXTABREVIATURA.CONTROLSOURCE = 'cCuentasModelo.Abreviatura'
+THIS.CHKASENTABLE.CONTROLSOURCE = 'cCuentasModelo.Asentable'
+IF LCACCION<>'N'
+LOCATE FOR CUENTA=STRTRAN(LONODO.KEY, '_', '')
+ENDIF
+THIS.CHKASENTABLE.ENABLED = LONODO.CHILDREN=0
+DODEFAULT()
+ENDPROC
+**
+PROCEDURE afterupdatetabla1
+LOCAL CMDSQL AS STRING
+IF THISFORM.TAG='N'
+CMDSQL = 'EXEC dbo.app_cn_Cuentas_insert_modelo ?cCuentasModelo.Cuenta,   '
+ELSE
+CMDSQL = 'EXEC dbo.app_cn_Cuentas_update_modelo ?cCuentasModelo.Cuenta,  '
+ENDIF
+CMDSQL = CMDSQL+'?cCuentasModelo.descripción,?cCuentasModelo.Abreviatura, ?cCuentasModelo.Asentable,?cCuentasModelo.Nivel, ?cCuentasModelo.integradora, ?cCuentasModelo.IdModelo'
+IF THIS.HNDCONN=0
+THIS.HNDCONN = SQLCONNECT(OAPP.SISTEMA)
+SQLSETPROP(THIS.HNDCONN, "Transactions", 2)
+ENDIF
+IF SQL(CMDSQL,  , THIS.HNDCONN)>0
+SQLCOMMIT(THIS.HNDCONN)
+THISFORM.NODOACTIVO.TEXT = ALLTRIM(THISFORM.TXTCUENTA.VALUE)+' - '+ALLTRIM(THISFORM.TXTDESCRIPCION.VALUE)
+THISFORM.NODOACTIVO.KEY = ALLTRIM(THISFORM.TXTCUENTA.VALUE)+'_'
+THISFORM.NODOACTIVO.TAG = '|A='+IIF(ASENTABLE, 'S', 'N')
+THISFORM.NODOACTIVO.TAG = THISFORM.NODOACTIVO.TAG+'|N='+ALLTRIM(STR(NIVEL))
+THISFORM.NODOACTIVO.TAG = THISFORM.NODOACTIVO.TAG+'|B='+ALLTRIM(IIF(ISNULL(ABREVIATURA), '', ABREVIATURA))
+IF CCUENTASMODELO.ASENTABLE
+THISFORM.NODOACTIVO.SELECTEDIMAGE = 3
+THISFORM.NODOACTIVO.IMAGE = 3
+ELSE
+THISFORM.NODOACTIVO.SELECTEDIMAGE = 2
+THISFORM.NODOACTIVO.IMAGE = 1
+ENDIF
+ELSE
+SQLROLLBACK(THIS.HNDCONN)
+ENDIF
+SQLDISCONNECT(THIS.HNDCONN)
+THIS.HNDCONN = 0
+THISFORM.HIDE()
+ENDPROC
+**
+PROCEDURE restore
+DODEFAULT()
+THIS.HIDE()
+ENDPROC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+8[END RESERVED2]
+[START RESERVED3]
+abreviatura
+nodoactivo
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X10KT13C
+[CLASS] tscheckbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkAsentable
+[PARENT] cn_cuentasmodelo
+[START PROPERTIES]
+Alignment = 1
+Caption = "Asentable "
+Comment = ""
+FontBold = .T.
+Height = 16
+Left = 11
+Name = "chkAsentable"
+TabIndex = 7
+Top = 113
+Width = 90
+ZOrderSet = 7
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HZ
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAbreviatura
+[PARENT] cn_cuentasmodelo
+[START PROPERTIES]
+Caption = "Abreviatura"
+Height = 16
+Left = 17
+Name = "lblAbreviatura"
+TabIndex = 5
+Top = 86
+Width = 66
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HF
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCuenta
+[PARENT] cn_cuentasmodelo
+[START PROPERTIES]
+Caption = "Cuenta"
+Height = 16
+Left = 42
+Name = "lblCuenta"
+TabIndex = 1
+Top = 32
+Width = 41
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HP
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripción
+[PARENT] cn_cuentasmodelo
+[START PROPERTIES]
+Caption = "Descripción"
+Height = 16
+Left = 16
+Name = "lblDescripción"
+TabIndex = 3
+Top = 59
+Width = 67
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HY
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAbreviatura
+[PARENT] cn_cuentasmodelo
+[START PROPERTIES]
+Comment = ""
+Height = 22
+Left = 88
+Name = "txtAbreviatura"
+TabIndex = 6
+Top = 86
+Width = 65
+ZOrderSet = 5
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HE
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCuenta
+[PARENT] cn_cuentasmodelo
+[START PROPERTIES]
+Comment = ""
+Enabled = .F.
+Height = 22
+Left = 88
+Name = "txtCuenta"
+TabIndex = 2
+Top = 32
+Width = 65
+ZOrderSet = 1
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YD0ZC9HO
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] cn_cuentasmodelo
+[START PROPERTIES]
+Comment = ""
+Height = 22
+Left = 88
+Name = "txtDescripcion"
+TabIndex = 4
+Top = 59
+Width = 368
+ZOrderSet = 3
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] cn_cuentasmodelo
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1R40Y7YIM
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] fecha
+[START PROPERTIES]
+Name = "fecha"
+condicionvalidacion = BETWEEN(THIS.VALUE ,oApp.InicioEjercicio ,oApp.FinalEjercicio) and (oApp.Periodo = 13 or  oApp.PeriodoTrabajo>oApp.Periodo) and (month(this.value) = oApp.PeriodoTrabajo or oApp.PeriodoTrabajo=13)
+mensajevalidacion = La fecha no se encuentra dentro del Periodo o Ejercicio.
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] fecha
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0P5QV2
+[CLASS] tsbaseform
+[CLASSLOC] tsbase.vcx
+[BASECLASS] form
+[OBJNAME] frmvalores
+[START PROPERTIES]
+Caption = "Detalle de Valores"
+DoCreate = .T.
+Height = 242
+MaxButton = .F.
+MinButton = .F.
+Name = "frmvalores"
+Width = 493
+WindowType = 1
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+7[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PHLAN
+[CLASS] ts3dshape
+[CLASSLOC] tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] frmvalores
+[START PROPERTIES]
+Height = 0
+Left = 24
+Name = "Ts3dshape1"
+Top = 190
+Width = 444
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X10KVJF8
+[CLASS] tscommandbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] frmvalores
+[START PROPERTIES]
+Cancel = .T.
+Caption = "Cancelar"
+Left = 396
+Name = "Tscommandbutton1"
+Top = 200
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PHLAV
+[CLASS] tscommandbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton2
+[PARENT] frmvalores
+[START PROPERTIES]
+Caption = "Aceptar"
+Left = 300
+Name = "Tscommandbutton2"
+Top = 200
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PHLAB
+[CLASS] valores
+[CLASSLOC] futura.vcx
+[BASECLASS] container
+[OBJNAME] Valores1
+[PARENT] frmvalores
+[START PROPERTIES]
+Left = 24
+Name = "Valores1"
+Top = 20
+Tsfact1.Banco.Header1.Name = "Header1"
+Tsfact1.Banco.Name = "Banco"
+Tsfact1.Banco.Tscombobox3.Name = "Tscombobox3"
+Tsfact1.COLUMN0.Name = "COLUMN0"
+Tsfact1.Column2.Header1.Name = "Header1"
+Tsfact1.Column2.Name = "Column2"
+Tsfact1.Column2.Text1.Name = "Text1"
+Tsfact1.Column4.Header1.Name = "Header1"
+Tsfact1.Column4.Name = "Column4"
+Tsfact1.Column4.Text1.Name = "Text1"
+Tsfact1.Column5.Header1.Name = "Header1"
+Tsfact1.Column5.Name = "Column5"
+Tsfact1.Column5.Text1.Name = "Text1"
+Tsfact1.Name = "Tsfact1"
+Tsfact1.Tipo.Header1.Name = "Header1"
+Tsfact1.Tipo.Name = "Tipo"
+Tsfact1.Tipo.Tscombobox1.Name = "Tscombobox1"
+Tslabel10.Caption = "Detalle de Valores"
+Tslabel10.Name = "Tslabel10"
+Tslabel9.Name = "Tslabel9"
+txtTotalValor.Name = "txtTotalValor"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PHLAL
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] frmvalores.Valores1.Tsfact1.COLUMN0
+[START PROPERTIES]
+Caption = "Header1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PHLAM
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] frmvalores.Valores1.Tsfact1.COLUMN0
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 255,255,255
+SelectedForeColor = 0,0,0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] frmvalores
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GE0ONVJI
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idasociacion
+[START PROPERTIES]
+Name = "idasociacion"
+indice = IdAsociacion
+objeto = this.parent.asociacion
+origen = R
+retorna = asociacion
+tabla = financiera.dbo.fn_asociaciones
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idasociacion
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O00TOWHZ
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idbanco
+[START PROPERTIES]
+Name = "idbanco"
+condicionextra = Tipo='B'
+indice = IdBanco
+objeto = this.parent.banco
+origen = R
+retorna = descripcion
+tabla = bs_Bancos
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idbanco
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XB0UQY3V
+[CLASS] campo_clave
+[CLASSLOC] ..\..\futura\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idcliente
+[START PROPERTIES]
+Height = 22
+Name = "idcliente"
+TabIndex = 6
+Width = 96
+condicion_en_edicion = Activo=1
+condicionextra = idempresa=?oApp.Empresa 
+datoayuda = Clientes
+editable = .T.
+indice = idCliente
+objeto = this.parent.Cliente
+origen = R
+retorna = razSocial
+tabla = vt_clientes
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idcliente
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O010PNA9
+[CLASS] idcliente
+[CLASSLOC] futura.vcx
+[BASECLASS] textbox
+[OBJNAME] idcliente_aso
+[START PROPERTIES]
+Name = "idcliente_aso"
+actualizar = .F.
+objeto2 = this.parent.ci
+retorna2 = RUC
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE novalido_event
+*Return .T.
+Local CCLIENTE, IDASO
+If Type("THIS.VALUE")="C"
+	CCLIENTE = This.Value
+Else
+	CCLIENTE = Str(This.Value)
+Endif
+If Messagebox("Desea seguir buscando?.", 068, TASTRADE_LOC)=6
+	If Sql("fn_BuscaCliente "+CCLIENTE, "cCedula")>0
+		If Reccount("cCedula")>0
+			If Messagebox("Se ha encontrado : "+Rtrim(CCEDULA.NYA)+Chr(13)+"Desea agregar a la lista de clientes?", 068, TASTRADE_LOC)=6
+				IDASO = Inputbox("Codigo de Asociacion", "Indique la Asociacion")
+				If Empty(IDASO)
+					IDASO = "0"
+				Endif
+				If Sql("exec fn_AgregarCliente ?cCedula.Nombre,?cCedula.Apellido,?cCedula.Ci,?cCedula.Direccion ,"+IDASO, "cCedula")>0
+					Return .T.
+				Endif
+			Endif
+		Else
+			Messagebox("No se ha encontrado el cliente especificado", 64, TASTRADE_LOC)
+			Return .F.
+		Endif
+	Endif
+Endif
+Return .F.
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idcliente_aso
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X713KI4G
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idconcepto
+[START PROPERTIES]
+BackStyle = 1
+BorderStyle = 0
+Name = "idconcepto"
+condicionextra = idEmpresa = ?oapp.empresa
+copiarcampos = isnull(Valor,0) AS Porcentaje
+datoayuda = Conceptos CNT
+indice = idConcepto
+mensajeerror = No se encuentra el Concepto
+objeto = this.parent.parent.concepto.text1
+origen = R
+pegarcampos = Porcentaje
+retorna = concepto
+tabla = cn_Conceptos a left join vt_Iva b on a.IdIva = b.Iva
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idconcepto
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X80N61WD
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idcuenta
+[START PROPERTIES]
+ControlSource = "cp_vproveedores.cuentacontable"
+Height = 22
+Name = "idcuenta"
+TabIndex = 28
+Width = 77
+condicionextra = idEmpresa = ?oApp.Empresa and Ejercicio = ?oApp.Ejercicio and  asentable=1
+datoayuda = Cuentas Contables
+indice = cuenta
+mensajeerror = La cuenta no existe o no es asentable.
+objeto = this.parent.cuentaContable
+origen = R
+retorna = descripción
+tabla = cn_cuentas
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idcuenta
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MZ0JYY4Y
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] iddeposito
+[START PROPERTIES]
+BorderStyle = 0
+Name = "iddeposito"
+condicionextra = IdEmpresa = ?oApp.Empresa
+datoayuda = Depositos
+indice = IdDeposito
+mensajeerror = No se encuentra el depósito.
+origen = R
+tabla = st_depositos
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] iddeposito
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O710MCBP
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idnegocio
+[START PROPERTIES]
+ControlSource = "vt_pedido.idnegocio"
+Height = 22
+Name = "idnegocio"
+TabIndex = 2
+Width = 84
+ZOrderSet = 25
+condicion_en_edicion = idempresa=?oApp.Empresa and Activo=1
+condicionextra = idempresa=?oApp.Empresa 
+datoayuda = Negocios
+indice = IdNegocio
+objeto = this.parent.negocio
+objeto2 = 
+origen = R
+requerido = .T.
+retorna = Negocio
+retorna2 = 
+tabla = vt_Negocio
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idnegocio
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZO5QD
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idpersona
+[START PROPERTIES]
+Name = "idpersona"
+datoayuda = Personas
+indice = IdPersona
+objeto = this.parent.persona
+origen = R
+requerido = .T.
+retorna = rtrim(nombre) + ' ' + apellido
+tabla = bs_personas
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idpersona
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _19J0YBDQY
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idproducto
+[START PROPERTIES]
+Name = "idproducto"
+condicionextra = IdEmpresa=?oApp.Empresa and (isnull(FiltraSucursal,0)=0 or exists(Select idproducto from st_ProductoSucursal s where p.IdEmpresa=s.IdEmpresa and p.IdProducto=s.IdProducto and s.Sucursal=?oApp.Sucursal))
+datoayuda = Productos
+indice = IdProducto
+mensajeerror = No se encuentra el producto
+origen = R
+retorna = descripcion
+tabla = st_producto p
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idproducto
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X713AR97
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idproveedor
+[START PROPERTIES]
+ControlSource = "iva.código"
+Height = 22
+Left = 119
+Name = "Campo_clave1"
+TabIndex = 6
+Top = 70
+Width = 96
+condicionextra = idempresa=?oApp.Empresa
+datoayuda = Proveedores
+editable = .T.
+indice = idProveedor
+objeto = this.parent.proveedor
+origen = R
+retorna = razon
+tabla = cp_proveedor
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idproveedor
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25N0L5L4R
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idproyecto
+[START PROPERTIES]
+InputMask = "999999"
+Name = "idproyecto"
+condicion_en_edicion = Estado='A'
+condicionextra = IdEmpresa=?oApp.Empresa
+datoayuda = Proyectos
+indice = Nro
+objeto = this.parent.proyecto
+origen = R
+retorna = Nombre
+tabla = pr_Proyecto
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+*!*	LOCAL lcCampo, lcAlias
+*!*	MESSAGEBOX(this.ControlSource)
+*!*	lcAlias=SUBSTR(this.ControlSource,1,AT(".",this.ControlSource)-1)
+*!*	lcCampo=SUBSTR(this.ControlSource,AT(".",this.ControlSource)+1)
+*!*	IF EMPTY(FIELD(lcCampo,lcAlias))
+*!*			this.Visible=.f.
+*!*			this.ControlSource=""
+*!*	ENDIF
+this.Visible=!EMPTY(this.ControlSource)
+DODEFAULT()
+
+ENDPROC
+PROCEDURE controlsource_access
+*To do: Modify this routine for the Access method
+LOCAL lcCampo, lcAlias
+lcAlias=SUBSTR(this.ControlSource,1,AT(".",this.ControlSource)-1)
+lcCampo=SUBSTR(this.ControlSource,AT(".",this.ControlSource)+1)
+IF EMPTY(FIELD(lcCampo,lcAlias))
+	RETURN "" 
+ELSE
+	RETURN THIS.ControlSource
+ENDIF
+
+
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED3]
+*controlsource_access 
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idproyecto
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT13QWW4
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idrecepcionista
+[START PROPERTIES]
+Name = "idrecepcionista"
+condicionextra = IdEmpresa=?oApp.Empresa and r.IdPersona = p.IdPersona
+datoayuda = Recepcionistas
+indice = IdReceptor
+objeto = this.parent.recepcionista
+origen = R
+retorna = rtrim(nombre) + ' ' + apellido
+tabla = vt_Receptor r, bs_Personas p
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idrecepcionista
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT13LAZC
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idrepartidor
+[START PROPERTIES]
+Name = "idrepartidor"
+condicionextra = IdEmpresa=?oApp.Empresa and r.IdPersona = p.IdPersona
+datoayuda = Repartidores
+indice = IdRepartidor
+objeto = this.parent.repartidor
+origen = R
+retorna = rtrim(nombre) + ' ' + apellido
+tabla = vt_Repartidor r,bs_Personas p
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idrepartidor
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O00UKQ56
+[CLASS] campo_clave
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idvendedor
+[START PROPERTIES]
+Name = "idvendedor"
+condicionextra = IdEmpresa = ?oApp.Empresa and  a.IdPersona = b.IdPersona
+indice = IdVendedor
+objeto = this.parent.vendedor
+origen = R
+retorna = rtrim(b.nombre) + ' ' + b.apellido
+tabla = vt_Vendedores a, bs_Personas b
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] idvendedor
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VA0Z4JB6
+[CLASS] reportlistener
+[BASECLASS] reportlistener
+[OBJNAME] report
+[START PROPERTIES]
+FRXDataSession = -1
+Height = 23
+Name = "report"
+Width = 23
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] report
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOINE
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] valores
+[START PROPERTIES]
+Height = 152
+Name = "valores"
+Width = 444
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+15[END RESERVED2]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOINF
+[CLASS] tsgrid
+[CLASSLOC] tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsfact1
+[PARENT] valores
+[START PROPERTIES]
+AllowAddNew = .F.
+AllowHeaderSizing = .F.
+AllowRowSizing = .F.
+ChildOrder = ""
+Column1.ColumnOrder = 3
+Column1.ControlSource = ""
+Column1.FontSize = 8
+Column1.Name = "Nro"
+Column1.Visible = .T.
+Column1.Width = 66
+Column2.ColumnOrder = 2
+Column2.ControlSource = ""
+Column2.FontSize = 8
+Column2.Name = "Banco"
+Column2.Sparse = .F.
+Column2.Visible = .T.
+Column2.Width = 120
+Column3.ColumnOrder = 5
+Column3.ControlSource = ""
+Column3.DynamicInputMask = ""
+Column3.FontSize = 8
+Column3.InputMask = "999,999,999,999.99"
+Column3.Name = "Importe"
+Column3.Visible = .T.
+Column3.Width = 93
+Column4.ColumnOrder = 1
+Column4.ControlSource = ""
+Column4.CurrentControl = "Tscombobox1"
+Column4.FontSize = 8
+Column4.Name = "Tipo"
+Column4.Sparse = .F.
+Column4.Visible = .T.
+Column4.Width = 70
+Column5.ColumnOrder = 4
+Column5.ControlSource = ""
+Column5.FontSize = 8
+Column5.Name = "Fecha"
+Column5.Width = 60
+ColumnCount = 5
+DeleteMark = .F.
+FontSize = 8
+GridLines = 2
+HeaderHeight = 20
+Height = 110
+Highlight = .F.
+Left = 0
+LinkMaster = ""
+Name = "Tsfact1"
+Panel = 1
+PanelLink = .T.
+RecordMark = .F.
+RelationalExpr = ""
+RightToLeft = .T.
+RowHeight = 22
+ScrollBars = 2
+SplitBar = .F.
+TabIndex = 14
+Top = 17
+Width = 444
+ZOrderSet = 0
+campo = IdFactura,idempresa,IdMoneda,Importe
+cfieldtosum = Importe
+editable = .T.
+valor = thisform.IdFactura,oapp.empresa,'GS'
+valorvariable = thisform.IdFactura
+variablevista = m.IdFactura
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+THIS.PARENT.TXTTOTALVALOR.REFRESH()
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOINY
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] valores.Tsfact1.Banco
+[START PROPERTIES]
+Caption = "Banco"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOINZ
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] valores.Tsfact1.Banco
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+FirstElement = 1
+Height = 22
+Left = 163
+Name = "Tscombobox3"
+NumberOfElements = 0
+SpecialEffect = 1
+Style = 2
+TabIndex = 12
+Top = 150
+Width = 194
+cmdsql = Select descripcion,convert(char(10),idbanco) as IdBanco from bs_Bancos order by 1
+condicionvalidacion = 
+cursor = Bancos
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOIOJ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] valores.Tsfact1.Fecha
+[START PROPERTIES]
+Caption = "Fecha"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOIOK
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] valores.Tsfact1.Fecha
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOIO0
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] valores.Tsfact1.Importe
+[START PROPERTIES]
+Caption = "Importe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOIO8
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] valores.Tsfact1.Importe
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999,999.99"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+**
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THIS.PARENT.PARENT.PARENT.TXTTOTALVALOR.REFRESH()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOINO
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] valores.Tsfact1.Nro
+[START PROPERTIES]
+Caption = "Cheque Nº"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOINP
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] valores.Tsfact1.Nro
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+[START METHODS]
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOIO9
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] valores.Tsfact1.Tipo
+[START PROPERTIES]
+Caption = "Tipo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOIOA
+[CLASS] tscombobox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] valores.Tsfact1.Tipo
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 2
+ColumnLines = .T.
+Left = 18
+Name = "Tscombobox1"
+SpecialEffect = 1
+Style = 2
+Top = 26
+Visible = .T.
+cmdsql = Select TipoValor,convert(char(10),IdTipoValor) from ts_TipoValor 
+condicionvalidacion = 
+cursor = cTipoValor
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOIOT
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel10
+[PARENT] valores
+[START PROPERTIES]
+Alignment = 2
+BackColor = 128,128,192
+BackStyle = 1
+Caption = "Detalle de Pago"
+ForeColor = 255,255,255
+Height = 16
+Left = 0
+Name = "Tslabel10"
+Style = 0
+TabIndex = 13
+Top = 0
+Width = 444
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOIOM
+[CLASS] tslabel
+[CLASSLOC] tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] valores
+[START PROPERTIES]
+Caption = "Total de Valores"
+Height = 16
+Left = 203
+Name = "Tslabel9"
+TabIndex = 15
+Top = 132
+Width = 107
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0OOIOL
+[CLASS] tstextbox
+[CLASSLOC] tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTotalValor
+[PARENT] valores
+[START PROPERTIES]
+Comment = ""
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999"
+Left = 320
+Name = "txtTotalValor"
+TabIndex = 16
+Top = 130
+Width = 95
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+**
+** ReFox - este procedimiento es vacío **
+**
+ENDPROC
+**
+PROCEDURE Refresh
+THIS.PARENT.TSFACT1.SUMCOLUMN()
+THIS.VALUE = THIS.PARENT.TSFACT1.TOTALES(1)
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] valores
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

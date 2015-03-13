@@ -1,0 +1,1583 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN4
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = (oApp.HndConn)
+DataSourceType = "ODBC"
+Height = 200
+InitialSelectedAlias = "pr_ProyectoDet"
+Left = 265
+Name = "Dataenvironment"
+Top = 241
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+4[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W11CA84
+[CLASS] cursoradapter
+[BASECLASS] cursoradapter
+[OBJNAME] Cursoradapter1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "pr_ProyectoDet"
+BufferModeOverride = 5
+CursorSchema = IDPD I, IDPROYECTO I, IDEMPRESA C(3), IDPRODUCTO C(20), PRODUCTO C(50), DESCRIPCION C(200), UM C(3), CANTIDAD Y, PRECIO Y, IMPORTE Y, CERTIFICACION Y, TIPO C(1), IDPADRE I
+Flags = 0
+Height = 90
+KeyFieldList = IDPD
+Left = 10
+Name = "Cursoradapter1"
+NoData = .T.
+Prepared = .T.
+SelectCmd = select * from pr_ProyectoDet where IdPD=?thisform.key
+Tables = pr_ProyectoDet
+Top = 20
+UpdatableFieldList = IDPROYECTO, IDEMPRESA, IDPRODUCTO, PRODUCTO, DESCRIPCION, UM, CANTIDAD, PRECIO, IMPORTE, CERTIFICACION, TIPO, IDPADRE
+UpdateNameList =      430IDPD pr_ProyectoDet.IDPD, IDPROYECTO pr_ProyectoDet.IDPROYECTO, IDEMPRESA pr_ProyectoDet.IDEMPRESA, IDPRODUCTO pr_ProyectoDet.IDPRODUCTO, PRODUCTO pr_ProyectoDet.PRODUCTO, DESCRIPCION pr_ProyectoDet.DESCRIPCION, UM pr_ProyectoDet.UM, CANTIDAD pr_ProyectoDet.CANTIDAD, PRECIO pr_ProyectoDet.PRECIO, IMPORTE pr_ProyectoDet.IMPORTE, CERTIFICACION pr_ProyectoDet.CERTIFICACION, TIPO pr_ProyectoDet.TIPO, IDPADRE pr_ProyectoDet.IDPADRE
+UseDeDataSource = .T.
+Width = 155
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE AutoOpen
+*** Setup code: DO NOT REMOVE
+if not pemstatus(This, '__VFPSetup', 5)
+	This.AddProperty('__VFPSetup', 1)
+	This.Init()
+endif
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+PROCEDURE Init
+*** Setup code: DO NOT REMOVE
+local llReturn
+do case
+	case not pemstatus(This, '__VFPSetup', 5)
+		This.AddProperty('__VFPSetup', 0)
+	case This.__VFPSetup = 1
+		This.__VFPSetup = 2
+	case This.__VFPSetup = 2
+		This.__VFPSetup = 0
+		return
+endcase
+set multilocks on
+llReturn = dodefault()
+*** End of Setup code: DO NOT REMOVE
+
+*** Setup code: DO NOT REMOVE
+if This.__VFPSetup = 1
+	This.__VFPSetup = 2
+endif
+return llReturn
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W130L00
+[CLASS] cursoradapter
+[BASECLASS] cursoradapter
+[OBJNAME] Cursoradapter2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "pr_ProyectoDetList"
+CursorSchema = IDPD I, IDPROYECTO I, IDEMPRESA C(3), IDPRODUCTO C(20), PRODUCTO C(50), DESCRIPCION C(200), UM C(3), CANTIDAD Y, PRECIO Y, IMPORTE Y, CERTIFICACION Y, TIPO C(1), IDPADRE I
+Flags = 0
+Height = 90
+KeyFieldList = IDPD
+Left = 294
+Name = "Cursoradapter2"
+NoData = .T.
+SelectCmd = select * from pr_ProyectoDet where IdPAdre=?m.idPadre
+Tables = pr_ProyectoDet
+Top = 13
+UpdatableFieldList = CANTIDAD
+UpdateNameList = IDPD pr_ProyectoDet.IDPD, CANTIDAD pr_ProyectoDet.CANTIDAD
+UseDeDataSource = .T.
+Width = 138
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE AutoOpen
+*** Setup code: DO NOT REMOVE
+if not pemstatus(This, '__VFPSetup', 5)
+	This.AddProperty('__VFPSetup', 1)
+	This.Init()
+endif
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+PROCEDURE Init
+*** Setup code: DO NOT REMOVE
+local llReturn
+do case
+	case not pemstatus(This, '__VFPSetup', 5)
+		This.AddProperty('__VFPSetup', 0)
+	case This.__VFPSetup = 1
+		This.__VFPSetup = 2
+	case This.__VFPSetup = 2
+		This.__VFPSetup = 0
+		return
+endcase
+set multilocks on
+llReturn = dodefault()
+*** End of Setup code: DO NOT REMOVE
+
+*** Setup code: DO NOT REMOVE
+if This.__VFPSetup = 1
+	This.__VFPSetup = 2
+endif
+return llReturn
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB48
+[CLASS] cursoradapter
+[BASECLASS] cursoradapter
+[OBJNAME] Cursoradapter3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "pr_ProyectoMed"
+BufferModeOverride = 5
+CursorSchema = IDPM I, IDPD I, LINEA I, DESCRIPCION C(50), CANTIDAD Y, LONGITUD Y, ALTURA Y, ANCHURA Y, FORMULA C(50), TOTAL Y
+Flags = 0
+Height = 90
+KeyFieldList = IDPM
+Left = 136
+Name = "Cursoradapter3"
+NoData = .T.
+SelectCmd = select * from pr_ProyectoMed where IdPD=?m.IdPD
+Tables = pr_ProyectoMed
+Top = 25
+UpdatableFieldList = IDPD, LINEA, DESCRIPCION, CANTIDAD, LONGITUD, ALTURA, ANCHURA, FORMULA, TOTAL
+UpdateNameList =      308IDPM pr_ProyectoMed.IDPM, IDPD pr_ProyectoMed.IDPD, LINEA pr_ProyectoMed.LINEA, DESCRIPCION pr_ProyectoMed.DESCRIPCION, CANTIDAD pr_ProyectoMed.CANTIDAD, LONGITUD pr_ProyectoMed.LONGITUD, ALTURA pr_ProyectoMed.ALTURA, ANCHURA pr_ProyectoMed.ANCHURA, FORMULA pr_ProyectoMed.FORMULA, TOTAL pr_ProyectoMed.TOTAL
+UseDeDataSource = .T.
+Width = 130
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE AutoOpen
+*** Setup code: DO NOT REMOVE
+if not pemstatus(This, '__VFPSetup', 5)
+	This.AddProperty('__VFPSetup', 1)
+	This.Init()
+endif
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+PROCEDURE Init
+*** Setup code: DO NOT REMOVE
+local llReturn
+do case
+	case not pemstatus(This, '__VFPSetup', 5)
+		This.AddProperty('__VFPSetup', 0)
+	case This.__VFPSetup = 1
+		This.__VFPSetup = 2
+	case This.__VFPSetup = 2
+		This.__VFPSetup = 0
+		return
+endcase
+set multilocks on
+llReturn = dodefault()
+*** End of Setup code: DO NOT REMOVE
+
+*** Setup code: DO NOT REMOVE
+if This.__VFPSetup = 1
+	This.__VFPSetup = 2
+endif
+return llReturn
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN5
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+Caption = "Carpeta de Proyecto"
+DataSession = 2
+DoCreate = .T.
+Height = 526
+Name = "Tsbaseform12"
+Width = 874
+campos = IdProyecto,IdEmpresa,IdPadre
+idproyecto = 1
+key = .F.
+lblRequerido.Name = "lblRequerido"
+lblRequerido.ZOrderSet = 1
+tabla1 = pr_proyectoDet
+tabla2 = pr_proyectoMed
+tabla3 = pr_ProyectoDetList
+valores = thisform.IdProyecto,oApp.Empresa,thisform.key
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+SET CLASSLIB TO proyecto ADDITIVE 
+DODEFAULT()
+this.filltree()
+
+ENDPROC
+PROCEDURE filltree
+cmdsql="Select IdPD,Producto=RTRIM(IdProducto) + ' - '+ Producto,Tipo,IdPadre from pr_proyectoDET where IdProyecto=?this.idproyecto"
+this.runsql(cmdsql,"pr")
+SELECT pr
+
+
+THISFORM.Pageframe1.Proyecto.OLETREEVIEW.DOVERB(-1)
+THIS.Pageframe1.Proyecto.OLETREEVIEW.IMAGELIST = THIS.Pageframe1.Proyecto.OLEIMAGESLIST
+O = THISFORM.Pageframe1.Proyecto.OLETREEVIEW.NODES
+O.CLEAR
+
+SCAN 
+	
+	
+		IF ISNULL(IdPadre)
+			O.ADD( , 1, this.newkey(IdPD), ALLTRIM(Producto), 1, 2)
+		ELSE
+			
+				O.ADD(this.newkey(IdPadre), 4, this.newkey(IdPD), ALLTRIM(Producto), 1, 2)
+
+		ENDIF
+ENDSCAN
+THISFORM.Pageframe1.Proyecto.OLETREEVIEW.FONT.SIZE = 8
+THISFORM.Pageframe1.Proyecto.OLETREEVIEW.LABELEDIT = 1
+THISFORM.Pageframe1.Proyecto.OLETREEVIEW.LINESTYLE = 1
+THISFORM.Pageframe1.Proyecto.OLETREEVIEW.indentation=4
+THISFORM.Pageframe1.Proyecto.OLETREEVIEW.SORTED = .F.
+
+
+
+ENDPROC
+PROCEDURE medir
+LOCAL mTotal
+IF !EMPTY(NVL(pr_ProyectoMed.Formula,''))
+	mTotal = EVALUATE(pr_ProyectoMed.Formula)
+ELSE
+	mTotal = pr_ProyectoMed.Cantidad * pr_ProyectoMed.Longitud * pr_ProyectoMed.Altura *pr_ProyectoMed.Anchura
+ENDIF
+replace Total WITH mTotal IN pr_ProyectoMed		
+
+ThisForm.Pageframe1.Page1.Total.Refresh()
+
+replace cantidad WITH ThisForm.Pageframe1.Page1.Total.Value IN pr_ProyectoDetList
+
+ENDPROC
+PROCEDURE newkey
+LPARAMETERS IdNodo
+RETURN ALLTRIM(STR(IdNodo))+"_"
+
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*filltree 
+*medir 
+*newkey 
+idproyecto
+key
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN4
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] Pageframe1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ErasePage = .T.
+Height = 526
+Left = 0
+Name = "Pageframe1"
+Page1.Caption = "Proyecto"
+Page1.FontSize = 8
+Page1.Name = "Proyecto"
+Page2.Caption = "Ficha"
+Page2.FontSize = 8
+Page2.Name = "Page2"
+Page3.Caption = "Mediciones"
+Page3.FontSize = 8
+Page3.Name = "Page1"
+Page4.Caption = "Descomposicion"
+Page4.FontSize = 8
+Page4.Name = "Page3"
+PageCount = 4
+Top = 0
+Width = 864
+ZOrderSet = 0
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Page1.Activate
+this.Refresh()
+
+
+ENDPROC
+PROCEDURE Page1.Deactivate
+*thisform.save()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB50
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdPr_proyectomed
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "pr_ProyectoMed.linea"
+Column1.FontSize = 8
+Column1.Name = "Column3"
+Column1.Width = 38
+Column2.ControlSource = "pr_ProyectoMed.descripcion"
+Column2.FontSize = 8
+Column2.Name = "Column4"
+Column2.Width = 197
+Column3.ColumnOrder = 4
+Column3.ControlSource = "pr_ProyectoMed.cantidad"
+Column3.FontSize = 8
+Column3.Name = "Column5"
+Column3.Width = 58
+Column4.ColumnOrder = 5
+Column4.ControlSource = "pr_ProyectoMed.longitud"
+Column4.FontSize = 8
+Column4.Name = "Column6"
+Column4.Width = 59
+Column5.ColumnOrder = 6
+Column5.ControlSource = "pr_ProyectoMed.altura"
+Column5.FontSize = 8
+Column5.Name = "Column7"
+Column5.Width = 57
+Column6.ColumnOrder = 7
+Column6.ControlSource = "pr_ProyectoMed.anchura"
+Column6.FontSize = 8
+Column6.Name = "Column8"
+Column6.Width = 62
+Column7.ColumnOrder = 3
+Column7.ControlSource = "pr_ProyectoMed.formula"
+Column7.FontSize = 8
+Column7.Name = "Column9"
+Column7.Width = 183
+Column8.ColumnOrder = 8
+Column8.ControlSource = "pr_ProyectoMed.total"
+Column8.FontSize = 8
+Column8.Name = "Column10"
+Column8.ReadOnly = .T.
+Column8.Width = 74
+ColumnCount = 8
+FontSize = 8
+Height = 409
+Left = 23
+Name = "grdPr_proyectomed"
+Panel = 1
+RecordSource = "pr_ProyectoMed"
+RecordSourceType = 1
+RowHeight = 17
+ScrollBars = 2
+Top = 58
+Width = 756
+campo = IdPD
+cfieldtosum = total
+editable = .T.
+valor = pr_proyectoDetList.IdPD
+valorvariable = pr_proyectoDetList.IdPD
+variablevista = m.IdPD
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+
+This.parent.Total.Refresh()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB4Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Total
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = ""
+Enabled = .F.
+Height = 21
+Left = 683
+Name = "Total"
+Top = 22
+Width = 72
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+This.parent.grdPr_proyectomed.sumcolumn()
+this.Value=This.parent.grdPr_proyectomed.totales(1)
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB4W
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Alto"
+Height = 16
+Left = 623
+Name = "Tslabel1"
+Top = 8
+Width = 26
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB4Y
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Total"
+Height = 16
+Left = 683
+Name = "Tslabel2"
+Top = 8
+Width = 31
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB4R
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "U.M."
+Height = 16
+Left = 11
+Name = "Tslabel3"
+Top = 8
+Width = 27
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Descripcion"
+Height = 16
+Left = 71
+Name = "Tslabel4"
+Top = 8
+Width = 69
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB4U
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Cantidad"
+Height = 16
+Left = 443
+Name = "Tslabel5"
+Top = 8
+Width = 52
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Largo"
+Height = 16
+Left = 503
+Name = "Tslabel6"
+Top = 8
+Width = 36
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W130L00
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Ancho"
+Height = 16
+Left = 563
+Name = "Tslabel7"
+Top = 8
+Width = 39
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W14IRHY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Formula"
+Height = 16
+Left = 251
+Name = "Tslabel8"
+Top = 8
+Width = 49
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB4X
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = ""
+Height = 21
+Left = 623
+Name = "Tstextbox1"
+Top = 22
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB4V
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox3
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = ""
+Height = 21
+Left = 443
+Name = "Tstextbox3"
+Top = 22
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W11CA84
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox4
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = ""
+Height = 21
+Left = 503
+Name = "Tstextbox4"
+Top = 22
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN5
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox5
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = ""
+Height = 21
+Left = 563
+Name = "Tstextbox5"
+Top = 22
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W14IRHZ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox6
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "pr_ProyectoMed.formula"
+Height = 21
+Left = 251
+Name = "Tstextbox6"
+ReadOnly = .F.
+Top = 22
+Width = 192
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W11CA84
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDesc
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "pr_ProyectoDetList.producto"
+Height = 21
+Left = 71
+Name = "txtDesc"
+ReadOnly = .T.
+Top = 22
+Width = 192
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB4Q
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Unidad
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 1
+ColumnCount = 1
+ColumnWidths = "105,0"
+ControlSource = "pr_ProyectoDetList.um"
+Enabled = .F.
+FirstElement = 1
+Height = 22
+Left = 11
+Name = "Unidad"
+NumberOfElements = 0
+Style = 2
+TabIndex = 5
+Top = 22
+Width = 52
+ZOrderSet = 36
+cmdsql = Select Unidad from st_Unidad
+cursor = cUnidad
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB5F
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column10
+[START PROPERTIES]
+Caption = "total"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB5G
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column10
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB51
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column3
+[START PROPERTIES]
+Caption = "linea"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB52
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column3
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB53
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column4
+[START PROPERTIES]
+Caption = "descripcion"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB54
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column4
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB55
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column5
+[START PROPERTIES]
+Caption = "cantidad"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB56
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column5
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.Tag=STR(this.Value,10,4)
+
+ENDPROC
+PROCEDURE LostFocus
+IF this.Tag<>STR(this.Value,10,4)
+	thisform.medir()
+ENDIF
+	
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB57
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column6
+[START PROPERTIES]
+Caption = "longitud"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB58
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.Tag=STR(this.Value,10,4)
+
+ENDPROC
+PROCEDURE LostFocus
+IF this.Tag<>STR(this.Value,10,4)
+	thisform.medir()
+ENDIF
+	
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB59
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column7
+[START PROPERTIES]
+Caption = "altura"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB5A
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column7
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.Tag=STR(this.Value,10,4)
+
+ENDPROC
+PROCEDURE LostFocus
+IF this.Tag<>STR(this.Value,10,4)
+	thisform.medir()
+ENDIF
+	
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB5B
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column8
+[START PROPERTIES]
+Caption = "anchura"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB5C
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column8
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.Tag=STR(this.Value,10,4)
+
+ENDPROC
+PROCEDURE LostFocus
+IF this.Tag<>STR(this.Value,10,4)
+	thisform.medir()
+ENDIF
+	
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB5D
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column9
+[START PROPERTIES]
+Caption = "formula"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13XB5E
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page1.grdPr_proyectomed.Column9
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.Tag=this.Value
+
+ENDPROC
+PROCEDURE LostFocus
+IF this.Tag<>this.Value
+	thisform.medir()
+ENDIF
+	
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG7T
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdPr_proyectodetlist
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+Column1.ControlSource = "pr_ProyectoDetList.idproducto"
+Column1.FontSize = 8
+Column1.Name = "Column4"
+Column1.ReadOnly = .T.
+Column1.Width = 70
+Column2.ControlSource = "pr_ProyectoDetList.producto"
+Column2.FontSize = 8
+Column2.Name = "Column5"
+Column2.ReadOnly = .T.
+Column2.Width = 150
+Column3.ControlSource = "pr_ProyectoDetList.um"
+Column3.FontSize = 8
+Column3.Name = "Column7"
+Column3.ReadOnly = .T.
+Column3.Width = 87
+Column4.ControlSource = "pr_ProyectoDetList.cantidad"
+Column4.FontSize = 8
+Column4.Name = "Column8"
+Column4.ReadOnly = .T.
+Column4.Width = 66
+Column5.ControlSource = "pr_ProyectoDetList.precio"
+Column5.FontSize = 8
+Column5.Name = "Column9"
+Column5.ReadOnly = .T.
+Column5.Width = 65
+Column6.ControlSource = "pr_ProyectoDetList.importe"
+Column6.FontSize = 8
+Column6.Name = "Column10"
+Column6.ReadOnly = .T.
+Column6.Width = 83
+ColumnCount = 6
+FontSize = 8
+Height = 288
+Left = 227
+Name = "grdPr_proyectodetlist"
+Panel = 1
+ReadOnly = .T.
+RecordSource = "pr_ProyectoDetList"
+RecordSourceType = 1
+RowHeight = 17
+Top = 20
+Width = 612
+valorvariable = thisform.key
+variablevista = m.idPadre
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN5
+[CLASS] olecontrol
+[BASECLASS] olecontrol
+[OBJNAME] oleImagesList
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+Height = 37
+Left = 179
+Name = "oleImagesList"
+Top = 10
+Width = 49
+[END PROPERTIES]
+[BINSTART OLE]
+CHECKSUM=62628
+[BINEND OLE]
+[BINSTART OLE2]
+CHECKSUM=26800
+[BINEND OLE2]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0YYQGL
+[CLASS] olecontrol
+[BASECLASS] olecontrol
+[OBJNAME] OleTreeView
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+Enabled = .T.
+Height = 420
+Left = 11
+Name = "OleTreeView"
+TabIndex = 17
+Top = 20
+Width = 204
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE NodeClick
+LPARAMETERS NODE
+thisform.key=VAL(SUBSTR(node.key,1,LEN(node.key)-1))
+*This.parent.grdPr_proyectodetlist.Refresh()
+REQUERY('pr_ProyectoDet')
+this.Parent.Refresh()
+RETURN
+
+SELECT INFORMES
+= SEEK(NODE.KEY, 'informes', 'key')
+IF INFORMES.DISPONIBLE
+THISFORM.DESCRIP.CAPTION = INFORMES.DESCRIP
+M.CDOSNAME = INFORMES.REPOFILE
+THISFORM.LIMPIAR()
+THISFORM.FILTRAR()
+IF  .NOT. EMPTY(INFORMES.REPOFILE)
+THISFORM.EJECUTAR.ENABLED = .T.
+ELSE
+THISFORM.EJECUTAR.ENABLED = .F.
+ENDIF
+ELSE
+THISFORM.EJECUTAR.ENABLED = .F.
+THISFORM.DESCRIP.CAPTION = 'No está autorizado a acceder a este informe. Consulte con el Administrador de Sistemas'
+ENDIF
+ENDPROC
+[END METHODS]
+[BINSTART OLE]
+CHECKSUM=15012
+[BINEND OLE]
+[BINSTART OLE2]
+CHECKSUM=26800
+[BINEND OLE2]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W11CA84
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+Caption = "Codigo"
+Left = 11
+Name = "Tslabel1"
+Top = 452
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+Caption = "Codigo"
+Left = 119
+Name = "Tslabel2"
+Top = 452
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+Caption = "U.M."
+Left = 227
+Name = "Tslabel3"
+Top = 452
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0YYQGL
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+Caption = "Descripcion"
+Left = 323
+Name = "Tslabel4"
+Top = 452
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W104JIR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+Caption = "Codigo"
+Left = 515
+Name = "Tslabel5"
+Top = 452
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+Caption = "Codigo"
+Left = 611
+Name = "Tslabel6"
+Top = 452
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W104JIV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+Caption = "Codigo"
+Left = 719
+Name = "Tslabel7"
+Top = 452
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W130L00
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+ControlSource = "pr_ProyectoDet.idproducto"
+Left = 11
+Name = "Tstextbox1"
+Top = 464
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN4
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox2
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+ControlSource = ""
+Left = 119
+Name = "Tstextbox2"
+Top = 464
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W104JIS
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox3
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+ControlSource = ""
+Left = 515
+Name = "Tstextbox3"
+Top = 464
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN5
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox4
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+ControlSource = ""
+Left = 611
+Name = "Tstextbox4"
+Top = 464
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W10CHNW
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox5
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+ControlSource = ""
+Left = 719
+Name = "Tstextbox5"
+Top = 464
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W104JIQ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDesc
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+ControlSource = "pr_ProyectoDet.producto"
+Height = 21
+Left = 323
+Name = "txtDesc"
+Top = 464
+Width = 192
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0XLVN4
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Unidad
+[PARENT] Tsbaseform12.Pageframe1.Proyecto
+[START PROPERTIES]
+BoundColumn = 1
+ColumnCount = 1
+ColumnWidths = "105,0"
+ControlSource = "pr_ProyectoDet.um"
+FirstElement = 1
+Height = 22
+Left = 263
+Name = "Unidad"
+NumberOfElements = 0
+Style = 2
+TabIndex = 5
+Top = 464
+Width = 52
+ZOrderSet = 36
+cmdsql = Select Unidad from st_Unidad
+cursor = cUnidad
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG84
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column10
+[START PROPERTIES]
+Caption = "importe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG85
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column10
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG7U
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column4
+[START PROPERTIES]
+Caption = "idproducto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG7V
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column4
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG7W
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column5
+[START PROPERTIES]
+Caption = "producto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG7X
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column5
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG7Y
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column7
+[START PROPERTIES]
+Caption = "um"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG7Z
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column7
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG80
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column8
+[START PROPERTIES]
+Caption = "cantidad"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG81
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column8
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG82
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column9
+[START PROPERTIES]
+Caption = "precio"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W13DG83
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Proyecto.grdPr_proyectodetlist.Column9
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

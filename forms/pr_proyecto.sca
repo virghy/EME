@@ -1,0 +1,204 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0LEHDJ
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = (oApp.HndConn)
+DataSourceType = "ODBC"
+Height = 200
+InitialSelectedAlias = "pr_Proyecto"
+Left = 166
+Name = "Dataenvironment"
+Top = 164
+Width = 518
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0LEHDK
+[CLASS] cursoradapter
+[BASECLASS] cursoradapter
+[OBJNAME] Cursoradapter1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "pr_Proyecto"
+CursorSchema =      376IDPROYECTO I, IDEMPRESA C(3), NRO I, FECHA D, IDCLIENTE C(10), CLIENTE C(50), NOMBRE C(50), DESCRIPCION M, INICIO T, FIN T, ESTADO C(1), LOCALIDAD C(50), IDMONEDA C(3), RESPONSABLE1 C(50), RESPONSABLE2 C(50), PGASTOS N(5, 2), PBENEFICIOS N(5, 2), PPERDIDAS N(5, 2), FECHAENTREGA T, DECIMPORTE I, DECPRECIO I, DECMEDICION I, DECNPI I, DECLAA I, AUDITFECHA T, AUDITUSUARIO C(10)
+Flags = 0
+Height = 90
+KeyFieldList = IDPROYECTO
+Left = 8
+MapVarchar = .T.
+Name = "Cursoradapter1"
+Prepared = .T.
+SelectCmd = select * from pr_Proyecto where IdEmpresa=?oApp.Empresa
+Tables = pr_Proyecto
+Top = 18
+UpdatableFieldList =      269IDPROYECTO, IDEMPRESA, NRO, FECHA, IDCLIENTE, CLIENTE, NOMBRE, DESCRIPCION, INICIO, FIN, ESTADO, LOCALIDAD, IDMONEDA, RESPONSABLE1, RESPONSABLE2, PGASTOS, PBENEFICIOS, PPERDIDAS, FECHAENTREGA, DECIMPORTE, DECPRECIO, DECMEDICION, DECNPI, DECLAA, AUDITFECHA, AUDITUSUARIO
+UpdateNameList =      826IDPROYECTO pr_Proyecto.IDPROYECTO, IDEMPRESA pr_Proyecto.IDEMPRESA, NRO pr_Proyecto.NRO, FECHA pr_Proyecto.FECHA, IDCLIENTE pr_Proyecto.IDCLIENTE, CLIENTE pr_Proyecto.CLIENTE, NOMBRE pr_Proyecto.NOMBRE, DESCRIPCION pr_Proyecto.DESCRIPCION, INICIO pr_Proyecto.INICIO, FIN pr_Proyecto.FIN, ESTADO pr_Proyecto.ESTADO, LOCALIDAD pr_Proyecto.LOCALIDAD, IDMONEDA pr_Proyecto.IDMONEDA, RESPONSABLE1 pr_Proyecto.RESPONSABLE1, RESPONSABLE2 pr_Proyecto.RESPONSABLE2, PGASTOS pr_Proyecto.PGASTOS, PBENEFICIOS pr_Proyecto.PBENEFICIOS, PPERDIDAS pr_Proyecto.PPERDIDAS, FECHAENTREGA pr_Proyecto.FECHAENTREGA, DECIMPORTE pr_Proyecto.DECIMPORTE, DECPRECIO pr_Proyecto.DECPRECIO, DECMEDICION pr_Proyecto.DECMEDICION, DECNPI pr_Proyecto.DECNPI, DECLAA pr_Proyecto.DECLAA, AUDITFECHA pr_Proyecto.AUDITFECHA, AUDITUSUARIO pr_Proyecto.AUDITUSUARIO
+UseDeDataSource = .T.
+Width = 91
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE AutoOpen
+*** Setup code: DO NOT REMOVE
+if not pemstatus(This, '__VFPSetup', 5)
+	This.AddProperty('__VFPSetup', 1)
+	This.Init()
+endif
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+PROCEDURE Init
+*** Setup code: DO NOT REMOVE
+local llReturn
+do case
+	case not pemstatus(This, '__VFPSetup', 5)
+		This.AddProperty('__VFPSetup', 0)
+	case This.__VFPSetup = 1
+		This.__VFPSetup = 2
+	case This.__VFPSetup = 2
+		This.__VFPSetup = 0
+		return
+endcase
+set multilocks on
+llReturn = dodefault()
+*** End of Setup code: DO NOT REMOVE
+
+*** Setup code: DO NOT REMOVE
+if This.__VFPSetup = 1
+	This.__VFPSetup = 2
+endif
+return llReturn
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0LEHDL
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Proyectos"
+DoCreate = .T.
+Height = 401
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 396
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Top = 0
+Pageframe1.Width = 600
+Width = 609
+camponro = Nro,pr_proyecto,IdEmpresa=?oApp.Empresa
+camponroorden = N
+campos = IdEmpresa,IdProyecto
+lblRequerido.Name = "lblRequerido"
+valores = oApp.Empresa,NewId('Pr_Proyecto')
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0WPKDC
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFecha
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Fecha"
+Height = 16
+Left = 11
+Name = "lblFecha"
+TabIndex = 1
+Top = 46
+Width = 34
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0WPKDB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNro
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nro"
+Height = 16
+Left = 23
+Name = "lblNro"
+TabIndex = 1
+Top = 22
+Width = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0WPKDE
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecha
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "pr_Proyecto.fecha"
+Height = 22
+Left = 59
+Name = "txtFecha"
+SpecialEffect = 0
+TabIndex = 1
+Themes = .T.
+Top = 46
+Width = 125
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0WPKDD
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNro
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "pr_Proyecto.nro"
+Height = 22
+Left = 59
+Name = "txtNro"
+TabIndex = 1
+Top = 22
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

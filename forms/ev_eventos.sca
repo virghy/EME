@@ -1,0 +1,2560 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGU
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 394
+Left = 177
+Name = "Dataenvironment"
+Top = 90
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+7[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGV
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "ev_eventos"
+CursorSource = "ev_eventos"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 137
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0MJ4L5
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "ev_eventosdet"
+BufferModeOverride = 5
+CursorSource = "ev_eventosdet"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 150
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 162
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0W0YZU
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor4
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_aniversarios"
+BufferModeOverride = 5
+CursorSource = "vt_aniversarios"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor4"
+NoDataOnLoad = .T.
+Top = 140
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VX0VQSMI
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor5
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "ev_eventosop"
+BufferModeOverride = 5
+CursorSource = "ev_eventosop"
+Database = ..\data\datos.dbc
+Filter = "Presentar=.t."
+Height = 217
+Left = 291
+Name = "Cursor5"
+NoDataOnLoad = .T.
+Top = 77
+Width = 156
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20W1SSQ
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor6
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "ev_eventosval"
+BufferModeOverride = 5
+CursorSource = "ev_eventosval"
+Database = ..\data\datos.dbc
+Filter = "Concepto='Seña'"
+Height = 90
+Left = 216
+Name = "Cursor6"
+NoDataOnLoad = .T.
+Top = 248
+Width = 212
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W818SE7J
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "bs_clientes"
+CursorSource = "ev_clientes"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 403
+Name = "Cursor3"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGW
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmovform12
+[START PROPERTIES]
+Caption = "Contrato"
+DataSession = 2
+DoCreate = .T.
+Height = 542
+Name = "Tsmovform12"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 540
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Tabs = .F.
+Pageframe1.Top = 0
+Pageframe1.Width = 720
+Width = 719
+auditmarcahora = Audit_Fecha
+auditusuario = Audit_Usuario
+campoempresa = IdEmpresa
+camponro = NroEvento,ev_Eventos,IdEmpresa=?oApp.Empresa
+camponroorden = S
+campos = IdEvento,IdEmpresa,Descuento,Adelando,NroAdicional,CalcularIva
+dfecha = .F.
+hfecha = .F.
+identidad = idEvento
+lblRequerido.Name = "lblRequerido"
+tabla1 = ev_Eventos
+tabla2 = ev_EventosOp
+tabla3 = ev_EventosVal
+tabla4 = bs_clientes
+tablaconsulta = Eventos
+valores = newid('EV_EVENTOS'),oApp.Empresa,0,0,0,.f.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+CREATE CURSOR cSeleccion (IDPRODUCTO C (20), DESCRIPCION C (50), SEL L, TIPO C (1))
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE2.GRDOPCIONES.RECORDSOURCETYPE = 1
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE2.GRDOPCIONES.RECORDSOURCE = 'ev_EventosOp'
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE2.GRDOPCIONES.COLUMN1.CONTROLSOURCE = 'ev_EventosOp.Sel'
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE2.GRDOPCIONES.COLUMN2.CONTROLSOURCE = 'ev_EventosOp.Descripcion'
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE2.GRDOPCIONES.COLUMN2.ENABLED = .F.
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE2.GRDOPCIONES.CANTIDAD.CONTROLSOURCE = 'ev_EventosOp.Cantidad'
+DODEFAULT()
+INSERT INTO cSeleccion (DESCRIPCION, TIPO) VALUES ('MENU INFANTIL', 'G')
+INSERT INTO cSeleccion (DESCRIPCION, TIPO) VALUES ('Fun 1', 'P')
+INSERT INTO cSeleccion (DESCRIPCION, TIPO) VALUES ('Fun 2', 'P')
+INSERT INTO cSeleccion (DESCRIPCION, TIPO) VALUES ('Fun 3', 'P')
+INSERT INTO cSeleccion (DESCRIPCION, TIPO) VALUES ('MENU ADULTO', 'G')
+INSERT INTO cSeleccion (DESCRIPCION, TIPO) VALUES ('Lomito Simple', 'P')
+INSERT INTO cSeleccion (DESCRIPCION, TIPO) VALUES ('Lomito Especial', 'P')
+INSERT INTO cSeleccion (DESCRIPCION, TIPO) VALUES ('Hamburguesa Simple', 'P')
+ENDPROC
+PROCEDURE Pageframe1.Page1.Activate
+**
+** ReFox - este procedimiento es vacío **
+**
+ENDPROC
+PROCEDURE Pageframe1.Page1.Refresh
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE2.REFRESH()
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.REFRESH()
+ENDPROC
+PROCEDURE Refresh
+IF  .NOT. THISFORM.EDITMODE
+M.IDCLIENTE = EV_EVENTOS.IDCLIENTE
+REQUERY('bs_clientes')
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE afteraddnew
+SELECT EV_EVENTOSOP
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE2.REFRESH()
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.REFRESH()
+TEXT TO CMDSQL NOSHOW
+
+	SELECT     IdProducto, Descripcion, Tipo='P',Familia,Precio, Costo=Ult_Costo,
+				Calcular=Convert(bit,Case when ISNULL(ev_Incluye,0)=0 AND ISNULL(ev_CalcularCierre,0)=0 then 1 else 0 end),
+				CalcularCierre=ev_CalcularCierre,Ev_Incluye,Ev_Presentar
+	FROM         dbo.st_Producto
+	where idEmpresa = ?oApp.Empresa and Activo = 1 and Idtipo in ('P','S')
+	union 
+	Select IdProducto=IdFamilia,Descripcion,Tipo='G',Familia=IdFamilia,Precio=0,Costo=0,
+			Calcular=convert(bit,0),CalcularCierre=convert(bit,0),Ev_Incluye=convert(bit,0),Ev_Presentar=convert(bit,1)
+	from st_familia where idempresa=?oApp.Empresa
+	order by 4,3,2
+ENDTEXT
+THIS.RUNSQL(CMDSQL, 'cOpcion')
+SELECT COPCION
+SCAN
+INSERT INTO ev_EventosOp (IDEMPRESA, IDEVENTO, IDPRODUCTO, DESCRIPCION, TIPO, PRECIO, CALCULAR, CALCULARCIERRE, INCLUYE, PRESENTAR, COSTO, SEL) VALUES (OAPP.EMPRESA, EV_EVENTOS.IDEVENTO, COPCION.IDPRODUCTO, COPCION.DESCRIPCION, COPCION.TIPO, COPCION.PRECIO, COPCION.CALCULAR, COPCION.CALCULARCIERRE, COPCION.EV_INCLUYE, COPCION.EV_PRESENTAR, COPCION.COSTO, IIF(COPCION.TIPO='P', .F., .NULL.))
+ENDSCAN
+SET FILTER TO PRESENTAR=.T. IN EV_EVENTOSOP
+APPEND IN BS_CLIENTES BLANK
+ENDPROC
+PROCEDURE calcular
+LOCAL M.ADICIONALES
+M.ADICIONALES = 0
+SELECT EV_EVENTOSOP
+SUM PRECIO TO M.ADICIONALES FOR SEL=.T. .AND. CALCULAR=.T.
+REPLACE ADICIONALUNITARIO WITH COPCIONES.COSTOADICIONAL IN EV_EVENTOS
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.SERVICIOS.VALUE = M.ADICIONALES
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.TXTCOSTOADICIONAL.VALUE = COPCIONES.COSTOADICIONAL*EV_EVENTOS.NROADICIONAL
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.TXTCOSTOBASICO.VALUE = COPCIONES.IMPORTE
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.TXTTOTAL.VALUE = M.ADICIONALES+COPCIONES.IMPORTE
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.TXTSALDO.REFRESH()
+ENDPROC
+PROCEDURE delete
+IF  .NOT. EMPTY(EV_EVENTOS.IDFACTURA)
+IF MESSAGEBOX("El evento que desea eliminar ya fue facturado. "+"Desea eliminar de todos modos?", 32, "Futura Software")=32
+RETURN DODEFAULT()
+ELSE
+RETURN .F.
+ENDIF
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE lallowedits_access
+RETURN ISNULL(EV_EVENTOS.ESTADO) .OR. EMPTY(EV_EVENTOS.ESTADO)
+ENDPROC
+PROCEDURE validar
+IF EMPTY(EV_EVENTOS.IDCLIENTE)
+	LCULTNRO = THIS.CAMPONRO
+	THIS.CAMPONRO = "idcliente,vt_clientes,idempresa=?oApp.Empresa"
+	THIS.CAMPOTAM = 4
+	REPLACE EV_EVENTOS.IDCLIENTE WITH THISFORM.ULTIMONRO IN EV_EVENTOS
+	REPLACE BS_CLIENTES.IDCLIENTE WITH EV_EVENTOS.IDCLIENTE, BS_CLIENTES.IDEMPRESA WITH OAPP.EMPRESA IN BS_CLIENTES
+	THIS.CAMPONRO = LCULTNRO
+	THIS.CAMPOTAM = 0
+	= TABLEUPDATE(.T., .T., 'bs_Clientes')
+ENDIF
+IF ALLTRIM(EV_EVENTOS.DHORA)=":" .OR. EMPTY(EV_EVENTOS.DHORA)
+	REPLACE DHORA WITH .NULL. IN EV_EVENTOS
+ENDIF
+IF ALLTRIM(EV_EVENTOS.HHORA)=":" .OR. EMPTY(EV_EVENTOS.HHORA)
+	REPLACE HHORA WITH .NULL. IN EV_EVENTOS
+ENDIF
+IF  .NOT. ISNULL(EV_EVENTOS.DHORA) .AND.  .NOT. ISNULL(EV_EVENTOS.HHORA)
+	THIS.DFECHA = DTOC(EV_EVENTOS.FECHA)+" "+EV_EVENTOS.DHORA
+	THIS.HFECHA = DTOC(EV_EVENTOS.FECHA)+" "+EV_EVENTOS.HHORA
+	TEXT TO CMDSQL NOSHOW
+		SELECT NroEvento FROM ev_Eventos
+		WHERE dHora is NOT null AND hHora is NOT null
+		and (?this.dFecha between convert(datetime,convert(char(10),Fecha,105) + ' ' + dHora)
+		and  convert(datetime,convert(char(10),Fecha,105) + ' ' + hHora)
+		OR ?this.hFecha between convert(datetime,convert(char(10),Fecha,105) + ' ' + dHora)
+		and  convert(datetime,convert(char(10),Fecha,105) + ' ' + hHora))
+		and IdEmpresa=?oApp.Empresa
+		and NroEvento<> ?ev_eventos.NroEvento
+	ENDTEXT
+	THIS.RUNSQL(CMDSQL, 'eRepetido')
+	IF RECCOUNT('eRepetido')>0
+		MESSAGEBOX("Existe otro evento que coincide con la hora de este evento."+CHR(13)+"Evento Nro. "+STR(EREPETIDO.NROEVENTO), 64, "Futura Software")
+		RETURN .F.
+	ENDIF
+ELSE
+ENDIF
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.TXTTOTALVALOR.REFRESH()
+IF EV_EVENTOS.ADELANDO>0 .AND. THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.TXTTOTALVALOR.VALUE=0
+	INSERT INTO ev_EventosVal (IDEVENTO, IDEMPRESA, IDTIPOVALOR, IMPORTE, IDMONEDA, CONCEPTO) VALUES (EV_EVENTOS.IDEVENTO, OAPP.EMPRESA, "1", EV_EVENTOS.ADELANDO, 'GS', 'Seña')
+ENDIF
+THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.TXTTOTALVALOR.REFRESH()
+IF THISFORM.PAGEFRAME1.PAGE1.PAGEFRAME1.PAGE3.TXTTOTALVALOR.VALUE<>EV_EVENTOS.ADELANDO
+	MESSAGEBOX("Existe una diferencia entre la suma de los Valores y el importe del Adelanto", 64, "Futura Software")
+	RETURN .F.
+ENDIF
+LNDIA = DOW(EV_EVENTOS.FECHA, 1)
+TEXT TO CMDSQL NOSHOW
+	SELECT COUNT(*) As Cantidad FROM ev_feriados
+		WHERE dia=datepart(dd,?ev_Eventos.Fecha)
+			  and mes=datepart(mm,?ev_Eventos.Fecha)
+			  and (año=datepart(yy,?ev_Eventos.Fecha) or Anual = 1)
+
+ENDTEXT
+THIS.RUNSQL(CMDSQL, 'cFeriados')
+SELECT EV_EVENTOSOP
+SET FILTER TO
+SCAN FOR ALLTRIM(IDPRODUCTO)='000019'
+	IF CFERIADOS.CANTIDAD>0 .OR. INLIST(LNDIA, 1, 7)
+		REPLACE SEL WITH .T., CANTIDAD WITH 1 FOR ALLTRIM(IDPRODUCTO)='000019' IN EV_EVENTOSOP
+	ELSE
+		REPLACE SEL WITH .F., CANTIDAD WITH 0 FOR ALLTRIM(IDPRODUCTO)='000019' IN EV_EVENTOSOP
+	ENDIF
+ENDSCAN
+SET FILTER TO PRESENTAR=.T. IN EV_EVENTOSOP
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*calcular 
+dfecha
+hfecha
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHHE
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtObs
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.obs"
+Height = 48
+Left = 67
+Name = "edtObs"
+TabIndex = 34
+Top = 478
+Width = 636
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHHF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblObs
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Obs"
+Height = 16
+Left = 34
+Name = "lblObs"
+TabIndex = 33
+Top = 478
+Width = 24
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4VU
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] Pageframe1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ErasePage = .T.
+Height = 456
+Left = 2
+Name = "Pageframe1"
+Page1.Caption = "Contrato"
+Page1.FontSize = 8
+Page1.Name = "Page1"
+Page2.Caption = "Evento"
+Page2.FontSize = 8
+Page2.Name = "Page2"
+Page3.Caption = "Financiero"
+Page3.FontSize = 8
+Page3.Name = "Page3"
+PageCount = 3
+TabOrientation = 0
+Top = 10
+Width = 717
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Page1.Activate
+THIS.REFRESH()
+ENDPROC
+PROCEDURE Page2.Activate
+THIS.REFRESH()
+ENDPROC
+PROCEDURE Page3.Activate
+IF THISFORM.EDITMODE
+	THISFORM.CALCULAR()
+ENDIF
+THIS.REFRESH()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGU
+[CLASS] campo_busca
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_busca1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "ev_eventos.nroevento"
+Left = 137
+Name = "Campo_busca1"
+TabIndex = 2
+Top = 34
+datoayuda = Eventos
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Cliente
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_clientes.razsocial"
+Enabled = .T.
+Height = 22
+Left = 139
+Name = "Cliente"
+TabIndex = 6
+Top = 94
+Width = 408
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE ProgrammaticChange
+= TABLEREVERT(.T., 'bs_clientes')
+M.IDCLIENTE = EV_EVENTOS.IDCLIENTE
+REQUERY('bs_clientes')
+THISFORM.REFRESH()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMY
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdVt_aniversarios
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Anchor = 15
+Column1.ColumnOrder = 2
+Column1.ControlSource = "vt_aniversarios.fecha"
+Column1.FontSize = 8
+Column1.Name = "Column5"
+Column1.Sparse = .F.
+Column1.Width = 58
+Column2.ColumnOrder = 1
+Column2.ControlSource = "vt_aniversarios.detalle"
+Column2.FontSize = 8
+Column2.Name = "Column6"
+Column2.Width = 238
+ColumnCount = 2
+FontSize = 8
+Height = 120
+HighlightStyle = 0
+Left = 139
+Name = "grdVt_aniversarios"
+Panel = 1
+RecordSource = "vt_aniversarios"
+RecordSourceType = 1
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 22
+Top = 286
+Width = 318
+campo = IdEmpresa,IdCliente
+editable = .T.
+titulo = Aniversarios
+valor = oApp.Empresa,bs_Clientes.IdCliente
+valorvariable = bs_Clientes.IdCliente
+variablevista = m.IdCliente
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4VX
+[CLASS] idcliente
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "ev_eventos.idcliente"
+Height = 22
+Left = 139
+Name = "Idcliente1"
+TabIndex = 4
+Top = 70
+Width = 72
+actualizar = .F.
+requerido = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMML
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Cumpleaños"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 60
+Name = "Label1"
+TabIndex = 21
+Top = 286
+Width = 70
+WordWrap = .T.
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMS
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label2
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Conyuge:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 78
+Name = "Label2"
+TabIndex = 7
+Top = 117
+Width = 52
+WordWrap = .T.
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMT
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label3
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "E-mail:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 94
+Name = "Label3"
+TabIndex = 19
+Top = 261
+Width = 36
+WordWrap = .T.
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMU
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label5
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "RUC/C.I."
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 85
+Name = "Label5"
+TabIndex = 9
+Top = 141
+Width = 42
+WordWrap = .T.
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMW
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblCiudad
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Ciudad:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 89
+Name = "lblCiudad"
+TabIndex = 13
+Top = 189
+Width = 41
+WordWrap = .T.
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMK
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblDireccion
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Dirección:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 76
+Name = "lblDireccion"
+TabIndex = 11
+Top = 165
+Width = 54
+WordWrap = .T.
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMR
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblFax
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Fax:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 109
+Name = "lblFax"
+TabIndex = 17
+Top = 237
+Width = 21
+WordWrap = .T.
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcliente
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Id Cliente:"
+Height = 16
+Left = 66
+Name = "lblIdcliente"
+TabIndex = 3
+Top = 69
+Width = 64
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMN
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblTelefono
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 192,192,192
+BackStyle = 0
+BorderStyle = 0
+Caption = "Teléfono:"
+FontBold = .T.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 78
+Name = "lblTelefono"
+TabIndex = 15
+Top = 213
+Width = 52
+WordWrap = .T.
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMJ
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] Tseditbox1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "bs_clientes.direccion"
+Height = 21
+Left = 139
+Name = "Tseditbox1"
+TabIndex = 12
+Top = 166
+Width = 408
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMX
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] Tseditbox2
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+AddLineFeeds = .F.
+ControlSource = "bs_clientes.email"
+Height = 22
+Left = 139
+Name = "Tseditbox2"
+ScrollBars = 0
+TabIndex = 20
+Top = 262
+Width = 408
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Contrato"
+Height = 16
+Left = 69
+Name = "Tslabel1"
+TabIndex = 1
+Top = 34
+Width = 59
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W81875CX
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nombre:"
+Height = 16
+Left = 66
+Name = "Tslabel2"
+TabIndex = 5
+Top = 94
+Width = 64
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W81875CY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Deje en blanco para un cliente nuevo. Presione F8 para un cliente existente."
+FontBold = .F.
+Height = 16
+Left = 223
+Name = "Tslabel3"
+TabIndex = 23
+Top = 70
+Width = 367
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMM
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.telefono"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Format = "K"
+InputMask = ""
+Left = 139
+MaxLength = 20
+Name = "Tstextbox1"
+TabIndex = 16
+Top = 214
+Value = 
+Width = 153
+ZOrderSet = 7
+editable = .T.
+requerido = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox2
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.ruc"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Left = 139
+MaxLength = 20
+Name = "Tstextbox2"
+TabIndex = 10
+Top = 142
+Width = 153
+ZOrderSet = 9
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMQ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox3
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.nomcontacto"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 21
+Left = 139
+MaxLength = 20
+Name = "Tstextbox3"
+TabIndex = 8
+Top = 118
+Width = 408
+ZOrderSet = 9
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMV
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCiudad
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.ciudad"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Left = 139
+MaxLength = 25
+Name = "txtCiudad"
+TabIndex = 14
+Top = 190
+Width = 153
+ZOrderSet = 11
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMP
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFax
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 1
+BorderStyle = 1
+Comment = ""
+ControlSource = "bs_clientes.fax"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Left = 139
+MaxLength = 20
+Name = "txtFax"
+TabIndex = 18
+Top = 238
+Width = 153
+ZOrderSet = 9
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMMZ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1.grdVt_aniversarios.Column5
+[START PROPERTIES]
+Caption = "Fecha"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMN0
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1.grdVt_aniversarios.Column5
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMN1
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1.grdVt_aniversarios.Column6
+[START PROPERTIES]
+Caption = "Nombre"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0VTMN2
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page1.grdVt_aniversarios.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0OH220
+[CLASS] campo_busca
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_busca1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+ControlSource = "ev_eventos.nroevento"
+Left = 91
+Name = "Campo_busca1"
+TabIndex = 2
+Top = 22
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0WDPNM
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdOpciones
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Column1.CurrentControl = "Check"
+Column1.DynamicBackColor = "IIF(Tipo='G',RGB(240,193,85), RGB(255,255,255))"
+Column1.DynamicCurrentControl = "IIF(Tipo='G','Text1','Check')"
+Column1.DynamicFontBold = "IIF(Tipo='G',.t.,.f.)"
+Column1.DynamicFontSize = "IIF(Tipo='G',10,8)"
+Column1.DynamicForeColor = "IIF(Tipo='G',8192,0)"
+Column1.FontSize = 8
+Column1.Name = "Column1"
+Column1.Sparse = .F.
+Column1.Width = 22
+Column2.DynamicBackColor = "IIF(Tipo='G',RGB(240,193,85), RGB(255,255,255))"
+Column2.DynamicCurrentControl = "IIF(Tipo='G','Text2','Text1')"
+Column2.DynamicFontBold = "IIF(Tipo='G',.t.,.f.)"
+Column2.DynamicFontSize = "IIF(Tipo='G',9,8)"
+Column2.DynamicForeColor = "IIF(Tipo='G',8192,0)"
+Column2.FontSize = 8
+Column2.Name = "Column2"
+Column2.ReadOnly = .T.
+Column2.Width = 230
+Column3.ControlSource = ""
+Column3.FontSize = 8
+Column3.InputMask = "9999"
+Column3.Name = "Cantidad"
+Column3.Width = 53
+ColumnCount = 3
+FontSize = 8
+GridLines = 0
+HeaderHeight = 0
+Height = 408
+Left = 373
+Name = "grdOpciones"
+Panel = 1
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 27
+Top = 10
+Width = 330
+editable = .T.
+valorvariable = ev_Eventos.IdEvento
+variablevista = m.IdEvento
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WC
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAgasajado
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Agasajado"
+Height = 16
+Left = 24
+Name = "lblAgasajado"
+TabIndex = 3
+Top = 82
+Width = 59
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WL
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDhora
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Desde Hora"
+Height = 16
+Left = 7
+Name = "lblDhora"
+TabIndex = 17
+Top = 226
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDia
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = ""
+Height = 16
+Left = 171
+Name = "lblDia"
+TabIndex = 28
+Top = 58
+Width = 144
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+IF  .NOT. EMPTY(EV_EVENTOS.FECHA)
+THIS.CAPTION = UPPER(CDOW(EV_EVENTOS.FECHA))
+ELSE
+THIS.CAPTION = ''
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblEdad
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Edad"
+Height = 16
+Left = 55
+Name = "lblEdad"
+TabIndex = 5
+Top = 106
+Width = 28
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFecha
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Fecha"
+Height = 16
+Left = 49
+Name = "lblFecha"
+TabIndex = 1
+Top = 58
+Width = 34
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblHhora
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Hasta Hora"
+Height = 16
+Left = 7
+Name = "lblHhora"
+TabIndex = 19
+Top = 250
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WI
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNroinvitados
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Nro Invitados"
+Height = 16
+Left = 12
+Name = "lblNroinvitados"
+TabIndex = 9
+Top = 154
+Width = 71
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGV
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "ev_eventos.idopcion"
+Height = 22
+Left = 91
+Name = "Tscombobox1"
+TabIndex = 8
+Top = 130
+Width = 275
+cmdsql = Select Opcion,IdOpcion,NroInvitados,CostoAdicional,Importe,IdListaPrecio from ev_Opciones where idEmpresa=?oApp.Empresa
+cursor = cOpciones
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+THIS.PARENT.TXTNROINVITADOS.VALUE = COPCIONES.NROINVITADOS
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGV
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox2
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "ev_eventos.iddecoracion"
+Height = 22
+Left = 91
+Name = "Tscombobox2"
+TabIndex = 14
+Top = 178
+Width = 276
+cmdsql = Select Descripcion,IdProducto from st_producto where IdEmpresa = ?oApp.Empresa and Familia = '01' and ev_Presentar = 1
+cursor = cDecoracion
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0Y5WSE
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = ""
+Height = 22
+Left = 91
+Name = "Tscombobox3"
+TabIndex = 16
+Top = 202
+Visible = .F.
+Width = 276
+cmdsql = Select Descripcion,IdProducto from st_producto where IdEmpresa = ?oApp.Empresa and Familia = '02' and ev_Presentar = 1
+cursor = cMenu
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WN
+[CLASS] tshora
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] tshora1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+ControlSource = "ev_eventos.dhora"
+Height = 21
+Left = 91
+Name = "tshora1"
+TabIndex = 18
+Top = 226
+Width = 60
+requerido = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WO
+[CLASS] tshora
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tshora2
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+ControlSource = "ev_eventos.hhora"
+Height = 21
+Left = 91
+Name = "Tshora2"
+TabIndex = 20
+Top = 250
+Width = 60
+requerido = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Opcion"
+Height = 16
+Left = 12
+Name = "Tslabel1"
+TabIndex = 7
+Top = 130
+Width = 71
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Decoración"
+Height = 16
+Left = 12
+Name = "Tslabel2"
+TabIndex = 13
+Top = 178
+Width = 71
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0Y5WSD
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Menu Chicos"
+Height = 16
+Left = 12
+Name = "Tslabel3"
+TabIndex = 15
+Top = 202
+Visible = .F.
+Width = 71
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Invitados Adicionales"
+Height = 16
+Left = 163
+Name = "Tslabel4"
+TabIndex = 11
+Top = 154
+Visible = .F.
+Width = 126
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W310XDFW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Nro Niños"
+Height = 16
+Left = -41
+Name = "Tslabel5"
+TabIndex = 24
+Top = 274
+Visible = .T.
+Width = 126
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W310XDG5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Nro Niñas"
+Height = 16
+Left = -41
+Name = "Tslabel6"
+TabIndex = 25
+Top = 298
+Visible = .T.
+Width = 126
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W310XDG7
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Nro Adultos"
+Height = 16
+Left = -41
+Name = "Tslabel7"
+TabIndex = 26
+Top = 322
+Visible = .T.
+Width = 126
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0OH221
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Caption = "Contrato"
+Height = 16
+Left = 23
+Name = "Tslabel8"
+TabIndex = 1
+Top = 22
+Width = 59
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W310XDFV
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.nroniños"
+Height = 22
+Left = 91
+Name = "Tstextbox1"
+TabIndex = 21
+Top = 274
+Visible = .T.
+Width = 60
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THISFORM.CALCULAR()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W310XDFX
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox2
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.nroniñas"
+Height = 22
+Left = 91
+Name = "Tstextbox2"
+TabIndex = 22
+Top = 298
+Visible = .T.
+Width = 60
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THISFORM.CALCULAR()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W310XDG6
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox3
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.nroadultos"
+Height = 22
+Left = 91
+Name = "Tstextbox3"
+TabIndex = 23
+Top = 322
+Visible = .T.
+Width = 60
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THISFORM.CALCULAR()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WB
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAgasajado
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.agasajado"
+Height = 22
+Left = 92
+MaxLength = 50
+Name = "txtAgasajado"
+TabIndex = 4
+Top = 82
+Width = 275
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WD
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtEdad
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.edad"
+Height = 22
+Left = 91
+Name = "txtEdad"
+TabIndex = 6
+Top = 106
+Width = 72
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WP
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecha
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.fecha"
+Height = 22
+Left = 92
+Name = "txtFecha"
+TabIndex = 2
+Top = 58
+Width = 72
+requerido = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+THIS.PARENT.LBLDIA.CAPTION = CDOW(THIS.VALUE)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroAdicional
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.nroadicional"
+Height = 22
+Left = 295
+Name = "txtNroAdicional"
+TabIndex = 12
+Top = 154
+Visible = .F.
+Width = 72
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THISFORM.CALCULAR()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WH
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroinvitados
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.nroinvitados"
+Height = 22
+Left = 92
+Name = "txtNroinvitados"
+OpenWindow = .F.
+ReadOnly = .T.
+TabIndex = 10
+Top = 154
+Width = 72
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W90M3CPL
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2.grdOpciones.Cantidad
+[START PROPERTIES]
+Caption = "Header1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W90M3CPM
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2.grdOpciones.Cantidad
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "9999"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0WDPNP
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Check
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2.grdOpciones.Column1
+[START PROPERTIES]
+Alignment = 1
+Caption = ""
+Left = 35
+Name = "Check"
+Top = 11
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+IF THIS.VALUE=.T.
+REPLACE CANTIDAD WITH 1
+ELSE
+REPLACE CANTIDAD WITH 0
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0WDPNN
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2.grdOpciones.Column1
+[START PROPERTIES]
+Caption = "Header1"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0WDPNO
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2.grdOpciones.Column1
+[START PROPERTIES]
+BackColor = 240,193,85
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,64,128
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0WDPNQ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2.grdOpciones.Column2
+[START PROPERTIES]
+Caption = "Header1"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0WDPNR
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2.grdOpciones.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VJ0X2QWM
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text2
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page2.grdOpciones.Column2
+[START PROPERTIES]
+BackColor = 240,193,85
+BackStyle = 0
+BorderStyle = 0
+DisabledForeColor = 0,0,0
+FontBold = .T.
+FontSize = 9
+ForeColor = 0,64,128
+Height = 23
+Left = 60
+Name = "Text2"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Top = 35
+Width = 100
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCostoadicional
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Costo p/ adicional"
+Height = 16
+Left = 91
+Name = "lblCostoadicional"
+TabIndex = 3
+Top = 70
+Visible = .F.
+Width = 107
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W310O1BO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Servicios
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.consumoadicional"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999"
+Left = 223
+Name = "Servicios"
+TabIndex = 4
+Top = 46
+Width = 84
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3A
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsfact1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+AllowAddNew = .F.
+AllowHeaderSizing = .F.
+AllowRowSizing = .F.
+ChildOrder = ""
+Column1.ColumnOrder = 3
+Column1.ControlSource = "ev_eventosval.nrocheque"
+Column1.FontSize = 8
+Column1.Name = "Column2"
+Column1.Visible = .T.
+Column1.Width = 104
+Column2.ColumnOrder = 2
+Column2.ControlSource = "ev_eventosval.idbanco"
+Column2.FontSize = 8
+Column2.Name = "Banco"
+Column2.Sparse = .F.
+Column2.Visible = .T.
+Column2.Width = 144
+Column3.ColumnOrder = 5
+Column3.ControlSource = "ev_eventosval.importe"
+Column3.DynamicInputMask = ""
+Column3.FontSize = 8
+Column3.InputMask = "999,999,999,999.99"
+Column3.Name = "Column4"
+Column3.Visible = .T.
+Column3.Width = 101
+Column4.ColumnOrder = 1
+Column4.ControlSource = "ev_eventosval.idtipovalor"
+Column4.CurrentControl = "Tscombobox1"
+Column4.FontSize = 8
+Column4.Name = "Tipo"
+Column4.Sparse = .F.
+Column4.Visible = .T.
+Column4.Width = 70
+Column5.ColumnOrder = 4
+Column5.ControlSource = "ev_eventosval.fchcheque"
+Column5.FontSize = 8
+Column5.Name = "Column5"
+Column5.Width = 76
+ColumnCount = 5
+DeleteMark = .F.
+FontSize = 8
+GridLines = 2
+HeaderHeight = 20
+Height = 153
+Highlight = .F.
+Left = 67
+LinkMaster = ""
+Name = "Tsfact1"
+Panel = 1
+PanelLink = .T.
+RecordMark = .F.
+RecordSource = "ev_eventosval"
+RelationalExpr = ""
+RightToLeft = .T.
+RowHeight = 22
+ScrollBars = 2
+SplitBar = .F.
+TabIndex = 14
+Top = 230
+Width = 523
+ZOrderSet = 0
+campo = IdEvento,idempresa,IdMoneda,Concepto
+cfieldtosum = Importe
+editable = .T.
+titulo = Detalle de Pagos
+valor = ev_Eventos.IdeVento,oapp.empresa,'GS','Seña'
+valorvariable = ev_Eventos.IdEvento
+variablevista = m.IdEvento
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+THIS.PARENT.TXTTOTALVALOR.REFRESH()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VX19RQKB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Saldo"
+Height = 16
+Left = 91
+Name = "Tslabel1"
+TabIndex = 11
+Top = 166
+Width = 107
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Importe Basico"
+Height = 16
+Left = 115
+Name = "Tslabel2"
+TabIndex = 1
+Top = 22
+Width = 83
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WX
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Importe Total"
+FontBold = .T.
+Height = 16
+Left = 115
+Name = "Tslabel3"
+TabIndex = 5
+Top = 94
+Width = 83
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Total de Valores"
+Height = 16
+Left = 355
+Name = "Tslabel4"
+TabIndex = 15
+Top = 388
+Width = 107
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0MJ4L5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Alignment = 2
+BackColor = 128,128,192
+BackStyle = 1
+Caption = "Detalle de Pago"
+ForeColor = 255,255,255
+Height = 16
+Left = 67
+Name = "Tslabel5"
+Style = 0
+TabIndex = 13
+Top = 214
+Width = 523
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20X7KYK
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Descuento"
+Height = 16
+Left = 439
+Name = "Tslabel6"
+TabIndex = 7
+TabStop = .F.
+Top = 34
+Visible = .F.
+Width = 107
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Seña"
+Height = 16
+Left = 91
+Name = "Tslabel7"
+TabIndex = 9
+Top = 142
+Width = 107
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W310O1BP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Servicios Adicionales"
+Height = 16
+Left = 79
+Name = "Tslabel8"
+TabIndex = 3
+Top = 46
+Width = 119
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAdelando
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.adelando"
+Height = 22
+InputMask = "999,999,999"
+Left = 223
+Name = "txtAdelando"
+TabIndex = 10
+Top = 142
+Width = 84
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+THIS.PARENT.TXTSALDO.REFRESH()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCostoadicional
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.costoadicional"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999"
+Left = 223
+Name = "txtCostoadicional"
+TabIndex = 4
+Top = 70
+Visible = .F.
+Width = 84
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCostoBasico
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.importebasico"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999"
+Left = 223
+Name = "txtCostoBasico"
+TabIndex = 2
+Top = 22
+Width = 84
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20X7KYJ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescuento
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.descuento"
+Height = 22
+InputMask = "999,999,999"
+Left = 571
+Name = "txtDescuento"
+TabIndex = 8
+TabStop = .F.
+Top = 34
+Visible = .F.
+Width = 84
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+THIS.PARENT.TXTSALDO.REFRESH()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1VX19RQKA
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSaldo
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Alignment = 3
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+FontBold = .T.
+Height = 22
+InputMask = "999,999,999"
+Left = 223
+Name = "txtSaldo"
+TabIndex = 12
+Top = 166
+Value = (0)
+Width = 84
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+THIS.VALUE = NVL(THIS.PARENT.TXTTOTAL.VALUE, 0)-NVL(THIS.PARENT.TXTADELANDO.VALUE, 0)-NVL(THIS.PARENT.TXTDESCUENTO.VALUE, 0)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1V30VI4WW
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTotal
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.importetotal"
+FontBold = .T.
+Height = 22
+InputMask = "999,999,999"
+Left = 223
+Name = "txtTotal"
+ReadOnly = .T.
+TabIndex = 6
+Top = 94
+Width = 84
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0LRHGU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTotalValor
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3
+[START PROPERTIES]
+Comment = ""
+Height = 22
+InputMask = "999,999,999"
+Left = 468
+Name = "txtTotalValor"
+TabIndex = 16
+Top = 386
+Width = 103
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+THIS.PARENT.TSFACT1.SUMCOLUMN()
+THIS.VALUE = THIS.PARENT.TSFACT1.TOTALES(1)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3D
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3.Tsfact1.Banco
+[START PROPERTIES]
+Caption = "Banco"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3E
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3.Tsfact1.Banco
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+FirstElement = 1
+Height = 22
+Left = 163
+Name = "Tscombobox3"
+NumberOfElements = 0
+SpecialEffect = 1
+Style = 2
+TabIndex = 12
+Top = 150
+Width = 194
+cmdsql = Select descripcion,convert(char(10),idbanco) as IdBanco from bs_Bancos order by 1
+condicionvalidacion = 
+cursor = Bancos
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3B
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3.Tsfact1.Column2
+[START PROPERTIES]
+Caption = "Cheque Nº"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3C
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3.Tsfact1.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+RETURN EV_EVENTOSVAL.IDTIPOVALOR<>'01'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3F
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3.Tsfact1.Column4
+[START PROPERTIES]
+Caption = "Importe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3G
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3.Tsfact1.Column4
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999,999.99"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+		THIS.PARENT.PARENT.PARENT.TXTTOTALVALOR.REFRESH()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3K
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3.Tsfact1.Column5
+[START PROPERTIES]
+Caption = "Fecha"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3L
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3.Tsfact1.Column5
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3H
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3.Tsfact1.Tipo
+[START PROPERTIES]
+Caption = "Tipo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W20VXG3I
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmovform12.Pageframe1.Page1.Pageframe1.Page3.Tsfact1.Tipo
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 2
+ColumnLines = .T.
+Left = 18
+Name = "Tscombobox1"
+SpecialEffect = 1
+Style = 2
+Top = 26
+Visible = .T.
+cmdsql = Select TipoValor,convert(char(10),IdTipoValor) from ts_TipoValor 
+condicionvalidacion = 
+cursor = cTipoValor
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

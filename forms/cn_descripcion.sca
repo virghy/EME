@@ -1,0 +1,233 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VLY
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 220
+Left = 1
+Width = 520
+Height = 200
+InitialSelectedAlias = "cnt_descripciones"
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VM0
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Height = 203
+Width = 419
+DoCreate = .T.
+Caption = "Descripciones de Asientos"
+tabla1 = cnt_Descripciones
+campos = IdEmpresa
+valores = oApp.Empresa
+camponro = IdDescripcion,cn_Descripciones,IdEmpresa=?oApp.Empresa
+campotam = 2
+idobjeto = 415
+Name = "Tsmaintform1"
+lblRequerido.TabIndex = 1
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.ColumnCount = 2
+Pageframe1.Page2.grdList.Column1.FontSize = 8
+Pageframe1.Page2.grdList.Column1.ControlSource = "cnt_descripciones.iddescripcion"
+Pageframe1.Page2.grdList.Column1.Width = 50
+Pageframe1.Page2.grdList.Column1.Name = "Column1"
+Pageframe1.Page2.grdList.Column2.FontSize = 8
+Pageframe1.Page2.grdList.Column2.ControlSource = "cnt_descripciones.descripcion"
+Pageframe1.Page2.grdList.Column2.Width = 336
+Pageframe1.Page2.grdList.Column2.Name = "Column2"
+Pageframe1.Page2.grdList.FontSize = 8
+Pageframe1.Page2.grdList.Height = 155
+Pageframe1.Page2.grdList.Left = 9
+Pageframe1.Page2.grdList.Panel = 1
+Pageframe1.Page2.grdList.RecordSource = "cnt_descripciones"
+Pageframe1.Page2.grdList.RowHeight = 17
+Pageframe1.Page2.grdList.ScrollBars = 1
+Pageframe1.Page2.grdList.Top = 11
+Pageframe1.Page2.grdList.Width = 399
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 0
+Pageframe1.Left = 0
+Pageframe1.Width = 420
+Pageframe1.Height = 204
+Pageframe1.TabIndex = 2
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VM3
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdconcepto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cnt_descripciones.iddescripcion"
+Height = 22
+Left = 132
+TabIndex = 2
+Top = 40
+Width = 44
+editable = .T.
+Name = "txtIdconcepto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VM5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdconcepto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Código"
+Height = 16
+Left = 65
+Top = 40
+Width = 63
+TabIndex = 1
+Name = "lblIdconcepto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VM6
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtConcepto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cnt_descripciones.descripcion"
+Height = 22
+Left = 132
+TabIndex = 4
+Top = 64
+Width = 263
+editable = .T.
+Name = "txtConcepto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VM8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblConcepto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Descripcion"
+Height = 16
+Left = 35
+Top = 64
+Width = 93
+TabIndex = 3
+Name = "lblConcepto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X80OLLTZ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page2.grdList.Column1
+[START PROPERTIES]
+FontSize = 8
+Caption = "Codigo"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X80OLLU0
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page2.grdList.Column1
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X80OLLU1
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page2.grdList.Column2
+[START PROPERTIES]
+FontSize = 8
+Caption = "Descripcion"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X80OLLU2
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page2.grdList.Column2
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

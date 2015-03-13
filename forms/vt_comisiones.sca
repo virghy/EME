@@ -1,0 +1,333 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OY0X5FEW
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 234
+InitialSelectedAlias = "vt_comisiones"
+Left = 211
+Name = "Dataenvironment"
+Top = 293
+Width = 532
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO seteo
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU13B4HR
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_comisiones_det"
+BufferModeOverride = 5
+CursorSource = "vt_comisiones_det"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 84
+Left = 275
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 40
+Width = 180
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU140A51
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_comisiones"
+CursorSource = "vt_comision"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 118
+Name = "Cursor1"
+Top = 28
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OY0X5FEZ
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Comisiones"
+DoCreate = .T.
+Height = 319
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 324
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Top = -3
+Pageframe1.Width = 408
+Width = 405
+camponro = idcomision,vt_comisiones,idempresa=?oapp.empresa
+campos = idempresa
+campotam = 2
+detalle = .T.
+idobjeto = 46
+lblRequerido.Name = "lblRequerido"
+tabla1 = vt_comisiones
+tabla2 = vt_comisiones_Det
+valores = oapp.empresa
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OY0X5FFD
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdVt_comisiones_det
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "vt_comisiones_det.desde"
+Column1.FontSize = 8
+Column1.InputMask = "999,999,999,999"
+Column1.Name = "Column1"
+Column1.Width = 122
+Column2.ControlSource = "vt_comisiones_det.comision"
+Column2.FontSize = 8
+Column2.InputMask = "999.99 %"
+Column2.Name = "Column2"
+Column2.Width = 73
+ColumnCount = 2
+FontSize = 8
+Height = 128
+Left = 83
+Name = "grdVt_comisiones_det"
+Panel = 1
+RecordSource = "vt_comisiones_det"
+RecordSourceType = 1
+RowHeight = 17
+TabIndex = 4
+Top = 142
+Width = 216
+campo = idcomision,idempresa
+editable = .T.
+valor = vt_comisiones.idcomision,oapp.empresa
+valorvariable = vt_comisiones.idcomision
+variablevista = m.idcomision
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OY0X5FFG
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_comisiones_det.Column1
+[START PROPERTIES]
+Caption = "Desde"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OY0X5FFI
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_comisiones_det.Column1
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vt_comisiones_det.desde"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999,999"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OY0X5FFJ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_comisiones_det.Column2
+[START PROPERTIES]
+Caption = "Comision"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OY0X5FFK
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVt_comisiones_det.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999.99 %"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU140A53
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Descripcion"
+Height = 16
+Left = 68
+Name = "lblDescripcion"
+TabIndex = 5
+Top = 58
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU140A55
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcomision
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Idcomision"
+Height = 16
+Left = 72
+Name = "lblIdcomision"
+TabIndex = 6
+Top = 34
+Width = 63
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU140A56
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTipo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Tipo"
+Height = 16
+Left = 109
+Name = "lblTipo"
+TabIndex = 7
+Top = 82
+Width = 26
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU140A57
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "80,0"
+ControlSource = "vt_comisiones.tipo"
+Height = 22
+Left = 143
+Name = "Tscombobox1"
+RowSource = "Metas,M,Cuotas,C"
+RowSourceType = 1
+TabIndex = 3
+Top = 82
+Width = 132
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU140A52
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_comisiones.descripcion"
+Height = 20
+Left = 143
+Name = "txtDescripcion"
+TabIndex = 2
+Top = 58
+Width = 187
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU140A54
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdcomision
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_comisiones.idcomision"
+Height = 20
+Left = 143
+Name = "txtIdcomision"
+TabIndex = 1
+Top = 34
+Width = 120
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

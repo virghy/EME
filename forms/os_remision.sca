@@ -1,0 +1,2130 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 446
+Left = 21
+Name = "Dataenvironment"
+Top = 80
+Width = 686
+[END PROPERTIES]
+[START RESERVED2]
+5[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q2T
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "os_remision"
+BufferModeOverride = 5
+CursorSource = "os_remision"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 389
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 3
+Width = 202
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q2U
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "os_movimiento_detalle"
+BufferModeOverride = 5
+CursorSource = "os_movimiento_detalle"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 363
+Left = 254
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 8
+Width = 140
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q2V
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "os_detalleserviciorealizado"
+CursorSource = "os_detalleserviciorealizado"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 244
+Left = 442
+Name = "Cursor3"
+NoDataOnLoad = .T.
+Top = 132
+Width = 127
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G70O65RE
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor4
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_vnum_docu"
+BufferModeOverride = 5
+CursorSource = "vt_vnum_docu"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 110
+Left = 475
+Name = "Cursor4"
+Top = 7
+Width = 108
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q2W
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] remision
+[START PROPERTIES]
+Caption = "Nota de Remisión"
+DoCreate = .T.
+Height = 491
+Name = "remision"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 575
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page3.Caption = "Traslado"
+Pageframe1.Page3.FontSize = 8
+Pageframe1.Page3.Name = "Page3"
+Pageframe1.PageCount = 3
+Pageframe1.Top = 1
+Pageframe1.Width = 792
+Width = 788
+WindowState = 0
+camponro = NroRemision,os_remision,IdEmpresa=?oApp.Empresa
+campos = idempresa,idremision
+detalle = .T.
+identidad = idremision
+lblRequerido.Name = "lblRequerido"
+tabla1 = os_remision
+tabla2 = os_movimiento_detalle
+tablaconsulta = REMISION
+valores = oapp.empresa,newid('os_remision')
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+LOCAL LCTIPO, LCCONDICION, STRSQL
+STRSQL = "Select valor from bs_constante where constante = "+"'"+"MONEDA_VENTAS"+"'"
+IF SQL(STRSQL, 'vparam')>0
+THIS.MONEDA_DEF = ALLTRIM(VPARAM.VALOR)
+ENDIF
+STRSQL = "Select valor from bs_constante where constante = "+"'"+"COMPROBANTE_REMISION"+"'"
+IF SQL(STRSQL, 'vparam')>0
+THIS.COMPROBANTE_DEF = VPARAM.VALOR
+ENDIF
+IF  .NOT. EMPTY(OAPP.SUCURSAL)
+THIS.SUCURSAL_DEF = OAPP.SUCURSAL
+ENDIF
+ENDPROC
+PROCEDURE addnew
+DODEFAULT()
+LOCAL STRSQL
+THISFORM.PAGEFRAME1.PAGE1.TXTFECHA.VALUE = DATE()
+THISFORM.PAGEFRAME1.PAGE1.CBOSUCURSAL1.VALUE = THIS.SUCURSAL_DEF
+THISFORM.PAGEFRAME1.PAGE1.CBOMONEDA1.VALUE = THIS.MONEDA_DEF
+REPLACE OS_REMISION.IDCOMPROBANTE WITH ALLTRIM(THISFORM.COMPROBANTE_DEF)
+THISFORM.PAGEFRAME1.PAGE1.CBOMONEDA1.LISTINDEX = 1
+THIS.PAGEFRAME1.PAGE1.CPBT.LISTINDEX = 1
+THIS.PAGEFRAME1.PAGE1.COTIZACION.VALUE = COTIZACION(THIS.PAGEFRAME1.PAGE1.CBOMONEDA1.VALUE, 'V', THIS.PAGEFRAME1.PAGE1.TXTFECHA.VALUE)
+THIS.PAGEFRAME1.PAGE1.REFRESH()
+ThisForm.Pageframe1.Page3.FechaInicio.Value = DATE()
+ThisForm.Pageframe1.Page3.FechaFin.Value = DATE()
+ThisForm.Pageframe1.Page3.Refresh()
+
+ENDPROC
+PROCEDURE imprimir
+
+M.IDRemision = os_remision.IdRemision
+DO ('NotaRemision'+oApp.Empresa)
+
+ENDPROC
+PROCEDURE validar
+IF EMPTY(THISFORM.PAGEFRAME1.PAGE1.CPBT.VALUE)
+MESSAGEBOX("El comprobante no puede estar vacio")
+RETURN .F.
+ENDIF
+SELECT OS_MOVIMIENTO_DETALLE
+GOTO TOP
+IF EOF('os_movimiento_detalle')
+MESSAGEBOX("La remisión no se puede grabar sin detalle")
+RETURN .F.
+ENDIF
+IF EMPTY(NVL(SUCURSAL.IDDEPOSITO, ''))
+MESSAGEBOX("El sucursal actual no tiene un depósito predeterminado.", 48, "Futura Software")
+RETURN .F.
+ENDIF
+REPLACE IDDEPOSITO_SAL WITH SUCURSAL.IDDEPOSITO, IDDEPOSITO_ENT WITH .NULL. ALL IN OS_MOVIMIENTO_DETALLE
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+comprobante_def El tipo de comprobante por defecto cuando se inserta un nuevo registro de cabecera
+moneda_def moneda por defecto para venta
+sucursal_def Sucursal por defecto para la venta
+valor_iva valor del iva
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LG3
+[CLASS] cbomoneda
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbomoneda1
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "os_remision.idmoneda"
+Left = 647
+Name = "Cbomoneda1"
+RowSource = "Cu_Moneda.descripcion, IdMoneda"
+RowSourceType = 6
+TabIndex = 8
+Top = 81
+Width = 120
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] cbosucursal
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbosucursal1
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "os_remision.sucursal"
+Left = 311
+Name = "Cbosucursal1"
+RowSource = "sucursal.descripción, sucursal"
+RowSourceType = 6
+TabIndex = 2
+Top = 9
+Width = 180
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LFI
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkAnulado
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Anulado"
+Comment = ""
+ControlSource = "os_remision.anulado"
+Height = 16
+Left = 707
+Name = "chkAnulado"
+TabIndex = 12
+Top = 143
+Width = 58
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cliente
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "os_remision.idcliente"
+FontBold = .T.
+Height = 23
+Left = 83
+MaxLength = 6
+Name = "cliente"
+TabIndex = 3
+Top = 33
+Width = 82
+condicionextra = IdEmpresa=?oApp.Empresa
+datoayuda = Clientes
+indice = idCliente
+mensajeerror = No se encuentra el cliente espesificado
+objeto = this.parent.nom_cliente
+objeto2 = this.parent.direc
+origen = R
+requerido = .T.
+retorna = razsocial
+retorna2 = direccion
+tabla = vt_clientes
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LFE
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Cotizacion
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "os_remision.cotizacion"
+Left = 713
+Name = "Cotizacion"
+TabIndex = 11
+Top = 105
+Width = 54
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60YO9OI
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cpbt
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "os_remision.idcomprobante"
+Left = 647
+Name = "cpbt"
+TabIndex = 6
+Top = 57
+Width = 120
+cmdsql = Select descripcion,cpbt_stk,tipo from st_cpbt_stk where Tipo = 'SA' and IdEmpresa = ?oApp.Empresa
+cursor = cu_cpbt
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] direc
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Enabled = .F.
+Left = 83
+Name = "direc"
+TabIndex = 5
+Top = 58
+Width = 408
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K40XO12O
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] direcpartida
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "os_remision.direccionpartida"
+Enabled = .T.
+Height = 21
+Left = 155
+Name = "direcpartida"
+TabIndex = 5
+Top = 81
+Width = 336
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LFJ
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtNotas
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "os_remision.notas"
+Height = 46
+Left = 83
+Name = "edtNotas"
+TabIndex = 10
+Top = 154
+Width = 408
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FM0TOHKF
+[CLASS] idproyecto
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idproyecto1
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "os_remision.nroproyecto"
+Height = 23
+Left = 83
+Name = "Idproyecto1"
+TabIndex = 9
+Top = 129
+Width = 82
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LFF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCotizacion
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Cotización"
+Height = 16
+Left = 640
+Name = "lblCotizacion"
+TabIndex = 24
+Top = 105
+Width = 59
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LF9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFecha
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Fecha"
+Height = 16
+Left = 611
+Name = "lblFecha"
+TabIndex = 21
+Top = 33
+Width = 34
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcliente
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Cliente"
+Height = 16
+Left = 31
+Name = "lblIdcliente"
+TabIndex = 20
+Top = 33
+Width = 42
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LFD
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdmoneda
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Moneda"
+Height = 16
+Left = 587
+Name = "lblIdmoneda"
+TabIndex = 23
+Top = 81
+Width = 57
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LFH
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdvendedor
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Vendedor"
+Height = 16
+Left = 10
+Name = "lblIdvendedor"
+TabIndex = 25
+Top = 104
+Width = 65
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LFK
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNotas
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Notas"
+Height = 16
+Left = 42
+Name = "lblNotas"
+TabIndex = 27
+Top = 154
+Width = 33
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LF3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblOrdenservicio
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Ord. Servicio"
+Height = 16
+Left = -1
+Name = "lblOrdenservicio"
+TabIndex = 16
+Top = 9
+Width = 79
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LFC
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSucursal
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Sucursal"
+Height = 14
+Left = 253
+Name = "lblSucursal"
+TabIndex = 22
+Top = 9
+Width = 50
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OXKX5
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] nom_cliente
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Enabled = .F.
+Height = 23
+Left = 167
+Name = "nom_cliente"
+TabIndex = 14
+Top = 33
+Width = 324
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OXKX7
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] nom_vendedor
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Enabled = .F.
+Height = 23
+Left = 167
+Name = "nom_vendedor"
+TabIndex = 15
+Top = 104
+Width = 324
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60RRQ7Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] nro_remision
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Comment = ""
+ControlSource = "os_remision.nroremision"
+Enabled = .T.
+Left = 647
+MaxLength = 10
+Name = "nro_remision"
+TabIndex = 17
+Top = 9
+Value = 0
+Width = 119
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FM0TOHKD
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Proyecto
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 23
+Left = 167
+Name = "Proyecto"
+TabIndex = 29
+Top = 129
+Width = 324
+ZOrderSet = 3
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJD
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] totales
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Height = 105
+Left = 11
+Name = "totales"
+SpecialEffect = 1
+TabIndex = 30
+Top = 350
+Width = 768
+ZOrderSet = 22
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+LOCAL LNTOTAL, LNDESCUENTO, LNPORCDESCUENTO
+IF THISFORM.EDITMODE
+LNDESCUENTO = THIS.DESCUENTO.VALUE
+THIS.PARENT.TSGRID1.SUMCOLUMN()
+LNPORCDESCUENTO = THIS.PORCENTAJE.VALUE
+IF LNPORCDESCUENTO>0
+THIS.DESCUENTO.VALUE = (THIS.PARENT.TSGRID1.TOTALES(1)+THIS.PARENT.TSGRID1.TOTALES(2))*THIS.PORCENTAJE.VALUE/100
+ELSE
+IF THIS.DESCUENTO.VALUE>0
+LNPORCDESCUENTO = (THIS.DESCUENTO.VALUE*100/(THIS.PARENT.TSGRID1.TOTALES(1)+THIS.PARENT.TSGRID1.TOTALES(2)))
+ELSE
+LNPORCDESCUENTO = 0
+ENDIF
+THIS.PORCENTAJE.VALUE = LNPORCDESCUENTO
+ENDIF
+IF THIS.PARENT.TSGRID1.TOTALES(1)>0
+THIS.EXENTO.VALUE = THIS.PARENT.TSGRID1.TOTALES(1)-(THIS.PARENT.TSGRID1.TOTALES(1)*LNPORCDESCUENTO/100)
+ELSE
+THIS.EXENTO.VALUE = 0
+ENDIF
+IF THIS.PARENT.TSGRID1.TOTALES(2)>0
+THIS.GRAVADO.VALUE = THIS.PARENT.TSGRID1.TOTALES(2)-(THIS.PARENT.TSGRID1.TOTALES(2)*LNPORCDESCUENTO/100)
+ELSE
+THIS.GRAVADO.VALUE = 0
+ENDIF
+IF THIS.PARENT.TSGRID1.TOTALES(3)>0
+THIS.IVA.VALUE = THIS.PARENT.TSGRID1.TOTALES(3)-THIS.PARENT.TSGRID1.TOTALES(3)*LNPORCDESCUENTO/100
+ELSE
+THIS.IVA.VALUE = 0
+ENDIF
+ENDIF
+THIS.SUBTOTAL.VALUE = OS_REMISION.EXENTA+OS_REMISION.GRAVADA
+THIS.TOTAL.VALUE = OS_REMISION.EXENTA+OS_REMISION.GRAVADA+OS_REMISION.IVA
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJE
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] descuento
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 255,255,255
+ControlSource = "os_remision.impdesc"
+Enabled = .T.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 629
+Name = "descuento"
+TabIndex = 5
+Top = 5
+Value = 0
+Width = 117
+editable = .T.
+inputmaskdinamico = 
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THIS.PARENT.PORCENTAJE.VALUE = 0
+THIS.PARENT.REFRESH()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] exento
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 192,192,192
+ControlSource = "os_remision.exenta"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 431
+Name = "exento"
+TabIndex = 3
+Top = 29
+Value = 0
+Width = 117
+editable = .F.
+inputmaskdinamico = 
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THIS.PARENT.REFRESH()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJG
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Gravado
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 192,192,192
+ControlSource = "os_remision.gravada"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 431
+Name = "Gravado"
+TabIndex = 2
+Top = 54
+Value = 0
+Visible = .T.
+Width = 117
+editable = .F.
+inputmaskdinamico = 
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THIS.PARENT.REFRESH()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJH
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] iva
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+BackColor = 255,255,255
+ControlSource = "os_remision.iva"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 629
+Name = "iva"
+TabIndex = 6
+Top = 53
+Width = 117
+editable = .F.
+inputmaskdinamico = 
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJP
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] porcentaje
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+ControlSource = "os_remision.descuento"
+Enabled = .T.
+Height = 22
+InputMask = "99.99"
+Left = 561
+Name = "porcentaje"
+TabIndex = 1
+Top = 5
+Value = 0
+Width = 45
+editable = .T.
+inputmaskdinamico = 
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THIS.PARENT.REFRESH()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJF
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] subtotal
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 255,255,255
+ControlSource = ""
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 629
+Name = "subtotal"
+TabIndex = 4
+Top = 29
+Value = 0
+Width = 117
+editable = .F.
+inputmaskdinamico = 
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJQ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] total
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+ControlSource = ""
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 629
+Name = "total"
+TabIndex = 7
+Top = 77
+Width = 117
+editable = .F.
+inputmaskdinamico = 
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Caption = "Exentas"
+Height = 16
+Left = 371
+Name = "Tslabel1"
+TabIndex = 10
+Top = 39
+Width = 44
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJL
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Caption = "%"
+Height = 16
+Left = 599
+Name = "Tslabel2"
+TabIndex = 9
+Top = 11
+Width = 18
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJK
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Caption = "Sub - Total"
+Height = 16
+Left = 551
+Name = "Tslabel3"
+TabIndex = 8
+Top = 35
+Width = 72
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Caption = "Iva"
+Height = 16
+Left = 599
+Name = "Tslabel4"
+TabIndex = 14
+Top = 59
+Width = 24
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Caption = "Descuento"
+Height = 16
+Left = 492
+Name = "Tslabel5"
+TabIndex = 11
+Top = 10
+Width = 61
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJI
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Caption = "Gravadas"
+Height = 16
+Left = 358
+Name = "Tslabel6"
+TabIndex = 13
+Top = 60
+Visible = .T.
+Width = 58
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G5127DJO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] remision.Pageframe1.Page1.totales
+[START PROPERTIES]
+Caption = "Total"
+Height = 16
+Left = 587
+Name = "Tslabel7"
+TabIndex = 12
+Top = 83
+Width = 36
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAYZ
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "os_movimiento_detalle.idproducto"
+Column1.FontSize = 8
+Column1.Name = "producto"
+Column1.Width = 67
+Column2.ControlSource = "os_movimiento_detalle.descripcion"
+Column2.FontSize = 8
+Column2.Name = "descripcion"
+Column2.Width = 203
+Column3.ColumnOrder = 3
+Column3.ControlSource = "os_movimiento_detalle.cantidad"
+Column3.FontSize = 8
+Column3.Name = "cantidad"
+Column3.Width = 50
+Column4.ColumnOrder = 4
+Column4.ControlSource = "os_movimiento_detalle.precio"
+Column4.FontSize = 8
+Column4.InputMask = "99,999,999.99"
+Column4.Name = "Precio"
+Column4.Width = 65
+Column5.ColumnOrder = 5
+Column5.ControlSource = "os_movimiento_detalle.iva"
+Column5.FontSize = 8
+Column5.InputMask = "99,99"
+Column5.Name = "iva"
+Column5.Width = 31
+Column6.ColumnOrder = 6
+Column6.ControlSource = "cantidad*precio"
+Column6.FontSize = 8
+Column6.InputMask = "999,999,999.99"
+Column6.Name = "total"
+Column6.Width = 78
+Column7.ColumnOrder = 9
+Column7.ControlSource = "os_movimiento_detalle.serie"
+Column7.CurrentControl = "Tscommandbutton1"
+Column7.FontSize = 8
+Column7.Name = "serie"
+Column7.Sparse = .F.
+Column7.Width = 35
+Column8.ColumnOrder = 7
+Column8.ControlSource = "os_movimiento_detalle.modelo"
+Column8.FontSize = 8
+Column8.Name = "modelo"
+Column8.Width = 66
+Column9.ColumnOrder = 8
+Column9.ControlSource = "os_movimiento_detalle.marca"
+Column9.FontSize = 8
+Column9.Name = "Column9"
+Column9.Sparse = .F.
+Column9.Width = 63
+ColumnCount = 9
+GridLines = 2
+Height = 144
+Left = 11
+Name = "Tsgrid1"
+Panel = 1
+RecordSource = "os_movimiento_detalle"
+ScrollBars = 2
+TabIndex = 13
+Top = 203
+Width = 768
+campo = idremision,idcomprobante,idDeposito_sal, idempresa
+cfieldtosum = iif(iva=0,precio*cantidad,0),iif(iva<>0,precio*cantidad,0), iif(iva<>0, (precio*cantidad)*iva/100,0)
+codigo = idproducto
+editable = .T.
+titulo = Detalle de Remisión
+valor = os_remision.idremision,os_remision.idcomprobante,os_remision.sucursal, oApp.empresa
+valorvariable = os_remision.idremision
+variablevista = m.idremision
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+THIS.IVA.ENABLED = .F.
+THIS.TOTAL.ENABLED = .F.
+THIS.PARENT.TOTALES.REFRESH()
+THIS.SERIE.ENABLED = .T.
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZ4
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.cantidad
+[START PROPERTIES]
+Caption = "Cantidad"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZ5
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtCantidad
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.cantidad
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "os_movimiento_detalle.cantidad"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "txtCantidad"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THIS.PARENT.PARENT.REFRESH
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G80KJMCK
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.Column9
+[START PROPERTIES]
+Caption = "Marca"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G80KQ5ED
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] marca
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.Column9
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "os_movimiento_detalle.marca"
+FontSize = 8
+Left = 49
+Name = "marca"
+RowSource = "cu_marcas.Descripcion, idmarca "
+RowSourceType = 6
+Top = 71
+cmdsql = Select Descripcion, idmarca from st_marca where idempresa = ?oapp.Empresa
+cursor = cu_marcas
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZ2
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.descripcion
+[START PROPERTIES]
+Caption = "Descripción"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZ3
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtdescripcion
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.descripcion
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "os_movimiento_detalle.descripcion"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "txtdescripcion"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE DblClick
+LOCAL FRM AS FORM, LDESC
+DO FORM sys_edit NAME FRM LINKED NOSHOW
+FRM.CAPTION = "Edicion de Productos"
+FRM.EDTTEXT.VALUE = os_movimiento_detalle.descripcion
+FRM.SHOW(1)
+IF EMPTY(FRM.COMMENT)
+	LDESC = FRM.EDTTEXT.VALUE
+	REPLACE os_movimiento_detalle.descripcion WITH LDESC
+	THIS.VALUE = LDESC
+ENDIF
+ENDPROC
+PROCEDURE When
+LOCAL STRSQL, LRETURN
+STRSQL = "Select idtipo from st_producto where idproducto = "+"'"+OS_MOVIMIENTO_DETALLE.IDPRODUCTO+"'"
+IF SQL(STRSQL, 'vproducto')>0
+IF VPRODUCTO.IDTIPO<>'P'
+LRETURN = .T.
+ELSE
+LRETURN = .F.
+ENDIF
+ELSE
+LRETURN = .T.
+ENDIF
+IF USED('vproducto')
+USE IN 'vproducto'
+ENDIF
+RETURN LRETURN
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZ8
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.iva
+[START PROPERTIES]
+Caption = "IVA"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZ9
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtiva
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.iva
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "os_movimiento_detalle.iva"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "99,99"
+Margin = 0
+Name = "txtiva"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZE
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.modelo
+[START PROPERTIES]
+Caption = "Modelo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZF
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] tmarca
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.modelo
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "os_movimiento_detalle.modelo"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "tmarca"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZ6
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.Precio
+[START PROPERTIES]
+Caption = "Precio"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZ7
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtprecio
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.Precio
+[START PROPERTIES]
+Alignment = 3
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "os_movimiento_detalle.precio"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "99,999,999.99"
+Margin = 0
+Name = "txtprecio"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Value = 0
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+THIS.TAG = STR(THIS.VALUE)
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THIS.PARENT.PARENT.REFRESH
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZ0
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.producto
+[START PROPERTIES]
+Caption = "Producto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZ1
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtproducto
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.producto
+[START PROPERTIES]
+ControlSource = "os_movimiento_detalle.idproducto"
+Left = 35
+Name = "txtproducto"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Top = 35
+condicionextra = a.iva = b.iva
+copiarcampos = Costo_Prom as Costo_Pro,Costo_Repo as Ult_Costo
+datoayuda = Productos
+indice = idproducto
+mensajeerror = Producto no existe
+objeto = this.parent.parent.descripcion.txtdescripcion
+objeto2 = this.parent.parent.iva.txtiva  
+origen = R
+pegarcampos = Costo_Pro,Ult_Costo
+retorna = a.descripcion
+retorna2 = isnull(b.valor ,0)
+tabla = st_producto a, vt_iva b
+validar = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZC
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.serie
+[START PROPERTIES]
+Caption = "Series"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1XA0N96KD
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.serie
+[START PROPERTIES]
+Caption = "..."
+Left = 16
+Name = "Tscommandbutton1"
+Top = 29
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF EMPTY(OS_MOVIMIENTO_DETALLE.IDDETALLE)
+	MESSAGEBOX('Es necesario que se grabe primero para registrar las series', 64, TASTRADE_LOC)
+ELSE
+	DO FORM st_series WITH OS_MOVIMIENTO_DETALLE.IDDETALLE
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZD
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] tserie
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.serie
+[START PROPERTIES]
+ControlSource = "os_movimiento_detalle.serie"
+FontSize = 8
+Left = 21
+Name = "tserie"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Top = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZA
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.total
+[START PROPERTIES]
+Caption = "Importe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60OIAZB
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txttotal
+[PARENT] remision.Pageframe1.Page1.Tsgrid1.total
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999.99"
+Margin = 0
+Name = "txttotal"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Dirección"
+Height = 16
+Left = 11
+Name = "Tslabel1"
+TabIndex = 28
+Top = 57
+Width = 64
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FM0TOHKE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel12
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Proyecto"
+Height = 16
+Left = 24
+Name = "Tslabel12"
+TabIndex = 26
+Top = 129
+Width = 51
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nro. Remisión"
+Height = 16
+Left = 539
+Name = "Tslabel2"
+TabIndex = 18
+Top = 9
+Width = 103
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1G60YU3RF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Comprobante"
+Height = 16
+Left = 563
+Name = "Tslabel3"
+TabIndex = 19
+Top = 57
+Width = 81
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K40XO12P
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Dirección Punto de Partida"
+Height = 16
+Left = -6
+Name = "Tslabel4"
+TabIndex = 28
+Top = 83
+Width = 156
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1XA0LI69K
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecha
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "os_remision.fecha"
+Left = 647
+Name = "txtFecha"
+TabIndex = 4
+Top = 33
+Width = 120
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V9LF2
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtOrdenservicio
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "os_remision.ordenservicio"
+Left = 83
+MaxLength = 10
+Name = "txtOrdenservicio"
+TabIndex = 1
+Top = 9
+Width = 81
+datoayuda = Orden de Servicios
+solonuevo = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Valid
+LOCAL STRSQL
+IF EMPTY(THIS.VALUE)
+RETURN .T.
+ENDIF
+IF (THIS.TAG=THIS.VALUE .AND. THIS.VAL_PRE=THIS.VAL_POS) .OR.  .NOT. THISFORM.EDITMODE
+RETURN .T.
+ENDIF
+THIS.VAL_POS = THIS.VALUE
+THIS.VAL_PRE = THIS.VALUE
+STRSQL = "select a.idorden,a.idcliente,a.idvendedor,a.tipo tip_cont,a.idsucursal,a.idmoneda, "+"b.idproducto,b.modelo,b.serie, b.marca,b.cantidad, ISNULL(b.precio,0) precio,"+"b.descripcion des_prod, "+"b.tipo cat_prod,b.tipoproducto,isnull(b.impuesto,0) iva "+" from os_ordenservicio a, os_detalleservicio b "+"where a.idorden = b.idorden "+"  and a.estado = 'EJ' and b.tipo='ST'"+"  and a.idorden = '"+THIS.VALUE+"'"
+IF SQL(STRSQL, 'vserv')>0
+IF EOF('vserv')
+MESSAGEBOX('Nro. de Servicio no existe. o no Ejecutado')
+IF USED('vserv')
+USE IN 'vserv'
+ENDIF
+RETURN .F.
+ENDIF
+DELETE FROM os_movimiento_detalle WHERE OS_MOVIMIENTO_DETALLE.IDREMISION=OS_REMISION.IDREMISION
+REPLACE OS_REMISION.SUCURSAL WITH VSERV.IDSUCURSAL
+REPLACE OS_REMISION.IDMONEDA WITH VSERV.IDMONEDA
+REPLACE OS_REMISION.IDCLIENTE WITH VSERV.IDCLIENTE
+REPLACE OS_REMISION.IDVENDEDOR WITH VSERV.IDVENDEDOR
+THIS.PARENT.COTIZACION.VALUE = COTIZACION(VSERV.IDMONEDA, 'V', DATE())
+SELECT VSERV
+GOTO TOP
+DO WHILE  .NOT. EOF('vserv')
+INSERT INTO os_movimiento_detalle (IDEMPRESA, IDREMISION, IDPRODUCTO, DESCRIPCION, CANTIDAD, PRECIO, IVA, IDDEPOSITO_SAL, IDCOMPROBANTE, MARCA, MODELO, SERIE) VALUES (OAPP.EMPRESA, OS_REMISION.IDREMISION, VSERV.IDPRODUCTO, VSERV.DES_PROD, VSERV.CANTIDAD, VSERV.PRECIO, VSERV.IVA, VSERV.IDSUCURSAL, OS_REMISION.IDCOMPROBANTE, VSERV.MARCA, VSERV.MODELO, VSERV.SERIE)
+SKIP IN 'vserv'
+ENDDO
+THISFORM.REFRESHFORM()
+IF USED('vserv')
+USE IN 'vserv'
+ENDIF
+ELSE
+MESSAGEBOX('Nro. de pedido no existe. ')
+IF USED('vserv')
+USE IN 'vserv'
+ENDIF
+RETURN .F.
+ENDIF
+THISFORM.PAGEFRAME1.PAGE1.TOTALES.REFRESH
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21Q10K47O
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] vendedor
+[PARENT] remision.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "os_remision.idvendedor"
+FontBold = .F.
+Height = 23
+Left = 83
+MaxLength = 6
+Name = "vendedor"
+TabIndex = 7
+Top = 104
+Width = 82
+condicionextra = v.idempresa=?oapp.empresa and v.idpersona=p.idpersona
+datoayuda = Vendedor
+indice = idvendedor
+mensajeerror = No se encuentra el Empleado espesificado
+objeto = this.parent.nom_vendedor
+origen = R
+requerido = .F.
+retayuda = idvendedor
+retorna = rtrim(p.nombre)+' '+rtrim(apellido)
+tabla = vt_vendedores v,bs_personas p
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UP
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] CiConduct
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "os_remision.ciconductor"
+Left = 551
+Name = "CiConduct"
+TabIndex = 8
+Top = 197
+Width = 120
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] DireccionCond
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "os_remision.direccionconductor"
+Height = 21
+Left = 173
+Name = "DireccionCond"
+TabIndex = 9
+Top = 243
+Width = 225
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UJ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] FechaFin
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "os_remision.fechafintraslado"
+Height = 21
+Left = 551
+Name = "FechaFin"
+TabIndex = 2
+Top = 55
+Width = 102
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] FechaInicio
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "os_remision.fechainiciotraslado"
+Height = 21
+Left = 173
+Name = "FechaInicio"
+TabIndex = 1
+Top = 55
+Width = 102
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UK
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Marca
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "os_remision.marcavehic"
+Height = 21
+Left = 173
+Name = "Marca"
+TabIndex = 3
+Top = 103
+Width = 225
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NombreConduc
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "os_remision.nombreconduct"
+Height = 21
+Left = 173
+Name = "NombreConduc"
+TabIndex = 7
+Top = 197
+Width = 225
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UM
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NombreTransp
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "os_remision.razsocialtransp"
+Height = 21
+Left = 173
+Name = "NombreTransp"
+TabIndex = 5
+Top = 151
+Width = 225
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UL
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NroChapa
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "os_remision.nrochapa"
+Height = 21
+Left = 551
+Name = "NroChapa"
+TabIndex = 4
+Top = 103
+Width = 120
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60MEM6S
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] OtrosMotivos
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "os_remision.otrosmotivos"
+Height = 21
+Left = 173
+Name = "OtrosMotivos"
+TabIndex = 9
+Top = 324
+Visible = .F.
+Width = 225
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+IF This.parent.Tscombobox1.Value = '013'
+	This.Visible = .T.
+ENDIF 
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UN
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] RucTransp
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "os_remision.ructransportista"
+Height = 21
+Left = 551
+Name = "RucTransp"
+TabIndex = 6
+Top = 151
+Width = 120
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UD
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "os_remision.idtraslado"
+Enabled = .T.
+Height = 22
+Left = 173
+Name = "Tscombobox1"
+RowSource = ""
+RowSourceType = 0
+TabIndex = 10
+Top = 291
+Width = 225
+cmdsql = select descripcion,IdTraslado from os_traslado  order by descripcion
+cursor = cTraslado
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+*!*	This.parent.OtrosMotivos.Visible = this.Value = '013'
+*!*	This.parent.OtrosMotivos.setfocus()
+ENDPROC
+PROCEDURE LostFocus
+This.parent.OtrosMotivos.setfocus()
+ENDPROC
+PROCEDURE When
+IF this.Value = '013'
+	This.parent.OtrosMotivos.Visible = .T.
+ENDIF 
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Fecha Inicio Traslado"
+Height = 22
+Left = 49
+Name = "Tslabel1"
+TabIndex = 5
+Top = 55
+Width = 120
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel10
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Motivo Traslado"
+Height = 22
+Left = 48
+Name = "Tslabel10"
+TabIndex = 20
+Top = 291
+Width = 121
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "C.I Conductor"
+Left = 468
+Name = "Tslabel2"
+TabIndex = 15
+Top = 197
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Direccion Conductor"
+Height = 22
+Left = 48
+Name = "Tslabel3"
+TabIndex = 16
+Top = 243
+Width = 121
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FG0V0Q1Z
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Nombre Conductor"
+Height = 22
+Left = 61
+Name = "Tslabel4"
+TabIndex = 7
+Top = 197
+Width = 108
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Ruc"
+Left = 468
+Name = "Tslabel5"
+TabIndex = 10
+Top = 151
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Nombre Transportista"
+Height = 22
+Left = 37
+Name = "Tslabel6"
+TabIndex = 11
+Top = 151
+Width = 132
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Numero Chapa"
+Height = 22
+Left = 449
+Name = "Tslabel7"
+TabIndex = 12
+Top = 103
+Width = 96
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UH
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Fecha FinTraslado"
+Height = 22
+Left = 425
+Name = "Tslabel8"
+TabIndex = 13
+Top = 55
+Width = 120
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K313M8UI
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] remision.Pageframe1.Page3
+[START PROPERTIES]
+Caption = "Marca Vehiculo"
+Height = 22
+Left = 73
+Name = "Tslabel9"
+TabIndex = 14
+Top = 103
+Width = 96
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

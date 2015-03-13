@@ -1,0 +1,763 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CV0K0GZ5
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 435
+Left = 12
+Name = "Dataenvironment"
+Top = 69
+Width = 847
+[END PROPERTIES]
+[START RESERVED2]
+5[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60JD6IN
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "bancos"
+CursorSource = "bs_bancos"
+Database = ..\data\datos.dbc
+Height = 219
+Left = 542
+Name = "Cursor3"
+Top = 135
+Width = 126
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1JC106UBI
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "monedas"
+CursorSource = "bs_monedas"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 294
+Name = "Cursor2"
+Top = 4
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1JD0VAA77
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vvalordepos"
+CursorSource = "ts_vvalordepos"
+Database = ..\data\datos.dbc
+Height = 311
+Left = 401
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 69
+Width = 137
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1JD0W7JL6
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor4
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "estado_cheque"
+CursorSource = "ts_estado_cheque"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 67
+Name = "Cursor4"
+Top = 27
+Width = 130
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CV0K0GZ6
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+BackColor = 160,184,200
+Caption = "Valores a depositar"
+DataSession = 2
+DoCreate = .T.
+Height = 394
+Name = "Tsbaseform12"
+Width = 594
+WindowType = 1
+ctoolbar = tstoolbar
+editmode = .F.
+lallowdelete = .F.
+lallowedits = .F.
+lallownew = .F.
+lblRequerido.Name = "lblRequerido"
+navegador = .F.
+tabla1 = vValorDepos
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Activate
+DODEFAULT()
+THIS.FILTRAR()
+ENDPROC
+**
+PROCEDURE Init
+LPARAMETERS LOORIGEN
+THIS.ORIGEN = LOORIGEN
+DODEFAULT()
+ENDPROC
+**
+PROCEDURE filtrar
+M.MONEDA = THISFORM.MONEDA.VALUE
+M.FECHA = THISFORM.FECHA.VALUE
+= TABLEREVERT(.T.)
+= REQUERY('vValorDepos')
+THISFORM.REFRESHFORM()
+ENDPROC
+**
+[END METHODS]
+[START RESERVED3]
+*filtrar 
+origen
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60HBQBG
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdAddToCurrentOrder
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Ag\<regar valores marcados al depósito actual"
+Height = 26
+Left = 12
+Name = "cmdAddToCurrentOrder"
+Top = 357
+Width = 291
+ZOrderSet = 3
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LCALIAS, LOGRID, LNOLDAREA, LNNUMITEMSADDED
+LNNUMITEMSADDED = 0
+LOCAL LNTHISSESSIONID, LNTARGETSESSIONID
+LNTHISSESSIONID = THISFORM.DATASESSIONID
+LNTARGETSESSIONID = THISFORM.ORIGEN.DATASESSIONID
+LNOLDAREA = SELECT()
+THISFORM.LOCKSCREEN = .T.
+THISFORM.ORIGEN.LOCKSCREEN = .T.
+LOGRID = THISFORM.GRDLINEITEMS
+LCALIAS = LOGRID.RECORDSOURCE
+SELECT (LCALIAS)
+WAIT WINDOW NOWAIT "Actualizando el pedido"
+SCAN
+IF VVALORDEPOS.MARCADO
+IF VVALORDEPOS.IDMONEDA<>VPMONEDA
+MESSAGEBOX('No puedo Utilizar Valores con Moneda diferente a la Cuenta', 0, 'Futura Soft')
+= TABLEREVERT(.T., "vValorDepos")
+SELECT (LNOLDAREA)
+THISFORM.HIDE()
+THISFORM.ORIGEN.REFRESHFORM()
+THISFORM.ORIGEN.LOCKSCREEN = .F.
+WAIT CLEAR
+RELEASE THISFORM, VPMONEDA
+RETURN
+ENDIF
+LCIDVALOR = VVALORDEPOS.IDVALOR
+LCIDBANCO = VVALORDEPOS.IDBANCO
+LCNROCHEQUE = VVALORDEPOS.NROCHEQUE
+LNIMPORTE = VVALORDEPOS.IMPORTE
+LCIDTIPOVALOR = VVALORDEPOS.IDTIPOVALOR
+SET DATASESSION TO (LNTARGETSESSIONID)
+INSERT INTO vDetDepos (IDDEPOSITO, TIPOVALOR, IDBANCO, NROCHEQUE, IMPORTE, IDVALOR, IDEMPRESA) VALUES (DEPOSITOS.IDDEPOSITO, LCIDTIPOVALOR, LCIDBANCO, LCNROCHEQUE, LNIMPORTE, LCIDVALOR, OAPP.EMPRESA)
+SET DATASESSION TO (LNTHISSESSIONID)
+LNNUMITEMSADDED = LNNUMITEMSADDED+1
+ENDIF
+ENDSCAN
+= TABLEREVERT(.T., "vValorDepos")
+SELECT (LNOLDAREA)
+THISFORM.HIDE()
+THISFORM.ORIGEN.REFRESHFORM()
+THISFORM.ORIGEN.LOCKSCREEN = .F.
+WAIT CLEAR
+RELEASE THISFORM, VPMONEDA
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60H487F
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] fecha
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 3
+Left = 457
+Name = "fecha"
+Top = 308
+Value = (date())
+ZOrderSet = 1
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF THIS.TAG<>DTOC(THIS.VALUE)
+THISFORM.FILTRAR()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CY0QV048
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdLineItems
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Column1.BackColor = 211,224,231
+Column1.ColumnOrder = 2
+Column1.ControlSource = "vvalordepos.fchcheque"
+Column1.FontSize = 8
+Column1.Name = "Fecha"
+Column1.Visible = .T.
+Column1.Width = 65
+Column2.BackColor = 211,224,231
+Column2.ColumnOrder = 4
+Column2.ControlSource = "vvalordepos.nrocheque"
+Column2.FontSize = 8
+Column2.Name = "NroCheque"
+Column2.Visible = .T.
+Column2.Width = 79
+Column3.BackColor = 211,224,231
+Column3.ColumnOrder = 5
+Column3.ControlSource = "vvalordepos.importe"
+Column3.FontSize = 8
+Column3.InputMask = "999,999,999,999.99"
+Column3.Name = "Importe"
+Column3.Visible = .T.
+Column3.Width = 86
+Column4.ColumnOrder = 7
+Column4.ControlSource = "vvalordepos.idestado"
+Column4.CurrentControl = "Estado"
+Column4.FontSize = 8
+Column4.Name = "Estado"
+Column4.Sparse = .F.
+Column4.Visible = .T.
+Column4.Width = 91
+Column5.ColumnOrder = 1
+Column5.ControlSource = "vvalordepos.marcado"
+Column5.CurrentControl = "Tscheckbox1"
+Column5.FontSize = 8
+Column5.Name = "marcado"
+Column5.Sparse = .F.
+Column5.Width = 48
+Column6.ColumnOrder = 3
+Column6.ControlSource = "vvalordepos.idbanco"
+Column6.CurrentControl = "Tscombobox3"
+Column6.FontSize = 8
+Column6.Name = "Banco"
+Column6.Sparse = .F.
+Column6.Width = 131
+Column7.ColumnOrder = 6
+Column7.ControlSource = "vvalordepos.idmoneda"
+Column7.FontSize = 8
+Column7.Name = "Moneda"
+Column7.Width = 56
+ColumnCount = 7
+FontSize = 8
+Height = 278
+Left = 0
+Name = "grdLineItems"
+Panel = 1
+RecordMark = .T.
+RecordSource = "vvalordepos"
+RecordSourceType = 1
+RowHeight = 20
+ScrollBars = 2
+Top = 2
+Width = 594
+ZOrderSet = 6
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Banco.Refresh
+DODEFAULT()
+THIS.SETALL('Enabled', .F., 'Column')
+THIS.MARCADO.ENABLED = .T.
+ENDPROC
+**
+PROCEDURE Refresh
+DODEFAULT()
+THIS.MARCADO.ENABLED = .T.
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60HODVI
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdLineItems.Banco
+[START PROPERTIES]
+Caption = "Banco"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60HODVJ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdLineItems.Banco
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60IJC99
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsbaseform12.grdLineItems.Banco
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "vvalordepos.idbanco"
+FirstElement = 1
+Height = 22
+Left = 155
+Name = "Tscombobox3"
+RowSource = "bancos.descripcion,idbanco"
+RowSourceType = 6
+SpecialEffect = 1
+Style = 2
+TabIndex = 12
+Top = 142
+Width = 194
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CY0QV050
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdLineItems.Estado
+[START PROPERTIES]
+Caption = "Estado"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CY0QV051
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Estado
+[PARENT] Tsbaseform12.grdLineItems.Estado
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "160,0"
+ControlSource = "vvalordepos.idestado"
+Enabled = .T.
+FirstElement = 1
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 24
+ItemBackColor = 255,255,255
+ItemForeColor = 0,0,0
+ItemTips = .T.
+Left = 132
+Name = "Estado"
+NumberOfElements = 0
+RowSource = "estado_cheque.estado_cheque,idestado"
+RowSourceType = 6
+SpecialEffect = 1
+Style = 2
+TabIndex = 2
+Top = 324
+Visible = .T.
+Width = 351
+ZOrderSet = 3
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+THISFORM.FILTRAR()
+ENDPROC
+**
+PROCEDURE LostFocus
+IF EMPTY(THIS.VALUE)
+THISFORM.FILTRAR()
+ENDIF
+ENDPROC
+**
+PROCEDURE Refresh
+THIS.ENABLED =  .NOT. THISFORM.EDITMODE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CY0QV04H
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdLineItems.Fecha
+[START PROPERTIES]
+Caption = "Fecha"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CY0QV04I
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdLineItems.Fecha
+[START PROPERTIES]
+BackColor = 211,224,231
+BackStyle = 0
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CY0QV04X
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdLineItems.Importe
+[START PROPERTIES]
+Caption = "Importe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CY0QV04Y
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdLineItems.Importe
+[START PROPERTIES]
+BackColor = 211,224,231
+BackStyle = 0
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999,999.99"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60HODVD
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Marcado
+[PARENT] Tsbaseform12.grdLineItems.marcado
+[START PROPERTIES]
+Caption = "Marcado"
+FontSize = 8
+Name = "Marcado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60HODVG
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsbaseform12.grdLineItems.marcado
+[START PROPERTIES]
+Alignment = 0
+Caption = ""
+ControlSource = "vvalordepos.marcado"
+Left = 25
+Name = "Tscheckbox1"
+SpecialEffect = 1
+Top = 45
+Value = .F.
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60HODVL
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdLineItems.Moneda
+[START PROPERTIES]
+Caption = "Moneda"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60JMX0W
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Moneda
+[PARENT] Tsbaseform12.grdLineItems.Moneda
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "100,50"
+ControlSource = "vvalordepos.idmoneda"
+FirstElement = 1
+Height = 22
+Left = 85
+Name = "Moneda"
+NumberOfElements = 0
+RowSource = "monedas.descripcion,idmoneda"
+RowSourceType = 6
+Style = 2
+TabIndex = 4
+Top = 308
+Width = 180
+ZOrderSet = 5
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CY0QV04T
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdLineItems.NroCheque
+[START PROPERTIES]
+Caption = "Nº Cheque"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CY0QV04V
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdLineItems.NroCheque
+[START PROPERTIES]
+BackColor = 211,224,231
+BackStyle = 0
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CV0K0GZ5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcuenta
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "Hasta la fecha"
+FontBold = .F.
+Height = 16
+Left = 379
+Name = "lblIdcuenta"
+TabIndex = 3
+Top = 308
+Width = 72
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CV0K0GZ5
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Moneda
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "100,50"
+ControlSource = ""
+FirstElement = 1
+Height = 22
+Left = 85
+Name = "Moneda"
+NumberOfElements = 0
+RowSource = "monedas.descripcion,idmoneda"
+RowSourceType = 6
+Style = 2
+TabIndex = 4
+Top = 308
+Width = 180
+ZOrderSet = 5
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+THISFORM.FILTRAR()
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60JMWZQ
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 48
+Left = 4
+Name = "Ts3dshape1"
+Top = 296
+Width = 588
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60JD6K5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Moneda"
+FontBold = .F.
+Height = 16
+Left = 35
+Name = "Tslabel1"
+TabIndex = 3
+Top = 308
+Width = 46
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D60JMX11
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Condición de Filtro"
+FontBold = .F.
+Height = 16
+Left = 25
+Name = "Tslabel3"
+TabIndex = 3
+Top = 290
+Width = 94
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,289 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZEGVN
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 200
+InitialSelectedAlias = "sys_config"
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+OAPP.SETDATABASE(THIS)
+ENDPROC
+**
+[END METHODS]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZQPR1
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sys_config"
+BufferModeOverride = 5
+CursorSource = "sys_config"
+Database = \\venus\sistemas\futura\data\datos.dbc
+Height = 90
+Left = 11
+Name = "Cursor1"
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZEGVO
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+Caption = "Configuraciones del Sistema"
+DataSession = 1
+DoCreate = .T.
+Height = 413
+Name = "Tsbaseform12"
+Width = 598
+lallowconsultar = .F.
+lallowdelete = .F.
+lallownew = .F.
+lblRequerido.Name = "lblRequerido"
+navegador = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZUHZ6
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Column1.ControlSource = "sys_config.constante"
+Column1.FontSize = 8
+Column1.Name = "Constante"
+Column1.ReadOnly = .T.
+Column1.Visible = .T.
+Column1.Width = 142
+Column2.ControlSource = "sys_config.descripcion"
+Column2.FontSize = 8
+Column2.Name = "Descripcion"
+Column2.ReadOnly = .T.
+Column2.Visible = .T.
+Column2.Width = 263
+Column3.ColumnOrder = 4
+Column3.ControlSource = "sys_config.valor"
+Column3.DynamicCurrentControl = "iif(tipo='N','ValorNumerico',iif(tipo='D','ValorFecha','ValorCaracter'))"
+Column3.FontSize = 8
+Column3.Name = "ConfigValor"
+Column3.Sparse = .F.
+Column3.Visible = .T.
+Column3.Width = 82
+Column4.ColumnOrder = 3
+Column4.ControlSource = "sys_config.tipo"
+Column4.FontSize = 8
+Column4.Name = "Tipo"
+Column4.ReadOnly = .T.
+Column4.Width = 45
+ColumnCount = 4
+FontSize = 8
+Height = 375
+Left = 24
+Name = "Tsgrid1"
+Panel = 1
+RecordSource = "sys_config"
+RowHeight = 17
+ScrollBars = 2
+Top = 18
+Width = 555
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZUHZB
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.ConfigValor
+[START PROPERTIES]
+Caption = "Valor"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZUHZD
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] ValorCaracter
+[PARENT] Tsbaseform12.Tsgrid1.ConfigValor
+[START PROPERTIES]
+BorderStyle = 0
+FontSize = 8
+Height = 23
+Left = 24
+Name = "ValorCaracter"
+Top = 23
+Width = 100
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZUHZE
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] ValorFecha
+[PARENT] Tsbaseform12.Tsgrid1.ConfigValor
+[START PROPERTIES]
+BorderStyle = 0
+FontSize = 8
+Height = 23
+InputMask = "D"
+Left = 36
+Name = "ValorFecha"
+Top = 23
+Width = 100
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZUHZC
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] ValorNumerico
+[PARENT] Tsbaseform12.Tsgrid1.ConfigValor
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999999"
+Margin = 0
+Name = "ValorNumerico"
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZUHZ7
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.Constante
+[START PROPERTIES]
+Caption = "Constante"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZUHZ8
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Tsgrid1.Constante
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZUHZ9
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.Descripcion
+[START PROPERTIES]
+Caption = "Descripcion"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O80ZUHZA
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Tsgrid1.Descripcion
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O8113I7J
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.Tipo
+[START PROPERTIES]
+Caption = "Tipo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O8113I7K
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Tsgrid1.Tipo
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

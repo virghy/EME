@@ -1,0 +1,1415 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 52
+Left = 140
+Width = 765
+Height = 438
+InitialSelectedAlias = "st_movimiento"
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GT0VHNCY
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 4
+Left = 39
+Height = 307
+Width = 174
+Alias = "st_movimiento"
+BufferModeOverride = 5
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+CursorSource = "st_movimiento"
+NoDataOnLoad = .T.
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MW0PFB5B
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 4
+Left = 282
+Height = 402
+Width = 172
+Alias = "st_detfactu"
+BufferModeOverride = 5
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+CursorSource = "st_detfactu"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WWM
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] st_Movimientos
+[START PROPERTIES]
+DataSession = 2
+Height = 489
+Width = 671
+DoCreate = .T.
+BufferMode = 0
+Caption = "Movimientos de Productos"
+Icon = ..\bitmaps\default1.ico
+WindowState = 0
+LockScreen = .F.
+WhatsThisButton = .T.
+tabla1 = st_movimiento
+tabla2 = st_DetFactu
+editmode = .F.
+tabla3 = 
+etiquetamenu = Compras
+camponro = 
+campotam = 
+detalle = .T.
+campos = idmovimiento,idempresa
+valores = newid('stmovimiento'),oapp.empresa
+identidad = idmovimiento
+tablaconsulta = MOVIMIENTO
+idobjeto = 300
+Name = "st_Movimientos"
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 0
+Pageframe1.Left = 1
+Pageframe1.Width = 671
+Pageframe1.Height = 492
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+LPARAMETERS M.NROORDEN
+DODEFAULT()
+IF RECCOUNT('cpbt_stk')>0
+THISFORM.PAGEFRAME1.PAGE1.COMPROBANTE.LISTINDEX = 1
+ENDIF
+IF PCOUNT()>0
+THIS.ADDNEW()
+REPLACE NROORDEN WITH M.NROORDEN, ST_MOVIMIENTO.IDCOMPROBANTE WITH 'EP'
+THISFORM.PAGEFRAME1.PAGE1.CMDGENERAR.CLICK()
+ENDIF
+IF THIS.RUNSQL("Select convert(char(1),dbo.LeerConstante(?oApp.Empresa,'VT_INF_PRODUCTO')) as Inf_Producto", 'cConfig')>0
+THISFORM.PAGEFRAME1.PAGE1.CONTAINER1.TSFACT1.MARCA.VISIBLE = NVL(CCONFIG.INF_PRODUCTO, '')='S'
+THISFORM.PAGEFRAME1.PAGE1.CONTAINER1.TSFACT1.MODELO.VISIBLE = NVL(CCONFIG.INF_PRODUCTO, '')='S'
+THISFORM.PAGEFRAME1.PAGE1.CONTAINER1.TSFACT1.SERIE.VISIBLE = NVL(CCONFIG.INF_PRODUCTO, '')='S'
+ENDIF
+ENDPROC
+PROCEDURE addnew
+DODEFAULT()
+THIS.PAGEFRAME1.PAGE1.TXTFECFACTU.VALUE = DATE()
+THIS.PAGEFRAME1.PAGE1.DEP_ENTRADA.LISTINDEX = 1
+THIS.PAGEFRAME1.PAGE1.CBOMONEDA1.LISTINDEX = 1
+THIS.PAGEFRAME1.PAGE1.COTIZACION.VALUE = COTIZACION(THIS.PAGEFRAME1.PAGE1.CBOMONEDA1.VALUE, 'V', THIS.PAGEFRAME1.PAGE1.TXTFECFACTU.VALUE)
+ENDPROC
+PROCEDURE imprimir
+M.CPBT_STK = ST_MOVIMIENTO.CPBT_STK
+M.NUMERO = ST_MOVIMIENTO.NUMERO
+REPORT FORM st_movistk NOCONSOLE PREVIEW
+ENDPROC
+PROCEDURE validar
+IF THIS.PAGEFRAME1.PAGE1.COMPROBANTE.VALUE='TR' .AND. THIS.PAGEFRAME1.PAGE1.DEP_ENTRADA.VALUE=THIS.PAGEFRAME1.PAGE1.DEP_SALIDA.VALUE
+MESSAGEBOX('No puede Trasferir al mismo Deposito', 0, 'Futura')
+RETURN .F.
+ENDIF
+IF EMPTY(THIS.PAGEFRAME1.PAGE1.DEP_ENTRADA.VALUE) .AND. EMPTY(THIS.PAGEFRAME1.PAGE1.DEP_SALIDA.VALUE)
+MESSAGEBOX('Ingrese Deposito')
+RETURN .F.
+ENDIF
+IF EMPTY(ST_MOVIMIENTO.NUMERO) .OR. ST_MOVIMIENTO.NUMERO=0
+M.IDCOMPROB = ST_MOVIMIENTO.IDCOMPROBANTE
+STRSQL = 'select isnull(max(numero),0)+1 as numero from st_movimiento where idcomprobante = ?m.idcomprob'
+IF SQL(STRSQL, 'ultimo')>0
+IF  .NOT. EOF('ultimo')
+ULT_VALOR = ULTIMO.NUMERO
+ELSE
+ULT_VALOR = 1
+ENDIF
+USE IN 'ultimo'
+ELSE
+ULT_VALOR = 1
+ENDIF
+REPLACE NUMERO WITH ULT_VALOR IN ST_MOVIMIENTO
+ENDIF
+SELECT ST_DETFACTU
+REPLACE IDDEPOSITO_SAL WITH IIF(EMPTY(ST_MOVIMIENTO.DEPOSITO), .NULL., ST_MOVIMIENTO.DEPOSITO), IDDEPOSITO_ENT WITH IIF(EMPTY(ST_MOVIMIENTO.DEPOSITO_ENT), .NULL., ST_MOVIMIENTO.DEPOSITO_ENT) ALL
+IF RECCOUNT('st_detfactu')=0
+MESSAGEBOX('Ingrese Productos a procesar')
+RETURN .F.
+ENDIF
+IF  .NOT. EMPTY(ST_MOVIMIENTO.NROORDEN)
+TEXT TO CMDSQL NOSHOW
+		UPDATE prd_produccion
+			SET Estado = 'F'
+		where idEmpresa = ?oApp.Empresa and NroOrden = ?st_movimiento.nroorden
+ENDTEXT
+THIS.RUNSQL(CMDSQL, 'cc', THISFORM.HNDCONN)
+ENDIF
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+tipo_comprob Tipo de Comprobante ..Entrada o Salida
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+FontBold = .F.
+Caption = "Depósito Salida"
+Height = 16
+Left = 394
+Top = 57
+Width = 76
+TabIndex = 19
+ZOrderSet = 1
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J0112JDR
+[CLASS] tslabel
+[CLASSLOC] ..\..\empresas\yuty\ventas\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .F.
+Caption = "Dep. Referencia"
+Height = 16
+Left = -11
+Top = 106
+Width = 100
+TabIndex = 18
+ZOrderSet = 1
+Name = "Tslabel8"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J0112JDQ
+[CLASS] tslabel
+[CLASSLOC] ..\..\empresas\yuty\ventas\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .F.
+Caption = "Nro. Referencia"
+Height = 16
+Left = 382
+Top = 106
+Width = 88
+TabIndex = 23
+ZOrderSet = 1
+Name = "Tslabel7"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J0112JDS
+[CLASS] tstextbox
+[CLASSLOC] ..\..\empresas\yuty\ventas\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroRef
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+DateFormat = 13
+ControlSource = "st_movimiento.nro_ref"
+Format = "K"
+Height = 23
+Left = 478
+ReadOnly = .T.
+TabIndex = 8
+Top = 106
+Width = 156
+ZOrderSet = 3
+editable = .T.
+Name = "txtNroRef"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+RETURN EMPTY(st_movimiento.deposito_ref)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BO0M9JM5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+FontBold = .F.
+Caption = "Referencia"
+Height = 16
+Left = 36
+Top = 130
+Width = 55
+TabIndex = 22
+ZOrderSet = 1
+Name = "Tslabel4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RB0Y81IK
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+FontBold = .F.
+Caption = "Moneda"
+Height = 16
+Left = 46
+Top = 83
+Width = 43
+TabIndex = 20
+ZOrderSet = 2
+Name = "Tslabel5"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BO0M9JM7
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Referencia
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+DateFormat = 13
+ControlSource = "st_movimiento.referencia"
+Height = 23
+Left = 94
+TabIndex = 9
+Top = 131
+Width = 540
+ZOrderSet = 3
+editable = .T.
+Name = "Referencia"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecfactu
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+DateFormat = 13
+ControlSource = "st_movimiento.fecha"
+Format = "D"
+Height = 23
+Left = 94
+TabIndex = 2
+Top = 34
+Width = 84
+ZOrderSet = 3
+editable = .T.
+condicionvalidacion = !empty(st_movimiento.fecha)
+mensajevalidacion = Ingrese Fecha
+Name = "txtFecfactu"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GT0VHNCY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] fechafac
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+FontBold = .F.
+Caption = "Fecha:"
+Height = 16
+Left = 27
+Top = 36
+Width = 64
+TabIndex = 16
+ZOrderSet = 4
+Name = "fechafac"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FM0TSNNN
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Proyecto
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 23
+Left = 167
+TabIndex = 28
+Top = 156
+Width = 467
+ZOrderSet = 3
+editable = .F.
+Name = "Proyecto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1TZ0JG57F
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .F.
+Caption = "Nro. Orden Prod."
+Height = 12
+Left = 382
+Top = 34
+Visible = .T.
+Width = 88
+TabIndex = 24
+ZOrderSet = 7
+Name = "Tslabel6"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RB0Y81IM
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cotizacion
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "st_movimiento.cotizacion"
+Height = 23
+InputMask = "999,999"
+Left = 478
+TabIndex = 6
+Top = 82
+Width = 156
+ZOrderSet = 8
+Name = "cotizacion"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Valid
+IF EMPTY(THIS.VALUE)
+RETURN .T.
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RB0Y81IQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNivel
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+FontBold = .F.
+Caption = "Cotización"
+Height = 16
+Left = 412
+Top = 82
+Width = 58
+TabIndex = 21
+ZOrderSet = 9
+Name = "lblNivel"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdfactura
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .F.
+Caption = "Nro."
+Height = 12
+Left = 445
+Top = 10
+Visible = .T.
+Width = 25
+TabIndex = 25
+ZOrderSet = 7
+Name = "lblIdfactura"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07W0M38IO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .F.
+Caption = "Depósito Entrada"
+Height = 16
+Left = 7
+Top = 58
+Width = 84
+TabIndex = 17
+ZOrderSet = 13
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07W0LMSRO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+FontBold = .F.
+Caption = "Comprobante"
+Height = 16
+Left = 8
+Top = 11
+Width = 83
+TabIndex = 15
+ZOrderSet = 13
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] dep_entrada
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 3
+ColumnCount = 3
+ColumnWidths = "100,0,100"
+RowSourceType = 3
+ControlSource = "st_movimiento.deposito_ent"
+Left = 94
+NumberOfElements = 0
+Style = 2
+TabIndex = 3
+Top = 58
+Width = 204
+ZOrderSet = 14
+editable = .T.
+cmdsql = select b.deposito,a.sucursal,b.iddeposito from sucursal a,st_depositos b where a.sucursal=b.idsucursal and a.IdEmpresa = b.IdEmpresa and b.idempresa=?oapp.empresa order by 1
+cursor = cDep_entrada
+Name = "dep_entrada"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+LOCAL LCTIPO
+LCTIPO = CPBT_STK.TIPO
+RETURN LCTIPO='EN' .OR. LCTIPO='TR'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1TI0UMJWW
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] comprobante
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "155,30,30"
+DisplayValue = 
+ControlSource = "st_movimiento.idcomprobante"
+FirstElement = 1
+Left = 94
+NumberOfElements = 0
+Style = 2
+TabIndex = 1
+Top = 10
+Width = 204
+ZOrderSet = 14
+BoundTo = .F.
+DisplayCount = 0
+editable = .T.
+cmdsql = Select descripcion, cpbt_stk,  tipo, valor_costo  from st_cpbt_stk where IdEmpresa = ?oApp.Empresa
+cursor = cpbt_stk
+solonuevo = .T.
+mensajevalidacion = Ingrese Comprobante
+condicionvalidacion = !empty(st_movimiento.idcomprobante)
+Name = "comprobante"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+**
+** ReFox - este procedimiento es vacío **
+**
+ENDPROC
+PROCEDURE LostFocus
+**
+** ReFox - este procedimiento es vacío **
+**
+ENDPROC
+PROCEDURE Valid
+THISFORM.TIPO_COMPROB = CPBT_STK.TIPO
+M.IDCOMPROB = ST_MOVIMIENTO.IDCOMPROBANTE
+STRSQL = 'select isnull(max(numero),0)+1 as numero from st_movimiento where idcomprobante = ?m.idcomprob'
+IF SQL(STRSQL, 'ultimo')>0
+IF  .NOT. EOF('ultimo')
+ULT_VALOR = ULTIMO.NUMERO
+ELSE
+ULT_VALOR = 1
+ENDIF
+USE IN 'ultimo'
+ELSE
+ULT_VALOR = 1
+ENDIF
+IF CPBT_STK.TIPO='SA'
+THIS.PARENT.DEP_ENTRADA.VALUE = ''
+ENDIF
+IF CPBT_STK.TIPO='EN'
+THIS.PARENT.DEP_SALIDA.VALUE = ''
+ENDIF
+THISFORM.PAGEFRAME1.PAGE1.TXTCPBT.VALUE = ULT_VALOR
+THISFORM.PAGEFRAME1.PAGE1.TXTCPBT.REFRESH
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BO0M9JM9
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] dep_salida
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+Comment = "cDep_salida.descripción, sucursal"
+BoundColumn = 3
+ColumnCount = 3
+ColumnWidths = "100,0,100"
+RowSourceType = 3
+ControlSource = "st_movimiento.deposito"
+FirstElement = 2
+Height = 23
+Left = 478
+NumberOfElements = 0
+Style = 2
+TabIndex = 4
+Top = 58
+Width = 156
+ZOrderSet = 14
+BoundTo = .F.
+editable = .T.
+cmdsql = select b.deposito,a.sucursal,b.iddeposito from sucursal a,st_depositos b where a.sucursal=b.idsucursal  and a.IdEmpresa = b.IdEmpresa and b.idempresa=?oapp.empresa order by 1
+cursor = cDep_salida
+Name = "dep_salida"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+LOCAL LCTIPO
+LCTIPO = CPBT_STK.TIPO
+RETURN LCTIPO='SA' .OR. LCTIPO='TR'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J014LSS6
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 3
+ColumnCount = 3
+ColumnWidths = "100,0,100"
+RowSourceType = 3
+ControlSource = "st_movimiento.deposito_ref"
+Height = 22
+Left = 94
+NumberOfElements = 0
+Style = 2
+TabIndex = 7
+Top = 106
+Width = 204
+ZOrderSet = 14
+editable = .T.
+cmdsql = select b.deposito,a.sucursal,b.iddeposito from sucursal a,st_depositos b where a.sucursal=b.idsucursal and a.IdEmpresa = b.IdEmpresa and b.idempresa=?oapp.empresa order by 1
+cursor = cDep_Ref
+Name = "Tscombobox1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+
+SET STEP ON
+
+TEXT TO CMDSQL NOSHOW
+	SELECT MAX(nro_ref) AS nroref
+	FROM st_movimiento
+	WHERE deposito_ref = ?st_movimiento.Deposito_ref AND idempresa = ?oapp.empresa
+ENDTEXT	
+sql (cmdsql, "cref")
+
+IF RECCOUNT("CREF") > 0
+     this.parent.txtnroref.value = NVL(cref.nroref,0) + 1
+ELSE
+     this.parent.txtnroref.value = 1
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GT0VHNCY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtcpbt
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "st_movimiento.numero"
+Enabled = .T.
+Height = 23
+InputMask = ""
+Left = 478
+TabIndex = 12
+Top = 10
+Visible = .T.
+Width = 84
+ZOrderSet = 20
+editable = .T.
+Name = "txtcpbt"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1TZ0JG57G
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroOrden
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "st_movimiento.nroorden"
+Enabled = .T.
+Height = 23
+InputMask = ""
+Left = 478
+TabIndex = 13
+Top = 34
+Visible = .T.
+Width = 84
+ZOrderSet = 20
+editable = .T.
+Name = "txtNroOrden"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GT0VHND7
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] idmovimiento
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "st_movimiento.idmovimiento"
+Enabled = .F.
+Height = 23
+InputMask = ""
+Left = 562
+TabIndex = 26
+Top = 10
+Visible = .T.
+Width = 72
+ZOrderSet = 20
+editable = .F.
+Name = "idmovimiento"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GT0UKTTM
+[CLASS] cbomoneda
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbomoneda1
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "st_movimiento.idmoneda"
+Left = 94
+TabIndex = 5
+Top = 82
+Width = 204
+Name = "Cbomoneda1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2A4
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] Container1
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+Top = 186
+Left = 2
+Width = 632
+Height = 268
+BackStyle = 0
+BorderWidth = 1
+SpecialEffect = 1
+TabIndex = 11
+Name = "Container1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2A5
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsfact1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1
+[START PROPERTIES]
+ColumnCount = 7
+FontShadow = .F.
+FontSize = 8
+AllowAddNew = .F.
+AllowHeaderSizing = .F.
+AllowRowSizing = .F.
+ChildOrder = ""
+DeleteMark = .F.
+GridLines = 2
+HeaderHeight = 17
+Height = 200
+Highlight = .F.
+Left = 8
+LinkMaster = ""
+Panel = 1
+PanelLink = .T.
+RecordMark = .F.
+RecordSource = "st_detfactu"
+RelationalExpr = ""
+RowHeight = 20
+ScrollBars = 2
+SplitBar = .F.
+TabIndex = 9
+Top = 8
+Width = 614
+ZOrderSet = 19
+RightToLeft = .T.
+cfieldtosum = Cantidad
+editable = .T.
+campo = idmovimiento,idcomprobante, número,iddeposito_sal,iddeposito_ent,cantidad,idempresa
+valor = st_movimiento.idmovimiento,st_movimiento.idcomprobante, st_movimiento.numero, st_movimiento.deposito, st_movimiento.deposito_ent,1,oapp.empresa
+codigo = idproducto
+valorvariable = st_movimiento.idMovimiento
+variablevista = m.movimiento
+Name = "Tsfact1"
+Column1.FontShadow = .F.
+Column1.FontSize = 8
+Column1.ColumnOrder = 1
+Column1.ControlSource = "st_detfactu.idproducto"
+Column1.Width = 47
+Column1.Sparse = .F.
+Column1.Name = "IdProducto"
+Column2.FontShadow = .F.
+Column2.FontSize = 8
+Column2.ControlSource = "st_detfactu.descripcion"
+Column2.Enabled = .F.
+Column2.Width = 162
+Column2.ReadOnly = .T.
+Column2.Sparse = .F.
+Column2.Visible = .T.
+Column2.BackColor = 211,224,231
+Column2.Name = "Producto"
+Column3.FontShadow = .F.
+Column3.FontSize = 8
+Column3.ColumnOrder = 3
+Column3.ControlSource = "st_detfactu.cantidad"
+Column3.Width = 50
+Column3.Sparse = .F.
+Column3.Visible = .T.
+Column3.DynamicInputMask = "'999,999,999'+iif(oApp.Producto_decimal=0,'','.'+replicate('9',oApp.Producto_decimal))"
+Column3.Name = "Cantidad"
+Column4.FontShadow = .F.
+Column4.FontSize = 8
+Column4.ColumnOrder = 5
+Column4.ControlSource = "st_detfactu.marca"
+Column4.Width = 92
+Column4.Sparse = .F.
+Column4.Name = "Marca"
+Column5.FontShadow = .F.
+Column5.FontSize = 8
+Column5.ColumnOrder = 6
+Column5.ControlSource = "st_detfactu.modelo"
+Column5.Width = 81
+Column5.Name = "Modelo"
+Column6.FontShadow = .F.
+Column6.FontSize = 8
+Column6.ColumnOrder = 7
+Column6.ControlSource = "st_detfactu.serie"
+Column6.Width = 84
+Column6.Name = "Serie"
+Column7.FontShadow = .F.
+Column7.FontSize = 8
+Column7.ColumnOrder = 4
+Column7.ControlSource = "st_detfactu.precio"
+Column7.Width = 70
+Column7.Sparse = .F.
+Column7.InputMask = "999999.99"
+Column7.Name = "precio"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+THIS.PARENT.TOTALES.REFRESH()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2A6
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.IdProducto
+[START PROPERTIES]
+FontShadow = .F.
+FontSize = 8
+Caption = "Producto"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2A7
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] IdProducto
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.IdProducto
+[START PROPERTIES]
+FontSize = 8
+BackStyle = 0
+BorderStyle = 0
+Height = 10
+Left = 346
+Top = 58
+Width = 10
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+tabla = st_Producto
+retorna = descripcion
+indice = idproducto
+objeto = this.parent.parent.producto.text1
+actualizar = .F.
+datoayuda = Materia Prima 
+indice1 = catalogo
+retorna2 = costo_prom
+objeto2 = this.parent.parent.precio.text1
+origen = R
+condicionextra = IdEmpresa=?oApp.Empresa and IdTipo IN('P','I')
+Name = "IdProducto"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2A8
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.Producto
+[START PROPERTIES]
+FontShadow = .F.
+FontSize = 8
+Caption = "Descripción"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2A9
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.Producto
+[START PROPERTIES]
+FontShadow = .F.
+FontSize = 8
+BorderStyle = 0
+Enabled = .F.
+Margin = 0
+ReadOnly = .T.
+Visible = .T.
+ForeColor = 0,0,0
+BackColor = 211,224,231
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AA
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.Cantidad
+[START PROPERTIES]
+FontShadow = .F.
+FontSize = 8
+Caption = "Cantidad"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AB
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCantidad
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.Cantidad
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Enabled = .T.
+Height = 23
+Left = 370
+TabIndex = 4
+Top = 8
+Visible = .T.
+Width = 86
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+ZOrderSet = 20
+editable = .T.
+camposec = 
+Name = "txtCantidad"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF THIS.TAG<>STR(THIS.VALUE)
+THIS.PARENT.PARENT.PARENT.TOTALES.REFRESH()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AC
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.Marca
+[START PROPERTIES]
+FontSize = 8
+Caption = "Marca"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AD
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.Marca
+[START PROPERTIES]
+BoundColumn = 2
+RowSourceType = 3
+ControlSource = "st_detfactu.marca"
+Left = 32
+Top = 33
+cmdsql = Select Descripcion,ltrim(str(idmarca)) from st_marca where idempresa = ?oapp.Empresa
+cursor = marca
+Name = "Tscombobox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AE
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.Modelo
+[START PROPERTIES]
+FontSize = 8
+Caption = "Modelo"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AF
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.Modelo
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AG
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.Serie
+[START PROPERTIES]
+FontSize = 8
+Caption = "Serie"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AH
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.Serie
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AI
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.precio
+[START PROPERTIES]
+FontSize = 8
+Caption = "Precio"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AJ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.Tsfact1.precio
+[START PROPERTIES]
+FontSize = 8
+Alignment = 3
+BorderStyle = 0
+Value = 0
+InputMask = "999999.99"
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AK
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] totales
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1
+[START PROPERTIES]
+Top = 217
+Left = 252
+Width = 244
+Height = 43
+SpecialEffect = 1
+TabIndex = 18
+ZOrderSet = 22
+Name = "totales"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+THIS.PARENT.TSFACT1.SUMCOLUMN()
+THIS.TOTALCHEQUE.VALUE = THIS.PARENT.TSFACT1.TOTALES(1)
+DODEFAULT()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AL
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] TotalCheque
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.totales
+[START PROPERTIES]
+Alignment = 3
+Value = 0
+ControlSource = ""
+Enabled = .F.
+Height = 24
+InputMask = "999,999,999,999"
+Left = 131
+TabIndex = 2
+Top = 11
+Width = 92
+BackColor = 192,192,192
+Name = "TotalCheque"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0FZ2AM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1.totales
+[START PROPERTIES]
+Caption = "Total"
+Height = 12
+Left = 76
+Top = 15
+Width = 47
+TabIndex = 8
+BackColor = 0,0,0
+Name = "Tslabel7"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IR0G0CUC
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] st_Movimientos.Pageframe1.Page1.Container1
+[START PROPERTIES]
+Top = 217
+Left = 20
+Height = 43
+Width = 180
+FontBold = .F.
+Picture = ..\bitmaps\wzprint.bmp
+Caption = "Imprimir Cpbte de Entrega"
+TabIndex = 11
+Visible = .T.
+Name = "Tscommandbutton1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+
+SET STEP ON
+
+M.CPBT_STK = ST_MOVIMIENTO.IDCOMPROBANTE
+M.NUMERO = ST_MOVIMIENTO.NUMERO
+REPORT FORM st_cpbteEntrega NOCONSOLE PREVIEW
+ENDPROC
+PROCEDURE Refresh
+THIS.ENABLED =  .NOT. THISFORM.EDITMODE
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1TZ0JG57H
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdGenerar
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+Top = 34
+Left = 563
+Height = 24
+Width = 71
+Caption = "Generar"
+TabIndex = 14
+Name = "cmdGenerar"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+TEXT TO CMDSQL NOSHOW
+	SELECT     p.NroOrden, pd.IdProducto, pd.Cantidad, pd.CantidadBase, pd.CantidadProducida, pr.Descripcion, pd.Costo
+	FROM         dbo.Prd_Produccion p INNER JOIN
+	                      dbo.Prd_ProduccionDet pd ON p.IdProduccion = pd.IdProduccion
+				 INNER JOIN
+                      dbo.st_Producto pr ON pd.IdEmpresa = pr.IdEmpresa AND pd.IdProducto = pr.IdProducto	
+	where p.IdEmpresa = ?oApp.Empresa and NroOrden = ?st_movimiento.NroOrden  and ISNULL(p.Estado,'P')	 <> 'F'
+ENDTEXT
+IF SQL(CMDSQL, 'cProducto')>0
+IF RECCOUNT('cProducto')=0
+MESSAGEBOX("El Nro. de Orden no existe o su produccion ha sido confirmado", 64, "Futura Software")
+RETURN
+ENDIF
+THISFORM.LOCKSCREEN = .T.
+SELECT CPRODUCTO
+SCAN
+THIS.PARENT.CONTAINER1.TSFACT1.AGREGARITEM(.F.)
+REPLACE IDPRODUCTO WITH CPRODUCTO.IDPRODUCTO, CANTIDAD WITH CPRODUCTO.CANTIDADPRODUCIDA, DESCRIPCION WITH CPRODUCTO.DESCRIPCION, PRECIO WITH CPRODUCTO.COSTO, ULT_COSTO WITH CPRODUCTO.COSTO IN ST_DETFACTU
+SELECT CPRODUCTO
+ENDSCAN
+ENDIF
+TEXT TO CMDSQL NOSHOW
+	SELECT     p.NroOrden, pd.IdProducto, pd.Cantidad, pd.CantidadBase, pd.CantidadProducida,
+	pf.Cantidad AS CantidadReq, pf.IdProducto AS IdInsumo,  pr.Descripcion, pf.Costo
+	FROM         dbo.Prd_Produccion p INNER JOIN
+	                      dbo.Prd_ProduccionDet pd ON p.IdProduccion = pd.IdProduccion INNER JOIN
+	                      dbo.Prd_ProduccionFormula pf ON pd.IdPD = pf.IdPD
+	                      INNER JOIN
+                      dbo.st_Producto pr ON pd.IdEmpresa = pr.IdEmpresa AND pf.IdProducto = pr.IdProducto	
+	where p.IdEmpresa = ?oApp.Empresa and NroOrden = ?st_movimiento.NroOrden  and ISNULL(p.Estado,'P')	 <> 'F'
+ENDTEXT
+IF SQL(CMDSQL, 'cProducto')>0
+SELECT CPRODUCTO
+SCAN
+THIS.PARENT.CONTAINER1.TSFACT1.AGREGARITEM(.F.)
+REPLACE IDPRODUCTO WITH CPRODUCTO.IDINSUMO, CANTIDAD WITH CPRODUCTO.CANTIDADREQ*-1, DESCRIPCION WITH CPRODUCTO.DESCRIPCION, PRECIO WITH CPRODUCTO.COSTO, ULT_COSTO WITH CPRODUCTO.COSTO IN ST_DETFACTU
+SELECT CPRODUCTO
+ENDSCAN
+ENDIF
+THISFORM.LOCKSCREEN = .F.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FM0TSNNO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel12
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+FontBold = .F.
+Caption = "Proyecto"
+Height = 16
+Left = 40
+Top = 156
+Width = 51
+TabIndex = 27
+Name = "Tslabel12"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FM0TSNNP
+[CLASS] idproyecto
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idproyecto1
+[PARENT] st_Movimientos.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "st_movimiento.nroproyecto"
+Height = 23
+Left = 94
+TabIndex = 10
+Top = 156
+Width = 72
+Name = "Idproyecto1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[START RESERVED1]
+  ..\include\tastrade.hæqõv†5@ ..\..\..\archivos de programa\microsoft visual foxpro 9\foxpro.hîrš‰1 ..\include\strings.hösõv†5[END RESERVED1]
+[EOF]

@@ -1,0 +1,431 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ47
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70YX5AX
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_listapedidos"
+CursorSource = "vt_listapedidos"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4H
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+BorderStyle = 3
+Caption = "Confirmacion de Pedidos"
+DataSession = 1
+DoCreate = .T.
+Height = 422
+MaxButton = .F.
+Name = "Tsbaseform12"
+Width = 637
+campos = FechaFactura
+detalle = .T.
+editmode = .T.
+idobjeto = 48
+lallowconsultar = .F.
+lallowdelete = .F.
+lallowedits = .F.
+lallownew = .F.
+lblRequerido.Name = "lblRequerido"
+tabla1 = vt_Confirma
+valores = getdate()
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE save
+IF THIS.VALIDAR()
+LOCAL LLERROR
+LLERROR = .F.
+SELECT VT_CONFIRMA
+HNDCONN = SQLCONNECT(OAPP.SISTEMA)
+= SQLSETPROP(HNDCONN, "Transactions", 2)
+SCAN
+IF EMPTY(VT_CONFIRMA.IDPEDIDO)
+LOOP
+ENDIF
+CUSUARIO = OAPP.GETEMPLOYEEID()
+IF THISFORM.RUNSQL("Exec vt_ConfirmaPedido ?vt_Confirma.IdPedido, ?vt_confirma.FechaFactura, ?cUsuario", "lcPedido", HNDCONN)<=0
+LLERROR = .T.
+EXIT
+ENDIF
+ENDSCAN
+IF LLERROR
+SQLROLLBACK(HNDCONN)
+MESSAGEBOX("No se pudo confirmar todos los pedidos. Por favor intente de nuevo.", 48, "Futura Software")
+RETURN .F.
+ELSE
+SQLCOMMIT(HNDCONN)
+DODEFAULT()
+MESSAGEBOX("Confirmación de los pedidos finalizado satisfactoriamente.", 64, "Futura Software")
+ENDIF
+SQLDISCONNECT(HNDCONN)
+ENDIF
+THISFORM.RELEASE()
+ENDPROC
+PROCEDURE validar
+IF RECCOUNT("vt_Confirma")=0
+MESSAGEBOX("No existe pedidos a confirmar.", 64, "Futura Software")
+RETURN .F.
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4T
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Agregar desde Lista ..."
+Height = 26
+Left = 474
+Name = "Tscommandbutton1"
+Top = 12
+Width = 136
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+OAPP.DOFORM('vt_ListaPedidos', THISFORM)
+SELECT VT_CONFIRMA
+GOTO TOP
+THISFORM.REFRESH
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4U
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Confirmar y Generar Facturas"
+Height = 26
+Left = 420
+Name = "Tscommandbutton2"
+Top = 384
+Width = 180
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.SAVE()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ47
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Column1.ControlSource = ""
+Column1.FontSize = 8
+Column1.Name = "NroPedido"
+Column1.Width = 68
+Column2.ControlSource = ""
+Column2.FontSize = 8
+Column2.Name = "Fecha"
+Column2.ReadOnly = .T.
+Column2.Width = 57
+Column3.ColumnOrder = 3
+Column3.ControlSource = ""
+Column3.FontSize = 8
+Column3.Name = "IdCliente"
+Column3.ReadOnly = .T.
+Column3.Width = 63
+Column4.ColumnOrder = 4
+Column4.ControlSource = ""
+Column4.FontSize = 8
+Column4.Name = "Cliente"
+Column4.ReadOnly = .T.
+Column4.Width = 230
+Column5.ColumnOrder = 6
+Column5.ControlSource = ""
+Column5.FontSize = 8
+Column5.Name = "FechaFactura"
+Column5.Width = 67
+Column6.ColumnOrder = 5
+Column6.ControlSource = ""
+Column6.FontSize = 8
+Column6.InputMask = "999,999,999"
+Column6.Name = "Importe"
+Column6.ReadOnly = .T.
+Column6.Width = 76
+ColumnCount = 6
+FontSize = 8
+Height = 324
+Left = 24
+Name = "Tsgrid1"
+Panel = 1
+RecordSource = "vt_Confirma"
+RowHeight = 17
+ScrollBars = 2
+Top = 48
+Width = 586
+campo = FechaFactura
+editable = .T.
+valor = GetDate()
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4N
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.Cliente
+[START PROPERTIES]
+Caption = "Cliente"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4O
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Tsgrid1.Cliente
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4J
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.Fecha
+[START PROPERTIES]
+Caption = "Fecha"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70X1KB1
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Tsgrid1.Fecha
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4P
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.FechaFactura
+[START PROPERTIES]
+Caption = "Fecha Fact."
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4Q
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Tsgrid1.FechaFactura
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4L
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.IdCliente
+[START PROPERTIES]
+Caption = "Id Cliente"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4M
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Tsgrid1.IdCliente
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4R
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.Importe
+[START PROPERTIES]
+Caption = "Importe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4S
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Tsgrid1.Importe
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4H
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Tsgrid1.NroPedido
+[START PROPERTIES]
+Caption = "Nro Pedido"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O70VXZ4I
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NroPedido
+[PARENT] Tsbaseform12.Tsgrid1.NroPedido
+[START PROPERTIES]
+Left = 35
+Name = "NroPedido"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Top = 23
+actualizar = .F.
+condicionextra = a.IdEmpresa=?oApp.Empresa and b.IdEmpresa=?oApp.Empresa  and a.IDCliente = b.IdCliente
+copiarcampos = a.IdCliente,RazSocial as Cliente, Importe,IdPedido
+indice = NroPedido
+objeto = this.parent.parent.Fecha.text1
+origen = R
+pegarcampos = IdCliente,Cliente,Importe, IdPedido
+resulrepe = .T.
+retorna = FechaPedido
+tabla = vt_Pedido a, vt_Clientes b
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,1567 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Class     
+[START RESERVED1]
+VERSION =  0.029[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GARDA
+[CLASS] _form
+[CLASSLOC] _base.vcx
+[BASECLASS] form
+[OBJNAME] _aboutbox
+[START PROPERTIES]
+AlwaysOnTop = .T.
+AutoCenter = .T.
+BorderStyle = 2
+Caption = "Acerca de las aplicaciones personalizadas"
+DoCreate = .T.
+FontSize = 8
+Height = 319
+MaxButton = .F.
+MinButton = .F.
+MinWidth = 1
+Name = "_aboutbox"
+Width = 374
+WindowType = 1
+cmsinfodir = 
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Activate
+SET MESSAGE TO THISFORM.CAPTION
+ENDPROC
+**
+PROCEDURE Init
+LPARAMETERS TCAPPNAME, TCVERSION, TCCOPYRIGHT, TCTRADEMARK, TCLOGOBMP
+LOCAL LNERROR, LCMSINFO
+IF TYPE("tcAppName")="C"
+THISFORM.CAPTION = "Acerca de "+ALLTRIM(TCAPPNAME)
+THISFORM.LBLAPPNAME.CAPTION = ALLTRIM(TCAPPNAME)
+ENDIF
+IF TYPE("tcVersion")="C"
+THISFORM.LBLVERSION.CAPTION = "Versión "+ALLTRIM(TCVERSION)
+ENDIF
+IF TYPE("tcCopyright")="C"
+THISFORM.LBLCOPYRIGHT.CAPTION = ALLTRIM(TCCOPYRIGHT)
+ENDIF
+IF TYPE("tcTrademark")="C"
+THISFORM.LBLTRADEMARK.CAPTION = TCTRADEMARK
+THISFORM.LBLTRADEMARK.WORDWRAP = 1
+ENDIF
+IF TYPE("tcLogoBMP")="C"
+THISFORM.IMGLOGO.PICTURE = TCLOGOBMP
+ENDIF
+THISFORM.LBLUSERNAME.CAPTION = THIS.GETREGISTEREDOWNER()
+THISFORM.LBLUSERCORP.CAPTION = THIS.GETREGISTEREDCOMPANY()
+LCMSINFO = ""
+LNERROR = THIS.REGISTRY.GETREGKEY("Path", @LCMSINFO, "Software\Microsoft\Shared Tools\MSInfo", -2147483646)
+IF LNERROR=0
+THISFORM.CMSINFODIR = LCMSINFO
+ENDIF
+IF EMPTY(THISFORM.CMSINFODIR)
+THISFORM.CMSINFODIR = " "
+THISFORM.CMDSYSINFO.ENABLED = .F.
+THISFORM.HEIGHT = 282
+ENDIF
+ENDPROC
+**
+PROCEDURE Unload
+SET MESSAGE TO
+ENDPROC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+15[END RESERVED2]
+[START RESERVED3]
+*getregisteredcompany Stub routine to return registered owner.
+*getregisteredowner Stub routine to return registered company.
+cmsinfodir Holds the path of the MSINFO.EXE program.
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED7]
+This class displays an About Application that the user can customize.[END RESERVED7]
+[START RESERVED8]
+dialogs.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GAPY3
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdOK
+[PARENT] _aboutbox
+[START PROPERTIES]
+Caption = "Aceptar"
+Default = .T.
+FontSize = 8
+Height = 25
+Left = 239
+Name = "cmdOK"
+TabIndex = 1
+Top = 252
+Width = 131
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+RELEASE THISFORM
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GAQM0
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdSysInfo
+[PARENT] _aboutbox
+[START PROPERTIES]
+Caption = "\<Información del sistema"
+FontSize = 8
+Height = 25
+Left = 239
+Name = "cmdSysInfo"
+TabIndex = 2
+Top = 283
+Width = 131
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LCMSINFOWINDIR
+LCMSINFOWINDIR = THISFORM.CMSINFODIR
+RUN/N1 &LCMSINFOWINDIR
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GAPPH
+[CLASS] image
+[BASECLASS] image
+[OBJNAME] imgLogo
+[PARENT] _aboutbox
+[START PROPERTIES]
+BackStyle = 0
+Height = 111
+Left = 10
+Name = "imgLogo"
+Stretch = 1
+Top = 11
+Width = 100
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GAPQL
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblAppName
+[PARENT] _aboutbox
+[START PROPERTIES]
+BackStyle = 0
+Caption = "Nombre de la aplicación"
+FontSize = 8
+Height = 14
+Left = 120
+Name = "lblAppName"
+TabIndex = 1
+Top = 17
+Width = 233
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GARA7
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblCopyright
+[PARENT] _aboutbox
+[START PROPERTIES]
+BackStyle = 0
+Caption = "Información de copyright"
+FontSize = 8
+Height = 16
+Left = 120
+Name = "lblCopyright"
+TabIndex = 3
+Top = 55
+Width = 233
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GAPTN
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblLicense
+[PARENT] _aboutbox
+[START PROPERTIES]
+BackStyle = 0
+Caption = "Se autoriza el uso de este producto a:"
+FontSize = 8
+Height = 16
+Left = 120
+Name = "lblLicense"
+TabIndex = 4
+Top = 152
+Width = 234
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GAPSJ
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblTrademark
+[PARENT] _aboutbox
+[START PROPERTIES]
+BackStyle = 0
+Caption = "Información de marca registrada"
+FontBold = .F.
+FontSize = 8
+Height = 19
+Left = 120
+Name = "lblTrademark"
+TabIndex = 3
+Top = 75
+Width = 233
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GAPWZ
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblUserCorp
+[PARENT] _aboutbox
+[START PROPERTIES]
+BackStyle = 0
+Caption = "Organización"
+FontBold = .F.
+FontSize = 8
+Height = 25
+Left = 130
+Name = "lblUserCorp"
+TabIndex = 6
+Top = 202
+Width = 205
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GAPVL
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblUserName
+[PARENT] _aboutbox
+[START PROPERTIES]
+BackStyle = 0
+Caption = "Nombre de usuario"
+FontBold = .F.
+FontSize = 8
+Height = 25
+Left = 130
+Name = "lblUserName"
+TabIndex = 5
+Top = 181
+Width = 205
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GAPRF
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblVersion
+[PARENT] _aboutbox
+[START PROPERTIES]
+BackStyle = 0
+Caption = "Nº de versión"
+FontSize = 8
+Height = 16
+Left = 120
+Name = "lblVersion"
+TabIndex = 2
+Top = 35
+Width = 233
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GARC6
+[CLASS] line
+[BASECLASS] line
+[OBJNAME] linBlackVertical
+[PARENT] _aboutbox
+[START PROPERTIES]
+BorderColor = 0,0,0
+Height = 0
+Left = 0
+Name = "linBlackVertical"
+Top = 240
+Width = 376
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GARBC
+[CLASS] line
+[BASECLASS] line
+[OBJNAME] linWhiteShadow
+[PARENT] _aboutbox
+[START PROPERTIES]
+BorderColor = 255,255,255
+BorderStyle = 1
+BorderWidth = 2
+Height = 1
+Left = 1
+Name = "linWhiteShadow"
+Top = 241
+Width = 375
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RQ614UL2W
+[CLASS] registry
+[CLASSLOC] registry.vcx
+[BASECLASS] custom
+[OBJNAME] Registry
+[PARENT] _aboutbox
+[START PROPERTIES]
+Height = 17
+Left = 24
+Name = "Registry"
+Top = 276
+Width = 36
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R020GAPUR
+[CLASS] shape
+[BASECLASS] shape
+[OBJNAME] shpRectangle
+[PARENT] _aboutbox
+[START PROPERTIES]
+Height = 60
+Left = 119
+Name = "shpRectangle"
+SpecialEffect = 0
+Top = 169
+Width = 252
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] _aboutbox
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 20, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RGX0SXAEZ
+[CLASS] _form
+[CLASSLOC] _base.vcx
+[BASECLASS] form
+[OBJNAME] _dialog
+[START PROPERTIES]
+AlwaysOnTop = .T.
+AutoCenter = .T.
+BorderStyle = 2
+Caption = "Diálogo"
+DataSession = 2
+DoCreate = .T.
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 172
+KeyPreview = .T.
+MaxButton = .F.
+MinButton = .F.
+Name = "_dialog"
+ShowTips = .T.
+Width = 358
+WindowType = 1
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Activate
+ACTIVATE SCREEN
+SET MESSAGE TO
+ENDPROC
+**
+PROCEDURE Deactivate
+ACTIVATE SCREEN
+SET MESSAGE TO
+ENDPROC
+**
+PROCEDURE Init
+SET TALK OFF
+SET COMPATIBLE FOXPLUS
+SET CONFIRM ON
+SET EXACT OFF
+SET EXCLUSIVE OFF
+SET MEMOWIDTH TO 1024
+SET MULTILOCKS ON
+SET SAFETY OFF
+WAIT CLEAR
+THIS.SETFONT
+ENDPROC
+**
+PROCEDURE KeyPress
+LPARAMETERS NKEYCODE, NSHIFTALTCTRL
+IF NKEYCODE=27
+THIS.RELEASE
+ENDIF
+ENDPROC
+**
+PROCEDURE QueryUnload
+THIS.ENABLED = .F.
+THIS.VISIBLE = .F.
+ENDPROC
+**
+PROCEDURE Release
+THIS.QUERYUNLOAD
+ENDPROC
+**
+PROCEDURE setfont
+IF FONTMETRIC(1, "MS Sans Serif", 8, "")<>13 .OR. FONTMETRIC(4, "MS Sans Serif", 8, "")<>2 .OR. FONTMETRIC(6, "MS Sans Serif", 8, "")<>5 .OR. FONTMETRIC(7, "MS Sans Serif", 8, "")<>11
+THIS.LLARGEFONT = .T.
+THIS.SETALL("FontName", "Arial")
+RETURN
+ENDIF
+ENDPROC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED3]
+*setfont Routine to automatically set font for large vs small fonts.
+llargefont
+lobjectupdated
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED8]
+dialogs.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] _dialog
+[START PROPERTIES]
+MS Sans Serif, 0, 8, 5, 13, 11, 11, 2, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BYUWX
+[CLASS] _dialog
+[CLASSLOC] _dialogs.vcx
+[BASECLASS] form
+[OBJNAME] _keywords
+[START PROPERTIES]
+Caption = "Palabras clave"
+DoCreate = .T.
+Height = 223
+HelpContextID = 189582656
+Name = "_keywords"
+Width = 403
+cdbfname = (HOME()+"Gallery\KEYWORDS.DBF")
+ckeywords = 
+clastvalue = 
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Release
+DODEFAULT()
+IF VARTYPE(THIS.OKEYWORDS)="O"
+THIS.OKEYWORDS.ADDPROPERTY("cKeywords", THIS.CKEYWORDS)
+ENDIF
+ENDPROC
+**
+PROCEDURE apply
+LOCAL LNKEYWORDCOUNT, LNCOUNT, LCKEYWORD, LCKEYWORDS
+DIMENSION LAKEYWORDS[1]
+THIS.HIDE
+WITH THIS.CNTSUPERMOVER
+IF THIS.LUPDATED
+SET MESSAGE TO "Actualizando palabras clave"+" ..."
+LNKEYWORDCOUNT = ALEN(.ACHOICES)
+DIMENSION LAKEYWORDS[LNKEYWORDCOUNT]
+LAKEYWORDS = ""
+ACOPY(.ACHOICES, LAKEYWORDS)
+FOR LNCOUNT = 1 TO ALEN(.ASELECTIONS, 1)
+LCKEYWORD = .ASELECTIONS(LNCOUNT, 1)
+IF EMPTY(LCKEYWORD)
+LOOP
+ENDIF
+LNKEYWORDCOUNT = LNKEYWORDCOUNT+1
+DIMENSION LAKEYWORDS[LNKEYWORDCOUNT]
+LAKEYWORDS[LNKEYWORDCOUNT] = ALLTRIM(LCKEYWORD)
+ENDFOR
+ASORT(LAKEYWORDS)
+SELECT KEYWORDS
+REPLACE KEYWORD WITH "" ALL
+DELETE ALL
+LOCATE
+FOR LNCOUNT = 1 TO ALEN(LAKEYWORDS)
+LCKEYWORD = ALLTRIM(LAKEYWORDS(LNCOUNT))
+IF LNCOUNT>RECCOUNT()
+APPEND BLANK
+ELSE
+GOTO LNCOUNT
+ENDIF
+REPLACE KEYWORD WITH LCKEYWORD
+RECALL
+ENDFOR
+SELECT 0
+SET MESSAGE TO
+ENDIF
+LNKEYWORDCOUNT = ALEN(.ASELECTIONS, 1)
+IF LNKEYWORDCOUNT=0 .OR. EMPTY(.ASELECTIONS(1, 1))
+THIS.RELEASE
+RETURN
+ENDIF
+LCKEYWORDS = ""
+FOR LNCOUNT = 1 TO LNKEYWORDCOUNT
+LCKEYWORDS = ALLTRIM(LCKEYWORDS+" "+ALLTRIM(.ASELECTIONS(LNCOUNT, 1)))
+ENDFOR
+ENDWITH
+THIS.CKEYWORDS = LCKEYWORDS
+THIS.RELEASE
+ENDPROC
+**
+FUNCTION initialize
+LOCAL LNCOUNT
+LOCAL LAKEYWORDS[1]
+IF EMPTY(THIS.CDBFNAME) .OR.  .NOT. FILE(THIS.CDBFNAME)
+RETURN .F.
+ENDIF
+USE SHARED (THIS.CDBFNAME) AGAIN ALIAS "keywords"
+IF EMPTY(ALIAS())
+RETURN .F.
+ENDIF
+DIMENSION LAKEYWORDS[1]
+LAKEYWORDS = ""
+SELECT KEYWORDS
+LNCOUNT = 0
+SCAN ALL FOR  .NOT. DELETED()
+LNCOUNT = LNCOUNT+1
+DIMENSION LAKEYWORDS[LNCOUNT]
+LAKEYWORDS[LNCOUNT] = ALLTRIM(KEYWORD)
+ENDSCAN
+THIS.CNTSUPERMOVER.INITCHOICES(@LAKEYWORDS)
+ENDFUNC
+**
+FUNCTION Unload
+RETURN THIS.CKEYWORDS
+ENDFUNC
+**
+FUNCTION Init
+IF  .NOT. DODEFAULT() .OR.  .NOT. THIS.INITIALIZE()
+RETURN .F.
+ENDIF
+ENDFUNC
+**
+FUNCTION QueryUnload
+IF  .NOT. DODEFAULT()
+RETURN .F.
+ENDIF
+THIS.RELEASE()
+ENDFUNC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+11[END RESERVED2]
+[START RESERVED3]
+*apply Retrieves the list of keywords.
+*initialize 
+cdbfname The Keywords DBF name.
+ckeywords List of selected keywords.
+clastvalue
+laddmode
+lupdated
+okeywords Object to retrieve list of keywords set to cKeywords property.
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED8]
+dialogs.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BYUZ2
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdAdd
+[PARENT] _keywords
+[START PROPERTIES]
+Caption = "\<Agregar"
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 23
+Left = 8
+Name = "cmdAdd"
+TabIndex = 2
+Top = 157
+Width = 75
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.LADDMODE = .T.
+THISFORM.CLASTVALUE = ""
+WITH THIS.PARENT.TXTKEYWORD
+.VALUE = ""
+.ENABLED = .T.
+.REFRESH
+.INTERACTIVECHANGE
+.SETFOCUS
+ENDWITH
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BYUY1
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancel
+[PARENT] _keywords
+[START PROPERTIES]
+Cancel = .T.
+Caption = "Cancelar"
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 23
+Left = 320
+Name = "cmdCancel"
+TabIndex = 8
+Top = 188
+Width = 75
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.RELEASE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BYUZQ
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdEnter
+[PARENT] _keywords
+[START PROPERTIES]
+Caption = ""
+Enabled = .F.
+FontName = "MS Sans Serif"
+FontSize = 8
+ForeColor = 0,128,0
+Height = 23
+Left = 202
+Name = "cmdEnter"
+Picture = graphics\_save.bmp
+TabIndex = 5
+Top = 157
+Width = 22
+[END PROPERTIES]
+[START METHODS]
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BYUXR
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdOK
+[PARENT] _keywords
+[START PROPERTIES]
+Caption = "Aceptar"
+Default = .T.
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 23
+Left = 240
+Name = "cmdOK"
+TabIndex = 7
+Top = 188
+Width = 75
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.APPLY
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BYUYO
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdRemove
+[PARENT] _keywords
+[START PROPERTIES]
+Caption = "\<Quitar"
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 23
+Left = 89
+Name = "cmdRemove"
+TabIndex = 3
+Top = 157
+Width = 75
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LCVALUE, LNLISTINDEX, LNITEMID, LNKEYWORDCOUNT
+LNLISTINDEX = THIS.PARENT.CNTSUPERMOVER.LSTLEFT.LISTINDEX
+IF LNLISTINDEX<1
+RETURN
+ENDIF
+LCVALUE = THIS.PARENT.CNTSUPERMOVER.LSTLEFT.VALUE
+IF MESSAGEBOX("Quitar palabra clave"+' "'+LCVALUE+'"?', 292, THISFORM.CAPTION)<>6
+RETURN
+ENDIF
+THISFORM.LUPDATED = .T.
+WITH THIS.PARENT.CNTSUPERMOVER
+LNITEMID = .LSTLEFT.INDEXTOITEMID(LNLISTINDEX)
+LNKEYWORDCOUNT = ALEN(.ACHOICES)
+IF LNKEYWORDCOUNT>=2
+ADEL(.ACHOICES, LNITEMID)
+DIMENSION .ACHOICES[LNKEYWORDCOUNT-1]
+ELSE
+DIMENSION .ACHOICES[1]
+.ACHOICES = ""
+ENDIF
+.LSTLEFT.REFRESH
+.LSTLEFT.SETFOCUS
+ENDWITH
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BYUZE
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdScratch
+[PARENT] _keywords
+[START PROPERTIES]
+Caption = ""
+Enabled = .F.
+FontName = "MS Sans Serif"
+FontSize = 8
+ForeColor = 128,0,0
+Height = 23
+Left = 180
+Name = "cmdScratch"
+Picture = graphics\_cancel.bmp
+TabIndex = 4
+Top = 157
+Width = 22
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THIS.PARENT.CMDENTER.ENABLED = .F.
+THIS.ENABLED = .F.
+THISFORM.LADDMODE = .F.
+THIS.PARENT.CMDADD.ENABLED = .T.
+THIS.PARENT.CMDREMOVE.ENABLED = .T.
+WITH THIS.PARENT.CNTSUPERMOVER.LSTLEFT
+.REFRESH
+.SETFOCUS
+ENDWITH
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BYV0A
+[CLASS] _supermover
+[CLASSLOC] _movers.vcx
+[BASECLASS] container
+[OBJNAME] cntSuperMover
+[PARENT] _keywords
+[START PROPERTIES]
+Height = 125
+LABEL1.AutoSize = .T.
+LABEL1.Caption = "Palabras clave \<disponibles:"
+LABEL1.FontName = "MS Sans Serif"
+LABEL1.FontSize = 8
+LABEL1.Left = 0
+LABEL1.Name = "LABEL1"
+LABEL1.Top = 0
+LABEL2.AutoSize = .T.
+LABEL2.Caption = "Palabras clave \<seleccionadas:"
+LABEL2.FontName = "MS Sans Serif"
+LABEL2.FontSize = 8
+LABEL2.Left = 219
+LABEL2.Name = "LABEL2"
+LABEL2.Top = 0
+Left = 8
+Name = "cntSuperMover"
+TabIndex = 1
+Top = 12
+Width = 387
+cmdAdd.FontName = "MS Sans Serif"
+cmdAdd.FontSize = 8
+cmdAdd.Left = 182
+cmdAdd.Name = "cmdAdd"
+cmdAdd.Top = 24
+cmdAddAll.FontName = "MS Sans Serif"
+cmdAddAll.FontSize = 8
+cmdAddAll.Left = 182
+cmdAddAll.Name = "cmdAddAll"
+cmdAddAll.Top = 47
+cmdRemove.FontName = "MS Sans Serif"
+cmdRemove.FontSize = 8
+cmdRemove.Left = 182
+cmdRemove.Name = "cmdRemove"
+cmdRemove.Top = 70
+cmdRemoveAll.FontName = "MS Sans Serif"
+cmdRemoveAll.FontSize = 8
+cmdRemoveAll.Left = 182
+cmdRemoveAll.Name = "cmdRemoveAll"
+cmdRemoveAll.Top = 93
+lstLeft.FontName = "MS Sans Serif"
+lstLeft.FontSize = 8
+lstLeft.Height = 109
+lstLeft.Left = 0
+lstLeft.Name = "lstLeft"
+lstLeft.Top = 15
+lstLeft.Width = 168
+lstRight.FontName = "MS Sans Serif"
+lstRight.FontSize = 8
+lstRight.Height = 109
+lstRight.Left = 219
+lstRight.Name = "lstRight"
+lstRight.Top = 15
+lstRight.Width = 168
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE lstLeft.InteractiveChange
+DODEFAULT()
+THIS.REFRESH
+ENDPROC
+**
+PROCEDURE lstLeft.Refresh
+LOCAL LCVALUE
+DODEFAULT()
+THISFORM.LADDMODE = .F.
+LCVALUE = IIF(THIS.LISTINDEX>=1, ALLTRIM(THIS.VALUE), "")
+IF THIS.LISTCOUNT<1 .OR. EMPTY(LCVALUE)
+THIS.LISTINDEX = -1
+ENDIF
+THISFORM.CLASTVALUE = LCVALUE
+WITH THIS.PARENT.PARENT.TXTKEYWORD
+.VALUE = LCVALUE
+.ENABLED = ( .NOT. EMPTY(LCVALUE))
+ENDWITH
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RNA0U1VMC
+[CLASS] line
+[BASECLASS] line
+[OBJNAME] linRule1
+[PARENT] _keywords
+[START PROPERTIES]
+Height = 0
+Left = 8
+Name = "linRule1"
+Top = 146
+Width = 388
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RNA0U1VMI
+[CLASS] line
+[BASECLASS] line
+[OBJNAME] linRule2
+[PARENT] _keywords
+[START PROPERTIES]
+BorderColor = 255,255,255
+Height = 0
+Left = 8
+Name = "linRule2"
+Top = 147
+Width = 388
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BYUYC
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtKeyword
+[PARENT] _keywords
+[START PROPERTIES]
+Enabled = .F.
+FontName = "MS Sans Serif"
+FontSize = 8
+Format = "K"
+Height = 23
+InputMask = (REPLICATE("X",30))
+Left = 227
+Name = "txtKeyword"
+TabIndex = 6
+Top = 157
+Width = 168
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+IF THIS.PARENT.CMDADD.ENABLED
+THIS.PARENT.CMDADD.ENABLED = .F.
+ENDIF
+IF THIS.PARENT.CMDREMOVE.ENABLED
+THIS.PARENT.CMDREMOVE.ENABLED = .F.
+ENDIF
+IF  .NOT. THIS.PARENT.CMDSCRATCH.ENABLED
+THIS.PARENT.CMDSCRATCH.ENABLED = .T.
+ENDIF
+IF  .NOT. THIS.PARENT.CMDENTER.ENABLED
+THIS.PARENT.CMDENTER.ENABLED = .T.
+ENDIF
+ENDPROC
+**
+PROCEDURE LostFocus
+THIS.PARENT.CMDADD.ENABLED = .T.
+THIS.PARENT.CMDREMOVE.ENABLED = .T.
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] _keywords
+[START PROPERTIES]
+MS Sans Serif, 0, 8, 5, 13, 11, 11, 2, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BXZI7
+[CLASS] _dialog
+[CLASSLOC] _dialogs.vcx
+[BASECLASS] form
+[OBJNAME] _locateitem
+[START PROPERTIES]
+Caption = "Buscar elemento"
+DoCreate = .T.
+Height = 94
+HelpContextID = 189582662
+Name = "_locateitem"
+Width = 334
+cdefaultfilename = .NULL.
+cfilename = .NULL.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Release
+DODEFAULT()
+IF VARTYPE(THIS.OLOCATEITEM)="O"
+THIS.OLOCATEITEM.ADDPROPERTY("cFileName", THIS.CFILENAME)
+ENDIF
+ENDPROC
+**
+FUNCTION Unload
+RETURN THISFORM.CFILENAME
+ENDFUNC
+**
+FUNCTION Init
+LPARAMETERS OSOURCE, TCFILENAME, TLGETPICTURE
+IF VARTYPE(OSOURCE)="O"
+THIS.OLOCATEITEM = OSOURCE
+ENDIF
+IF VARTYPE(TCFILENAME)<>"C" .OR. EMPTY(TCFILENAME)
+RETURN .F.
+ENDIF
+THIS.CDEFAULTFILENAME = LOWER(ALLTRIM(TCFILENAME))
+THIS.LGETPICTURE = TLGETPICTURE
+THIS.EDTMESSAGE.VALUE = 'Error al abrir "'+THIS.CDEFAULTFILENAME+'".  No se encontró el archivo.'
+RETURN DODEFAULT()
+ENDFUNC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+6[END RESERVED2]
+[START RESERVED3]
+cdefaultfilename The default file name to locate.
+cfilename The file name retrieved from Locate button.
+lgetpicture
+olocateitem Object reference to obtain return value set to cFileName property.
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED8]
+dialogs.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BXZJB
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancel
+[PARENT] _locateitem
+[START PROPERTIES]
+Cancel = .T.
+Caption = "Cancelar"
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 23
+Left = 170
+Name = "cmdCancel"
+TabIndex = 4
+Top = 63
+Width = 75
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.CFILENAME = .NULL.
+THISFORM.RELEASE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BXZJW
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdHelp
+[PARENT] _locateitem
+[START PROPERTIES]
+Cancel = .T.
+Caption = "\<Ayuda"
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 23
+Left = 251
+Name = "cmdHelp"
+TabIndex = 5
+Top = 63
+Width = 75
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+HELP ID (THISFORM.HELPCONTEXTID) NOWAIT
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BXZJL
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdIgnore
+[PARENT] _locateitem
+[START PROPERTIES]
+Cancel = .T.
+Caption = "\<Pasar por alto"
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 23
+Left = 89
+Name = "cmdIgnore"
+TabIndex = 3
+Top = 63
+Width = 75
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.CFILENAME = THISFORM.CDEFAULTFILENAME
+THISFORM.RELEASE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BXZIZ
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdLocate
+[PARENT] _locateitem
+[START PROPERTIES]
+Caption = "\<Buscar..."
+Default = .T.
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 23
+Left = 8
+Name = "cmdLocate"
+TabIndex = 2
+Top = 63
+Width = 75
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LCFILENAME, LCFILEEXT
+THISFORM.ENABLED = .F.
+THISFORM.VISIBLE = .F.
+LCFILEEXT = JUSTEXT(THISFORM.CDEFAULTFILENAME)
+IF THISFORM.LGETPICTURE .OR. INLIST(LOWER(LCFILEEXT), "bmp", "ico", "gif", "jpg", "cur", "msk")
+LCFILENAME = LOWER(GETPICT(LCFILEEXT))
+ELSE
+LCFILENAME = LOWER(GETFILE(LCFILEEXT))
+ENDIF
+IF EMPTY(LCFILENAME)
+THISFORM.CFILENAME = THISFORM.CDEFAULTFILENAME
+ELSE
+THISFORM.CFILENAME = LCFILENAME
+ENDIF
+THISFORM.RELEASE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RN31BXZKG
+[CLASS] editbox
+[BASECLASS] editbox
+[OBJNAME] edtMessage
+[PARENT] _locateitem
+[START PROPERTIES]
+BackColor = (thisform.BackColor)
+BackStyle = 0
+BorderColor = (thisform.BackColor)
+BorderStyle = 0
+FontName = "MS Sans Serif"
+FontSize = 8
+Height = 45
+Left = 8
+Name = "edtMessage"
+ReadOnly = .T.
+ScrollBars = 0
+SpecialEffect = 1
+TabIndex = 1
+TabStop = .F.
+Top = 8
+Width = 317
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] _locateitem
+[START PROPERTIES]
+MS Sans Serif, 0, 8, 5, 13, 11, 11, 2, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QZ90UO74C
+[CLASS] _form
+[CLASSLOC] _base.vcx
+[BASECLASS] form
+[OBJNAME] _login
+[START PROPERTIES]
+AutoCenter = .T.
+Caption = "Inicio de sesión"
+DataSession = 2
+DoCreate = .T.
+Height = 131
+HelpContextID = 10
+Name = "_login"
+ScaleMode = 3
+Width = 224
+cfieldname = 
+cpassword = 
+ctable = 
+ctagname = 
+opassword = 
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+LOCAL LCFIELDVALUE
+IF EMPTY(THIS.CTABLE)
+RETURN
+ENDIF
+SELECT (THIS.CTABLE)
+LCFIELDVALUE = UPPER(ALLTRIM(THIS.CBONAME.DISPLAYVALUE))
+LOCATE FOR UPPER(ALLTRIM(EVALUATE(THIS.CFIELDNAME)))==LCFIELDVALUE
+ENDPROC
+**
+FUNCTION QueryUnload
+IF  .NOT. DODEFAULT()
+RETURN .F.
+ENDIF
+THIS.RELEASE()
+ENDFUNC
+**
+PROCEDURE Release
+DODEFAULT()
+IF VARTYPE(THIS.OPASSWORD)="O"
+THIS.OPASSWORD.ADDPROPERTY("lValidPassword", THIS.LVALIDPASSWORD)
+ENDIF
+ENDPROC
+**
+FUNCTION Init
+IF EMPTY(THIS.CFIELDNAME) .OR. EMPTY(THIS.CTABLE)
+RETURN
+ENDIF
+RETURN THIS.SETUP()
+ENDFUNC
+**
+PROCEDURE Unload
+IF USED("cNames")
+USE IN CNAMES
+ENDIF
+IF  .NOT. EMPTY(THIS.CTABLE) .AND. USED(THIS.CTABLE)
+USE IN (THIS.CTABLE)
+ENDIF
+ENDPROC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+7[END RESERVED2]
+[START RESERVED3]
+*checkpassword Routine to validate password.
+*processpassword Stub routine to add encryption routine.
+*setup Routine to setup lookup dropdown.
+cdbfname Name of Login lookup DBF.
+cfieldname Name of field that holds user name.
+cpassword Name of field that hold user password.
+ctable Name of table alias that hold user information. 
+ctagname Tag name used to search the employee table for the user name. 
+lcasesensitive Whether password is case-sensitive.
+lvalidpassword Whether valid password was passed.
+opassword Object reference for returning valid password set to lValidPassword property.
+[END RESERVED3]
+[START RESERVED4]
+..\bitmaps\login_s.bmp[END RESERVED4]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED7]
+Base login container. Allows entry of name and password.[END RESERVED7]
+[START RESERVED8]
+dialogs.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QZ90UO6FL
+[CLASS] combobox
+[BASECLASS] combobox
+[OBJNAME] cboName
+[PARENT] _login
+[START PROPERTIES]
+BoundColumn = 2
+Height = 21
+Left = 100
+Name = "cboName"
+RowSource = ""
+RowSourceType = 3
+Style = 2
+TabIndex = 1
+Top = 15
+Width = 106
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+THISFORM.REFRESH()
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QZ90UO5NH
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancel
+[PARENT] _login
+[START PROPERTIES]
+Cancel = .T.
+Caption = "Cancelar"
+Enabled = .T.
+Height = 26
+Left = 130
+Name = "cmdCancel"
+TabIndex = 4
+Top = 90
+Width = 60
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.RELEASE()
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QZ90UO4ZA
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdOk
+[PARENT] _login
+[START PROPERTIES]
+Caption = "Aceptar"
+Default = .T.
+Height = 26
+Left = 50
+Name = "cmdOk"
+TabIndex = 3
+Top = 90
+Width = 60
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF THISFORM.CHECKPASSWORD()
+THISFORM.LVALIDPASSWORD = .T.
+THISFORM.RELEASE()
+ELSE
+MESSAGEBOX("La contraseña no es válida.", 48)
+THISFORM.TXTPASSWORD.VALUE = ""
+THISFORM.TXTPASSWORD.SETFOCUS()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QZ90UO6C8
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblName
+[PARENT] _login
+[START PROPERTIES]
+Alignment = 1
+Caption = "Nombre"
+Height = 17
+Left = 9
+Name = "lblName"
+TabIndex = 5
+Top = 18
+Width = 87
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QZ90UO6DD
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblPswd
+[PARENT] _login
+[START PROPERTIES]
+Alignment = 1
+Caption = "Contraseña"
+FontSize = 9
+Height = 17
+Left = 9
+Name = "lblPswd"
+TabIndex = 6
+Top = 50
+Width = 87
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QZ90UO6EH
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtPassword
+[PARENT] _login
+[START PROPERTIES]
+Format = "K"
+Height = 24
+Left = 99
+Name = "txtPassword"
+PasswordChar = "*"
+TabIndex = 2
+Top = 46
+Width = 104
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] _login
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 21, 3, 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R2S079AYF
+[CLASS] _custom
+[CLASSLOC] _base.vcx
+[BASECLASS] custom
+[OBJNAME] _msgbox
+[START PROPERTIES]
+Height = 23
+Name = "_msgbox"
+Width = 24
+builderx = (HOME()+"Wizards\BuilderD,BuilderDForm")
+cmessage = 
+ctitle = (_screen.Caption)
+ntype = 48
+[END PROPERTIES]
+[START PROTECTED]
+display
+[END PROTECTED]
+[START METHODS]
+PROCEDURE Init
+LPARAMETERS TCMESSAGE, TNTYPE, TCTITLE, TLBEEP
+THIS.SET(TCMESSAGE, TNTYPE, TCTITLE, TLBEEP, PARAMETERS())
+ENDPROC
+**
+PROCEDURE set
+LPARAMETERS TCMESSAGE, TNTYPE, TCTITLE, TLBEEP, TNPARAMETERS
+LOCAL LNPARAMETERS
+LNPARAMETERS = IIF(TYPE("tnParameters")=="N", TNPARAMETERS, PARAMETERS())
+IF LNPARAMETERS<1
+RETURN
+ENDIF
+IF TYPE("tcMessage")=="C"
+THIS.CMESSAGE = TCMESSAGE
+ENDIF
+IF LNPARAMETERS<2
+RETURN
+ENDIF
+IF TYPE("tnType")=="N"
+THIS.NTYPE = TNTYPE
+ENDIF
+IF LNPARAMETERS<3
+RETURN
+ENDIF
+IF TYPE("tcTitle")=="C"
+THIS.CTITLE = TCTITLE
+ENDIF
+IF LNPARAMETERS<4
+RETURN
+ENDIF
+IF TYPE("tlBeep")=="L"
+THIS.LBEEP = TLBEEP
+ENDIF
+ENDPROC
+**
+FUNCTION display
+RETURN MESSAGEBOX(THIS.CMESSAGE, THIS.NTYPE, THIS.CTITLE)
+ENDFUNC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED3]
+*display 
+*set Sets the properties for message, type, title, and beep.
+*show Displays the message box and returns the dialog result.
+cmessage Message box message text.
+ctitle Message box title text.
+lbeep Specifies whether a beep occurs when message box is activated.
+ntype Message box type.
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+[START RESERVED7]
+Message box wrapper for MESSAGEBOX().[END RESERVED7]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] _msgbox
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RHO0WNS7X
+[CLASS] _form
+[CLASSLOC] _base.vcx
+[BASECLASS] form
+[OBJNAME] _splash
+[START PROPERTIES]
+AutoCenter = .T.
+BorderStyle = 2
+Caption = ""
+Closable = .F.
+ControlBox = .F.
+DoCreate = .T.
+Height = 250
+MaxButton = .F.
+MinButton = .F.
+Movable = .F.
+Name = "_splash"
+Width = 375
+nduration = 3
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Activate
+THIS.PICTURE = THIS.PICTURE
+LOCAL T1
+T1 = SECONDS()
+DO WHILE (SECONDS()-M.T1)<THIS.NDURATION
+ENDDO
+THISFORM.RELEASE
+ENDPROC
+**
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED3]
+nduration This is duration in seconds to display splash screen.
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RHO0WNSBH
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] Label1
+[PARENT] _splash
+[START PROPERTIES]
+BackStyle = 0
+Caption = "Pantalla de presentación"
+FontBold = .T.
+FontSize = 22
+Height = 40
+Left = 18
+Name = "Label1"
+Top = 192
+Width = 349
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] _splash
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

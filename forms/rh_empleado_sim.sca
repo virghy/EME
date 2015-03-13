@@ -1,0 +1,795 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP0OME6N
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 59
+Left = 34
+Width = 645
+Height = 370
+InitialSelectedAlias = "vEmpleado"
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO seteo
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+6[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAU141VV3
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 21
+Left = 10
+Height = 90
+Width = 95
+Alias = "vEmpleado"
+Order = ""
+Database = ..\data\datos.dbc
+CursorSource = "rh_empleado"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAU15CY8V
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "seccion"
+Database = ..\data\datos.dbc
+CursorSource = "rh_seccion"
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _06Y0O5PCO
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor4
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 143
+Left = 148
+Height = 90
+Width = 95
+Alias = "hijos"
+BufferModeOverride = 5
+Database = ..\data\datos.dbc
+CursorSource = "rh_hijos"
+Name = "Cursor4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0760JS6RP
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor6
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 150
+Left = 15
+Height = 90
+Width = 95
+Alias = "horario"
+Database = ..\data\datos.dbc
+CursorSource = "rh_horarios"
+Name = "Cursor6"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20N0KEOZ2
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 146
+Left = 272
+Height = 90
+Width = 91
+Alias = "freqliqui"
+Database = ..\data\datos.dbc
+CursorSource = "rh_frecuencia"
+Name = "Cursor3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP0OME6Q
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform12
+[START PROPERTIES]
+DataSession = 2
+Height = 400
+Width = 578
+DoCreate = .T.
+Caption = "Empleados Simplificado"
+WindowState = 0
+tabla1 = vEmpleado
+tabla2 = hijos
+camponro = IdEmpleado,rh_empleado,IdEmpresa=?oApp.Empresa
+campotam = 4
+campos = IdEmpresa,Activo
+valores = oApp.Empresa,.t.
+identidad = IdEmpleado
+tablaconsulta = Empleado
+Name = "Tsmaintform12"
+lblRequerido.Name = "lblRequerido"
+PAGEFRAME1.ErasePage = .T.
+PAGEFRAME1.PageCount = 2
+PAGEFRAME1.PAGE1.Caption = "Datos \<Personales"
+PAGEFRAME1.PAGE1.PageOrder = 1
+PAGEFRAME1.PAGE1.Name = "PAGE1"
+PAGEFRAME1.PAGE2.GRDLIST.Height = 373
+PAGEFRAME1.PAGE2.GRDLIST.Left = 0
+PAGEFRAME1.PAGE2.GRDLIST.TabIndex = 1
+PAGEFRAME1.PAGE2.GRDLIST.Top = 2
+PAGEFRAME1.PAGE2.GRDLIST.Width = 578
+PAGEFRAME1.PAGE2.GRDLIST.Name = "GRDLIST"
+PAGEFRAME1.PAGE2.Caption = "\<Lista"
+PAGEFRAME1.PAGE2.PageOrder = 2
+PAGEFRAME1.PAGE2.Name = "PAGE2"
+PAGEFRAME1.ActivePage = 1
+PAGEFRAME1.Top = -1
+PAGEFRAME1.Left = 0
+PAGEFRAME1.Width = 581
+PAGEFRAME1.Height = 408
+PAGEFRAME1.TabIndex = 1
+PAGEFRAME1.Name = "PAGEFRAME1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE refreshform
+DODEFAULT()
+IF vempleado.activo
+     thisform.pageframe1.page1.fechabaja.visible = .F.
+     thisform.pageframe1.page1.tslabel1.visible =  .F.
+     thisform.pageframe1.page1.motivobaja.visible = .F.
+     thisform.pageframe1.page1.tslabel2.visible =  .F.
+     thisform.pageframe1.page1.sbaja.visible =  .F.
+ELSE
+     thisform.pageframe1.page1.fechabaja.visible = .T.
+     thisform.pageframe1.page1.tslabel1.visible =  .T.
+     thisform.pageframe1.page1.motivobaja.visible = .T.
+     thisform.pageframe1.page1.tslabel2.visible = .T.
+     thisform.pageframe1.page1.sbaja.visible = .T.
+ENDIF
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP0OME7K
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDocumento
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vEmpleado.documento"
+Height = 22
+Left = 179
+TabIndex = 8
+Top = 107
+Width = 108
+editable = .T.
+requerido = .T.
+Name = "txtDocumento"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAP0OME7M
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDocumento
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Documento"
+Height = 16
+Left = 47
+Top = 108
+Width = 98
+TabIndex = 7
+Name = "lblDocumento"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB10P41V4
+[CLASS] shape
+[BASECLASS] shape
+[OBJNAME] sBaja
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Top = 202
+Left = 323
+Height = 145
+Width = 229
+SpecialEffect = 0
+Name = "sBaja"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB10PE6FV
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] fechabaja
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vEmpleado.fecha_sali"
+Enabled = .F.
+Height = 22
+Left = 347
+TabIndex = 26
+Top = 238
+Width = 84
+Name = "fechabaja"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB10PE6FW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Fecha de Baja"
+Height = 16
+Left = 347
+Top = 221
+Width = 98
+TabIndex = 25
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB10PE6FY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] motivobaja
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vEmpleado.motivo"
+Enabled = .F.
+Height = 22
+Left = 347
+TabIndex = 28
+Top = 298
+Width = 192
+Name = "motivobaja"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB10PE6FZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Motivo de Baja"
+Height = 16
+Left = 347
+Top = 281
+Width = 98
+TabIndex = 27
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0JY0ORN18
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblJefe
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Activo"
+Height = 16
+Left = 49
+Top = 346
+Width = 113
+TabIndex = 23
+Name = "lblJefe"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0JY0ORN19
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Top = 348
+Left = 181
+Height = 15
+Width = 22
+Alignment = 0
+Caption = ""
+ControlSource = "vEmpleado.activo"
+TabIndex = 24
+editable = .T.
+Name = "Tscheckbox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAU141VV3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblLegajo
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Legajo"
+Enabled = .T.
+Height = 16
+Left = 48
+Top = 38
+Width = 98
+TabIndex = 1
+Name = "lblLegajo"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SAU15CY8V
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vEmpleado.nombre"
+Height = 22
+Left = 179
+TabIndex = 4
+Top = 59
+Width = 312
+editable = .T.
+requerido = .T.
+Name = "txtNombre"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _SB00GYMSG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNombre
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Nombre"
+Height = 16
+Left = 48
+Top = 62
+Width = 98
+TabIndex = 3
+Name = "lblNombre"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RM11GEWZ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtApellido
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vEmpleado.apellido"
+Height = 22
+Left = 179
+TabIndex = 6
+Top = 83
+Width = 312
+editable = .T.
+requerido = .T.
+Name = "txtApellido"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RM11GEX2
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Apellido"
+Height = 16
+Left = 48
+Top = 86
+Width = 98
+TabIndex = 5
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6L
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtOcupacion
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vEmpleado.ocupacion"
+Height = 22
+Left = 179
+TabIndex = 10
+Top = 131
+Width = 192
+editable = .T.
+requerido = .T.
+Name = "txtOcupacion"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6M
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblOcupacion
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Ocupación"
+Height = 16
+Left = 47
+Top = 135
+Width = 113
+TabIndex = 9
+Name = "lblOcupacion"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6N
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCateg_hora
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Categoría de Horario"
+Height = 16
+Left = 47
+Top = 161
+Width = 113
+TabIndex = 11
+Name = "lblCateg_hora"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6O
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSeccion
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Sección"
+Height = 16
+Left = 47
+Top = 188
+Width = 113
+TabIndex = 13
+Name = "lblSeccion"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6P
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCentro_pag
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Centro de Costo"
+Height = 16
+Left = 47
+Top = 215
+Width = 113
+TabIndex = 15
+Name = "lblCentro_pag"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6Q
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+RowSourceType = 6
+RowSource = "seccion.descripcion,idseccion"
+ControlSource = "Vempleado.Seccion"
+FirstElement = 1
+Height = 24
+Left = 179
+NumberOfElements = 0
+Style = 2
+TabIndex = 14
+Top = 182
+Width = 192
+editable = .T.
+requerido = .T.
+Name = "Tscombobox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6R
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox2
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,50"
+ControlSource = "Vempleado.Centro_pag"
+FirstElement = 1
+Height = 24
+Left = 179
+NumberOfElements = 0
+Style = 2
+TabIndex = 16
+Top = 209
+Width = 192
+editable = .T.
+cmdsql = Select Descripción,Centro from Centros where IdEmpresa = ?oApp.Empresa order by 1
+cursor = cCentro
+requerido = .T.
+Name = "Tscombobox2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6S
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+RowSourceType = 6
+RowSource = "horario.descripcion,idhorario"
+ControlSource = "vEmpleado.categ_hora"
+FirstElement = 1
+Height = 24
+Left = 179
+NumberOfElements = 0
+Style = 2
+TabIndex = 12
+Top = 155
+Width = 192
+editable = .T.
+requerido = .T.
+Name = "Tscombobox3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6T
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSueldo_bas
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vEmpleado.sueldo_bas"
+InputMask = "999,999,999"
+Left = 179
+TabIndex = 18
+Top = 236
+Width = 84
+editable = .T.
+requerido = .T.
+Name = "txtSueldo_bas"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6U
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSueldo_bas
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Sueldo Bâsico"
+Height = 16
+Left = 47
+Top = 239
+Width = 132
+TabIndex = 17
+Name = "lblSueldo_bas"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6V
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFrec_liqui
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Frecuencia de Liquid."
+Height = 16
+Left = 47
+Top = 263
+Width = 132
+TabIndex = 19
+Name = "lblFrec_liqui"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6W
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNro_asegur
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vEmpleado.nro_asegur"
+Height = 22
+Left = 179
+TabIndex = 22
+Top = 285
+Width = 84
+editable = .T.
+Name = "txtNro_asegur"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6X
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNro_asegur
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Nro Seguro IPS"
+Height = 16
+Left = 47
+Top = 287
+Width = 132
+TabIndex = 21
+Name = "lblNro_asegur"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20U0LCA6Y
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox4
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+RowSourceType = 6
+RowSource = "freqliqui.descripcion,idfrecliqui"
+ControlSource = "vEmpleado.frec_liqui"
+FirstElement = 1
+Height = 22
+Left = 179
+NumberOfElements = 0
+Style = 2
+TabIndex = 20
+Top = 260
+Width = 192
+editable = .T.
+requerido = .T.
+Name = "Tscombobox4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20Z106EBM
+[CLASS] campo_busca
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_busca1
+[PARENT] Tsmaintform12.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "vEmpleado.idempleado"
+Left = 179
+Top = 35
+datoayuda = Empleado
+requerido = .T.
+Name = "Campo_busca1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,407 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VLY
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+Left = 463
+Name = "Dataenvironment"
+Top = 218
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VLZ
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "conceptos"
+CursorSource = "cnt_conceptos"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 95
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VM0
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Conceptos de Movimientos"
+DoCreate = .T.
+Height = 319
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 324
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.ColumnCount = -1
+Pageframe1.Page2.grdList.FontSize = 8
+Pageframe1.Page2.grdList.Height = 200
+Pageframe1.Page2.grdList.Left = 7
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.grdList.Panel = 1
+Pageframe1.Page2.grdList.RecordSource = "conceptos"
+Pageframe1.Page2.grdList.RowHeight = 17
+Pageframe1.Page2.grdList.ScrollBars = 1
+Pageframe1.Page2.grdList.Top = -2
+Pageframe1.Page2.grdList.Width = 377
+Pageframe1.TabIndex = 2
+Pageframe1.Top = 0
+Pageframe1.Width = 420
+Width = 420
+camponro = IdConcepto,Cn_Conceptos,IdEmpresa = ?oApp.Empresa
+campos = IdEmpresa
+campotam = 3
+idobjeto = 10
+lblRequerido.Name = "lblRequerido"
+lblRequerido.TabIndex = 1
+tabla1 = conceptos
+valores = oApp.Empresa
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE validar
+
+*!*	IF !EMPTY(conceptos.idpadre) 
+*!*		IF conceptos.Tipo <> cConceptos.Tipo
+*!*			MESSAGEBOX('La sub Cagetoria del concepto debe ser del mismo tipo que el concepto actual',64,TASTRADE_LOC)
+*!*			RETURN .F.
+*!*		ENDIF
+*!*	ENDIF
+*!*			
+
+IF conceptos.Tipo <> 'S'
+	replace conceptos.idpadre WITH ''
+ENDIF
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DQ0PZB73
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cuentaContable
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 209
+Name = "cuentaContable"
+TabIndex = 7
+Top = 94
+Width = 186
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X80N95N4
+[CLASS] idcuenta
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcuenta1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "conceptos.cuentacontable"
+Height = 22
+Left = 131
+Name = "Idcuenta1"
+TabIndex = 6
+Top = 94
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VLZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblConcepto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Concepto"
+Height = 16
+Left = 71
+Name = "lblConcepto"
+TabIndex = 3
+Top = 70
+Width = 55
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VM5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdconcepto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Código"
+Height = 16
+Left = 59
+Name = "lblIdconcepto"
+TabIndex = 1
+Top = 46
+Width = 63
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VLZ
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "conceptos.idiva"
+Left = 131
+Name = "Tscombobox1"
+TabIndex = 9
+Top = 118
+cmdsql = Select Descripcion,Iva,Valor from vt_iva 
+cursor = cIva
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20Y0W981H
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "100,0"
+ControlSource = "conceptos.tipo"
+Left = 131
+Name = "Tscombobox2"
+RowSource = "Ingresos,I,Egresos,E,Sub Categoria,S"
+RowSourceType = 1
+TabIndex = 11
+Top = 142
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20Y0W981J
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "conceptos.idpadre"
+Left = 131
+Name = "Tscombobox3"
+TabIndex = 13
+Top = 166
+cmdsql = Select Concepto,IdConcepto,Tipo From cn_Conceptos where idEmpresa = ?oApp.Empresa Union Select '(Ninguno)','','' order by 1
+cursor = cConceptos
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE When
+RETURN conceptos.Tipo ='S'
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VLY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Iva"
+Height = 16
+Left = 71
+Name = "Tslabel1"
+TabIndex = 8
+Top = 118
+Width = 55
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DQ0PZB72
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Cuenta Contable"
+Height = 16
+Left = 35
+Name = "Tslabel2"
+TabIndex = 5
+Top = 94
+Width = 92
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20Y0W981G
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Tipo"
+Height = 16
+Left = 71
+Name = "Tslabel3"
+TabIndex = 10
+Top = 142
+Width = 55
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _20Y0W981I
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Sub Categoria de "
+Height = 16
+Left = 23
+Name = "Tslabel4"
+TabIndex = 12
+Top = 166
+Width = 103
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21L0N1IS2
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Orden"
+Height = 16
+Left = 59
+Name = "Tslabel5"
+TabIndex = 14
+Top = 190
+Width = 55
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21L0N1IS1
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "conceptos.orden"
+Height = 22
+Left = 131
+Name = "Tstextbox1"
+TabIndex = 15
+Top = 190
+Width = 84
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VLY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtConcepto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "conceptos.concepto"
+Height = 22
+Left = 131
+Name = "txtConcepto"
+TabIndex = 4
+Top = 70
+Width = 264
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0L1VM3
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdconcepto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "conceptos.idconcepto"
+Height = 22
+Left = 131
+Name = "txtIdconcepto"
+TabIndex = 2
+Top = 46
+Width = 44
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

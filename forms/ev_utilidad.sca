@@ -1,0 +1,782 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W2101Z0U
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 243
+Left = 349
+Width = 520
+Height = 341
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+4[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W2104BOK
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 10
+Height = 136
+Width = 91
+Alias = "ev_eventos"
+Database = ..\data\datos.dbc
+CursorSource = "ev_eventos"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W30RWGMU
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 290
+Height = 90
+Width = 91
+Alias = "ev_eventosval"
+BufferModeOverride = 5
+Database = ..\data\datos.dbc
+CursorSource = "ev_eventosval"
+NoDataOnLoad = .T.
+Name = "Cursor3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WV0N9EZG
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor4
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 46
+Left = 148
+Height = 90
+Width = 91
+Alias = "ev_eventosdet"
+BufferModeOverride = 5
+Database = ..\data\datos.dbc
+CursorSource = "ev_eventoscosto"
+NoDataOnLoad = .T.
+Name = "Cursor4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W2101Z0V
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmovform12
+[START PROPERTIES]
+Height = 497
+Width = 747
+DoCreate = .T.
+Caption = "Analisis de Utilidad"
+identidad = IdEvento
+tablaconsulta = Eventos
+tabla1 = ev_Eventos
+tabla2 = ev_EventosDet
+lallownew = .F.
+tabla3 = ev_EventosVal
+Name = "Tsmovform12"
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 0
+Pageframe1.Left = 0
+Pageframe1.Width = 748
+Pageframe1.Height = 498
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE editar
+DODEFAULT()
+IF thisform.editmode
+     thisform.runsql( ;
+                    'Select top 1 IdComprobante,Número, IdDeposito_Sal from st_movimiento_det where IdFactura = ?ev_Eventos.IdFactura', ;
+                    'cRef')
+ENDIF
+ENDPROC
+PROCEDURE lallowedits_access
+RETURN NVL(ev_eventos.estado, '') =  ;
+       'C'
+ENDPROC
+PROCEDURE validar
+*
+** ReFox - no body found for this  ;
+   procedure **
+*
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W2104BOM
+[CLASS] campo_busca
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_busca1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "ev_eventos.nroevento"
+Left = 83
+Top = 14
+Name = "Campo_busca1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W2101Z0U
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAgasajado
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.agasajado"
+Enabled = .F.
+Height = 22
+Left = 83
+MaxLength = 50
+TabIndex = 1
+Top = 44
+Width = 372
+editable = .F.
+Name = "txtAgasajado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W2101Z0U
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAgasajado
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Agasajado"
+Height = 16
+Left = 16
+Top = 44
+Width = 59
+TabIndex = 1
+Name = "lblAgasajado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W2104BOV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Contrato"
+Height = 16
+Left = 11
+Top = 14
+Width = 59
+TabIndex = 1
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W213A2ZN
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] total
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999"
+Left = 335
+MaxLength = 50
+TabIndex = 1
+Top = 414
+Width = 84
+editable = .F.
+Name = "total"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+this.parent.grdev_eventosdet.sumcolumn()
+this.value = this.parent.grdev_eventosdet.totales(1)
+IF thisform.editmode
+     this.parent.costos.value = this.value
+     this.parent.utilidad.value =  ;
+      this.parent.totalgeneral.value -  ;
+      this.value
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W30LSQH1
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Utilidad"
+Height = 16
+Left = 503
+Top = 194
+Width = 88
+TabIndex = 1
+Name = "Tslabel5"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAE
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdEv_eventosdet
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+ColumnCount = 5
+FontSize = 8
+Height = 310
+Left = 11
+Panel = 1
+RecordSource = "ev_eventosdet"
+RecordSourceType = 1
+RowHeight = 17
+Top = 94
+Width = 444
+ZOrderSet = 6
+campo = IdFactura,IdEmpresa, Visible,IdComprobante,Número,IdDeposito_sal
+valor = ev_Eventos.IdFactura,oApp.Empresa, .f.,cRef.IdComprobante,cRef.Número,cRef.IdDeposito_sal
+valorvariable = ev_Eventos.IdFactura
+variablevista = m.IdFactura
+cfieldtosum = Cantidad*Costo
+editable = .T.
+Name = "grdEv_eventosdet"
+Column1.FontSize = 8
+Column1.ColumnOrder = 1
+Column1.ControlSource = "ev_eventosdet.idproducto"
+Column1.Width = 49
+Column1.ReadOnly = .F.
+Column1.Visible = .T.
+Column1.Name = "Column4"
+Column2.FontSize = 8
+Column2.ColumnOrder = 3
+Column2.ControlSource = "ev_eventosdet.cantidad"
+Column2.Width = 48
+Column2.Visible = .T.
+Column2.InputMask = "999,999.99"
+Column2.Name = "Column5"
+Column3.FontSize = 8
+Column3.ColumnOrder = 4
+Column3.ControlSource = "ev_eventosdet.costo"
+Column3.Width = 71
+Column3.ReadOnly = .F.
+Column3.Visible = .T.
+Column3.InputMask = "999,999,999"
+Column3.Name = "Precio"
+Column4.FontSize = 8
+Column4.ColumnOrder = 2
+Column4.ControlSource = "ev_eventosdet.descripcion"
+Column4.Width = 152
+Column4.ReadOnly = .T.
+Column4.Visible = .T.
+Column4.BackColor = 217,227,244
+Column4.Name = "Descripcion"
+Column5.FontSize = 8
+Column5.ControlSource = "Costo*Cantidad"
+Column5.Width = 79
+Column5.ReadOnly = .T.
+Column5.Visible = .T.
+Column5.InputMask = "999,999,999"
+Column5.BackColor = 217,227,244
+Column5.Name = "Total"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+this.total.enabled = .F.
+this.descripcion.enabled = .F.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAF
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdEv_eventosdet.Column4
+[START PROPERTIES]
+FontSize = 8
+Caption = "Producto"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAG
+[CLASS] idproducto
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idproducto1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdEv_eventosdet.Column4
+[START PROPERTIES]
+Left = 211
+ReadOnly = .F.
+Top = 25
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+objeto = this.parent.parent.Descripcion.text1
+copiarcampos = Costo_Prom as Costo
+pegarcampos = Costo
+datoayuda = Materia Prima   
+Name = "Idproducto1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAH
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdEv_eventosdet.Column5
+[START PROPERTIES]
+FontSize = 8
+Caption = "Cantidad"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAI
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdEv_eventosdet.Column5
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+InputMask = "999,999.99"
+Margin = 0
+SelectOnEntry = .T.
+Visible = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+this.dblclick()
+ENDPROC
+PROCEDURE GotFocus
+this.tag = STR(NVL(this.value,  ;
+           0))
+ENDPROC
+PROCEDURE LostFocus
+IF this.tag <> STR(this.value)
+     this.parent.parent.parent.total.refresh()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAO
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdEv_eventosdet.Precio
+[START PROPERTIES]
+FontSize = 8
+Caption = "Costo"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAP
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdEv_eventosdet.Precio
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+InputMask = "999,999,999"
+Margin = 0
+ReadOnly = .F.
+Visible = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(NVL(this.value,  ;
+           0))
+ENDPROC
+PROCEDURE LostFocus
+IF this.tag <> STR(this.value)
+     this.parent.parent.parent.total.refresh()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAQ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdEv_eventosdet.Descripcion
+[START PROPERTIES]
+FontSize = 8
+Caption = "Descripcion"
+Name = "Header1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+SELECT ev_eventosdet
+INDEX ON descripcion TAG desc
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAR
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdEv_eventosdet.Descripcion
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+Visible = .T.
+ForeColor = 0,0,0
+BackColor = 217,227,244
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAS
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdEv_eventosdet.Total
+[START PROPERTIES]
+FontSize = 8
+Caption = "Total"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WO0QFKAT
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmovform12.Pageframe1.Page1.grdEv_eventosdet.Total
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+InputMask = "999,999,999"
+Margin = 0
+ReadOnly = .T.
+Visible = .T.
+ForeColor = 0,0,0
+BackColor = 217,227,244
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W2101Z0U
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] TotalGeneral
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999"
+Left = 599
+ReadOnly = .T.
+TabIndex = 1
+Top = 134
+Width = 108
+editable = .F.
+Name = "TotalGeneral"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+this.value = ev_eventos.totalgeneral -  ;
+             NVL(ev_eventos.iva,  ;
+             0)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W2104BOK
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Total Contrato"
+Height = 16
+Left = 503
+Top = 134
+Width = 88
+TabIndex = 1
+Name = "Tslabel6"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W30M0670
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Utilidad
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Alignment = 3
+Value = 
+ControlSource = "ev_eventos.utilidad"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999"
+Left = 599
+ReadOnly = .T.
+TabIndex = 1
+Top = 194
+Width = 108
+editable = .F.
+Name = "Utilidad"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+*
+** ReFox - no body found for this  ;
+   procedure **
+*
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W30MLTTR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Costos
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "ev_eventos.costototal"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999"
+Left = 599
+ReadOnly = .T.
+TabIndex = 1
+Top = 164
+Width = 108
+editable = .F.
+Name = "Costos"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W30MLTTS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Total Costos"
+Height = 16
+Left = 503
+Top = 164
+Width = 88
+TabIndex = 1
+Name = "Tslabel7"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W30RWGNP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel11
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Total de Costos"
+Height = 16
+Left = 204
+Top = 420
+Width = 119
+TabIndex = 15
+Name = "Tslabel11"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W30RWGNQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel12
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 2
+BackStyle = 1
+Caption = "Detalle de Costo"
+Height = 16
+Left = 11
+Top = 71
+Width = 444
+TabIndex = 13
+ForeColor = 255,255,255
+BackColor = 128,128,192
+Style = 0
+Name = "Tslabel12"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1W2101Z0U
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 424
+Left = 11
+Height = 26
+Width = 120
+Caption = "Agregar Insumos"
+editable = .T.
+Name = "Tscommandbutton1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+TEXT TO cmdsql
+	SELECT IdProducto,Descripcion, ;
+case when isnull(Costo_Prom,0)=0  ;
+then Ult_Costo else Costo_Prom  ;
+end  as Costo
+	FROM st_producto
+	WHERE IdEmpresa=?oApp.Empresa  ;
+AND IdTipo='I' AND Activo=1
+ENDTEXT
+IF sql(cmdsql,'Insumos') > 0
+     INSERT INTO ev_eventosdet  (idfactura, idempresa,  idproducto,  descripcion, costo,  visible,  idcomprobante, nÚmero,  ;
+            iddeposito_sal,  cantidad) ;
+            SELECT             ev_eventos.idfactura,  ;
+            oapp.empresa,  ;
+            insumos.idproducto,  ;
+            insumos.descripcion,  ;
+            insumos.costo, .F.,  ;
+            cref.idcomprobante,  ;
+            cref.nÚmero,  ;
+            cref.iddeposito_sal,  ;
+            0;
+			FROM  ;
+            Insumos
+ENDIF
+
+TEXT TO cmdsql
+	SELECT b.IdProducto, b.Descripcion,a.Costo,a.Cantidad
+	FROM ev_EventosOp a  inner join  st_producto b on a.IdEmpresa =  b.IdEmpresa and a.IdProducto =  b.IdProducto
+	WHERE IdEvento= ?ev_Eventos.IdEvento AND  ISNULL(b.ev_Incluye,0)=0 AND  ISNULL(b.ev_Presentar,0)=1 and  Cantidad > 0 and b.IdTipo ='S'
+ENDTEXT
+
+IF sql(cmdsql,'Insumos1') > 0
+     INSERT INTO ev_eventosdet  ;
+            (idfactura, idempresa,  ;
+            idproducto,  ;
+            descripcion, costo,  ;
+            visible,  ;
+            idcomprobante, nÚmero,  ;
+            iddeposito_sal,  ;
+            cantidad) SELECT ev_eventos.idfactura,  ;
+            oapp.empresa,  ;
+            insumos.idproducto,  ;
+            insumos.descripcion,  ;
+            insumos.costo, .F.,  ;
+            cref.idcomprobante,  ;
+            cref.nÚmero,  ;
+            cref.iddeposito_sal,  ;
+            insumos.cantidad  FROM  ;
+            Insumos1 AS insumos
+
+ENDIF
+this.parent.grdev_eventosdet.refresh()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

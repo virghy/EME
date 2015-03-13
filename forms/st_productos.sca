@@ -1,0 +1,2461 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 428
+InitialSelectedAlias = "st_producto"
+Left = -4
+Name = "Dataenvironment"
+Top = 11
+Width = 784
+[END PROPERTIES]
+[START RESERVED2]
+9[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MV0VHDHA
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor4
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_iva"
+BufferModeOverride = 5
+CursorSource = "vt_iva"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 118
+Name = "Cursor4"
+Top = 19
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MV0VHYRS
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "bs_monedas"
+BufferModeOverride = 5
+CursorSource = "bs_monedas"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 124
+Name = "Cursor2"
+Top = 142
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MV0VILAZ
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor5
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "st_unidad"
+BufferModeOverride = 5
+CursorSource = "st_unidad"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 234
+Name = "Cursor5"
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MV0VORMH
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor6
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_precios"
+BufferModeOverride = 5
+CursorSource = "vt_precios"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor6"
+NoDataOnLoad = .T.
+Top = 140
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MV11CUXI
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "st_producto"
+BufferModeOverride = 5
+CursorSource = "st_producto"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2DG0ZTGQ4
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "st_productosucursal"
+BufferModeOverride = 5
+CursorSource = "st_productosucursal"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 235
+Name = "Cursor3"
+NoDataOnLoad = .T.
+Top = 143
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EJ0NKCEO
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor7
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "st_productoatributo"
+CursorSource = "st_productoatributo"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 351
+Name = "Cursor7"
+NoDataOnLoad = .T.
+Top = 23
+Width = 174
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EJ0TSYET
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor8
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "st_productohijo"
+CursorSource = "st_productohijo"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 392
+Name = "Cursor8"
+NoDataOnLoad = .T.
+Top = 175
+Width = 194
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10R
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+BackColor = 236,233,225
+Caption = "Productos"
+DoCreate = .T.
+Height = 490
+Name = "Tsmaintform1"
+PAGEFRAME1.ErasePage = .T.
+PAGEFRAME1.Height = 492
+PAGEFRAME1.Left = 0
+PAGEFRAME1.Name = "PAGEFRAME1"
+PAGEFRAME1.PAGE1.Name = "PAGE1"
+PAGEFRAME1.PAGE1.PageOrder = 1
+PAGEFRAME1.PAGE2.GRDLIST.Name = "GRDLIST"
+PAGEFRAME1.PAGE2.Name = "PAGE2"
+PAGEFRAME1.PAGE2.PageOrder = 3
+PAGEFRAME1.Page3.Caption = "\<Stock"
+PAGEFRAME1.Page3.FontSize = 8
+PAGEFRAME1.Page3.Name = "Page3"
+PAGEFRAME1.Page3.PageOrder = 2
+PAGEFRAME1.PageCount = 3
+PAGEFRAME1.Top = 0
+PAGEFRAME1.Width = 639
+ScrollBars = 0
+ShowTips = .T.
+Width = 636
+WindowState = 0
+camponro = IdProducto,st_Producto,idEmpresa=?oApp.Empresa
+campos = idempresa
+campotam = 6
+detalle = .T.
+identidad = IdProducto
+lblRequerido.Name = "lblRequerido"
+tabla1 = st_producto
+tabla2 = vt_precios
+tabla3 = st_ProductoSucursal
+tabla4 = st_ProductoAtributo
+tabla5 = st_ProductoHijo
+tablaconsulta = Producto
+valores = oapp.empresa
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+IF THIS.RUNSQL("Select convert(int,dbo.LEERCONSTANTE(?oApp.Empresa,'ST_CODIGO_PRODUCTO')) as Valor", 'cConfig')>0
+IF CCONFIG.VALOR>0
+THIS.CAMPOTAM = CCONFIG.VALOR
+ENDIF
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE PAGEFRAME1.Page3.Activate
+THIS.REFRESH()
+ENDPROC
+PROCEDURE Refresh
+DODEFAULT()
+IF !thisform.editmode
+	ThisForm.PAGEFRAME1.PAGE1.Pageframe2.Page2.Tsgrid1.Refresh()
+	ThisForm.PAGEFRAME1.PAGE1.Pageframe2.Page1.Tsgrid1.Refresh()
+	ThisForm.PAGEFRAME1.PAGE1.Pageframe2.Page3.Tsgrid2.Refresh()
+	ThisForm.PAGEFRAME1.PAGE1.Pageframe2.Page4.Tsgrid1.Refresh()
+ENDIF
+
+ENDPROC
+PROCEDURE addnew
+DODEFAULT()
+THIS.PAGEFRAME1.PAGE1.TIPO.LISTINDEX = 1
+THIS.PAGEFRAME1.PAGE1.UNIDAD.LISTINDEX = 3
+THIS.PAGEFRAME1.PAGE1.IVA.LISTINDEX = 1
+THIS.PAGEFRAME1.PAGE1.MONEDA.LISTINDEX = 1
+ENDPROC
+PROCEDURE validar
+IF EMPTY(ST_PRODUCTO.PROVEEDOR)
+REPLACE PROVEEDOR WITH .NULL. IN ST_PRODUCTO
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APFW
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] activo
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+BackStyle = 1
+Caption = ""
+ControlSource = "st_producto.activo"
+Height = 16
+Left = 607
+Name = "activo"
+TabIndex = 26
+Top = 399
+Width = 13
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1O90YRBRC
+[CLASS] campo_busca
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_busca1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "st_producto.idproducto"
+Left = 125
+Name = "Campo_busca1"
+TabIndex = 1
+Top = 22
+Width = 108
+datoayuda = Productos General
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0I010OCMR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Catalogo
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "st_producto.catalogo"
+Height = 22
+Left = 291
+Name = "Catalogo"
+TabIndex = 6
+Top = 70
+Width = 98
+ZOrderSet = 29
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APG0
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] costo_promedio
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "st_producto.costo_prom"
+Enabled = .T.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 503
+Name = "costo_promedio"
+TabIndex = 14
+Top = 70
+Width = 109
+ZOrderSet = 11
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] CuentaCompra
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 140
+Name = "CuentaCompra"
+TabIndex = 23
+Top = 426
+Visible = .T.
+Width = 159
+ZOrderSet = 34
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cuentaContable
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 419
+Name = "cuentaContable"
+TabIndex = 25
+Top = 426
+Visible = .T.
+Width = 195
+ZOrderSet = 32
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APE0
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] descripcion
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BackColor = 255,255,255
+ControlSource = "st_producto.descripcion"
+FontBold = .T.
+ForeColor = 0,0,128
+Height = 22
+Left = 125
+Name = "descripcion"
+TabIndex = 3
+Top = 46
+Width = 264
+ZOrderSet = 6
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] esproducto
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+BackStyle = 1
+Caption = ""
+ControlSource = "st_producto.afectastock"
+Height = 16
+Left = 503
+Name = "esproducto"
+TabIndex = 18
+Top = 202
+Width = 13
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Familia
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "145,0"
+ControlSource = "St_producto.Familia"
+FirstElement = 1
+Height = 22
+Left = 59
+Name = "Familia"
+NumberOfElements = 0
+RowSource = ""
+RowSourceType = 3
+Style = 2
+TabIndex = 10
+Top = 182
+Width = 148
+ZOrderSet = 38
+cmdsql = Select descripcion,idfamilia from st_familia where idempresa = ?oApp.Empresa order by 1
+cursor = cFamilia
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] idcuenta
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcuenta1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "st_producto.cuentacontable"
+Height = 22
+Left = 64
+Name = "Idcuenta1"
+TabIndex = 30
+Top = 426
+Width = 74
+objeto = this.parent.cuentaCompra
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1SF0PZ2I9
+[CLASS] idcuenta
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcuenta2
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "st_producto.cuenta"
+Height = 22
+Left = 343
+Name = "Idcuenta2"
+TabIndex = 28
+Top = 426
+Width = 74
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WX0HSTTH
+[CLASS] idproveedor
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idproveedor1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "st_producto.proveedor"
+Height = 22
+Left = 125
+Name = "Idproveedor1"
+TabIndex = 7
+Top = 118
+Width = 66
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Iva
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "95,0"
+Comment = "Id de la tabla vt_iva (Inicialmente estaba relacionado con la tabla st_iva)"
+ControlSource = "st_producto.iva"
+FirstElement = 1
+Height = 23
+Left = 291
+Name = "Iva"
+NumberOfElements = 0
+RowSource = "vt_iva.descripcion,iva"
+RowSourceType = 6
+Style = 2
+TabIndex = 8
+Top = 94
+Width = 98
+ZOrderSet = 30
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0JLW7S
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCosto_repo
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Reposición"
+Height = 16
+Left = 437
+Name = "lblCosto_repo"
+TabIndex = 48
+Top = 122
+Width = 63
+ZOrderSet = 43
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0JLW7V
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFecha_últi
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Fec. Ult. Compra"
+Height = 16
+Left = 409
+Name = "lblFecha_últi"
+TabIndex = 49
+Top = 146
+Width = 91
+ZOrderSet = 45
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MO1JW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblStock_max
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Stock máximo"
+Height = 16
+Left = 419
+Name = "lblStock_max"
+TabIndex = 53
+Top = 251
+Width = 80
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MO1JS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblStock_mini
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Stock mínimo"
+Height = 16
+Left = 421
+Name = "lblStock_mini"
+TabIndex = 52
+Top = 227
+Width = 78
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MO1JZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTiempo_rep
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Tiempo reposic."
+Height = 16
+Left = 407
+Name = "lblTiempo_rep"
+TabIndex = 54
+Top = 275
+Width = 92
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] linea
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "95,0"
+ControlSource = "St_producto.Linea"
+FirstElement = 1
+Height = 22
+Left = 291
+Name = "linea"
+NumberOfElements = 0
+RowSourceType = 3
+Style = 2
+TabIndex = 12
+Top = 182
+Width = 98
+ZOrderSet = 39
+cmdsql = Select descripcion,idlinea from st_linea where idempresa = ?oApp.Empresa order by 1
+cursor = clinea
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Marca
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "145,0"
+ControlSource = "St_producto.Marca"
+FirstElement = 1
+Height = 22
+Left = 59
+Name = "Marca"
+RowSourceType = 3
+Style = 2
+TabIndex = 9
+Top = 158
+Width = 148
+ZOrderSet = 37
+cmdsql = Select descripcion,ltrim(str(idmarca)) from st_marca where idempresa = ?oApp.Empresa order by 1
+cursor = cmarca
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] moneda
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 1
+ColumnWidths = ""
+ControlSource = "st_producto.moneda"
+Height = 23
+Left = 503
+Name = "moneda"
+RowSource = "select descripcion, idmoneda from bs_monedas order by descripcion into cursor xxmone"
+RowSourceType = 3
+TabIndex = 13
+Top = 45
+Width = 109
+ZOrderSet = 12
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+THIS.ENABLED = THISFORM.EDITMODE .AND. EMPTY(THIS.VALUE)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APF5
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] máscara
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "st_producto.máscara"
+Height = 22
+Left = 125
+Name = "máscara"
+TabIndex = 4
+Top = 70
+Width = 108
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] Pageframe2
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ErasePage = .T.
+Height = 186
+Left = 8
+Name = "Pageframe2"
+Page1.Caption = "Lista de Precios"
+Page1.FontBold = .T.
+Page1.FontSize = 8
+Page1.ForeColor = 0,64,128
+Page1.Name = "Page1"
+Page2.Caption = "Atributos"
+Page2.FontBold = .T.
+Page2.FontSize = 8
+Page2.ForeColor = 255,128,64
+Page2.Name = "Page2"
+Page3.Caption = "Filtrar Sucursal"
+Page3.FontBold = .T.
+Page3.FontSize = 8
+Page3.Name = "Page3"
+Page4.Caption = "Sub-Productos"
+Page4.FontBold = .T.
+Page4.FontSize = 8
+Page4.ForeColor = 0,128,0
+Page4.Name = "Page4"
+PageCount = 4
+TabOrientation = 0
+Top = 220
+Width = 393
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Page2.Activate
+this.Refresh()
+
+ENDPROC
+PROCEDURE Page3.Activate
+this.Refresh
+ENDPROC
+PROCEDURE Page4.Activate
+this.Refresh
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MV0VHDHA
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page1
+[START PROPERTIES]
+Column1.ControlSource = "vt_precios.idlista"
+Column1.FontSize = 8
+Column1.Name = "Lista"
+Column1.Sparse = .F.
+Column1.Width = 142
+Column2.BackColor = 211,224,231
+Column2.ControlSource = "vt_precios.moneda"
+Column2.Enabled = .F.
+Column2.FontSize = 8
+Column2.Name = "Moneda"
+Column2.Sparse = .T.
+Column2.Width = 45
+Column3.ControlSource = "vt_precios.precio"
+Column3.FontSize = 8
+Column3.InputMask = "999,999,999,999.99"
+Column3.Name = "Precio"
+Column3.Width = 88
+Column4.ControlSource = "vt_precios.vigencia"
+Column4.FontSize = 8
+Column4.Name = "Vigencia"
+Column4.Width = 88
+ColumnCount = 4
+FontSize = 8
+Height = 76
+Left = -1
+Name = "Tsgrid1"
+RecordSource = "vt_precios"
+RowHeight = 20
+ScrollBars = 2
+TabIndex = 43
+Top = 7
+Width = 390
+campo = IdEmpresa, IdProducto
+editable = .T.
+titulo = Precios
+valor = oApp.Empresa, st_producto.idproducto
+valorvariable = st_producto.idproducto
+variablevista = m.idproducto
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MV0VHYRS
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page1.Tsgrid1.Lista
+[START PROPERTIES]
+Alignment = 0
+Caption = "Lista"
+FontBold = .F.
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MV0VILAZ
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] listaPrecio
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page1.Tsgrid1.Lista
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 3
+ColumnCount = 3
+ColumnWidths = "150,40,45"
+FirstElement = 1
+Left = 383
+Name = "listaPrecio"
+NumberOfElements = 0
+RowSourceType = 3
+SpecialEffect = 1
+Style = 2
+Top = 82
+cmdsql = select descripcion,moneda,idlista from vt_listaprecio where idempresa=?oapp.empresa
+cursor = cLista
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+REPLACE VT_PRECIOS.MONEDA WITH CLISTA.MONEDA
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MV0VORMH
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page1.Tsgrid1.Moneda
+[START PROPERTIES]
+Caption = "Moneda"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MV11CUXI
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] moneda
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page1.Tsgrid1.Moneda
+[START PROPERTIES]
+BackColor = 211,224,231
+BorderStyle = 0
+BoundColumn = 2
+ControlSource = "vt_precios.moneda"
+Enabled = .F.
+Height = 23
+Left = 503
+Name = "moneda"
+RowSource = "select  descripcion,rtrim(idmoneda) from bs_monedas order by descripcion into cursor xxxmone"
+RowSourceType = 3
+SpecialEffect = 1
+Style = 2
+TabIndex = 22
+Top = 40
+Width = 110
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2DG0ZTGQ4
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page1.Tsgrid1.Precio
+[START PROPERTIES]
+Caption = "Precio"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EJ0NKCEO
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page1.Tsgrid1.Precio
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vt_precios.precio"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999,999.99"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EJ0TSYET
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page1.Tsgrid1.Vigencia
+[START PROPERTIES]
+Caption = "Vigencia"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10R
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page1.Tsgrid1.Vigencia
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "vt_precios.vigencia"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APE0
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page2
+[START PROPERTIES]
+Caption = "Generar Sub Productos"
+Height = 60
+Left = 311
+Name = "Tscommandbutton1"
+Top = 7
+Width = 74
+WordWrap = .T.
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+*!*	SELECT IdAtributo FROM cAtributo INTO ARRAY aAtributo
+
+*!*	SELECT distinct Valor,IdAtributo FROM st_ProductoAtributo WITH (BUFFERING=.T.) INTO  ARRAY  aValores
+*!*	*SELECT cValores
+*!*	*COPY TO ARRAY aValores
+*!*	*ACOPY(aValores,AValores2)
+*!*	SET STEP ON
+
+*!*	FOR i=1 TO 1 &&ALEN(aValores,1)
+*!*		oAtributo = aValores(i,2)
+*!*		oValor = aValores(i,1)
+*!*		cNuevo = aValores(i,1)
+*!*		SELECT distinct Valor,IdAtributo FROM st_ProductoAtributo WITH (BUFFERING=.T.) WHERE IdAtributo <> oAtributo INTO  ARRAY  aValores2 	
+*!*		FOR x=1 TO ALEN(aValores2,1)
+*!*			IF oAtributo <> aValores2(x,2) AND oValor <> aValores2(x,1) 			
+*!*				cNuevo = cNuevo + ' ' + aValores2(x,1)
+*!*			ENDIF 	
+*!*		ENDFOR
+*!*		? cNuevo
+*!*	ENDFOR
+LOCAL cValores,cNombre
+IF thisform.runsql("exec dbo.st_GenerarAtributo ?st_Producto.IdProducto,?st_Producto.IdEmpresa","cAtr")>0
+	SELECT cAtr
+	SCAN
+		cValores=""
+		FOR x=1 TO FCOUNT()
+			cNombre=FIELD(x)
+			cValores= cValores + ' ' + ALLTRIM(NVL(eval(cNombre),''))
+			
+		ENDFOR
+		INSERT INTO st_ProductoHijo(IdEmpresa,IdProducto,Descripcion,IdPadre,iva,idtipo) ;
+		VALUES (st_Producto.IdEmpresa,ALLTRIM(st_Producto.IdProducto) + TRANSFORM(RECNO('cAtr'),"@L 99"),ALLTRIM(st_Producto.Descripcion) + ' ' + cValores,st_Producto.IdProducto,st_producto.iva,;
+		'P')
+	ENDSCAN
+	
+ENDIF
+
+	This.parent.parent.Page4.Tsgrid1.Refresh()
+	This.parent.parent.Page4.Activate()
+	
+	
+	
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MEW3K
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page2
+[START PROPERTIES]
+Column1.ControlSource = "st_productoatributo.idatributo"
+Column1.FontSize = 8
+Column1.Name = "Lista"
+Column1.Sparse = .F.
+Column1.Width = 112
+Column2.ControlSource = "st_productoatributo.valor"
+Column2.FontSize = 8
+Column2.Name = "Precio"
+Column2.Width = 175
+ColumnCount = 2
+FontSize = 8
+Height = 138
+Left = -1
+Name = "Tsgrid1"
+Panel = 1
+RecordSource = "st_productoatributo"
+RowHeight = 20
+ScrollBars = 2
+TabIndex = 43
+Top = 7
+Width = 308
+campo = IdEmpresa, IdProducto
+editable = .T.
+titulo = Atributos
+valor = oApp.Empresa, st_producto.idproducto
+valorvariable = st_producto.idproducto
+variablevista = m.idproducto
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MEW3M
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page2.Tsgrid1.Lista
+[START PROPERTIES]
+Alignment = 0
+Caption = "Atributo"
+FontBold = .F.
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] listaPrecio
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page2.Tsgrid1.Lista
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 3
+ColumnWidths = "150,40,45"
+Comment = "select Atributo,IdAtributo from st_Atributos where idempresa=?oapp.empresa"
+ControlSource = "vt_precios.idlista"
+FirstElement = 1
+Left = 383
+Name = "listaPrecio"
+NumberOfElements = 0
+RowSourceType = 3
+SpecialEffect = 1
+Style = 2
+Top = 82
+cmdsql = select Atributo,IdAtributo from st_Atributos where idempresa=?oapp.empresa
+cursor = cAtributo
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+REPLACE VT_PRECIOS.MONEDA WITH CLISTA.MONEDA
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page2.Tsgrid1.Precio
+[START PROPERTIES]
+Caption = "Valor"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APF5
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page2.Tsgrid1.Precio
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+MaxLength = 50
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkFiltrasucursal2
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page3
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .F.
+Caption = ""
+Comment = ""
+ControlSource = "st_producto.filtrasucursal"
+Height = 16
+Left = 202
+Name = "chkFiltrasucursal2"
+Top = 8
+Width = 18
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+This.parent.Tsgrid2.Visible= NVL(this.Value,.f.)
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APFW
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid2
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page3
+[START PROPERTIES]
+Column1.ControlSource = "st_productosucursal.sucursal"
+Column1.CurrentControl = "Cbosucursal1"
+Column1.FontSize = 8
+Column1.Name = "Lista"
+Column1.Sparse = .F.
+Column1.Visible = .T.
+Column1.Width = 370
+ColumnCount = 1
+FontSize = 8
+Height = 118
+Left = 8
+Name = "Tsgrid2"
+Panel = 1
+RecordSource = "st_productosucursal"
+RowHeight = 20
+ScrollBars = 2
+TabIndex = 17
+Top = 28
+Visible = .F.
+Width = 372
+campo = IdEmpresa, IdProducto
+editable = .T.
+titulo = Sucursales
+valor = oApp.Empresa, st_producto.idproducto
+valorvariable = st_producto.idproducto
+variablevista = m.idproducto
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+this.Visible= NVL(st_producto.filtrasucursal,.f.)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page3.Tsgrid2.Lista
+[START PROPERTIES]
+Alignment = 0
+Caption = "Sucursal"
+FontBold = .F.
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] cbosucursal
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbosucursal1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page3.Tsgrid2.Lista
+[START PROPERTIES]
+BorderStyle = 0
+Left = 33
+Name = "Cbosucursal1"
+Top = 174
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APG0
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] listaPrecio
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page3.Tsgrid2.Lista
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 3
+ColumnCount = 3
+ColumnWidths = "150,40,45"
+ControlSource = "vt_precios.idlista"
+FirstElement = 1
+Left = 383
+Name = "listaPrecio"
+NumberOfElements = 0
+RowSourceType = 3
+SpecialEffect = 1
+Style = 2
+Top = 82
+Visible = .T.
+cmdsql = select descripcion,moneda,idlista from vt_listaprecio where idempresa=?oapp.empresa
+cursor = cLista
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+REPLACE VT_PRECIOS.MONEDA WITH CLISTA.MONEDA
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APFR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel26
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page3
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Filtrar este producto por sucursal"
+Height = 16
+Left = 10
+Name = "Tslabel26"
+TabIndex = 25
+Top = 11
+Width = 188
+ZOrderSet = 43
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E60BVP85
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page4
+[START PROPERTIES]
+Column1.ColumnOrder = 3
+Column1.ControlSource = "st_productohijo.descripcion"
+Column1.FontSize = 8
+Column1.Name = "Precio"
+Column1.Width = 214
+Column2.ColumnOrder = 1
+Column2.ControlSource = "st_productohijo.idproducto"
+Column2.FontSize = 8
+Column2.Name = "Column3"
+Column2.Width = 82
+Column3.ColumnOrder = 2
+Column3.ControlSource = "st_productohijo.catalogo"
+Column3.FontSize = 8
+Column3.Name = "Column1"
+Column3.Width = 70
+ColumnCount = 3
+FontSize = 8
+Height = 138
+Left = -1
+Name = "Tsgrid1"
+Panel = 1
+RecordSource = "st_productohijo"
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 43
+Top = 5
+Width = 390
+campo = IdEmpresa, IdProducto
+editable = .T.
+titulo = SubProductos
+valor = oApp.Empresa, st_producto.idproducto
+valorvariable = st_producto.idproducto
+variablevista = m.idproducto
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110R8V
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page4.Tsgrid1.Column1
+[START PROPERTIES]
+Caption = "P/N"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110R90
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page4.Tsgrid1.Column1
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LW0YM76M
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page4.Tsgrid1.Column3
+[START PROPERTIES]
+Caption = "Producto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page4.Tsgrid1.Column3
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APE0
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page4.Tsgrid1.Precio
+[START PROPERTIES]
+Caption = "Descripción"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0EL10GX1Y
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1.Pageframe2.Page4.Tsgrid1.Precio
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+MaxLength = 50
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LB0NP7DB
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Procedencia
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "95,0"
+ControlSource = "st_producto.procedencia"
+Height = 22
+Left = 291
+Name = "Procedencia"
+TabIndex = 11
+Top = 158
+Width = 98
+cmdsql = SELECT Descripcion, IdPais FROM bs_paises ORDER BY 1
+cursor = cpais
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WX0HSTTJ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Proveedor
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 194
+Name = "Proveedor"
+TabIndex = 24
+Top = 118
+Visible = .T.
+Width = 195
+ZOrderSet = 34
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LW0YM76N
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tipo
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "93,0"
+ControlSource = "st_producto.idtipo"
+FirstElement = 1
+Height = 22
+Left = 291
+Name = "Tipo"
+NumberOfElements = 0
+RowSource = "Producto,P,Generico,G,Servicio,S,Insumo,I"
+RowSourceType = 1
+Style = 2
+TabIndex = 2
+Top = 22
+Width = 98
+ZOrderSet = 36
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Height = 61
+Left = 8
+Name = "Ts3dshape1"
+Top = 150
+Width = 391
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Height = 149
+Left = 404
+Name = "Ts3dshape2"
+Top = 29
+Width = 216
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MEW3M
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape3
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Height = 40
+Left = 8
+Name = "Ts3dshape3"
+Top = 417
+Visible = .T.
+Width = 612
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MEW3K
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape4
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Height = 144
+Left = 404
+Name = "Ts3dshape4"
+Top = 187
+Width = 216
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K50XQLXA
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] Tseditbox1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "st_producto.descripcion1"
+Height = 62
+Left = 470
+Name = "Tseditbox1"
+Top = 332
+Width = 149
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E60BVP85
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Producto"
+Height = 16
+Left = 69
+Name = "Tslabel1"
+TabIndex = 27
+Top = 25
+Width = 52
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110R9M
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel10
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Ubicación"
+Height = 16
+Left = 445
+Name = "Tslabel10"
+TabIndex = 55
+Top = 298
+Width = 54
+ZOrderSet = 22
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel11
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Caption = "Actualiza Stock"
+Height = 24
+Left = 403
+Name = "Tslabel11"
+TabIndex = 51
+Top = 202
+Width = 96
+ZOrderSet = 23
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110R9W
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel12
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Compra"
+Height = 16
+Left = 14
+Name = "Tslabel12"
+TabIndex = 57
+Top = 428
+Visible = .T.
+Width = 46
+ZOrderSet = 24
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110RA2
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel13
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Ultima Compra"
+Height = 16
+Left = 417
+Name = "Tslabel13"
+TabIndex = 47
+Top = 98
+Width = 83
+ZOrderSet = 25
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel14
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Promedio"
+Height = 16
+Left = 444
+Name = "Tslabel14"
+TabIndex = 46
+Top = 74
+Width = 56
+ZOrderSet = 26
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110RAE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel15
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Moneda"
+Height = 16
+Left = 454
+Name = "Tslabel15"
+TabIndex = 45
+Top = 49
+Width = 46
+ZOrderSet = 27
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110RAJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel16
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Es Activo"
+Height = 16
+Left = 548
+Name = "Tslabel16"
+TabIndex = 59
+Top = 399
+Width = 52
+ZOrderSet = 28
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ES153107
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel17
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Venta"
+Height = 16
+Left = 305
+Name = "Tslabel17"
+TabIndex = 58
+Top = 429
+Visible = .T.
+Width = 34
+ZOrderSet = 31
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel18
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 1
+Caption = "Agrupación"
+Height = 16
+Left = 18
+Name = "Tslabel18"
+TabIndex = 37
+Top = 143
+Width = 74
+ZOrderSet = 40
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APE0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel19
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 1
+Caption = "Costos"
+Height = 16
+Left = 414
+Name = "Tslabel19"
+TabIndex = 44
+Top = 23
+Width = 54
+ZOrderSet = 41
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APE0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Mascara"
+Height = 16
+Left = 73
+Name = "Tslabel2"
+TabIndex = 31
+Top = 73
+Width = 48
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MEW5R
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel20
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 1
+Caption = "Cuenta Contable"
+Height = 16
+Left = 18
+Name = "Tslabel20"
+TabIndex = 56
+Top = 410
+Visible = .T.
+Width = 102
+ZOrderSet = 46
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MEW5T
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel21
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 2
+AutoSize = .F.
+BackStyle = 1
+Caption = "Inventario"
+Height = 16
+Left = 414
+Name = "Tslabel21"
+TabIndex = 50
+Top = 181
+Width = 67
+ZOrderSet = 47
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0I010OCMQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel22
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "P/N"
+Height = 16
+Left = 267
+Name = "Tslabel22"
+TabIndex = 32
+Top = 74
+Width = 19
+ZOrderSet = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K50XQLX9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel23
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Descripción"
+Height = 16
+Left = 401
+Name = "Tslabel23"
+TabIndex = 29
+Top = 337
+Width = 67
+ZOrderSet = 15
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LW0YM76M
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel24
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Tipo"
+Height = 16
+Left = 260
+Name = "Tslabel24"
+TabIndex = 33
+Top = 25
+Width = 26
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WX0HSTTI
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel25
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Proveedor"
+Height = 16
+Left = 61
+Name = "Tslabel25"
+TabIndex = 34
+Top = 118
+Width = 60
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Nombre"
+Height = 16
+Left = 75
+Name = "Tslabel3"
+TabIndex = 29
+Top = 49
+Width = 46
+ZOrderSet = 15
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Unidad de Medida"
+Height = 16
+Left = 22
+Name = "Tslabel4"
+TabIndex = 35
+Top = 97
+Width = 99
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110R8V
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Marca"
+Height = 16
+Left = 22
+Name = "Tslabel5"
+TabIndex = 39
+Top = 161
+Width = 35
+ZOrderSet = 17
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110R90
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Familia"
+Height = 16
+Left = 17
+Name = "Tslabel6"
+TabIndex = 41
+Top = 185
+Width = 40
+ZOrderSet = 18
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110R95
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Linea"
+Height = 16
+Left = 255
+Name = "Tslabel7"
+TabIndex = 42
+Top = 185
+Width = 32
+ZOrderSet = 19
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Procedencia"
+Height = 16
+Left = 216
+Name = "Tslabel8"
+TabIndex = 40
+Top = 161
+Width = 70
+ZOrderSet = 20
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0DW110R9G
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Iva"
+Height = 16
+Left = 269
+Name = "Tslabel9"
+TabIndex = 36
+Top = 98
+Width = 17
+ZOrderSet = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0JLW7Q
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCosto_repo
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "st_producto.costo_repo"
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 503
+Name = "txtCosto_repo"
+TabIndex = 16
+Top = 118
+Width = 109
+ZOrderSet = 42
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0JLW7T
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecha_últi
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Alignment = 2
+ControlSource = "st_producto.fecha_últi"
+Height = 22
+Left = 503
+Name = "txtFecha_últi"
+TabIndex = 17
+Top = 142
+Width = 109
+ZOrderSet = 44
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MO1JU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtStock_max
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "st_producto.stock_max"
+Height = 22
+Left = 503
+Name = "txtStock_max"
+TabIndex = 20
+Top = 247
+Width = 109
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MO1JQ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtStock_mini
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "st_producto.stock_mini"
+Height = 22
+Left = 503
+Name = "txtStock_mini"
+TabIndex = 19
+Top = 223
+Width = 109
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0MO1JX
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTiempo_rep
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "st_producto.tiempo_rep"
+Height = 22
+Left = 503
+Name = "txtTiempo_rep"
+TabIndex = 21
+Top = 271
+Width = 109
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN07APFR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] ubicación
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "st_producto.ubicación"
+Height = 22
+Left = 503
+Name = "ubicación"
+TabIndex = 22
+Top = 295
+Width = 109
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN05V10Q
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] ultimo_costo
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+ControlSource = "st_producto.ult_costo"
+Enabled = .T.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 503
+Name = "ultimo_costo"
+TabIndex = 15
+Top = 94
+Width = 109
+ZOrderSet = 10
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1KW10148W
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Unidad
+[PARENT] Tsmaintform1.PAGEFRAME1.PAGE1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "105,0"
+ControlSource = "st_producto.unidad"
+FirstElement = 1
+Height = 22
+Left = 125
+Name = "Unidad"
+NumberOfElements = 0
+RowSource = "st_unidad.descripción,unidad"
+RowSourceType = 6
+Style = 2
+TabIndex = 5
+Top = 94
+Width = 108
+ZOrderSet = 36
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0PRI16
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] descripcion
+[PARENT] Tsmaintform1.PAGEFRAME1.Page3
+[START PROPERTIES]
+ControlSource = "st_producto.descripcion"
+FontBold = .T.
+ForeColor = 0,0,128
+Height = 22
+Left = 131
+Name = "descripcion"
+TabIndex = 6
+Top = 46
+Width = 264
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0PRI14
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] producto
+[PARENT] Tsmaintform1.PAGEFRAME1.Page3
+[START PROPERTIES]
+ControlSource = "st_producto.idproducto"
+FontBold = .T.
+ForeColor = 0,0,128
+Height = 22
+Left = 131
+Name = "producto"
+TabIndex = 2
+Top = 22
+Width = 168
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0PRI19
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.PAGEFRAME1.Page3
+[START PROPERTIES]
+Caption = "Producto"
+Height = 24
+Left = 47
+Name = "Tslabel1"
+TabIndex = 1
+Top = 22
+Width = 72
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0PRI1B
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.PAGEFRAME1.Page3
+[START PROPERTIES]
+Caption = "Descripción"
+Height = 24
+Left = 47
+Name = "Tslabel3"
+TabIndex = 5
+Top = 46
+Width = 72
+ZOrderSet = 15
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0PRI1D
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.PAGEFRAME1.Page3
+[START PROPERTIES]
+Caption = "Unidad de Medida"
+Height = 24
+Left = 11
+Name = "Tslabel4"
+TabIndex = 7
+Top = 70
+Width = 108
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0GX0PRI1F
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Unidad
+[PARENT] Tsmaintform1.PAGEFRAME1.Page3
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "st_producto.unidad"
+FirstElement = 1
+Height = 22
+Left = 131
+Name = "Unidad"
+NumberOfElements = 0
+RowSource = "st_unidad.descripción,unidad"
+RowSourceType = 6
+Style = 2
+TabIndex = 8
+Top = 70
+Width = 84
+ZOrderSet = 36
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

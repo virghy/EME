@@ -1,0 +1,1292 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3P
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 220
+Left = 1
+Width = 520
+Height = 200
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OK119J59
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 150
+Height = 90
+Width = 90
+Alias = "vasientos"
+BufferModeOverride = 5
+Database = ..\data\datos.dbc
+CursorSource = "cnt_asientos"
+NoDataOnLoad = .T.
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OK119J5B
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 290
+Height = 90
+Width = 90
+Alias = "vdetalle"
+BufferModeOverride = 5
+Database = ..\data\datos.dbc
+CursorSource = "cnt_detalle"
+ReadOnly = .F.
+NoDataOnLoad = .T.
+Name = "Cursor3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3R
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+DataSession = 2
+Height = 397
+Width = 548
+DoCreate = .T.
+Caption = "Proceso de Cierre de Ejercicio"
+ctoolbar = 
+editmode = .T.
+camponro = número,cn_Asientos,idempresa = ?oApp.Empresa and ejercicio = ?oApp.Ejercicio
+tabla1 = vAsientos
+tabla2 = vDetalle
+Name = "Tsbaseform12"
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+THISFORM.PAGEFRAME1.TABS = .F.
+ENDPROC
+PROCEDURE balanceo
+LOCAL LLERROR, LCRESP
+THIS.LOCKSCREEN = .T.
+SELECT COUNT(TIPO) AS CANTIDAD FROM asientos_base WHERE IDEMPRESA=OAPP.EMPRESA AND EJERCICIO=OAPP.EJERCICIO AND TIPO='C' INTO CURSOR xcCerrado
+
+IF xcCerrado.CANTIDAD>0
+	LCRESP = MESSAGEBOX('Se ha encontrado un cierre anterior a este proceso.'+CHR(13)+'Desea eliminarlo antes de continuar?', 036, "Futura Software")
+	IF LCRESP=6
+		CMDSQL = "Delete from cn_asientos where idempresa = ?oApp.Empresa "+"and  ((ejercicio = ?oApp.ejercicio and tipo='C') "+"	 or (Ejercicio = ?oApp.Ejercicio + 1	and tipo = 'A'))"
+		IF SQL(CMDSQL)<0
+		
+			RETURN .T.
+		ELSE
+		**VG 24-01-08
+		**Volvemos a recuperar despues de eliminar los asientos de cierre y apertura
+		= SQL('Select * from cn_asientos where idEmpresa = ?oapp.Empresa and ejercicio=?oApp.Ejercicio', 'asientos_Base')
+		= SQL('Select * from cn_detalle where idEmpresa = ?oapp.Empresa and ejercicio=?oApp.Ejercicio', 'Detalle_Base')
+			RETURN .F.
+		ENDIF
+	ELSE
+		THIS.LOCKSCREEN = .F.
+		RETURN .T.
+	ENDIF
+ENDIF
+
+WITH THISFORM.PAGEFRAME1.PAGE2
+	.REFRESH()
+	.P1.FONTBOLD = .T.
+	THIS.LOCKSCREEN = .F.
+	WAIT WINDOW TIMEOUT 1 ''
+	IF  .NOT. LLERROR
+		SELECT asientos_base.NÚMERO AS NÚMERO, asientos_base.FECHA, asientos_base.DESCRIPCIÓN,;
+		SUM(DETALLE_BASE.DEBE) AS TOTAL_DEBE, SUM(DETALLE_BASE.HABER) AS TOTAL_HABER, asientos_base.IDEMPRESA;
+		FROM asientos_base INNER JOIN DETALLE_BASE ;
+		ON asientos_base.IDEMPRESA=DETALLE_BASE.IDEMPRESA ;
+		WHERE asientos_base.IDASIENTO=DETALLE_BASE.IDASIENTO ;
+		AND (asientos_base.IDEMPRESA=OAPP.EMPRESA AND asientos_base.EJERCICIO=OAPP.EJERCICIO AND DETALLE_BASE.CUENTA<>SPACE(5)) ;
+		GROUP BY 1,2,3,6 HAVING TOTAL_DEBE<>TOTAL_HABER INTO CURSOR cn_cAsientos
+		LLERROR = RECCOUNT('cn_cAsientos')<>0
+		THISFORM.PAGEFRAME1.PAGE3.GRDCN_CASIENTOS.RECORDSOURCETYPE = 1
+		THISFORM.PAGEFRAME1.PAGE3.GRDCN_CASIENTOS.RECORDSOURCE = 'cn_cAsientos'
+	ENDIF
+	IF  .NOT. LLERROR
+		.P1.FORECOLOR = RGB(0, 128, 0)
+	ELSE
+		.P1.FORECOLOR = RGB(255, 0, 0)
+	ENDIF
+ENDWITH
+RETURN LLERROR
+ENDPROC
+PROCEDURE procesarcierre
+LOCAL LERROR
+
+
+
+= SQL('Select * from cn_asientos where idEmpresa = ?oapp.Empresa and ejercicio=?oApp.Ejercicio', 'asientos_Base')
+= SQL('Select * from cn_detalle where idEmpresa = ?oapp.Empresa and ejercicio=?oApp.Ejercicio', 'Detalle_Base')
+= SQL('Select * from cn_cuentas where idEmpresa = ?oapp.Empresa and Ejercicio = ?oApp.Ejercicio', 'cuentas_Base')
+= SQL('Select * from empresa where idEmpresa = ?oapp.Empresa ', 'Empresa')
+
+LERROR = THIS.BALANCEO()
+
+SET ENGINEBEHAVIOR 70
+IF LERROR
+	THISFORM.PAGEFRAME1.PAGE3.SETFOCUS()
+	THISFORM.PAGEFRAME1.ACTIVEPAGE = 3
+	RETURN
+ENDIF
+LOCAL XDECIMALES, VPERÍODO, VFECHAI, VFECHAF, VSUCURSAL, LNRESULTADO
+LOCAL PAGINAI, PAGINAF
+XDECIMALES = 0
+XEMPRESA = OAPP.EMPRESA
+m.DFECHA = THISFORM.PAGEFRAME1.PAGE1.DFECHA.VALUE
+m.HFECHA = THISFORM.PAGEFRAME1.PAGE1.HFECHA.VALUE
+VDESCRIPCIÓN = LEFT(THISFORM.PAGEFRAME1.PAGE1.DESCRIPCION.VALUE+SPACE(60), 60)
+m.FECHA = THISFORM.PAGEFRAME1.PAGE1.FECHA.VALUE
+m.SUCURSAL = THISFORM.PAGEFRAME1.PAGE1.SUCURSAL.VALUE
+VDESCRIPCIÓNAP = LEFT(THISFORM.PAGEFRAME1.PAGE1.DESCRIPCIONAP.VALUE+SPACE(60), 60)
+m.FECHAAP = THISFORM.PAGEFRAME1.PAGE1.FECHAAP.VALUE
+m.SUCURSALAP = THISFORM.PAGEFRAME1.PAGE1.SUCURSALAP.VALUE
+THISFORM.PAGEFRAME1.PAGE2.P2.FONTBOLD = .T.
+WAIT WINDOW TIMEOUT 0.5 ''
+SELECT D.CUENTA, SUM(D.DEBE-D.HABER) AS SALDO FROM asientos_base A, detalle_base D, cuentas_base C WHERE BETWEEN(A.FECHA, M.DFECHA, M.HFECHA) AND A.IDASIENTO=D.IDASIENTO AND D.CUENTA=C.CUENTA AND A.EJERCICIO=OAPP.EJERCICIO AND A.IDEMPRESA=OAPP.EMPRESA AND C.IDEMPRESA=OAPP.EMPRESA AND LEFT(D.CUENTA, 1)='1' INTO CURSOR xactivo NOFILTER
+SELECT D.CUENTA, SUM(D.DEBE-D.HABER) AS SALDO FROM asientos_base A, detalle_base D, cuentas_base C WHERE BETWEEN(A.FECHA, M.DFECHA, M.HFECHA) AND A.IDASIENTO=D.IDASIENTO AND D.CUENTA=C.CUENTA AND A.EJERCICIO=OAPP.EJERCICIO AND A.IDEMPRESA=OAPP.EMPRESA AND C.IDEMPRESA=OAPP.EMPRESA AND (LEFT(D.CUENTA, 1)='2' OR LEFT(D.CUENTA, 1)='3') INTO CURSOR xpasivo NOFILTER
+LNRESULTADO = xactivo.SALDO+xpasivo.SALDO
+IF LNRESULTADO<>0
+	LERROR = EMPTY(LEERPARAM('resultado', 'empresa', 'idempresa=?oApp.Empresa'))
+ENDIF
+IF LERROR
+	THISFORM.PAGEFRAME1.PAGE2.P2.FORECOLOR = RGB(255, 0, 0)
+	THISFORM.PAGEFRAME1.PAGE2.P2.CAPTION = "Debe indicar la cuenta de resultado de la Empresa"
+	RETURN
+ELSE
+	THISFORM.PAGEFRAME1.PAGE2.P2.FORECOLOR = RGB(0, 128, 0)
+	THISFORM.PAGEFRAME1.PAGE2.P3.FONTBOLD = .T.
+ENDIF
+WAIT WINDOW TIMEOUT 0.5 ''
+
+SELECT LEFT(D.CUENTA, 1) AS XNIVEL, D.CUENTA, D.CENTRO, ;
+SUM(D.DEBE-D.HABER) AS SALDO, C.DESCRIPCIÓN, XDECIMALES AS DEC, "Cierre Preliminar" AS TITULO ;
+FROM asientos_base A, detalle_base D, cuentas_base C ;
+WHERE BETWEEN(A.FECHA, M.DFECHA, M.HFECHA) AND A.IDASIENTO=D.IDASIENTO ;
+AND D.CUENTA=C.CUENTA AND A.EJERCICIO=OAPP.EJERCICIO AND A.IDEMPRESA=OAPP.EMPRESA ;
+AND C.IDEMPRESA=OAPP.EMPRESA GROUP BY 2, 3 ORDER BY 1 DESC ;
+INTO CURSOR xsaldo NOFILTER
+
+
+SELECT xsaldo
+VRESULTADO = 0
+VPERGANANCIA = 0
+SET CONSOLE OFF
+SUM (SALDO) TO VRESULTADO FOR LEFT(CUENTA, 1)<"3"
+SUM (SALDO) TO VPERGANANCIA FOR LEFT(CUENTA, 1)>="3"
+THISFORM.PAGEFRAME1.PAGE2.P3.FORECOLOR = RGB(0, 128, 0)
+THISFORM.PAGEFRAME1.PAGE2.P4.FONTBOLD = .T.
+WAIT WINDOW TIMEOUT 1 ''
+SET CONSOLE ON
+VNÚMERO = THISFORM.ULTIMONRO
+
+IF VPERGANANCIA<>0
+	SELECT IIF(LEFT(CUENTA, 1)>"3", VNÚMERO, VNÚMERO+1) AS NÚMERO, IIF(SALDO<0, "1", "2") AS TIPO, CUENTA, CENTRO, DESCRIPCIÓN, IIF(SALDO>0, $0.0000, ABS(SALDO)) AS HABER, IIF(SALDO<0, $0.0000, ABS(SALDO)) AS DEBE, XDECIMALES AS DEC, M.FECHA AS FECHA, VDESCRIPCIÓN AS NOTA, M.SUCURSAL AS SUCURSAL, XEMPRESA AS EMPRESA, "Cierre Preliminar" AS TITULO FROM xsaldo WHERE SALDO<>0 UNION ALL SELECT VNÚMERO AS NÚMERO, IIF(LNRESULTADO<0, "1", "2") AS TIPO, EMPRESA.RESULTADO AS CUENTA, SPACE(5) AS CENTRO, IIF(ISNULL(cuentas_base.DESCRIPCIÓN), SPACE(60), cuentas_base.DESCRIPCIÓN) AS DESCRIPCIÓN, IIF(LNRESULTADO<0, LNRESULTADO*-1, $0.0000) AS DEBE, IIF(LNRESULTADO>0, LNRESULTADO, $0.0000) AS HABER, XDECIMALES AS DEC, M.FECHA AS FECHA, VDESCRIPCIÓN AS NOTA, M.SUCURSAL AS SUCURSAL, XEMPRESA AS EMPRESA, "Cierre Preliminar" AS TITULO FROM EMPRESA, cuentas_base WHERE LNRESULTADO<>0 AND EMPRESA.RESULTADO=cuentas_base.CUENTA AND cuentas_base.IDEMPRESA=OAPP.EMPRESA AND EMPRESA.IDEMPRESA=OAPP.EMPRESA UNION ALL SELECT VNÚMERO+1 AS 
+NÚMERO, IIF(LNRESULTADO>0, "1", "2") AS TIPO, EMPRESA.RESULTADO AS CUENTA, SPACE(5) AS CENTRO, IIF(ISNULL(cuentas_base.DESCRIPCIÓN), SPACE(60), cuentas_base.DESCRIPCIÓN) AS DESCRIPCIÓN, IIF(LNRESULTADO<0, $0.0000, LNRESULTADO) AS DEBE, IIF(LNRESULTADO>0, $0.0000, LNRESULTADO*-1) AS HABER, XDECIMALES AS DEC, M.FECHA AS FECHA, VDESCRIPCIÓN AS NOTA, M.SUCURSAL AS SUCURSAL, XEMPRESA AS EMPRESA, "Cierre Preliminar" AS TITULO FROM EMPRESA, cuentas_base WHERE LNRESULTADO<>0 AND EMPRESA.RESULTADO=cuentas_base.CUENTA AND cuentas_base.IDEMPRESA=OAPP.EMPRESA AND EMPRESA.IDEMPRESA=OAPP.EMPRESA UNION ALL SELECT VNÚMERO+1 AS NÚMERO, IIF(VPERGANANCIA<0, "2", "1") AS TIPO, PÉRDIDA AS CUENTA, SPACE(5) AS CENTRO, IIF(ISNULL(DESCRIPCIÓN), SPACE(60), DESCRIPCIÓN) AS DESCRIPCIÓN, $0.0000 AS DEBE, ABS(VPERGANANCIA) AS HABER, XDECIMALES AS DEC, M.FECHA AS FECHA, VDESCRIPCIÓN AS NOTA, M.SUCURSAL AS SUCURSAL, XEMPRESA AS EMPRESA, "Cierre Preliminar" AS TITULO FROM EMPRESA LEFT JOIN cuentas_base ON EMPRESA.PÉRDIDA=CUENTAS_BASE.CUENTA 
+WHERE VPERGANANCIA<0 AND CUENTAS_BASE.IDEMPRESA=OAPP.EMPRESA AND EMPRESA.EMPRESA=OAPP.EMPRESA ORDER BY 1, 2, 3 INTO CURSOR xasientoscierre
+ELSE
+	SELECT IIF(LEFT(CUENTA, 1)<"3", VNÚMERO, VNÚMERO+1) AS NÚMERO, IIF(SALDO<0, "2", "1") AS TIPO, CUENTA, CENTRO, DESCRIPCIÓN, IIF(SALDO>0, $0.0000, ABS(SALDO)) AS DEBE, IIF(SALDO<0, $0.0000, ABS(SALDO)) AS HABER, DEC, M.FECHA AS FECHA, VDESCRIPCIÓN AS NOTA, M.SUCURSAL AS SUCURSAL, XEMPRESA AS EMPRESA, TITULO FROM xsaldo WHERE SALDO<>0 ORDER BY 1, 2 DESC, 3 INTO CURSOR xasientoscierre
+ENDIF
+
+WAIT WINDOW TIMEOUT 1 ''
+THISFORM.PAGEFRAME1.PAGE2.P4.FORECOLOR = RGB(0, 128, 0)
+THISFORM.PAGEFRAME1.PAGE2.P5.FONTBOLD = .T.
+THISFORM.TAG = THISFORM.CAMPONRO
+THIS.CAMPONRO = "número,cn_Asientos,idempresa = ?oApp.Empresa and ejercicio = ?oApp.Ejercicio + 1"
+VNÚMEROAP = THISFORM.ULTIMONRO
+THIS.CAMPONRO = THIS.TAG
+SELECT VNÚMEROAP AS NÚMERO, IIF(DEBE>HABER, '2', '1') AS TIPO, CUENTA, CENTRO, DESCRIPCIÓN, HABER AS HABER, DEBE AS DEBE, DEC, M.FECHAAP AS FECHA, VDESCRIPCIÓNAP AS NOTA, M.SUCURSALAP AS SUCURSAL, XEMPRESA AS EMPRESA, "Cierre Preliminar" AS TITULO FROM xasientoscierre WHERE NÚMERO=VNÚMERO+1 ORDER BY 1, 2 DESC, 3 INTO CURSOR xasientosApertura
+SELECT XASIENTOSCIERRE.*, 'C' AS TIPOASIENTO, OAPP.EJERCICIO AS EJERCICIO FROM xasientoscierre UNION ALL SELECT XASIENTOSAPERTURA.*, 'A' AS TIPOASIENTO, OAPP.EJERCICIO+1 AS EJERCICIO FROM xAsientosApertura ORDER BY 1, 2, 3 INTO CURSOR xasientos
+
+THISFORM.PAGEFRAME1.PAGE2.P5.FORECOLOR = RGB(0, 128, 0)
+WAIT WINDOW TIMEOUT 1 ''
+
+REPORT FORM CN_cierre TO printer PROMPT  PREVIEW
+
+SELECT XASIENTOS
+LNANSWER = MESSAGEBOX("Desea confirmar el Cierre del Ejercicio?", 036, "Futura Software")
+
+IF LNANSWER<>6
+	RETURN
+ENDIF
+GOTO TOP
+
+SELECT * FROM xAsientos GROUP BY NÚMERO INTO CURSOR xcCabecera
+SELECT XCCABECERA
+SCAN
+	SELECT VASIENTOS
+	APPEND BLANK
+	REPLACE IDEMPRESA WITH OAPP.EMPRESA, IDASIENTO WITH NEWID('CNT_ASIENTOS'), NÚMERO WITH XCCABECERA.NÚMERO, EJERCICIO WITH XCCABECERA.EJERCICIO, SUCURSAL WITH XCCABECERA.SUCURSAL, FECHA WITH XCCABECERA.FECHA, TIPO WITH XCCABECERA.TIPOASIENTO, DESCRIPCIÓN WITH XCCABECERA.NOTA
+	SELECT XASIENTOS
+
+	SCAN FOR XASIENTOS.NÚMERO=XCCABECERA.NÚMERO
+		SELECT VDETALLE
+		APPEND BLANK
+		REPLACE IDEMPRESA WITH OAPP.EMPRESA, IDASIENTO WITH VASIENTOS.IDASIENTO, EJERCICIO WITH VASIENTOS.EJERCICIO, CUENTA WITH XASIENTOS.CUENTA, DETALLE WITH VASIENTOS.DESCRIPCIÓN, DEBE WITH XASIENTOS.DEBE, HABER WITH XASIENTOS.HABER, CENTRO WITH XASIENTOS.CENTRO
+		SELECT XASIENTOS
+	ENDSCAN
+
+ENDSCAN
+
+IF  .NOT. THIS.SAVE()
+	RETURN
+ENDIF
+SET ENGINEBEHAVIOR 90
+MESSAGEBOX('Proceso Finalizado con éxito.', 64, "Futura Software")
+
+THISFORM.RELEASE()
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*procesarcierre 
+*balanceo 
+*saldocr 
+*saldocp 
+*cerrar 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3T
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] Pageframe1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ErasePage = .T.
+PageCount = 5
+Top = 0
+Left = 7
+Width = 533
+Height = 348
+Tabs = .T.
+Name = "Pageframe1"
+Page1.Caption = "Page1"
+Page1.Name = "Page1"
+Page2.Caption = "Page2"
+Page2.Name = "Page2"
+Page3.Caption = "Page3"
+Page3.Name = "Page3"
+Page4.Caption = "Page4"
+Page4.Name = "Page4"
+Page5.Caption = "Page5"
+Page5.Name = "Page5"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Page1.Activate
+WITH THIS.PARENT.PAGE2
+.P1.FONTBOLD = .F.
+.P1.FORECOLOR = RGB(0, 0, 0)
+.P2.FONTBOLD = .F.
+.P2.FORECOLOR = RGB(0, 0, 0)
+.P3.FONTBOLD = .F.
+.P3.FORECOLOR = RGB(0, 0, 0)
+.P4.FONTBOLD = .F.
+.P4.FORECOLOR = RGB(0, 0, 0)
+ENDWITH
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3W
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 17
+Left = 11
+Height = 39
+Width = 509
+Name = "Ts3dshape1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3Y
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 64
+Left = 11
+Height = 76
+Width = 509
+Name = "Ts3dshape2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV40
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+FontBold = .F.
+WordWrap = .T.
+Alignment = 0
+Caption = "Haga copias de sus datos antes de continuar con el proceso de cierre del ejercicio. "
+Height = 15
+Left = 28
+Top = 29
+Width = 480
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV42
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Desde:"
+Height = 22
+Left = 40
+Top = 80
+Width = 48
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV44
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Hasta:"
+Height = 22
+Left = 40
+Top = 104
+Width = 48
+Name = "Tslabel4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3P
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Periodo a cerrar"
+Height = 22
+Left = 39
+Top = 58
+Width = 92
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV48
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] dfecha
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Value = (oApp.InicioEjercicio)
+Enabled = .F.
+Left = 112
+Top = 80
+editable = .F.
+Name = "dfecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV4B
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] hfecha
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Value = (date(oApp.Ejercicio,12,30))
+Enabled = .T.
+Left = 112
+Top = 104
+editable = .T.
+Name = "hfecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3P
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape3
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 151
+Left = 11
+Height = 73
+Width = 509
+Name = "Ts3dshape3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH11SG8F
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Fecha:"
+Height = 22
+Left = 40
+Top = 164
+Width = 48
+Name = "Tslabel5"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OK119J59
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Descripción:"
+Height = 22
+Left = 39
+Top = 188
+Width = 72
+Name = "Tslabel6"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OK119J5B
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Asiento de Cierre"
+Height = 22
+Left = 39
+Top = 145
+Width = 97
+Name = "Tslabel7"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3R
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] descripcion
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Value = ('Cierre del Ejercicio '+ alltrim(Str(oApp.Ejercicio)))
+Height = 22
+Left = 112
+MaxLength = 60
+Top = 188
+Width = 360
+Name = "descripcion"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3T
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] fecha
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Value = (date(oApp.Ejercicio,12,31))
+Enabled = .T.
+Left = 112
+Top = 165
+editable = .T.
+Name = "fecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3W
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSucursal
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Sucursal"
+Height = 16
+Left = 220
+Top = 164
+Width = 50
+TabIndex = 6
+Name = "lblSucursal"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH1156DA
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Atención"
+Height = 22
+Left = 40
+Top = 10
+Width = 54
+Name = "Tslabel8"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OR0Z2BIQ
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape4
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Top = 234
+Left = 11
+Height = 74
+Width = 508
+Name = "Ts3dshape4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OR0Z2BIS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Fecha:"
+Height = 22
+Left = 40
+Top = 247
+Width = 48
+Name = "Tslabel9"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OR0Z2BIT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel10
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Descripción:"
+Height = 22
+Left = 39
+Top = 272
+Width = 72
+Name = "Tslabel10"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OR0Z2BIY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel11
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Asiento de Apertura"
+Height = 22
+Left = 39
+Top = 228
+Width = 121
+Name = "Tslabel11"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OR0Z2BIZ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Descripcionap
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Value = ('Apertura del Ejercicio '+ alltrim(Str(oApp.Ejercicio + 1)))
+Height = 22
+Left = 112
+MaxLength = 60
+Top = 272
+Width = 360
+Name = "Descripcionap"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OR0Z2BJ2
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] fechaap
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Value = (date(oApp.Ejercicio+1 ,1,2))
+Enabled = .T.
+Left = 112
+Top = 248
+editable = .T.
+Name = "fechaap"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OR0Z2BJ4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel12
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Sucursal"
+Height = 16
+Left = 220
+Top = 248
+Width = 50
+TabIndex = 6
+Name = "Tslabel12"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XH0Y02UC
+[CLASS] cbosucursal
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Sucursal
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Left = 293
+Top = 164
+Name = "Sucursal"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0XH0Y02UD
+[CLASS] cbosucursal
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] SucursalAp
+[PARENT] Tsbaseform12.Pageframe1.Page1
+[START PROPERTIES]
+Left = 294
+Top = 247
+cursor = xcSucursalAp
+Name = "SucursalAp"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3P
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] P1
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+FontBold = .F.
+Alignment = 0
+Caption = "Verificando Balanceo de Asientos"
+Height = 22
+Left = 40
+Top = 60
+Width = 312
+BackColor = 0,128,0
+Name = "P1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH1156DE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] P2
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+FontBold = .F.
+Alignment = 0
+Caption = "Calculando Saldos de Cuentas de Resultado"
+Height = 22
+Left = 40
+Top = 84
+Width = 312
+Name = "P2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH1156DG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] P3
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+FontBold = .F.
+Alignment = 0
+Caption = "Calculando Saldos de Cuentas Patrimoniales"
+Height = 22
+Left = 40
+Top = 108
+Width = 312
+Name = "P3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3P
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] P4
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+FontBold = .F.
+Alignment = 0
+Caption = "Generando asientos de cierre"
+Height = 22
+Left = 40
+Top = 132
+Width = 312
+Name = "P4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0XRJS7
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+FontBold = .T.
+Alignment = 0
+Caption = "Procesos"
+Height = 22
+Left = 6
+Top = 9
+Width = 192
+ForeColor = 0,0,128
+BackColor = 0,128,0
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0XRJSA
+[CLASS] line
+[BASECLASS] line
+[OBJNAME] Line1
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+BorderWidth = 2
+Height = 0
+Left = 6
+Top = 26
+Width = 522
+BorderColor = 0,0,128
+Name = "Line1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OR0XI2H7
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] p5
+[PARENT] Tsbaseform12.Pageframe1.Page2
+[START PROPERTIES]
+FontBold = .F.
+Alignment = 0
+Caption = "Generando asientos de apertura"
+Height = 22
+Left = 40
+Top = 155
+Width = 312
+Name = "p5"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO28J
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdCn_casientos
+[PARENT] Tsbaseform12.Pageframe1.Page3
+[START PROPERTIES]
+ColumnCount = 5
+FontSize = 8
+GridLines = 2
+Height = 271
+Left = 4
+Panel = 1
+ReadOnly = .T.
+RecordSource = ""
+RecordSourceType = 1
+RowHeight = 20
+ScrollBars = 2
+Top = 42
+Width = 525
+Name = "grdCn_casientos"
+Column1.FontSize = 8
+Column1.ControlSource = ""
+Column1.Width = 45
+Column1.ReadOnly = .T.
+Column1.InputMask = "99,999"
+Column1.Name = "Column2"
+Column2.FontSize = 8
+Column2.ControlSource = ""
+Column2.Width = 66
+Column2.ReadOnly = .T.
+Column2.Name = "Column3"
+Column3.FontSize = 8
+Column3.ControlSource = ""
+Column3.Width = 194
+Column3.ReadOnly = .T.
+Column3.Name = "Column4"
+Column4.FontSize = 8
+Column4.ControlSource = ""
+Column4.Width = 99
+Column4.ReadOnly = .T.
+Column4.InputMask = "999,999,999.99"
+Column4.Name = "Column5"
+Column5.FontSize = 8
+Column5.ControlSource = ""
+Column5.Width = 97
+Column5.ReadOnly = .T.
+Column5.InputMask = "999,999,999.99"
+Column5.Name = "Column6"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO28S
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page3.grdCn_casientos.Column2
+[START PROPERTIES]
+FontSize = 8
+Caption = "Asiento"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO28T
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page3.grdCn_casientos.Column2
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO28V
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page3.grdCn_casientos.Column3
+[START PROPERTIES]
+FontSize = 8
+Caption = "Fecha"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO28W
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page3.grdCn_casientos.Column3
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO28X
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page3.grdCn_casientos.Column4
+[START PROPERTIES]
+FontSize = 8
+Caption = "Descripción"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO28Y
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page3.grdCn_casientos.Column4
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO290
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page3.grdCn_casientos.Column5
+[START PROPERTIES]
+FontSize = 8
+Caption = "Total Debe"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO291
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page3.grdCn_casientos.Column5
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO292
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Pageframe1.Page3.grdCn_casientos.Column6
+[START PROPERTIES]
+FontSize = 8
+Caption = "Total Haber"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OI0WO293
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Pageframe1.Page3.grdCn_casientos.Column6
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3P
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] P1
+[PARENT] Tsbaseform12.Pageframe1.Page3
+[START PROPERTIES]
+FontBold = .T.
+Alignment = 0
+Caption = "Asientos no balanceados"
+Height = 22
+Left = 6
+Top = 9
+Width = 192
+ForeColor = 0,0,128
+BackColor = 0,128,0
+Name = "P1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH11SG8F
+[CLASS] line
+[BASECLASS] line
+[OBJNAME] Line1
+[PARENT] Tsbaseform12.Pageframe1.Page3
+[START PROPERTIES]
+BorderWidth = 2
+Height = 0
+Left = 6
+Top = 26
+Width = 518
+BorderColor = 0,0,128
+Name = "Line1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3P
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Siguiente
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 360
+Left = 379
+Height = 24
+Width = 76
+FontBold = .F.
+Caption = "Siguiente "
+Name = "Siguiente"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+WITH THISFORM.PAGEFRAME1
+DO CASE
+CASE .ACTIVEPAGE=1
+.ACTIVEPAGE = 2
+.PAGE2.SETFOCUS()
+THISFORM.ANTERIOR.ENABLED = .T.
+THISFORM.PROCESARCIERRE()
+ENDCASE
+ENDWITH
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH1156DN
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Anterior
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 360
+Left = 295
+Height = 24
+Width = 76
+FontBold = .F.
+Caption = "Anterior"
+Enabled = .F.
+Name = "Anterior"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+WITH THISFORM.PAGEFRAME1
+DO CASE
+CASE .ACTIVEPAGE=2
+.ACTIVEPAGE = 1
+THIS.ENABLED = .F.
+CASE .ACTIVEPAGE=3
+.ACTIVEPAGE = 2
+THIS.ENABLED = .T.
+ENDCASE
+ENDWITH
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH1156DP
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Cancelar
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 360
+Left = 463
+Height = 24
+Width = 76
+FontBold = .F.
+Caption = "Cancelar"
+Name = "Cancelar"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.RELEASE()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH10DV3P
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+FontBold = .F.
+FontName = "Webdings"
+FontSize = 12
+Alignment = 0
+Caption = "3"
+Height = 22
+Left = 297
+Top = 362
+Width = 12
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OH1156DV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+FontBold = .F.
+FontName = "Webdings"
+FontSize = 12
+Alignment = 0
+Caption = "4"
+Height = 22
+Left = 439
+Top = 362
+Width = 12
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[START RESERVED1]
+  ..\include\tastrade.háõv†5@ ..\..\..\archivos de programa\microsoft visual foxpro 9\foxpro.hâš‰1 ..\include\strings.h&ãõv†5[END RESERVED1]
+[EOF]

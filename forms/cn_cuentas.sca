@@ -1,0 +1,978 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0LWF30
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 61
+Left = 80
+Width = 520
+Height = 276
+InitialSelectedAlias = "cuentas"
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X10LEO94
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 41
+Left = 13
+Height = 90
+Width = 140
+Alias = "cdetalle_cuenta"
+BufferModeOverride = 5
+Database = ..\data\datos.dbc
+CursorSource = "cnt_cDetalleCuenta"
+NoDataOnLoad = .T.
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0LWF32
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Height = 412
+Width = 669
+DoCreate = .T.
+BorderStyle = 1
+Caption = "Plan de Cuentas"
+WindowState = 0
+tabla1 = cCuentas
+detalle = .F.
+grupoimpresion = Cuentas
+campos = idEmpresa
+valores = oApp.Empresa
+navegador = .F.
+Name = "Tsmaintform1"
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.PageCount = 3
+Pageframe1.TabStretch = 1
+Pageframe1.Page1.PageOrder = 1
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page3.grdList.Name = "grdList"
+Pageframe1.Page3.PageOrder = 3
+Pageframe1.Page3.Name = "Page3"
+Pageframe1.Page3.FontSize = 8
+Pageframe1.Page3.Caption = "\<Movimientos"
+Pageframe1.Page3.PageOrder = 2
+Pageframe1.Page3.Name = "Page4"
+Pageframe1.TabStyle = 0
+Pageframe1.ActivePage = 1
+Pageframe1.Top = 0
+Pageframe1.Left = -2
+Pageframe1.Width = 674
+Pageframe1.Height = 416
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+THIS.CARGARARBOL()
+DODEFAULT()
+SET CLASSLIB TO futura ADDITIVE
+ENDPROC
+PROCEDURE Pageframe1.Page3.Activate
+***
+ENDPROC
+PROCEDURE Pageframe1.Page3.Refresh
+****
+ENDPROC
+PROCEDURE Pageframe1.Page4.Activate
+M.CUENTA = THISFORM.KEY
+REQUERY("cdetalle_cuenta")
+THIS.REFRESH()
+ENDPROC
+PROCEDURE Release
+O = THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA
+O = .NULL.
+ENDPROC
+PROCEDURE addnew
+O = THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA
+IF ISNULL(O.SELECTEDITEM)
+MESSAGEBOX('Seleccione una Cuenta al cual quiere agregar la sub-cuenta.', 48, "Futura Software")
+RETURN
+ENDIF
+IF AT('A=S', O.SELECTEDITEM.TAG)>0
+MESSAGEBOX('No puede agregar sub-cuentas a cuentas asentables.', 48, "Futura Software")
+RETURN
+ENDIF
+INSERT INTO cCuentas (IDEMPRESA, EJERCICIO, CUENTA, INTEGRADORA, NIVEL) VALUES (OAPP.EMPRESA, OAPP.EJERCICIO, STRTRAN(THISFORM.NEWKEY(), '_', ''), STRTRAN(O.SELECTEDITEM.KEY, '_', ''), VAL(SUBSTR(O.SELECTEDITEM.TAG, AT('|N=', O.SELECTEDITEM.TAG)+3, 1))+1)
+O.SELECTEDITEM = O.NODES.ADD(O.SELECTEDITEM.KEY, 4, THISFORM.NEWKEY(), "Nueva Cuenta", 0)
+THISFORM.EDITAR('N')
+ENDPROC
+PROCEDURE cargararbol
+LOCAL O, ONODO
+IF TYPE("ThisForm.Pageframe1.page1.ArbolCuenta")<>"O" .OR. ISNULL(THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA)
+RETURN .F.
+ENDIF
+IF TYPE("ThisForm.Pageframe1.page1.oleImagesList")<>"O" .OR. ISNULL(THISFORM.PAGEFRAME1.PAGE1.OLEIMAGESLIST)
+RETURN .F.
+ENDIF
+THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA.DOVERB(-1)
+THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA.IMAGELIST = THISFORM.PAGEFRAME1.PAGE1.OLEIMAGESLIST
+O = THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA.NODES
+O.CLEAR
+LCALIAS = ALIAS()
+= SQL('select * from cn_cuentas where idempresa = ?oApp.Empresa and Ejercicio = ?oApp.Ejercicio order by nivel,cuenta', 'cCuentas')
+WAIT WINDOW AT 15, 35 NOCLEAR NOWAIT "::                 Un momento por favor           ::"+CHR(13)+":: Cargando la estructura de las Cuentas Contable ::"
+IF RECCOUNT('cCuentas')>0
+SELECT CCUENTAS
+SCAN
+IF EMPTY(ALLTRIM(INTEGRADORA))
+ONODO = O.ADD( , 1, ALLTRIM(CUENTA)+"_", ALLTRIM(CUENTA)+' - '+DESCRIPCIÓN, 1, 2)
+ELSE
+IF ASENTABLE
+ONODO = O.ADD(ALLTRIM(INTEGRADORA)+"_", 4, ALLTRIM(CUENTA)+"_", ALLTRIM(CUENTA)+' - '+SUBSTR(DESCRIPCIÓN, 1, 40), 3, 3)
+ELSE
+ONODO = O.ADD(ALLTRIM(INTEGRADORA)+"_", 4, ALLTRIM(CUENTA)+"_", ALLTRIM(CUENTA)+' - '+SUBSTR(DESCRIPCIÓN, 1, 40), 1, 2)
+ENDIF
+ENDIF
+ONODO.TAG = 'E='+IDEMPRESA
+ONODO.TAG = ONODO.TAG+'|EJ='+ALLTRIM(STR(EJERCICIO))
+ONODO.TAG = ONODO.TAG+'|A='+IIF(ASENTABLE, 'S', 'N')
+ONODO.TAG = ONODO.TAG+'|N='+ALLTRIM(STR(NIVEL))
+ONODO.TAG = ONODO.TAG+'|B='+ALLTRIM(IIF(ISNULL(ABREVIATURA), '', ABREVIATURA))
+ENDSCAN
+ELSE
+LN_OPC = MESSAGEBOX("No existe ningun plan de cuenta definido para el periodo actual"+CHR(13)+"Desea agregar un Plan de Cuenta Base?", 068, "Atención")
+IF LN_OPC=6
+OAPP.DOFORM("cn_cuentasModelo")
+THISFORM.CARGARARBOL()
+ENDIF
+ENDIF
+WAIT CLEAR
+THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA.FONT.SIZE = 8
+THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA.LABELEDIT = 1
+THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA.LINESTYLE = 1
+THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA.SORTED = .F.
+O = .NULL.
+ENDPROC
+PROCEDURE delete
+LOCAL O
+O = THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA
+IF  .NOT. ISNULL(O.SELECTEDITEM)
+IF AT('N=1', O.SELECTEDITEM.TAG)>0
+MESSAGEBOX('No puede eliminar las cuentas de este nivel.', 48, "Futura Software")
+RETURN
+ENDIF
+IF O.SELECTEDITEM.CHILDREN>0
+MESSAGEBOX('No puede eliminar Cuentas que contengan sub-cuentas.', 48, "Futura Software")
+RETURN
+ENDIF
+IF MESSAGEBOX("¿Realmente desea eliminar este registro?", 036, "Eliminar advertencia")=7
+RETURN .F.
+ENDIF
+SELECT CCUENTAS
+GOTO TOP
+LOCATE FOR CUENTA=STRTRAN(O.SELECTEDITEM.KEY, '_', '')
+IF FOUND()
+IF SQL('EXEC app_cn_Cuentas_Delete ?cCuentas.IdCuenta')>0
+O.NODES.REMOVE(O.SELECTEDITEM.KEY)
+ENDIF
+ENDIF
+ENDIF
+ENDPROC
+PROCEDURE editar
+PARAMETER LCACCION
+IF PCOUNT()=0
+LCACCION = 'E'
+ENDIF
+DODEFAULT()
+IF THISFORM.EDITMODE
+LOCAL FRM, LONODO
+LONODO = THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA
+FRM = CREATEOBJECT('cn_cuentas', @LONODO, THISFORM.DATASESSIONID, LCACCION)
+FRM.SHOW()
+RELEASE FRM
+DODEFAULT()
+ENDIF
+ENDPROC
+PROCEDURE newkey
+LOCAL O AS
+O = THISFORM.PAGEFRAME1.PAGE1.ARBOLCUENTA.SELECTEDITEM
+IF ISNULL(O.CHILD)
+LNLONGITUD = LEN(ALLTRIM(O.KEY))-1
+LCULTIMACUENTA = SUBSTR(O.KEY, 1, AT('00', O.KEY)-1)+'00'
+LCNUEVACUENTA = ALLTRIM(STR(VAL(LCULTIMACUENTA)+1))
+LCNUEVACUENTA = LCNUEVACUENTA+REPLICATE('0', LNLONGITUD-LEN(LCNUEVACUENTA))+'_'
+ELSE
+LCULTIMACUENTA = O.CHILD.LASTSIBLING.KEY
+LCULTIMACUENTA = STRTRAN(LCULTIMACUENTA, '_', '')
+LNLONGITUD = LEN(ALLTRIM(O.CHILD.LASTSIBLING.KEY))-1
+LCNUEVACUENTA = ALLTRIM(STR(VAL(LCULTIMACUENTA)+1))+'_'
+FOR I = LNLONGITUD TO 1 STEP -2
+A = SUBSTR(LCULTIMACUENTA, I-1, 2)
+IF VAL(A)=0
+LCNUEVACUENTA = ALLTRIM(STR(VAL(SUBSTR(LCULTIMACUENTA, 1, I-2))+1))
+ELSE
+EXIT
+ENDIF
+ENDFOR
+IF LNLONGITUD-LEN(LCNUEVACUENTA)>0
+LCNUEVACUENTA = LCNUEVACUENTA+REPLICATE('0', LNLONGITUD-LEN(LCNUEVACUENTA))+'_'
+ENDIF
+ENDIF
+RETURN LCNUEVACUENTA
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+key
+*cargararbol 
+*newkey 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YF1AWFIA
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Top = 382
+Left = 143
+Height = 22
+Width = 76
+FontBold = .F.
+Caption = "\<Expandir"
+Enabled = .F.
+Visible = .F.
+Name = "Tscommandbutton2"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.LOCKSCREEN = .T.
+WAIT WINDOW NOWAIT 'Expandiendo...'
+WITH THIS.PARENT.ARBOLCUENTA
+FOR I = 1 TO .NODES.COUNT
+.NODES(I).EXPANDED = .T.
+ENDFOR
+ENDWITH
+WAIT CLEAR
+THISFORM.LOCKSCREEN = .F.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0YF1AWFIB
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Top = 383
+Left = 251
+Height = 22
+Width = 76
+FontBold = .F.
+Caption = "\<Contraer"
+Enabled = .F.
+Visible = .F.
+Name = "Tscommandbutton3"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.LOCKSCREEN = .T.
+WITH THIS.PARENT.ARBOLCUENTA
+FOR I = 1 TO .NODES.COUNT
+.NODES(I).EXPANDED = .F.
+ENDFOR
+ENDWITH
+THISFORM.LOCKSCREEN = .F.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0LWF30
+[CLASS] label_boton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Label_boton1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "\<Expandir"
+Height = 18
+Left = 551
+Top = 370
+Width = 49
+Name = "Label_boton1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.LOCKSCREEN = .T.
+WAIT WINDOW NOWAIT 'Expandiendo...'
+WITH THIS.PARENT.ARBOLCUENTA
+FOR I = 1 TO .NODES.COUNT
+.NODES(I).EXPANDED = .T.
+ENDFOR
+ENDWITH
+WAIT CLEAR
+THISFORM.LOCKSCREEN = .F.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1C20PU6UG
+[CLASS] label_boton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Label_boton2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "\<Contraer"
+Height = 18
+Left = 611
+Top = 370
+Width = 50
+Name = "Label_boton2"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.LOCKSCREEN = .T.
+WITH THIS.PARENT.ARBOLCUENTA
+FOR I = 1 TO .NODES.COUNT
+.NODES(I).EXPANDED = .F.
+ENDFOR
+ENDWITH
+THISFORM.LOCKSCREEN = .F.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1C418QCUJ
+[CLASS] label_boton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Label_boton3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "E\<stablecer como Plan de Cuenta Modelo"
+Height = 18
+Left = 8
+Top = 371
+Width = 212
+Name = "Label_boton3"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.LOCKSCREEN = .T.
+OAPP.DOFORM("cn_ModelCuenAuto")
+THISFORM.LOCKSCREEN = .F.
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MU11H6KL
+[CLASS] olecontrol
+[BASECLASS] olecontrol
+[OBJNAME] oleImagesList
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Top = 8
+Left = 284
+Height = 37
+Width = 49
+Name = "oleImagesList"
+[END PROPERTIES]
+[BINSTART OLE]
+CHECKSUM=6697
+[BINEND OLE]
+[BINSTART OLE2]
+CHECKSUM=26800
+[BINEND OLE2]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1MU11H6KM
+[CLASS] olecontrol
+[BASECLASS] olecontrol
+[OBJNAME] ArbolCuenta
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Top = 10
+Left = 22
+Height = 348
+Width = 627
+TabIndex = 17
+Enabled = .T.
+Name = "ArbolCuenta"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE NodeClick
+LPARAMETERS NODE
+THISFORM.KEY = NODE.KEY
+ENDPROC
+[END METHODS]
+[BINSTART OLE]
+CHECKSUM=1842
+[BINEND OLE]
+[BINSTART OLE2]
+CHECKSUM=26800
+[BINEND OLE2]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO50N
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdMovimiento
+[PARENT] Tsmaintform1.Pageframe1.Page4
+[START PROPERTIES]
+ColumnCount = 7
+FontSize = 8
+Enabled = .T.
+Height = 312
+Left = 11
+Panel = 1
+ReadOnly = .T.
+RecordMark = .T.
+RecordSource = "cdetalle_cuenta"
+RecordSourceType = 1
+RowHeight = 22
+ScrollBars = 3
+TabIndex = 10
+Top = 22
+Width = 650
+BackColor = 238,234,219
+campo = 
+valor = 
+valorvariable = cCuentas.cuenta
+variablevista = m.cuenta
+cfieldtosum = debe,haber
+editable = .F.
+Name = "grdMovimiento"
+Column1.FontSize = 8
+Column1.ColumnOrder = 2
+Column1.ControlSource = "cdetalle_cuenta.número"
+Column1.Enabled = .T.
+Column1.Width = 58
+Column1.ReadOnly = .T.
+Column1.Visible = .T.
+Column1.InputMask = "99999"
+Column1.BackColor = 238,234,219
+Column1.Name = "Asiento"
+Column2.FontSize = 8
+Column2.ColumnOrder = 1
+Column2.ControlSource = "cdetalle_cuenta.fecha"
+Column2.Enabled = .T.
+Column2.Width = 64
+Column2.ReadOnly = .T.
+Column2.Visible = .T.
+Column2.BackColor = 238,234,219
+Column2.Name = "Fecha"
+Column3.FontSize = 8
+Column3.ControlSource = "cdetalle_cuenta.debe"
+Column3.Enabled = .T.
+Column3.Width = 92
+Column3.ReadOnly = .T.
+Column3.Visible = .T.
+Column3.InputMask = "999,999,999,999"
+Column3.BackColor = 238,234,219
+Column3.Name = "Debe"
+Column4.FontSize = 8
+Column4.ControlSource = "cdetalle_cuenta.haber"
+Column4.Enabled = .T.
+Column4.Width = 90
+Column4.ReadOnly = .T.
+Column4.Visible = .T.
+Column4.InputMask = "999,999,999,999"
+Column4.BackColor = 238,234,219
+Column4.Name = "Haber"
+Column5.FontSize = 8
+Column5.Bound = .T.
+Column5.ControlSource = "cdetalle_cuenta.centro"
+Column5.CurrentControl = "Cbocentro1"
+Column5.Enabled = .T.
+Column5.Width = 78
+Column5.ReadOnly = .T.
+Column5.Sparse = .T.
+Column5.Visible = .T.
+Column5.BackColor = 238,234,219
+Column5.Name = "Centro"
+Column6.FontSize = 8
+Column6.ControlSource = "cdetalle_cuenta.idconcepto"
+Column6.CurrentControl = "Cboconcepto1"
+Column6.Enabled = .T.
+Column6.Width = 58
+Column6.ReadOnly = .T.
+Column6.Visible = .T.
+Column6.BackColor = 238,234,219
+Column6.Name = "Concepto"
+Column7.FontSize = 8
+Column7.ControlSource = "cdetalle_cuenta.documento"
+Column7.Enabled = .T.
+Column7.Width = 196
+Column7.ReadOnly = .T.
+Column7.Visible = .T.
+Column7.BackColor = 238,234,219
+Column7.Name = "Documento"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+THIS.PARENT.TOTALES.REFRESH()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO50U
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Asiento
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 9
+Alignment = 2
+Caption = "Asiento"
+ForeColor = 255,255,255
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO50V
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_clave1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Asiento
+[START PROPERTIES]
+BackStyle = 0
+BorderStyle = 0
+Enabled = .T.
+InputMask = "99999"
+Left = 359
+ReadOnly = .T.
+SpecialEffect = 1
+Top = 46
+Visible = .T.
+BackColor = 238,234,219
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+indice = 
+condicionextra = asentable
+objeto = 
+retorna = 
+tabla = 
+mensajeerror = 
+actualizar = .F.
+datoayuda = Cuentas
+retorna2 = 
+objeto2 = 
+Name = "Campo_clave1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO50Y
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Fecha
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 9
+Alignment = 2
+Caption = "Fecha"
+ForeColor = 255,255,255
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO510
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Fecha
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Enabled = .T.
+Margin = 0
+ReadOnly = .T.
+Visible = .T.
+ForeColor = 0,0,0
+BackColor = 238,234,219
+DisabledBackColor = 228,228,228
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO512
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Debe
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 9
+Alignment = 2
+Caption = "Debe"
+ForeColor = 255,255,255
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO513
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Debe
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Enabled = .T.
+InputMask = "999,999,999,999"
+Margin = 0
+ReadOnly = .T.
+Visible = .T.
+ForeColor = 0,0,0
+BackColor = 238,234,219
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO515
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Haber
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 9
+Alignment = 2
+Caption = "Haber"
+ForeColor = 255,255,255
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO517
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Haber
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Enabled = .T.
+InputMask = "999,999,999,999"
+Margin = 0
+ReadOnly = .T.
+Visible = .T.
+ForeColor = 0,0,0
+BackColor = 238,234,219
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO51A
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Centro
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 9
+Alignment = 2
+Caption = "Centro Costo"
+ForeColor = 255,255,255
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X10L2H21
+[CLASS] cbocentro
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbocentro1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Centro
+[START PROPERTIES]
+ControlSource = "cdetalle_cuenta.centro"
+Enabled = .F.
+Left = 19
+SpecialEffect = 1
+Top = 31
+BackColor = 238,234,219
+BorderStyle = 0
+ReadOnly = .F.
+editable = .F.
+Name = "Cbocentro1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO51E
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Concepto
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 9
+Alignment = 2
+Caption = "Concepto"
+ForeColor = 255,255,255
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0X10L2H22
+[CLASS] cboconcepto
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cboconcepto1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Concepto
+[START PROPERTIES]
+ControlSource = "cdetalle_cuenta.idconcepto"
+Enabled = .F.
+Left = 24
+SpecialEffect = 1
+Top = 31
+BackColor = 238,234,219
+BorderStyle = 0
+ReadOnly = .F.
+editable = .F.
+Name = "Cboconcepto1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO51H
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Documento
+[START PROPERTIES]
+FontBold = .T.
+FontSize = 9
+Alignment = 2
+Caption = "Documento"
+ForeColor = 255,255,255
+BackColor = 0,0,128
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0QO51I
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page4.grdMovimiento.Documento
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+ControlSource = "vdetalle.detalle"
+Enabled = .T.
+Margin = 0
+ReadOnly = .T.
+Visible = .T.
+ForeColor = 0,0,0
+BackColor = 238,234,219
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0R5R1L
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] totales
+[PARENT] Tsmaintform1.Pageframe1.Page4
+[START PROPERTIES]
+Top = 350
+Left = 11
+Width = 650
+Height = 34
+SpecialEffect = 1
+TabIndex = 12
+ZOrderSet = 22
+Name = "totales"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+THIS.PARENT.GRDMOVIMIENTO.SUMCOLUMN()
+THIS.TOTALDEBE.VALUE = THIS.PARENT.GRDMOVIMIENTO.TOTALES(1)
+THIS.TOTALHABER.VALUE = THIS.PARENT.GRDMOVIMIENTO.TOTALES(2)
+THIS.SALDO.VALUE = THIS.TOTALDEBE.VALUE-THIS.TOTALHABER.VALUE
+DODEFAULT()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0R5R1P
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] TotalDebe
+[PARENT] Tsmaintform1.Pageframe1.Page4.totales
+[START PROPERTIES]
+FontBold = .T.
+ControlSource = ""
+Enabled = .F.
+Height = 24
+InputMask = "999,999,999,999"
+Left = 133
+TabIndex = 1
+Top = 5
+Width = 94
+BackColor = 192,192,192
+DisabledForeColor = 0,0,0
+Name = "TotalDebe"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0R5R1R
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] TotalHaber
+[PARENT] Tsmaintform1.Pageframe1.Page4.totales
+[START PROPERTIES]
+FontBold = .T.
+ControlSource = ""
+Enabled = .F.
+Height = 24
+InputMask = "999,999,999,999"
+Left = 228
+TabIndex = 2
+Top = 5
+Width = 89
+BackColor = 192,192,192
+DisabledForeColor = 0,0,0
+Name = "TotalHaber"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0R5R1T
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Saldo
+[PARENT] Tsmaintform1.Pageframe1.Page4.totales
+[START PROPERTIES]
+Comment = ""
+FontBold = .T.
+Alignment = 3
+Value = 0
+ControlSource = ""
+Enabled = .F.
+Height = 24
+InputMask = "999,999,999,999"
+Left = 318
+TabIndex = 4
+Top = 5
+Width = 89
+BackColor = 0,128,255
+DisabledForeColor = 0,128,0
+Name = "Saldo"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DO CASE
+CASE THIS.VALUE>0
+THIS.DISABLEDFORECOLOR = RGB(0, 128, 0)
+CASE THIS.VALUE<0
+THIS.DISABLEDFORECOLOR = RGB(255, 0, 0)
+CASE THIS.VALUE=0
+THIS.DISABLEDFORECOLOR = RGB(0, 0, 0)
+ENDCASE
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CH0R5R1X
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform1.Pageframe1.Page4.totales
+[START PROPERTIES]
+Caption = "Totales"
+Height = 12
+Left = 18
+Top = 8
+Width = 96
+TabIndex = 8
+BackColor = 0,0,0
+Name = "Tslabel7"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[START RESERVED1]
+  ..\include\tastrade.hÎ+õn†5@ ..\..\..\archivos de programa\microsoft visual foxpro 9\foxpro.hÖ,’‰1 ..\include\strings.hÞ-õn†5[END RESERVED1]
+[EOF]

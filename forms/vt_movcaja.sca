@@ -1,0 +1,385 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0TJEIU
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+Left = 270
+Name = "Dataenvironment"
+Top = 180
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0UG4FM
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_caja"
+CursorSource = "vt_caja"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0UG4FN
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_cajadet"
+BufferModeOverride = 5
+CursorSource = "vt_cajadet"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 150
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0TJEIV
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmovform12
+[START PROPERTIES]
+Caption = "Movimientos de Caja"
+DataSession = 2
+DoCreate = .T.
+Height = 386
+Name = "Tsmovform12"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 388
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Top = 2
+Pageframe1.Width = 550
+Width = 545
+campos = IdEmpresa,IdCaja
+idcaja = 0
+identidad = IdCaja
+lblRequerido.Name = "lblRequerido"
+tabla1 = vt_cajaDet
+tabla2 = 
+tablaconsulta = Caja
+valores = oApp.Empresa,thisform.IDCaja
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+TEXT TO CMDSQL TEXTMERGE NOSHOW
+SELECT IdCaja FROM vt_caja
+	where idEmpresa=?oApp.Empresa
+	and IdUsuario = <<oApp.GetEmployeeId()>>
+	and Estado is null
+ENDTEXT
+IF SQL(CMDSQL, 'cCaja')>0 .AND. RECCOUNT('cCaja')>0
+M.IDCAJA = CCAJA.IDCAJA
+THIS.IDCAJA = CCAJA.IDCAJA
+REQUERY('vt_Caja')
+ELSE
+MESSAGEBOX('No Existe ninguna caja abierta', 64, TASTRADE_LOC)
+RETURN .F.
+ENDIF
+ENDPROC
+PROCEDURE validar
+REPLACE OPERACION WITH COPERACION.TIPOOPERACION, IDFORMA WITH '01' IN VT_CAJADET
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+idcaja
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481U
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFecha
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Fecha"
+Height = 16
+Left = 72
+Name = "lblFecha"
+TabIndex = 8
+Top = 52
+Width = 34
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1X90XKWUE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdoperacion
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Operacion"
+Height = 16
+Left = 39
+Name = "lblIdoperacion"
+TabIndex = 12
+Top = 113
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481S
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdusuario
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Usuario"
+Height = 16
+Left = 52
+Name = "lblIdusuario"
+TabIndex = 7
+Top = 22
+Width = 54
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1X90XKWUD
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblImporte
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Importe"
+Height = 16
+Left = 60
+Name = "lblImporte"
+TabIndex = 11
+Top = 142
+Width = 46
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481W
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblInicio
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Inicio"
+Height = 16
+Left = 75
+Name = "lblInicio"
+TabIndex = 9
+Top = 82
+Width = 31
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1X90XKWUG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblObs
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Obs"
+Height = 16
+Left = 82
+Name = "lblObs"
+TabIndex = 13
+Top = 172
+Width = 24
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1X90XKWUH
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "vt_cajadet.idoperacion"
+Height = 22
+Left = 119
+Name = "Tscombobox1"
+TabIndex = 4
+Top = 113
+Width = 130
+cmdsql = Select Descripcion, IdOperacion,TipoOperacion from vt_OperacionCaja where IdEmpresa=?oApp.Empresa
+cursor = cOperacion
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V4828
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Height = 22
+Left = 194
+MaxLength = 10
+Name = "Tstextbox1"
+ReadOnly = .T.
+TabIndex = 10
+Top = 22
+Value = (oApp.NombreUsuario)
+Width = 235
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481T
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecha
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_caja.fecha"
+Height = 22
+Left = 119
+Name = "txtFecha"
+ReadOnly = .T.
+TabIndex = 2
+Top = 52
+Width = 130
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481R
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdusuario
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_caja.idusuario"
+Height = 22
+Left = 119
+MaxLength = 10
+Name = "txtIdusuario"
+ReadOnly = .T.
+TabIndex = 1
+Top = 22
+Width = 70
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1X90XKWU3
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtImporte
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_cajadet.importe"
+Height = 22
+Left = 119
+Name = "txtImporte"
+TabIndex = 5
+Top = 142
+Width = 130
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1UX0V481V
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtInicio
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_caja.inicio"
+Height = 22
+Left = 119
+Name = "txtInicio"
+ReadOnly = .T.
+TabIndex = 3
+Top = 82
+Width = 130
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1X90XKWUF
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtObs
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_cajadet.obs"
+Height = 22
+Left = 119
+MaxLength = 50
+Name = "txtObs"
+TabIndex = 6
+Top = 172
+Width = 310
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

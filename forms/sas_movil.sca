@@ -1,0 +1,458 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11IZS9
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+InitialSelectedAlias = "sas_movil"
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11IZSA
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sas_movil"
+CursorSource = "sas_movil"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11IZSB
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Moviles"
+DoCreate = .T.
+Height = 271
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Width = 381
+campoempresa = IDEmpresa
+camponro = Idmovil,sas_movil,IdEmpresa=?oApp.Empresa
+campotam = 3
+idobjeto = 441
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START RESERVED3]
+^aerrormsg[3,0] 
+^grids[4,0] 
+^permisos[5,0] 
+^validarcontroles[1,0] 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8IM
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_clave1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "sas_movil.paramedico"
+Height = 22
+Left = 107
+Name = "Campo_clave1"
+TabIndex = 5
+Top = 130
+Width = 33
+ZOrderSet = 54
+condicionextra = IdEmpresa = ?oApp.Empresa and idProfesion = 'PM'
+datoayuda = Staff
+indice = IdPersona
+objeto = this.parent.txtParamedico
+origen = R
+parametroayuda = "PM"
+retorna = fNombre
+tabla = sas_Personas
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8IL
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_clave2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "sas_movil.medico"
+Height = 22
+Left = 107
+Name = "Campo_clave2"
+TabIndex = 6
+Top = 154
+Width = 33
+ZOrderSet = 53
+condicionextra = IdEmpresa = ?oApp.Empresa and idProfesion = 'ME'
+datoayuda = Staff
+indice = IdPersona
+objeto = this.parent.txtMedico
+origen = R
+parametroayuda = "ME"
+retorna = fNombre
+tabla = sas_Personas
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8IN
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] IdChofer
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "sas_movil.chofer"
+Height = 22
+Left = 107
+Name = "IdChofer"
+TabIndex = 4
+Top = 106
+Width = 33
+ZOrderSet = 55
+condicionextra = IdEmpresa = ?oApp.Empresa and idProfesion = 'CH'
+datoayuda = Staff
+indice = IdPersona
+objeto = this.parent.txtChofer
+origen = R
+parametroayuda = "CH"
+retorna = fNombre
+tabla = sas_Personas
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8IG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblChofer
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Chofer"
+Height = 16
+Left = 59
+Name = "lblChofer"
+TabIndex = 11
+Top = 105
+Width = 40
+ZOrderSet = 48
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11IZSA
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Descripcion"
+Height = 16
+Left = 32
+Name = "lblDescripcion"
+TabIndex = 8
+Top = 58
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11KDWZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdmovil
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Idmovil"
+Height = 16
+Left = 57
+Name = "lblIdmovil"
+TabIndex = 7
+Top = 31
+Width = 42
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8IK
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblMedico
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Medico"
+Height = 16
+Left = 57
+Name = "lblMedico"
+TabIndex = 15
+Top = 154
+Width = 42
+ZOrderSet = 52
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8II
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblParamedico
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Paramedico"
+Height = 16
+Left = 32
+Name = "lblParamedico"
+TabIndex = 13
+Top = 130
+Width = 67
+ZOrderSet = 50
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8IP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .F.
+Caption = "Km. Actual"
+Height = 16
+Left = 39
+Name = "Tslabel1"
+TabIndex = 9
+Top = 82
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IQ0XHSU5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Mail"
+Height = 22
+Left = 72
+Name = "Tslabel2"
+Top = 178
+Width = 27
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8IO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_movil.km"
+Height = 22
+Left = 107
+Name = "Tstextbox1"
+TabIndex = 3
+Top = 82
+Width = 159
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8IF
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtChofer
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 143
+MaxLength = 0
+Name = "txtChofer"
+TabIndex = 10
+Top = 106
+Width = 225
+ZOrderSet = 47
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11IZS9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_movil.descripcion"
+Height = 22
+Left = 107
+MaxLength = 25
+Name = "txtDescripcion"
+TabIndex = 2
+Top = 58
+Width = 159
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22D11KDWY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdmovil
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sas_movil.idmovil"
+Height = 22
+Left = 107
+MaxLength = 4
+Name = "txtIdmovil"
+TabIndex = 1
+Top = 31
+Width = 39
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IQ0XHSU6
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtMail
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "sas_movil.email"
+Height = 21
+Left = 107
+Name = "txtMail"
+Top = 179
+Width = 264
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8IJ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtMedico
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 143
+MaxLength = 0
+Name = "txtMedico"
+TabIndex = 14
+Top = 154
+Width = 225
+ZOrderSet = 51
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2EM15P8IH
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtParamedico
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 143
+MaxLength = 0
+Name = "txtParamedico"
+TabIndex = 12
+Top = 130
+Width = 225
+ZOrderSet = 49
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

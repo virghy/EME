@@ -1,0 +1,127 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2M30U245W
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 0
+Left = 0
+Name = "Dataenvironment"
+Top = 0
+Width = 0
+[END PROPERTIES]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2M30U245X
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+Caption = "Proceso de duplicacion de datos"
+DataSession = 1
+DoCreate = .T.
+Name = "Tsbaseform12"
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2M30VJHH0
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Iniciar"
+Height = 26
+Left = 432
+Name = "Tscommandbutton1"
+Top = 216
+Width = 96
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+*!*	1.	Plan de Cuentas
+*!*	2.	Plantillas de Asientos
+*!*	3.	Conceptos
+*!*	4.	Descripcion de Asientos
+*!*	5.	Proveedores
+*!*	6.	Clientes
+*!*	7.	Comprobantes de Compra
+*!*	8.	Comprobantes de Venta
+*!*	9.	Analisis Contable
+*!*	10.	Planilla de Ingresos y Egresos
+*!*	11.	Centros de Costos
+*!*	12.	Sucursales
+
+WAIT windows NOWAIT "Procesando Plan de Cuentas" 
+
+TEXT TO cmdSQL noshow
+	Declare @Empresa char(3), @Ejercicio int, @NuevaEmpresa char(3)
+	Set @Empresa=?oApp.Empresa
+	Set @Ejercicio = ?nEjercicio
+	Set @NuevaEmpresa = _?cNuevaEmpresa
+
+	Print 'Plan de Cuenta'
+	--/*
+	INSERT INTO [cn_cuentas]
+	           ([IdEmpresa]
+	           ,[Cuenta]
+	           ,[Ejercicio]
+	           ,[Descripción]
+	           ,[Abreviatura]
+	           ,[Asentable]
+	           ,[Nivel]
+	           ,[Integradora]
+	           ,[IdGrupoPres]
+	           ,[Vigente])
+	--*/
+	Select            @NuevaEmpresa
+	           ,[Cuenta]
+	           ,[Ejercicio]
+	           ,[Descripción]
+	           ,[Abreviatura]
+	           ,[Asentable]
+	           ,[Nivel]
+	           ,[Integradora]
+	           ,[IdGrupoPres]
+	           ,[Vigente]
+	from [cn_cuentas]
+	where	IdEmpresa = @Empresa
+		and Ejercicio = @Ejercicio
+ENDTEXT
+
+thisform.runsql(cmdsql,'c')
+
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

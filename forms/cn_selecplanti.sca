@@ -1,0 +1,334 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO0ZVW7C
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 200
+InitialSelectedAlias = "vs_plantilla"
+Left = 14
+Name = "Dataenvironment"
+Top = 296
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO10G3B1
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vs_plantilla"
+BufferModeOverride = 5
+CursorSource = "cnt_plantilla"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO10G3B2
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vs_plandeta"
+BufferModeOverride = 5
+CursorSource = "cnt_plandeta"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 150
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 95
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO0ZVW7W
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Plantilla para Asientos"
+DoCreate = .T.
+Height = 289
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 288
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.BackColor = 119,159,189
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.BackColor = 119,159,189
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.TabIndex = 1
+Pageframe1.Top = 0
+Pageframe1.Width = 408
+Width = 408
+WindowType = 1
+detalle = .F.
+idplantilla = 0
+lallowdelete = .F.
+lallowedits = .F.
+lallownew = .F.
+navegador = .T.
+tabla1 = vs_plantilla
+tabla2 = vs_plandeta
+[END PROPERTIES]
+[START METHODS]
+[END METHODS]
+[START RESERVED3]
+idplantilla Código de la plantilla seleccionado
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO177WMU
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Seleccionar Plantilla"
+FontBold = .T.
+FontSize = 10
+ForeColor = 128,0,0
+Height = 21
+Left = 7
+Name = "Command1"
+Top = 238
+Width = 390
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.IDPLANTILLA = VS_PLANTILLA.ID
+THISFORM.RELEASE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO10G3BB
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdVs_plandeta
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "vs_plandeta.cuenta"
+Column1.Name = "Column1"
+Column1.ReadOnly = .T.
+Column1.Sparse = .F.
+Column2.ControlSource = "vs_plandeta.descripción"
+Column2.Name = "Column2"
+Column2.ReadOnly = .T.
+Column2.Width = 293
+ColumnCount = 2
+GridLines = 0
+Height = 164
+Left = 7
+Name = "grdVs_plandeta"
+Panel = 1
+ReadOnly = .T.
+RecordSource = "vs_plandeta"
+RecordSourceType = 1
+TabIndex = 3
+Top = 74
+Width = 390
+campo = plantilla
+teclaagregar = .T.
+valor = vs_plantilla.id
+valorvariable = vs_plantilla.id
+variablevista = m.plantilla
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO10G3BC
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVs_plandeta.Column1
+[START PROPERTIES]
+Alignment = 2
+BackColor = 0,0,128
+Caption = "Cuenta"
+FontBold = .T.
+ForeColor = 255,255,255
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO10G3BD
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_clave1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVs_plandeta.Column1
+[START PROPERTIES]
+Left = 15
+Name = "Campo_clave1"
+ReadOnly = .T.
+Top = 31
+condicionextra = Asentable
+datoayuda = cuenta
+indice = cuenta
+mensajeerror = Cuenta no existe o no es una cuenta Acentable
+objeto = this.parent.parent.column2.text1
+retayuda = 
+retorna = descripción
+tabla = cuentas
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO10G3BE
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVs_plandeta.Column2
+[START PROPERTIES]
+Alignment = 2
+BackColor = 0,0,128
+Caption = "Descripción"
+FontBold = .T.
+ForeColor = 255,255,255
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO10G3BF
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdVs_plandeta.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO0ZVW7W
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcio
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Descripción"
+ForeColor = 0,255,255
+Height = 16
+Left = 10
+Name = "lblDescripcio"
+TabIndex = 5
+Top = 42
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO10G3B1
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNombre
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nombre"
+ForeColor = 0,255,255
+Height = 16
+Left = 11
+Name = "lblNombre"
+TabIndex = 4
+Top = 13
+Width = 46
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO10G3B2
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcio
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vs_plantilla.descripcio"
+Height = 36
+Left = 85
+MaxLength = 120
+Name = "txtDescripcio"
+ReadOnly = .T.
+TabIndex = 2
+Top = 34
+Width = 308
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0OO0ZVW7C
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vs_plantilla.nombre"
+Height = 22
+Left = 85
+MaxLength = 50
+Name = "txtNombre"
+ReadOnly = .T.
+TabIndex = 1
+Top = 10
+Width = 308
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 10, 6, 16, 13, 34, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

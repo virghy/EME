@@ -1,0 +1,449 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Class     
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZCQW5
+[CLASS] toolbar
+[BASECLASS] toolbar
+[OBJNAME] prtoolbar
+[START PROPERTIES]
+Caption = "Toolbar1"
+Height =   3.62
+Left =   0.00
+Name = "prtoolbar"
+ScaleMode = 0
+Top =   0.00
+Width =  88.40
+[END PROPERTIES]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+16[END RESERVED2]
+[START RESERVED6]
+Foxels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIEG
+[CLASS] separator
+[BASECLASS] separator
+[OBJNAME] Separator1
+[PARENT] prtoolbar
+[START PROPERTIES]
+Height =   0.00
+Left =  21.60
+Name = "Separator1"
+Top =   0.23
+Width =   0.00
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIF9
+[CLASS] separator
+[BASECLASS] separator
+[OBJNAME] Separator3
+[PARENT] prtoolbar
+[START PROPERTIES]
+Height =   0.00
+Left =  72.00
+Name = "Separator3"
+Top =   0.23
+Width =   0.00
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIEB
+[CLASS] separator
+[BASECLASS] separator
+[OBJNAME] Separator5
+[PARENT] prtoolbar
+[START PROPERTIES]
+Height =   0.00
+Left =  20.00
+Name = "Separator5"
+Top =   0.23
+Width =   0.00
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIFI
+[CLASS] separator
+[BASECLASS] separator
+[OBJNAME] Separator6
+[PARENT] prtoolbar
+[START PROPERTIES]
+Height =   0.00
+Left =  83.20
+Name = "Separator6"
+Top =   0.23
+Width =   0.00
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIFL
+[CLASS] combobox
+[BASECLASS] combobox
+[OBJNAME] cboEnlaces
+[PARENT] prtoolbar
+[START PROPERTIES]
+FontSize = 8
+Height =   3.15
+Left =  83.20
+Name = "cboEnlaces"
+RowSourceType = 1
+SpecialEffect = 1
+ToolTipText = "Formularios relacionados"
+Top =   0.23
+Width =   4.20
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+CCOMANDO = CENLACES.COMANDO
+THIS.VALUE = ""
+= EXECSCRIPT(CCOMANDO)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIF4
+[CLASS] tstoolbarbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdClose
+[PARENT] prtoolbar
+[START PROPERTIES]
+Caption = "Cerrar"
+FontSize = 8
+Height =   3.08
+Left =  60.80
+Name = "cmdClose"
+Picture = ..\bitmaps\close.bmp
+SpecialEffect = 2
+Style = 0
+ToolTipText = "Cerrar (CTRL+F4)"
+Top =   0.23
+Width =   9.80
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF _SCREEN.ACTIVEFORM.QUERYUNLOAD()
+IF FORMISOBJECT()
+_SCREEN.ACTIVEFORM.RELEASE()
+ENDIF
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIEZ
+[CLASS] tstoolbarbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdEdit
+[PARENT] prtoolbar
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Modificar"
+Enabled = .T.
+FontSize = 8
+Height =   3.08
+Left =  51.00
+Name = "cmdEdit"
+Picture = ..\bitmaps\wzedit.bmp
+SpecialEffect = 2
+TabIndex = 6
+ToolTipText = "Modificar (CTRL+M)"
+Top =   0.23
+Visible = .T.
+Width =   9.80
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+_SCREEN.ACTIVEFORM.EDITAR()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIDO
+[CLASS] tstoolbarbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdFirst
+[PARENT] prtoolbar
+[START PROPERTIES]
+Caption = ""
+Enabled = .F.
+Height =   3.08
+Left =   1.00
+Name = "cmdFirst"
+Picture = ..\bitmaps\frsrec_s.bmp
+SpecialEffect = 2
+TabIndex = 1
+ToolTipText = "Primero (CTRL+INICIO)"
+Top =   0.23
+Width =   4.40
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LNRESULT
+LNRESULT = _SCREEN.ACTIVEFORM.FIRST()
+DO CASE
+CASE LNRESULT=1
+THIS.PARENT.REFRESH("BOF")
+ENDCASE
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIE5
+[CLASS] tstoolbarbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdLast
+[PARENT] prtoolbar
+[START PROPERTIES]
+Caption = ""
+Enabled = .F.
+Height =   3.08
+Left =  14.20
+Name = "cmdLast"
+Picture = ..\bitmaps\lstrec_s.bmp
+SpecialEffect = 2
+TabIndex = 4
+ToolTipText = "Último (CTRL+FIN)"
+Top =   0.23
+Width =   4.40
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LNRESULT
+LNRESULT = _SCREEN.ACTIVEFORM.LAST()
+DO CASE
+CASE LNRESULT=2
+THIS.PARENT.REFRESH("EOF")
+ENDCASE
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIEI
+[CLASS] tstoolbarbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdNew
+[PARENT] prtoolbar
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nuevo"
+FontSize = 8
+Height =   3.08
+Left =  21.60
+Name = "cmdNew"
+Picture = ..\bitmaps\new.bmp
+SpecialEffect = 2
+Style = 0
+TabIndex = 5
+ToolTipText = "Nuevo (F9)"
+Top =   0.23
+Width =   9.80
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+_SCREEN.ACTIVEFORM.ADDNEW()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIDZ
+[CLASS] tstoolbarbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdNext
+[PARENT] prtoolbar
+[START PROPERTIES]
+Caption = ""
+Enabled = .F.
+Height =   3.08
+Left =   9.80
+Name = "cmdNext"
+Picture = ..\bitmaps\nxtrec_s.bmp
+SpecialEffect = 2
+TabIndex = 3
+ToolTipText = "Siguiente (CTRL+AV PÁG)"
+Top =   0.23
+Width =   4.40
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LNRESULT
+LNRESULT = _SCREEN.ACTIVEFORM.NEXT()
+DO CASE
+CASE LNRESULT=2
+THIS.PARENT.REFRESH("EOF")
+CASE LNRESULT=0
+THIS.PARENT.REFRESH()
+ENDCASE
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIDU
+[CLASS] tstoolbarbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdPrior
+[PARENT] prtoolbar
+[START PROPERTIES]
+Caption = ""
+Enabled = .F.
+Height =   3.08
+Left =   5.40
+Name = "cmdPrior"
+Picture = ..\bitmaps\prvrec_s.bmp
+SpecialEffect = 2
+TabIndex = 2
+ToolTipText = "Anterior (CTRL+RE PÁG)"
+Top =   0.23
+Width =   4.40
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LNRESULT
+LNRESULT = _SCREEN.ACTIVEFORM.PRIOR()
+DO CASE
+CASE LNRESULT=1
+THIS.PARENT.REFRESH("BOF")
+CASE LNRESULT=0
+THIS.PARENT.REFRESH()
+ENDCASE
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIFC
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdQBFMode
+[PARENT] prtoolbar
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Filtro"
+Enabled = .T.
+FontBold = .F.
+FontName = "Arial"
+FontSize = 8
+Height =   3.08
+Left =  72.00
+Name = "cmdQBFMode"
+Picture = ..\bitmaps\filter.bmp
+SpecialEffect = 2
+TabIndex = 23
+ToolTipText = "Filtrar (CTRL + F)"
+Top =   0.23
+Visible = .F.
+Width =   9.80
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+SET DATASESSION TO _SCREEN.ACTIVEFORM.DATASESSIONID
+IF EMPTY(THIS.PARENT.QBF_TABLE)
+THIS.PARENT.QBF_TABLE = _SCREEN.ACTIVEFORM.DATAENVIRONMENT.INITIALSELECTEDALIAS
+ENDIF
+SELECT (THIS.PARENT.QBF_TABLE)
+BEGIN TRANSACTION
+APPEND BLANK
+THIS.ENABLED = .F.
+THIS.PARENT.CMDEXECUTEQBF.ENABLED = .T.
+THIS.PARENT.CMDCLEARFILTER.ENABLED = .F.
+_SCREEN.ACTIVEFORM.REFRESH
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIEO
+[CLASS] tstoolbarbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdRestore
+[PARENT] prtoolbar
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Restaurar"
+Enabled = .T.
+FontName = "Arial"
+FontSize = 8
+Height =   3.08
+Left =  31.40
+Name = "cmdRestore"
+Picture = ..\bitmaps\undo.bmp
+SpecialEffect = 2
+TabIndex = 7
+ToolTipText = "Restaurar (CTRL+Z)"
+Top =   0.23
+Width =   9.80
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+_SCREEN.ACTIVEFORM.RESTORE()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _24W0ZDIET
+[CLASS] tstoolbarbutton
+[CLASSLOC] tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdSave
+[PARENT] prtoolbar
+[START PROPERTIES]
+Caption = "Grabar"
+Enabled = .T.
+FontSize = 8
+Height =   3.08
+Left =  41.20
+Name = "cmdSave"
+Picture = ..\bitmaps\save.bmp
+SpecialEffect = 2
+TabIndex = 6
+ToolTipText = "Grabar (F12)"
+Top =   0.23
+Visible = .T.
+Width =   9.80
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+_SCREEN.ACTIVEFORM.SAVE()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] prtoolbar
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

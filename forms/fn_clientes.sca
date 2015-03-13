@@ -1,0 +1,1691 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\..\..\archivos de programa\microsoft visual studio\vfp98\foxpro.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 200
+Left = 49
+Name = "Dataenvironment"
+Top = 135
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV6
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "clientes"
+CursorSource = "fn_clientes"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Order = ""
+Top = 20
+Width = 95
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KVA
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+BorderStyle = 3
+Caption = "Clientes"
+DoCreate = .T.
+Height = 468
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 468
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page1.PageOrder = 1
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.PageOrder = 2
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.PageCount = 2
+Pageframe1.Top = 0
+Pageframe1.Width = 769
+Width = 769
+appconfig.Name = "appconfig"
+identidad = IdCliente
+lblRequerido.Name = "lblRequerido"
+tabla1 = Clientes
+tablaconsulta = Clientes
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1PR0LNB2M
+[CLASS] campo_busca
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_busca1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "clientes.idcliente"
+InputMask = "99999999"
+Left = 254
+Name = "Campo_busca1"
+Top = 27
+Visible = .F.
+datoayuda = Clientes
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1BV0LH7VR
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboBanco
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 0
+ColumnWidths = ""
+ControlSource = "clientes.idbanco"
+FirstElement = 1
+Height = 21
+Left = 451
+Name = "cboBanco"
+NumberOfElements = 0
+Style = 2
+TabIndex = 46
+Top = 238
+Width = 132
+ZOrderSet = 19
+cmdsql = Select Banco,IdBanco From bs_Bancos order by 1
+cursor = cBanco
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEE
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkEscriturado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Escriturado"
+Comment = ""
+ControlSource = "clientes.escriturado"
+Height = 16
+Left = 87
+Name = "chkEscriturado"
+TabIndex = 61
+Top = 393
+Width = 73
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEF
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkHipotecado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Hipotecado"
+Comment = ""
+ControlSource = "clientes.hipotecado"
+Height = 16
+Left = 87
+Name = "chkHipotecado"
+TabIndex = 62
+Top = 414
+Width = 72
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLE5
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkInmuebles
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Posee Inmuebles"
+Comment = ""
+ControlSource = "clientes.inmuebles"
+Height = 16
+Left = 87
+Name = "chkInmuebles"
+TabIndex = 56
+Top = 321
+Width = 96
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEO
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkPrendado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Prendado"
+Comment = ""
+ControlSource = "clientes.prendado"
+Height = 16
+Left = 319
+Name = "chkPrendado"
+TabIndex = 70
+Top = 413
+Width = 64
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEN
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkTitulado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Titulado"
+Comment = ""
+ControlSource = "clientes.titulado"
+Height = 16
+Left = 319
+Name = "chkTitulado"
+TabIndex = 69
+Top = 390
+Width = 55
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEK
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkVehiculo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Posee Vehiculo"
+Comment = ""
+ControlSource = "clientes.vehiculo"
+Height = 16
+Left = 295
+Name = "chkVehiculo"
+TabIndex = 64
+Top = 321
+Width = 104
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ13AASH
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] CiConyuge
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "clientes.ciconyuge"
+Left = 151
+Name = "CiConyuge"
+TabIndex = 21
+Top = 243
+Width = 100
+ZOrderSet = 18
+indice = idCliente
+mensajeerror = No se encuentra el C.I. especificado
+objeto = this.parent.NombreConyuge
+origen = R
+retorna = rtrim(Nombre)+ " "+Apellido
+tabla = fn_Clientes
+validar = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLES
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtReferencias
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.referencias"
+Height = 120
+Left = 471
+Name = "edtReferencias"
+TabIndex = 72
+Top = 313
+Width = 280
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPD2
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] IdAsociacion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "clientes.idasociacion"
+Left = 479
+Name = "IdAsociacion"
+TabIndex = 40
+Top = 166
+Width = 45
+ZOrderSet = 38
+indice = IdAsociacion
+indice1 = 
+mensajeerror = No se encuentra la Asociacion especificada
+mensajevalidacion = Indique la Asociación
+objeto = this.parent.NombreAsociacion
+origen = R
+prefijo = 
+requerido = .T.
+retorna = Asociacion
+tabla = fn_asociaciones
+validar = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAntiguedad
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Antiguedad"
+Height = 16
+Left = 391
+Name = "lblAntiguedad"
+TabIndex = 33
+Top = 118
+Width = 65
+ZOrderSet = 27
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KW3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblApellido
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Apellidos"
+Height = 16
+Left = 50
+Name = "lblApellido"
+TabIndex = 6
+Top = 75
+Width = 54
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCL
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCargo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Cargo"
+Height = 16
+Left = 391
+Name = "lblCargo"
+TabIndex = 31
+Top = 94
+Width = 35
+ZOrderSet = 25
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEH
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCcc
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Ccc"
+Height = 16
+Left = 36
+Name = "lblCcc"
+TabIndex = 59
+Top = 372
+Width = 22
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCiconyuge
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "C.I. Conyuge"
+Height = 16
+Left = 50
+Name = "lblCiconyuge"
+TabIndex = 20
+Top = 246
+Width = 71
+ZOrderSet = 15
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KWE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDireccion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Direccion"
+Height = 16
+Left = 50
+Name = "lblDireccion"
+TabIndex = 10
+Top = 123
+Width = 53
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDirecciontrab
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Direccion"
+Height = 16
+Left = 391
+Name = "lblDirecciontrab"
+TabIndex = 27
+Top = 46
+Width = 75
+ZOrderSet = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcliente
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Nro. Cliente"
+FontBold = .T.
+ForeColor = 0,0,128
+Height = 16
+Left = 53
+Name = "lblIdcliente"
+TabIndex = 2
+Top = 27
+Width = 69
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KX0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdestado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Estado Civil"
+Height = 16
+Left = 50
+Name = "lblIdestado"
+TabIndex = 18
+Top = 219
+Width = 65
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdlocalidad
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Localidad"
+Height = 16
+Left = 50
+Name = "lblIdlocalidad"
+TabIndex = 14
+Top = 171
+Width = 54
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KWV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdnacionalidad
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nacionalidad"
+Height = 16
+Left = 50
+Name = "lblIdnacionalidad"
+TabIndex = 16
+Top = 195
+Width = 70
+ZOrderSet = 13
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblLugartrab
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Empresa"
+Height = 16
+Left = 391
+Name = "lblLugartrab"
+TabIndex = 25
+Top = 22
+Width = 56
+ZOrderSet = 33
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblMarca
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Marca"
+Height = 16
+Left = 260
+Name = "lblMarca"
+TabIndex = 65
+Top = 339
+Width = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblModelo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Modelo"
+Height = 16
+Left = 260
+Name = "lblModelo"
+TabIndex = 67
+Top = 363
+Width = 43
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNombre
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nombres"
+Height = 16
+Left = 50
+Name = "lblNombre"
+TabIndex = 8
+Top = 99
+Width = 53
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblOtrosingresos
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Otros Ingresos"
+Height = 16
+Left = 391
+Name = "lblOtrosingresos"
+TabIndex = 37
+Top = 142
+Width = 83
+ZOrderSet = 31
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLET
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblReferencias
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Referencias"
+Height = 16
+Left = 471
+Name = "lblReferencias"
+TabIndex = 71
+Top = 297
+Width = 68
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSueldo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Sueldo"
+Height = 16
+Left = 551
+Name = "lblSueldo"
+TabIndex = 35
+Top = 119
+Width = 40
+ZOrderSet = 29
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KWK
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTelefono
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Telefono"
+Height = 16
+Left = 50
+Name = "lblTelefono"
+TabIndex = 12
+Top = 147
+Width = 51
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTelefonotrab
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Telefono"
+Height = 16
+Left = 391
+Name = "lblTelefonotrab"
+TabIndex = 29
+Top = 70
+Width = 73
+ZOrderSet = 23
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLE7
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTipo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Tipo"
+Height = 16
+Left = 36
+Name = "lblTipo"
+TabIndex = 57
+Top = 348
+Width = 26
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPD1
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NombreAsociacion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Left = 527
+Name = "NombreAsociacion"
+TabIndex = 41
+Top = 166
+Width = 202
+ZOrderSet = 37
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV6
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NombreConyuge
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Left = 151
+Name = "NombreConyuge"
+TabIndex = 23
+Top = 267
+Width = 192
+ZOrderSet = 17
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 203
+Left = 375
+Name = "Ts3dshape1"
+Top = 11
+Width = 374
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 288
+Left = 31
+Name = "Ts3dshape2"
+Top = 11
+Width = 330
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLE4
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 128
+Left = 31
+Name = "Ts3dshape3"
+Top = 306
+Width = 208
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEJ
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 128
+Left = 247
+Name = "Ts3dshape4"
+Top = 306
+Width = 216
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1BV0LH7VO
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 72
+Left = 375
+Name = "Ts3dshape5"
+Top = 226
+Width = 374
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV6
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 0
+ColumnWidths = ""
+ControlSource = "Clientes.Idlocalidad"
+FirstElement = 1
+Height = 21
+Left = 151
+Name = "Tscombobox1"
+NumberOfElements = 0
+Style = 2
+TabIndex = 15
+Top = 171
+Width = 192
+ZOrderSet = 19
+cmdsql = Select Localidad,IdLocalidad from bs_Localidad order by 1
+cursor = cLocalidad
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 0
+ColumnWidths = ""
+ControlSource = "Clientes.Idnacionalidad"
+FirstElement = 1
+Height = 21
+Left = 151
+Name = "Tscombobox2"
+NumberOfElements = 0
+Style = 2
+TabIndex = 17
+Top = 195
+Width = 192
+ZOrderSet = 21
+cmdsql = Select Nacionalidad,IdNacionalidad from bs_Nacionalidad order by 1
+cursor = cNacionalidad
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 0
+ColumnWidths = ""
+ControlSource = "clientes.idestado"
+FirstElement = 1
+Height = 21
+Left = 151
+Name = "Tscombobox3"
+NumberOfElements = 0
+Style = 2
+TabIndex = 19
+Top = 219
+WhatsThisHelpID = -1
+Width = 192
+ZOrderSet = 20
+cmdsql = Select EstadoCivil,IdEstado from bs_EstadoCivil
+cursor = cEstado
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ11AWX0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nombre Conyuge"
+Height = 16
+Left = 50
+Name = "Tslabel1"
+TabIndex = 22
+Top = 269
+Width = 98
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1BV0LH7VQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel10
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Banco"
+Height = 16
+Left = 384
+Name = "Tslabel10"
+TabIndex = 45
+Top = 238
+Width = 54
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel11
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Nro. Cuenta"
+Height = 16
+Left = 384
+Name = "Tslabel11"
+TabIndex = 49
+Top = 261
+Width = 71
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel12
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Sucursal"
+Height = 16
+Left = 531
+Name = "Tslabel12"
+TabIndex = 51
+Top = 262
+Width = 48
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1BV0LH7VT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel13
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Tipo Cuenta"
+Height = 16
+Left = 623
+Name = "Tslabel13"
+TabIndex = 53
+Top = 262
+Width = 71
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1CG0M9FUD
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel14
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Nro. Autoriz."
+ForeColor = 0,128,0
+Height = 16
+Left = 592
+Name = "Tslabel14"
+TabIndex = 47
+Top = 237
+Width = 71
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPD0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+Caption = "Asoc. Empleado"
+Height = 16
+Left = 391
+Name = "Tslabel2"
+TabIndex = 39
+Top = 166
+Width = 89
+ZOrderSet = 36
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 2
+BackStyle = 1
+Caption = "Informacion Laboral"
+Height = 16
+Left = 379
+Name = "Tslabel3"
+TabIndex = 24
+Top = 4
+Width = 124
+ZOrderSet = 39
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPD3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 2
+BackStyle = 1
+Caption = "Informacion Personal"
+Height = 16
+Left = 39
+Name = "Tslabel4"
+TabIndex = 1
+Top = 3
+Width = 124
+ZOrderSet = 40
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEI
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Inmuebles"
+Height = 16
+Left = 47
+Name = "Tslabel5"
+TabIndex = 55
+Top = 300
+Width = 64
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLER
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Vehiculos"
+Height = 16
+Left = 265
+Name = "Tslabel6"
+TabIndex = 63
+Top = 300
+Width = 64
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "C.I. Cliente"
+Height = 16
+Left = 50
+Name = "Tslabel7"
+TabIndex = 4
+Top = 51
+Width = 61
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY18CSBS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro. Socio"
+Height = 16
+Left = 391
+Name = "Tslabel8"
+TabIndex = 42
+Top = 190
+Width = 56
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1BV0LH7VP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 2
+BackStyle = 1
+Caption = "Débito Automático"
+Height = 16
+Left = 379
+Name = "Tslabel9"
+TabIndex = 44
+Top = 219
+Width = 115
+ZOrderSet = 39
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY18CSBR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Comment = ""
+ControlSource = "clientes.ci"
+Height = 21
+InputMask = "9,999,999"
+Left = 479
+Name = "Tstextbox1"
+TabIndex = 43
+Top = 190
+Width = 64
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.nrocuenta"
+Height = 21
+Left = 451
+Name = "Tstextbox2"
+TabIndex = 50
+Top = 262
+Width = 75
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.idsucursalbanco"
+Height = 21
+Left = 587
+Name = "Tstextbox3"
+TabIndex = 52
+Top = 262
+Width = 30
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1BV0LH7VS
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.idtipocuenta"
+Height = 21
+Left = 695
+Name = "Tstextbox4"
+TabIndex = 54
+Top = 262
+Width = 42
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1CG0M9FUC
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.nroautorizacion"
+ForeColor = 0,128,0
+Height = 21
+Left = 671
+Name = "Tstextbox5"
+TabIndex = 48
+Top = 238
+Width = 64
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCM
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAntiguedad
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.antiguedad"
+Left = 479
+Name = "txtAntiguedad"
+TabIndex = 34
+Top = 118
+Width = 65
+ZOrderSet = 26
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KW0
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtApellido
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.apellido"
+Height = 21
+Left = 151
+Name = "txtApellido"
+TabIndex = 7
+Top = 75
+Width = 192
+ZOrderSet = 4
+mensajevalidacion = Indique el Apellido
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCK
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCargo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.cargo"
+Left = 479
+Name = "txtCargo"
+TabIndex = 32
+Top = 94
+Width = 129
+ZOrderSet = 24
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEG
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCcc
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.ccc"
+Height = 22
+Left = 87
+Name = "txtCcc"
+TabIndex = 60
+Top = 369
+Width = 129
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCi
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Comment = ""
+ControlSource = "clientes.ci"
+InputMask = "999,999,999"
+Left = 151
+Name = "txtCi"
+TabIndex = 5
+Top = 51
+Width = 100
+ZOrderSet = 2
+condicionvalidacion = !EMPTY(THIS.VALUE)
+mensajevalidacion = Debe Indicar el C.I. del Cliente
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KWB
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDireccion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.direccion"
+Height = 21
+Left = 151
+Name = "txtDireccion"
+TabIndex = 11
+Top = 123
+Width = 192
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDirecciontrab
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.direcciontrab"
+Left = 479
+Name = "txtDirecciontrab"
+TabIndex = 28
+Top = 46
+Width = 248
+ZOrderSet = 34
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdcliente
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Comment = ""
+ControlSource = "clientes.idcliente"
+FontBold = .T.
+ForeColor = 0,0,128
+InputMask = "99999999"
+Left = 151
+Name = "txtIdcliente"
+TabIndex = 3
+Top = 27
+Width = 100
+ZOrderSet = 2
+condicionvalidacion = !EMPTY(THIS.VALUE)
+mensajevalidacion = Debe indicar el Nro. del Cliente
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCX
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtLugartrab
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.lugartrab"
+Left = 479
+Name = "txtLugartrab"
+TabIndex = 26
+Top = 22
+Width = 248
+ZOrderSet = 32
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEL
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtMarca
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.marca"
+Height = 22
+Left = 319
+Name = "txtMarca"
+TabIndex = 66
+Top = 339
+Width = 129
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLEP
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtModelo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.modelo"
+Height = 22
+Left = 319
+Name = "txtModelo"
+TabIndex = 68
+Top = 363
+Width = 128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KV4
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.nombre"
+Height = 21
+Left = 151
+Name = "txtNombre"
+TabIndex = 9
+Top = 99
+Width = 192
+ZOrderSet = 6
+mensajevalidacion = Indique el Nombre
+requerido = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCV
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtOtrosingresos
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.otrosingresos"
+InputMask = "999,999,999"
+Left = 479
+Name = "txtOtrosingresos"
+TabIndex = 38
+Top = 142
+Width = 132
+ZOrderSet = 30
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCT
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSueldo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.sueldo"
+Height = 22
+InputMask = "999,999,999"
+Left = 607
+Name = "txtSueldo"
+TabIndex = 36
+Top = 118
+Width = 120
+ZOrderSet = 28
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0AZ113KWI
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTelefono
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.telefono"
+Height = 21
+Left = 151
+Name = "txtTelefono"
+TabIndex = 13
+Top = 147
+Width = 192
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17FPCI
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTelefonotrab
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.telefonotrab"
+Left = 479
+Name = "txtTelefonotrab"
+TabIndex = 30
+Top = 70
+Width = 129
+ZOrderSet = 22
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UY17QLE6
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTipo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "clientes.tipo"
+Height = 22
+Left = 87
+Name = "txtTipo"
+TabIndex = 58
+Top = 345
+Width = 129
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

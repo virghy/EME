@@ -1,0 +1,801 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CV0K0GZ5
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 425
+Left = 39
+Name = "Dataenvironment"
+Top = 145
+Width = 671
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP13OKMI
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vestados"
+CursorSource = "ts_vestados"
+Database = ..\data\datos.dbc
+Height = 364
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 338
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CV0K0GZ6
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+BackColor = 160,184,200
+Caption = "Cambios de estado"
+DataSession = 2
+DoCreate = .T.
+Height = 338
+Name = "Tsbaseform12"
+Width = 630
+tabla1 = vEstados
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Activate
+**
+** ReFox - este procedimiento es vacío **
+**
+ENDPROC
+**
+PROCEDURE editar
+DODEFAULT()
+THISFORM.GRDVESTADOS.ESTADO.ENABLED = .T.
+ENDPROC
+**
+PROCEDURE filtrar
+M.IDCUENTA = ALLTRIM(THISFORM.CUENTA.VALUE)
+M.IDOPERACION = ALLTRIM(THISFORM.OPERACION.VALUE)
+M.IDESTADO = ALLTRIM(THISFORM.ESTADO.VALUE)
+= REQUERY('vEstados')
+THISFORM.REFRESHFORM()
+ENDPROC
+**
+[END METHODS]
+[START RESERVED3]
+*filtrar 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8OA
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Cuenta
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "222,30"
+FirstElement = 1
+Height = 24
+Left = 133
+Name = "Cuenta"
+NumberOfElements = 0
+RowSourceType = 3
+Style = 0
+TabIndex = 4
+Top = 264
+Width = 444
+ZOrderSet = 2
+cmdsql = select  nombre+idmoneda, idcuenta from ts_cuentas
+cursor = cCuentas
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+THIS.LISTINDEX = 1
+ENDPROC
+**
+PROCEDURE InteractiveChange
+THISFORM.FILTRAR()
+ENDPROC
+**
+PROCEDURE LostFocus
+IF EMPTY(THIS.VALUE)
+THISFORM.FILTRAR()
+ENDIF
+ENDPROC
+**
+PROCEDURE Refresh
+THIS.ENABLED =  .NOT. THISFORM.EDITMODE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8OK
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Estado
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BorderStyle = 1
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "160,30"
+Enabled = .T.
+FirstElement = 1
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 24
+ItemBackColor = 255,255,255
+ItemForeColor = 0,0,0
+Left = 385
+Name = "Estado"
+NumberOfElements = 0
+RowSourceType = 3
+SpecialEffect = 0
+Style = 0
+TabIndex = 2
+Top = 288
+Width = 192
+ZOrderSet = 4
+cmdsql = select estado_cheque, idestado from ts_estado_cheque
+cursor = cEstadoCheque
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+THIS.LISTINDEX = 1
+ENDPROC
+**
+PROCEDURE InteractiveChange
+THISFORM.FILTRAR()
+ENDPROC
+**
+PROCEDURE LostFocus
+IF EMPTY(THIS.VALUE)
+THISFORM.FILTRAR()
+ENDIF
+ENDPROC
+**
+PROCEDURE Refresh
+THIS.ENABLED =  .NOT. THISFORM.EDITMODE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8P4
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdVestados
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Column1.BackColor = 211,224,231
+Column1.ColumnOrder = 2
+Column1.ControlSource = "vestados.fecha"
+Column1.FontSize = 8
+Column1.Name = "Fecha"
+Column1.Visible = .T.
+Column1.Width = 65
+Column2.BackColor = 211,224,231
+Column2.ColumnOrder = 5
+Column2.ControlSource = "vestados.referencia"
+Column2.FontSize = 8
+Column2.Name = "ref"
+Column2.Visible = .T.
+Column2.Width = 122
+Column3.BackColor = 211,224,231
+Column3.ColumnOrder = 6
+Column3.ControlSource = "vestados.idoperacion"
+Column3.CurrentControl = "Operacion"
+Column3.FontSize = 8
+Column3.Name = "Operacion"
+Column3.Sparse = .F.
+Column3.Visible = .T.
+Column3.Width = 71
+Column4.BackColor = 211,224,231
+Column4.ColumnOrder = 3
+Column4.ControlSource = "vestados.nrocheque"
+Column4.FontSize = 8
+Column4.Name = "NroCheque"
+Column4.Visible = .T.
+Column4.Width = 79
+Column5.BackColor = 211,224,231
+Column5.ColumnOrder = 4
+Column5.ControlSource = "vestados.importe"
+Column5.FontSize = 8
+Column5.InputMask = "999,999,999,999.99"
+Column5.Name = "Importe"
+Column5.Visible = .T.
+Column5.Width = 86
+Column6.ColumnOrder = 7
+Column6.ControlSource = "vestados.idestado"
+Column6.CurrentControl = "Estado"
+Column6.FontSize = 8
+Column6.Name = "Estado"
+Column6.Sparse = .F.
+Column6.Visible = .T.
+Column6.Width = 85
+Column7.BackColor = 211,224,231
+Column7.ColumnOrder = 1
+Column7.ControlSource = "vestados.idcuenta"
+Column7.CurrentControl = "Cuenta"
+Column7.FontSize = 8
+Column7.Name = "Cuenta"
+Column7.Sparse = .F.
+ColumnCount = 7
+FontSize = 8
+Height = 238
+Left = 1
+Name = "grdVestados"
+Panel = 1
+RecordMark = .T.
+RecordSource = "vestados"
+RecordSourceType = 1
+RowHeight = 20
+ScrollBars = 2
+Top = 2
+Width = 623
+ZOrderSet = 9
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+THIS.CUENTA.WIDTH = 75
+ENDPROC
+**
+PROCEDURE Refresh
+DODEFAULT()
+THIS.SETALL('Enabled', .F., 'Column')
+THIS.ESTADO.ENABLED = THISFORM.EDITMODE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8Q8
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdVestados.Cuenta
+[START PROPERTIES]
+Caption = "Cuenta"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8Q9
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Cuenta
+[PARENT] Tsbaseform12.grdVestados.Cuenta
+[START PROPERTIES]
+BackColor = 211,224,231
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 3
+ColumnWidths = "222,0,20"
+ControlSource = "vestados.idcuenta"
+DisabledBackColor = 211,224,231
+FirstElement = 1
+Height = 24
+ItemTips = .T.
+Left = 132
+Name = "Cuenta"
+NumberOfElements = 0
+RowSourceType = 3
+SpecialEffect = 1
+Style = 2
+TabIndex = 4
+Top = 276
+Visible = .T.
+Width = 351
+ZOrderSet = 1
+cmdsql = select  rtrim(nombre), idcuenta, idmoneda from ts_cuentas
+cursor = cCuentas1
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+THISFORM.FILTRAR()
+ENDPROC
+**
+PROCEDURE LostFocus
+IF EMPTY(THIS.VALUE)
+THISFORM.FILTRAR()
+ENDIF
+ENDPROC
+**
+PROCEDURE Refresh
+THIS.ENABLED =  .NOT. THISFORM.EDITMODE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8Q1
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdVestados.Estado
+[START PROPERTIES]
+Caption = "Estado"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8Q7
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Estado
+[PARENT] Tsbaseform12.grdVestados.Estado
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "160,0"
+ControlSource = "vestados.idestado"
+FirstElement = 1
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 24
+ItemBackColor = 255,255,255
+ItemForeColor = 0,0,0
+ItemTips = .T.
+Left = 132
+Name = "Estado"
+NumberOfElements = 0
+RowSourceType = 3
+SpecialEffect = 1
+Style = 2
+TabIndex = 2
+Top = 324
+Visible = .T.
+Width = 351
+ZOrderSet = 3
+cmdsql = select estado_cheque, idestado from ts_estado_cheque
+cursor = cEstadoCheque1
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+**
+** ReFox - este procedimiento es vacío **
+**
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8PN
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdVestados.Fecha
+[START PROPERTIES]
+Caption = "Fecha Emis."
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8PO
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdVestados.Fecha
+[START PROPERTIES]
+BackColor = 211,224,231
+BackStyle = 0
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8PZ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdVestados.Importe
+[START PROPERTIES]
+Caption = "Importe"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8Q0
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdVestados.Importe
+[START PROPERTIES]
+BackColor = 211,224,231
+BackStyle = 0
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999,999.99"
+Margin = 0
+Name = "Text1"
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8PX
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdVestados.NroCheque
+[START PROPERTIES]
+Caption = "Nº Cheque"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8PY
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdVestados.NroCheque
+[START PROPERTIES]
+BackColor = 211,224,231
+BackStyle = 0
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8PR
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdVestados.Operacion
+[START PROPERTIES]
+Caption = "Operación"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8PS
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Operacion
+[PARENT] Tsbaseform12.grdVestados.Operacion
+[START PROPERTIES]
+Alignment = 0
+BackColor = 211,224,231
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "160,0"
+ControlSource = "vestados.idoperacion"
+DisabledBackColor = 211,224,231
+Enabled = .T.
+FirstElement = 1
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 24
+ItemBackColor = 255,255,255
+ItemForeColor = 0,0,0
+ItemTips = .T.
+Left = 132
+Name = "Operacion"
+NumberOfElements = 0
+RowSourceType = 3
+SpecialEffect = 1
+Style = 2
+TabIndex = 2
+Top = 300
+Visible = .T.
+Width = 351
+ZOrderSet = 6
+cmdsql = select descripcion, idoperacion from ts_operacion
+cursor = coperacion
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+THISFORM.FILTRAR()
+ENDPROC
+**
+PROCEDURE LostFocus
+IF EMPTY(THIS.VALUE)
+THISFORM.FILTRAR()
+ENDIF
+ENDPROC
+**
+PROCEDURE Refresh
+THIS.ENABLED =  .NOT. THISFORM.EDITMODE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8PP
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdVestados.ref
+[START PROPERTIES]
+Caption = "Referencia"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8PQ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdVestados.ref
+[START PROPERTIES]
+BackColor = 211,224,231
+BackStyle = 0
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8OJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcuenta
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+Caption = "Nombre de Cuenta"
+FontBold = .F.
+Height = 16
+Left = 13
+Name = "lblIdcuenta"
+TabIndex = 3
+Top = 264
+Width = 94
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8OV
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Operacion
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BorderStyle = 1
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "160,30"
+Enabled = .T.
+FirstElement = 1
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 24
+ItemBackColor = 255,255,255
+ItemForeColor = 0,0,0
+Left = 133
+Name = "Operacion"
+NumberOfElements = 0
+SpecialEffect = 0
+Style = 2
+TabIndex = 2
+Top = 288
+Width = 192
+ZOrderSet = 7
+cmdsql = select descripcion, idoperacion from ts_operacion
+cursor = cOperacion
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.FILTRAR()
+ENDPROC
+**
+PROCEDURE Init
+DODEFAULT()
+THIS.LISTINDEX = 1
+ENDPROC
+**
+PROCEDURE LostFocus
+IF EMPTY(THIS.VALUE)
+THISFORM.FILTRAR()
+ENDIF
+ENDPROC
+**
+PROCEDURE Refresh
+THIS.ENABLED =  .NOT. THISFORM.EDITMODE
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8O9
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 72
+Left = 1
+Name = "Ts3dshape1"
+Top = 252
+Width = 588
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8OT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 0
+BorderStyle = 0
+Caption = "Estado"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 337
+Name = "Tslabel1"
+TabIndex = 1
+Top = 288
+Width = 38
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8P3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BackStyle = 0
+BorderStyle = 0
+Caption = "Operación"
+FontBold = .F.
+FontItalic = .F.
+FontName = "Arial"
+FontSize = 8
+FontUnderline = .F.
+ForeColor = 0,0,0
+Height = 16
+Left = 13
+Name = "Tslabel2"
+TabIndex = 1
+Top = 288
+Width = 104
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1GP15I8OU
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Condición de Filtro"
+FontBold = .F.
+Height = 16
+Left = 13
+Name = "Tslabel3"
+TabIndex = 3
+Top = 246
+Width = 94
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

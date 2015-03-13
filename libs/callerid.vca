@@ -1,0 +1,174 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Class     
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2A10Q576J
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] callerid
+[START PROPERTIES]
+Width = 38
+Height = 59
+BackStyle = 0
+fecha = 
+telefono = 
+Name = "callerid"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Destroy
+this.olecontrol1.portopen = .f.
+ENDPROC
+PROCEDURE Init
+Local cValor
+With this
+*SET STEP ON
+cValor = ""
+.olecontrol1.commport = 3
+.olecontrol1.settings = "9600,N,8,1" &&aunque la 'N', podria ser en minuscula ("n").
+.olecontrol1.inputlen = 0
+.olecontrol1.portopen = .t.
+.olecontrol1.Output = "ATV1Q0" + Chr(13)
+
+cValor = cValor + .olecontrol1.input
+
+*!*	DO WHILE NOT (("OK" + CHR(13)) $ cValor)
+*!*	cValor = cValor + .olecontrol1.input
+
+*!*	ENDDO
+
+.olecontrol1.Output = "ATZ" + Chr(13)
+
+cValor = cValor + .olecontrol1.input
+
+DO WHILE NOT (("OK" + CHR(13)) $ cValor)
+cValor = cValor + .olecontrol1.input
+
+ENDDO
+
+.olecontrol1.Output = "AT#CID=1" + Chr(13)
+
+cValor = cValor + .olecontrol1.input
+
+DO WHILE NOT (("OK" + CHR(13)) $ cValor)
+cValor = cValor + .olecontrol1.input
+ENDDO
+
+*!*	cValor=""
+*!*	DO WHILE NOT (("RING" + CHR(13)) $ cValor)
+*!*	cValor = cValor + .olecontrol1.input
+*!*	ENDDO
+this.timer1.Enabled= .T.
+
+
+
+
+
+
+Endwith
+
+ENDPROC
+PROCEDURE llamada
+LPARAMETERS cadena
+***procesamos la llamada
+
+LOCAL llamada(4)
+cadena=STRTRAN(cadena,"DATE = ")
+cadena=STRTRAN(cadena,"TIME = ")
+cadena=STRTRAN(cadena,"NMBR = ")
+ALINES(llamada,cadena)
+LLAMADA(1)= DATETIME(YEAR(DATE()),VAL(SUBSTR(LLAMADA(2),1,2)),VAL(SUBSTR(LLAMADA(2),3,2)),VAL(SUBSTR(LLAMADA(3),1,2)),VAL(SUBSTR(LLAMADA(3),3,2)))
+*SET STEP ON
+*MESSAGEBOX(cadena)
+***luego activamos de nuevo el timer
+this.fecha=llamada(1)
+this.telefono=llamada(4)
+this.timer1.Enabled= .T.
+this.llamadaentrante
+
+ENDPROC
+[END METHODS]
+[START RESERVED1]
+Class[END RESERVED1]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED3]
+fecha
+telefono
+*llamada 
+*llamadaentrante 
+[END RESERVED3]
+[START RESERVED6]
+Pixels[END RESERVED6]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2A10Q576Z
+[CLASS] olecontrol
+[BASECLASS] olecontrol
+[OBJNAME] Olecontrol1
+[PARENT] callerid
+[START PROPERTIES]
+Top = 0
+Left = 0
+Height = 100
+Width = 100
+Name = "Olecontrol1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE OnComm
+*** ActiveX Control Event ***
+
+
+ENDPROC
+[END METHODS]
+[BINSTART OLE]
+CHECKSUM=58116
+[BINEND OLE]
+[BINSTART OLE2]
+CHECKSUM=61968
+[BINEND OLE2]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2A10Q5770
+[CLASS] timer
+[BASECLASS] timer
+[OBJNAME] Timer1
+[PARENT] callerid
+[START PROPERTIES]
+Top = 36
+Left = 0
+Height = 23
+Width = 23
+Enabled = .F.
+Interval = 500
+Name = "Timer1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Timer
+LOCAL lcInput
+lcInput = this.Parent.OLecontrol1.Input
+IF ("DATE"  $ lcInput)
+	THIS.Enabled= .F.
+	this.Parent.llamada(lcInput)
+*	MESSAGEBOX(lcInput)
+ENDIF
+
+
+*thisform.edit1.Value=thisform.edit1.Value+lcInput
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[OBJNAME] callerid
+[EOF]

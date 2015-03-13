@@ -1,0 +1,243 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\strings.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0IWC54
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = (oApp.HndConn)
+DataSourceType = "ODBC"
+Height = 200
+Left = 166
+Name = "Dataenvironment"
+Top = 219
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25Q0WX99V
+[CLASS] cursoradapter
+[BASECLASS] cursoradapter
+[OBJNAME] Cursoradapter1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "bs_Ciudades"
+CursorSchema = DESCRIPCION C(50), IDCIUDAD C(10), IDDPTO C(10)
+DataSourceType = "ODBC"
+Flags = 0
+Height = 90
+KeyFieldList = IDCIUDAD
+Left = 10
+Name = "Cursoradapter1"
+SelectCmd = select Descripcion, IdCiudad, IdDpto from bs_Ciudades
+Tables = bs_Ciudades
+Top = 20
+UpdatableFieldList = DESCRIPCION, IDCIUDAD, IDDPTO
+UpdateNameList = DESCRIPCION bs_Ciudades.Descripcion, IDCIUDAD bs_Ciudades.IdCiudad, IDDPTO bs_Ciudades.IdDpto
+UseDeDataSource = .T.
+Width = 91
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE AutoOpen
+*** Setup code: DO NOT REMOVE
+if not pemstatus(This, '__VFPSetup', 5)
+	This.AddProperty('__VFPSetup', 1)
+	This.Init()
+endif
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+PROCEDURE Init
+*** Setup code: DO NOT REMOVE
+local llReturn
+do case
+	case not pemstatus(This, '__VFPSetup', 5)
+		This.AddProperty('__VFPSetup', 0)
+	case This.__VFPSetup = 1
+		This.__VFPSetup = 2
+	case This.__VFPSetup = 2
+		This.__VFPSetup = 0
+		return
+endcase
+set multilocks on
+llReturn = dodefault()
+*** End of Setup code: DO NOT REMOVE
+
+*** Setup code: DO NOT REMOVE
+if This.__VFPSetup = 1
+	This.__VFPSetup = 2
+endif
+return llReturn
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0IWC56
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Ciudades"
+DoCreate = .T.
+Height = 253
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 252
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.PAGE1.Name = "PAGE1"
+Pageframe1.PAGE2.Name = "PAGE2"
+Pageframe1.PAGE2.grdList.Name = "grdList"
+Pageframe1.Top = 0
+Pageframe1.Width = 408
+Width = 408
+camponro = 
+campos = 
+campotam = 3
+idobjeto = 34
+lblRequerido.Name = "lblRequerido"
+tabla1 = bs_Ciudades
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0IWC5J
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCentro
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Codigo"
+Height = 16
+Left = 55
+Name = "lblCentro"
+TabIndex = 1
+Top = 55
+Width = 40
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0IWC5N
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripción
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Ciudad"
+Height = 16
+Left = 28
+Name = "lblDescripción"
+TabIndex = 3
+Top = 82
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0IWC5R
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblPresupuesto
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Caption = "Dpto"
+Height = 16
+Left = 21
+Name = "lblPresupuesto"
+TabIndex = 5
+Top = 109
+Width = 74
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0IWC5G
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCentro
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_Ciudades.idciudad"
+Height = 22
+Left = 119
+Name = "txtCentro"
+TabIndex = 2
+Top = 55
+Width = 44
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0IWC5L
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripción
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_Ciudades.descripcion"
+Height = 22
+Left = 119
+Name = "txtDescripción"
+TabIndex = 4
+Top = 82
+Width = 218
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BU0IWC5P
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtPresupuesto
+[PARENT] Tsmaintform1.Pageframe1.PAGE1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_Ciudades.iddpto"
+Height = 22
+Left = 119
+Name = "txtPresupuesto"
+TabIndex = 6
+Top = 109
+Width = 132
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

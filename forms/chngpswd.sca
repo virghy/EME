@@ -1,0 +1,308 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QZ90VFMP8
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 214
+InitialSelectedAlias = "vusuarios"
+Left = 371
+Name = "Dataenvironment"
+Top = 34
+Width = 329
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+SET TALK OFF
+SET EXCLUSIVE OFF
+SET DELETED ON
+ENDPROC
+**
+[END METHODS]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70Z0YZC
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] frmChangePassword
+[START PROPERTIES]
+BorderStyle = 2
+Caption = "Cambiar contraseña"
+ControlBox = .F.
+DataSession = 2
+DoCreate = .T.
+HalfHeightCaption = .T.
+Height = 168
+Name = "frmChangePassword"
+Width = 440
+WindowType = 1
+ctoolbar = 
+lallowedits = .F.
+lallownew = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Activate
+TSBASEFORM::ACTIVATE()
+SELECT VUSUARIOS
+ENDPROC
+**
+PROCEDURE Init
+THISFORM.TXTUSERNAME.VALUE = ALLTRIM(VUSUARIOS.FIRST_NAME)+" "+VUSUARIOS.LAST_NAME
+ENDPROC
+**
+[END METHODS]
+[START RESERVED3]
+*validate Validates all entries made in this form.
+coldpassword The employee's old password.
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70ZX87W
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancel
+[PARENT] frmChangePassword
+[START PROPERTIES]
+Cancel = .T.
+Caption = "\<Cancelar"
+FontBold = .T.
+Height = 26
+Left = 284
+Name = "cmdCancel"
+TabIndex = 6
+Top = 108
+Width = 145
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+= TABLEREVERT()
+RELEASE THISFORM
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70ZX872
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdOK
+[PARENT] frmChangePassword
+[START PROPERTIES]
+Caption = "Acep\<tar"
+Default = .T.
+FontBold = .T.
+Height = 26
+Left = 284
+Name = "cmdOK"
+TabIndex = 5
+Top = 72
+Width = 145
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF THISFORM.VALIDATE()
+M.IDUSUARIO = OAPP.GETEMPLOYEEID()
+M.NEWPASSWORD = OAPP.ENCRIPTAR(THISFORM.TXTCONFIRM.VALUE)
+SET DATABASE TO datos
+IF SQL('update Usuarios set password = ?m.newPassword where Employee_id = ?m.idUsuario')>0
+THISFORM.RELEASE
+ENDIF
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70Z0Z3I
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] frmChangePassword
+[START PROPERTIES]
+Caption = "Contraseña anterior"
+FontBold = .F.
+Height = 22
+Left = 24
+Name = "Tslabel1"
+TabIndex = 3
+Top = 53
+Width = 141
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70Z0Z4C
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] frmChangePassword
+[START PROPERTIES]
+Caption = "Nueva contraseña"
+FontBold = .F.
+Height = 22
+Left = 24
+Name = "Tslabel2"
+TabIndex = 4
+Top = 84
+Width = 141
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70Z0Z57
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] frmChangePassword
+[START PROPERTIES]
+Caption = "Confirmar nueva contraseña"
+FontBold = .F.
+Height = 22
+Left = 6
+Name = "Tslabel3"
+TabIndex = 5
+Top = 120
+Width = 159
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70Z0Z7F
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] frmChangePassword
+[START PROPERTIES]
+Caption = "Nombre de usuario"
+FontBold = .F.
+Height = 22
+Left = 24
+Name = "Tslabel4"
+TabIndex = 4
+Top = 18
+Width = 141
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70Z0Z61
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtConfirm
+[PARENT] frmChangePassword
+[START PROPERTIES]
+ControlSource = ""
+Enabled = .T.
+Format = "!"
+Left = 168
+Name = "txtConfirm"
+PasswordChar = "*"
+TabIndex = 3
+Top = 120
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70Z0Z24
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNewPassword
+[PARENT] frmChangePassword
+[START PROPERTIES]
+Enabled = .T.
+Format = "!"
+Left = 168
+Name = "txtNewPassword"
+PasswordChar = "*"
+TabIndex = 2
+Top = 84
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70Z0Z10
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtOldPassword
+[PARENT] frmChangePassword
+[START PROPERTIES]
+Enabled = .T.
+Format = "!"
+Left = 168
+Name = "txtOldPassword"
+PasswordChar = "*"
+TabIndex = 1
+Top = 48
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+LOCAL LLENABLED
+LLENABLED = (ALLTRIM(THISFORM.COLDPASSWORD)==OAPP.ENCRIPTAR(ALLTRIM(THIS.VALUE)))
+THISFORM.TXTNEWPASSWORD.ENABLED = LLENABLED
+THISFORM.TXTCONFIRM.ENABLED = LLENABLED
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QY70Z0Z89
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtUserName
+[PARENT] frmChangePassword
+[START PROPERTIES]
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 168
+Name = "txtUserName"
+PasswordChar = ""
+TabIndex = 4
+Top = 15
+Width = 257
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 30, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

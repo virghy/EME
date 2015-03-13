@@ -1,0 +1,429 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2F
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Height = 200
+InitialSelectedAlias = "vt_cpbt"
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1IS0UN8X6
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_cpbt"
+BufferModeOverride = 5
+CursorSource = "vt_cpbt"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2I
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Comprobantes de Venta"
+DoCreate = .T.
+Height = 277
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 276
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.TabIndex = 1
+Pageframe1.Top = 0
+Pageframe1.Width = 456
+Width = 456
+campos = idempresa
+idobjeto = 49
+lblRequerido.Name = "lblRequerido"
+tabla1 = vt_cpbt
+valores = oApp.Empresa
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1010T6B7I
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkPide_formapago
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = ""
+Comment = ""
+ControlSource = "vt_cpbt.pide_formapago"
+FontBold = .T.
+Height = 16
+Left = 196
+Name = "chkPide_formapago"
+TabIndex = 8
+Top = 214
+Width = 24
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2F
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Cpbt_stk
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "190,0"
+ControlSource = "vt_cpbt.cpbt_stk"
+FirstElement = 1
+Height = 24
+Left = 196
+Name = "Cpbt_stk"
+NumberOfElements = 0
+Style = 2
+TabIndex = 4
+Top = 114
+Width = 192
+cmdsql = select descripcion,cpbt_stk from st_cpbt_stk where IdEmpresa = ?oApp.Empresa order by 1 
+cursor = cCpbt_stk
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0H50JFL1V
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblAbrev
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Abreviatura"
+Height = 16
+Left = 125
+Name = "lblAbrev"
+TabIndex = 14
+Top = 169
+Width = 66
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU36
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCpbt_stk
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Comprobante de Stock"
+Height = 16
+Left = 62
+Name = "lblCpbt_stk"
+TabIndex = 12
+Top = 116
+Width = 129
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2U
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Descripción"
+Height = 16
+Left = 124
+Name = "lblDescripcion"
+TabIndex = 10
+Top = 67
+Width = 67
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2Q
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcpbt_vta
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Codigo de Comprobante"
+Height = 16
+Left = 54
+Name = "lblIdcpbt_vta"
+TabIndex = 9
+Top = 46
+Width = 137
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2F
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblUlt_nro
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Ultimo Nro."
+Height = 16
+Left = 129
+Name = "lblUlt_nro"
+TabIndex = 15
+Top = 193
+Width = 62
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NK0VQ5VP
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] TipoImpuesto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "190,0"
+ControlSource = "vt_cpbt.tipo_iva"
+FirstElement = 1
+Height = 24
+Left = 196
+Name = "TipoImpuesto"
+NumberOfElements = 0
+RowSource = "Inscripto,I,Exento,E,Consumidor Final,C"
+RowSourceType = 1
+Style = 2
+TabIndex = 5
+Top = 140
+Width = 192
+editable = .T.
+solonuevo = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+THIS.ENABLED = THISFORM.EDITMODE .AND. (THISFORM.ESNUEVO .OR. EMPTY(THIS.VALUE))
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2G
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] TipoOperacion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "190,0"
+ControlSource = "vt_cpbt.tipo"
+FirstElement = 1
+Height = 24
+Left = 196
+Name = "TipoOperacion"
+NumberOfElements = 0
+RowSource = "Debito,D,Crédito,C"
+RowSourceType = 1
+Style = 2
+TabIndex = 3
+Top = 88
+Width = 192
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2F
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Tipo de Operación"
+Height = 16
+Left = 89
+Name = "Tslabel1"
+TabIndex = 11
+Top = 91
+Width = 102
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NK0VQ5VM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Tipo de Impuesto"
+Height = 16
+Left = 92
+Name = "Tslabel2"
+TabIndex = 13
+Top = 143
+Width = 99
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1010T6B7J
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .T.
+Caption = "Solicita forma de pago"
+Height = 16
+Left = 67
+Name = "Tslabel3"
+TabIndex = 16
+Top = 214
+Width = 124
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0H50JFL1T
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtAbrev
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_cpbt.abrev"
+Height = 22
+Left = 196
+MaxLength = 5
+Name = "txtAbrev"
+TabIndex = 6
+Top = 166
+Width = 72
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2S
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_cpbt.descripcion"
+Height = 22
+Left = 196
+Name = "txtDescripcion"
+TabIndex = 2
+Top = 64
+Width = 192
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2N
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdcpbt_vta
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_cpbt.idcomprobante"
+Height = 22
+Left = 196
+Name = "txtIdcpbt_vta"
+TabIndex = 1
+Top = 40
+Width = 35
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E904PU2W
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtUlt_nro
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 3
+Comment = ""
+ControlSource = "vt_cpbt.ult_nro"
+Height = 22
+Left = 196
+Name = "txtUlt_nro"
+TabIndex = 7
+Top = 190
+Value = 0
+Width = 72
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

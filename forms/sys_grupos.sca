@@ -1,0 +1,706 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WD23C
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+AutoCloseTables = .F.
+AutoOpenTables = .F.
+Height = 453
+Left = -10
+Name = "Dataenvironment"
+Top = 58
+Width = 792
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+ENDPROC
+**
+PROCEDURE Init
+USE datos!sys_grupos IN 0
+CURSORSETPROP("Buffering", 5, 'sys_grupos')
+USE datos!sys_permisos_objetos NODATA IN 0
+CURSORSETPROP("Buffering", 5, 'sys_permisos_objetos')
+USE datos!sys_vgrupoUsuario NODATA IN 0
+CURSORSETPROP("Buffering", 5, 'sys_vGrupoUsuario')
+ENDPROC
+**
+[END METHODS]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WD23E
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Grupos de Usuarios"
+DoCreate = .T.
+ForeColor = 128,128,0
+Height = 400
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 400
+Pageframe1.Left = 1
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Top = 0
+Pageframe1.Width = 500
+Width = 500
+campos = idgrupo, idsistema
+colorform = (rgb(128,0,0))
+colorreport = (rgb(0,128,0))
+idobjeto = 3
+lblRequerido.Name = "lblRequerido"
+tabla1 = sys_grupos
+tabla2 = sys_permisos_objetos
+tabla3 = sys_vgrupousuario
+valores = newid('sys_grupos'), oApp.Sistema
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Load
+USE datos!sys_grupos IN 0
+USE datos!sys_permisos_objetos NODATA IN 0
+USE datos!sys_vGrupoUsuario NODATA IN 0
+= CURSORSETPROP('Buffering', 5, 'sys_permisos_objetos')
+= CURSORSETPROP('Buffering', 5, 'sys_vGrupoUsuario')
+ENDPROC
+**
+PROCEDURE save
+IF DODEFAULT()
+OAPP.CARGARPERMISOS()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+[START RESERVED3]
+colorform
+colorreport
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9C
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblGrupo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BackColor = 0,128,0
+Caption = "Grupo"
+ForeColor = 0,0,0
+Height = 16
+Left = 74
+Name = "lblGrupo"
+TabIndex = 1
+Top = 17
+Width = 36
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9D
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdsistema
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Sistema"
+Height = 16
+Left = 53
+Name = "lblIdsistema"
+TabIndex = 1
+Top = 46
+Width = 57
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WD23C
+[CLASS] pageframe
+[BASECLASS] pageframe
+[OBJNAME] Pageframe1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ErasePage = .T.
+Height = 276
+Left = 10
+Name = "Pageframe1"
+Page1.Caption = "\<Usuarios"
+Page1.FontSize = 8
+Page1.Name = "Page1"
+Page2.Caption = "\<Permisos"
+Page2.FontSize = 8
+Page2.Name = "Page2"
+PageCount = 2
+TabStretch = 1
+TabStyle = 0
+Tabs = .T.
+Top = 82
+Width = 468
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Page1.Activate
+THIS.REFRESH()
+ENDPROC
+**
+PROCEDURE Page2.Activate
+THIS.REFRESH()
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9C
+[CLASS] detalle
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandgroup
+[OBJNAME] Detalle1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+AddItem.Height = 31
+AddItem.Left = 10
+AddItem.Name = "AddItem"
+AddItem.Top = 10
+AddItem.Width = 31
+Height = 84
+Left = 383
+Name = "Detalle1"
+RemoveItem.Height = 31
+RemoveItem.Left = 10
+RemoveItem.Name = "RemoveItem"
+RemoveItem.Top = 46
+RemoveItem.Width = 31
+Top = 70
+Width = 48
+campo = idgrupo
+codigo = 
+editable = .T.
+enlace = GrdUsuarios
+tabla = sys_vgrupousuario
+valor = sys_grupos.idgrupo
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WD23D
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] GrdUsuarios
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "sys_vgrupousuario.idusuario"
+Column1.FontSize = 8
+Column1.Name = "Column1"
+Column1.Width = 69
+Column2.ControlSource = "sys_vgrupousuario.nombre"
+Column2.FontSize = 8
+Column2.Name = "nombre"
+Column2.ReadOnly = .T.
+Column2.Width = 228
+ColumnCount = 2
+FontSize = 8
+Height = 214
+Left = 32
+Name = "GrdUsuarios"
+Panel = 1
+RecordSource = "sys_vgrupousuario"
+RowHeight = 17
+Top = 12
+Width = 317
+editable = .T.
+valorvariable = sys_grupos.idgrupo
+variablevista = m.idgrupo
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WU0LN
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1.GrdUsuarios.Column1
+[START PROPERTIES]
+Caption = "Idusuario"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ND0OS6LB
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Campo_clave1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1.GrdUsuarios.Column1
+[START PROPERTIES]
+BorderStyle = 0
+Left = 23
+Name = "Campo_clave1"
+Top = 31
+editable = .T.
+indice = employee_id
+mensajeerror = No se encuentra el Nro. de Personal especificado
+objeto = this.parent.parent.nombre.text1
+retorna = rtrim(first_name) + ' ' + last_name
+tabla = usuarios
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WD23E
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1.GrdUsuarios.nombre
+[START PROPERTIES]
+Caption = "Nombre"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9B
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page1.GrdUsuarios.nombre
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9D
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdSys_permisos_objetos
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2
+[START PROPERTIES]
+Column1.Alignment = 2
+Column1.ControlSource = "sys_permisos_objetos.tipo"
+Column1.DynamicFontBold = ""
+Column1.DynamicForeColor = "iif(tipo='F', thisform.ColorForm,thisform.ColorReport)"
+Column1.FontSize = 8
+Column1.Name = "Column1"
+Column1.ReadOnly = .T.
+Column1.Width = 25
+Column2.ControlSource = "sys_permisos_objetos.descripcion"
+Column2.DynamicForeColor = "iif(tipo='F', thisform.ColorForm,thisform.ColorReport)"
+Column2.FontSize = 8
+Column2.Name = "Column2"
+Column2.ReadOnly = .T.
+Column2.Width = 175
+Column3.Alignment = 3
+Column3.ControlSource = "sys_permisos_objetos.ejecutar"
+Column3.FontSize = 8
+Column3.Name = "Column3"
+Column3.Sparse = .F.
+Column3.Width = 45
+Column4.ControlSource = "sys_permisos_objetos.agregar"
+Column4.FontSize = 8
+Column4.Name = "Column4"
+Column4.Sparse = .F.
+Column4.Width = 42
+Column5.ControlSource = "sys_permisos_objetos.modificar"
+Column5.FontSize = 8
+Column5.Name = "Column5"
+Column5.Sparse = .F.
+Column5.Width = 43
+Column6.ControlSource = "sys_permisos_objetos.borrar"
+Column6.FontSize = 8
+Column6.Name = "Column6"
+Column6.Sparse = .F.
+Column6.Width = 41
+Column7.ControlSource = "sys_permisos_objetos.consultar"
+Column7.FontSize = 8
+Column7.Name = "Column7"
+Column7.Sparse = .F.
+Column7.Width = 49
+ColumnCount = 7
+FontSize = 8
+GridLines = 0
+Height = 228
+Left = 11
+Name = "grdSys_permisos_objetos"
+Panel = 1
+RecordSource = "sys_permisos_objetos"
+RecordSourceType = 1
+RowHeight = 17
+ScrollBars = 2
+Top = 10
+Width = 444
+editable = .T.
+valorvariable = sys_grupos.idgrupo
+variablevista = m.idgrupo
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9E
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column1
+[START PROPERTIES]
+Caption = "Tipo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WD23C
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column1
+[START PROPERTIES]
+Alignment = 2
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "sys_permisos_objetos.tipo"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WD23D
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column2
+[START PROPERTIES]
+Caption = "Descripción"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WU0LN
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ND0OS6LB
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column3
+[START PROPERTIES]
+Alignment = 2
+Caption = "Ejecutar"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF EMPTY(THIS.TAG)
+THIS.TAG = 'OK'
+REPLACE EJECUTAR WITH .T. ALL IN SYS_PERMISOS_OBJETOS
+ELSE
+THIS.TAG = ''
+REPLACE EJECUTAR WITH .F. ALL IN SYS_PERMISOS_OBJETOS
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WD23E
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] Check1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column3
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackStyle = 0
+Caption = ""
+DisabledForeColor = 0,0,160
+Height = 17
+Left = 25
+Name = "Check1"
+SpecialEffect = 1
+Top = 35
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9B
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column4
+[START PROPERTIES]
+Caption = "Agregar"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF EMPTY(THIS.TAG)
+THIS.TAG = 'OK'
+REPLACE AGREGAR WITH .T. ALL IN SYS_PERMISOS_OBJETOS
+ELSE
+THIS.TAG = ''
+REPLACE AGREGAR WITH .F. ALL IN SYS_PERMISOS_OBJETOS
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9C
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] Check1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column4
+[START PROPERTIES]
+AutoSize = .T.
+BackStyle = 0
+Caption = ""
+Height = 17
+Left = 39
+Name = "Check1"
+SpecialEffect = 1
+Top = 23
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9D
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column5
+[START PROPERTIES]
+Caption = "Modificar"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF EMPTY(THIS.TAG)
+THIS.TAG = 'OK'
+REPLACE MODIFICAR WITH .T. ALL IN SYS_PERMISOS_OBJETOS
+ELSE
+THIS.TAG = ''
+REPLACE MODIFICAR WITH .F. ALL IN SYS_PERMISOS_OBJETOS
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9E
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] Check1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column5
+[START PROPERTIES]
+AutoSize = .T.
+BackStyle = 0
+Caption = ""
+Height = 17
+Left = 32
+Name = "Check1"
+SpecialEffect = 1
+Top = 23
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WD23C
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column6
+[START PROPERTIES]
+Caption = "Borrar"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF EMPTY(THIS.TAG)
+THIS.TAG = 'OK'
+REPLACE BORRAR WITH .T. ALL IN SYS_PERMISOS_OBJETOS
+ELSE
+THIS.TAG = ''
+REPLACE BORRAR WITH .F. ALL IN SYS_PERMISOS_OBJETOS
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WD23D
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] Check1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column6
+[START PROPERTIES]
+AutoSize = .T.
+BackStyle = 0
+Caption = ""
+Height = 17
+Left = 24
+Name = "Check1"
+SpecialEffect = 1
+Style = 0
+Top = 23
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WU0LN
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column7
+[START PROPERTIES]
+Caption = "Consultar"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF EMPTY(THIS.TAG)
+THIS.TAG = 'OK'
+REPLACE CONSULTAR WITH .T. ALL IN SYS_PERMISOS_OBJETOS
+ELSE
+THIS.TAG = ''
+REPLACE CONSULTAR WITH .F. ALL IN SYS_PERMISOS_OBJETOS
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0ND0OS6LB
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] Check1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Pageframe1.Page2.grdSys_permisos_objetos.Column7
+[START PROPERTIES]
+AutoSize = .T.
+BackStyle = 0
+Caption = ""
+Height = 17
+Left = 30
+Name = "Check1"
+SpecialEffect = 1
+Top = 35
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9E
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "sys_grupos.idsistema"
+DragMode = 0
+Enabled = .T.
+Left = 118
+Name = "Tscombobox1"
+RowSource = "Select sistema, idsistema from datos!sys_sistemas order by 1 into cursor cSistemas"
+RowSourceType = 3
+Top = 46
+Width = 205
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0NC0WLD9B
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtGrupo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sys_grupos.grupo"
+Height = 22
+Left = 118
+MaxLength = 20
+Name = "txtGrupo"
+TabIndex = 1
+Top = 17
+Width = 205
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

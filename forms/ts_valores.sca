@@ -1,0 +1,662 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8G8
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 426
+Left = 160
+Name = "Dataenvironment"
+Top = 97
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1QE0XGWUU
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vvalores"
+CursorSource = "ts_valores"
+Database = ..\data\datos.dbc
+Height = 201
+Left = 11
+Name = "Cursor1"
+Top = 19
+Width = 201
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GA
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform12
+[START PROPERTIES]
+Caption = "Entrada de Valores"
+DataSession = 2
+DoCreate = .T.
+Height = 286
+Name = "Tsmaintform12"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 288
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.TabIndex = 1
+Pageframe1.Top = 0
+Pageframe1.Width = 567
+Width = 565
+campos = idvalor,idempresa
+lblRequerido.Name = "lblRequerido"
+tabla1 = vValores
+valores = newid( idvalor ),oapp.empresa
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE addnew
+DODEFAULT()
+THISFORM.PAGEFRAME1.PAGE1.ESTADO.LISTINDEX = 1
+THISFORM.PAGEFRAME1.PAGE1.CBVALORES.LISTINDEX = 1
+THISFORM.PAGEFRAME1.PAGE1.MONEDA.LISTINDEX = 2
+ENDPROC
+PROCEDURE lallowedits_access
+RETURN ( .NOT. (NVL(VVALORES.IDESTADO,"")='2' .OR. NVL(VVALORES.IDESTADO,"")='5'))
+ENDPROC
+PROCEDURE validar
+If Empty(Thisform.PAGEFRAME1.PAGE1.TXTNROCHEQUE.Value) .And. Rtrim(VVALORES.IDTIPOVALOR)='2'
+	Messagebox('Ingrese Nro Cheque',64, 'Futura Soft')
+	Return .F.
+Endif
+If Rtrim(VVALORES.IDTIPOVALOR)='1'
+	Replace VVALORES.FCHEMISION With Date()
+Endif
+If Empty(VVALORES.FCHEMISION) .And. Rtrim(VVALORES.IDTIPOVALOR)='2'
+	Messagebox('Ingrese Fecha', 64, 'Futura Soft')
+	Return .F.
+Endif
+If Empty(VVALORES.IDBANCO) .And. Rtrim(VVALORES.IDTIPOVALOR)='2'
+	Messagebox('Ingrese Banco', 64, 'Futura Soft')
+	Return .F.
+Endif
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8G9
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Banco
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,45"
+ControlSource = "vvalores.Idbanco"
+FirstElement = 1
+Height = 22
+Left = 107
+Name = "Banco"
+NumberOfElements = 0
+RowSourceType = 2
+Style = 2
+TabIndex = 6
+Top = 46
+Width = 180
+ZOrderSet = 19
+cmdsql = select descripcion, convert(char(10),idbanco) as IdBanco from bs_bancos
+cursor = cBancos
+editable = .T.
+mensajevalidacion = Ingrese el Banco
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Valid
+IF EMPTY(THIS.VALUE)
+MESSAGEBOX('Seleccione Banco', 0, 'Futura Software')
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0I3D02
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cbValores
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,45"
+ControlSource = "vvalores.idtipovalor"
+Height = 22
+Left = 107
+Name = "cbValores"
+RowSourceType = 3
+Style = 2
+Top = 22
+Width = 180
+ZOrderSet = 24
+cmdsql = select  tipovalor,convert(char(10),idtipovalor) from ts_tipovalor where isnull(fiscal,0)=0
+cursor = cValores
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0L14XO
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] estado
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,45"
+ControlSource = "vvalores.idestado"
+Enabled = .F.
+FirstElement = 1
+Height = 22
+Left = 359
+Name = "estado"
+NumberOfElements = 0
+RowSourceType = 3
+Style = 2
+TabIndex = 22
+Top = 214
+Width = 180
+ZOrderSet = 20
+cmdsql = select estado_cheque,idestado from ts_estado_cheque
+cursor = cEstadoCheque
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8H5
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblConcepto
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Concepto"
+Height = 16
+Left = 298
+Name = "lblConcepto"
+TabIndex = 19
+Top = 191
+Width = 55
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFchcheque
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Fecha de Cobro"
+Height = 16
+Left = 14
+Name = "lblFchcheque"
+TabIndex = 13
+Top = 130
+Width = 88
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFchemision
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Fecha Emisión"
+Height = 16
+Left = 21
+Name = "lblFchemision"
+TabIndex = 9
+Top = 106
+Width = 81
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8G8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdbanco
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Banco"
+Height = 16
+Left = 67
+Name = "lblIdbanco"
+TabIndex = 5
+Top = 46
+Width = 35
+ZOrderSet = 18
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8HG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdestado
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Estado"
+Height = 16
+Left = 314
+Name = "lblIdestado"
+TabIndex = 21
+Top = 215
+Width = 39
+ZOrderSet = 17
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdtitular
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Titular"
+Height = 16
+Left = 316
+Name = "lblIdtitular"
+TabIndex = 11
+Top = 106
+Width = 37
+ZOrderSet = 10
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8H2
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblImporte
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Importe"
+Height = 12
+Left = 56
+Name = "lblImporte"
+TabIndex = 17
+Top = 191
+Width = 46
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNombre
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nombre"
+Height = 16
+Left = 307
+Name = "lblNombre"
+TabIndex = 15
+Top = 130
+Width = 46
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNrocheque
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro Cheque"
+Height = 16
+Left = 289
+Name = "lblNrocheque"
+TabIndex = 7
+Top = 46
+Width = 67
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8G8
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Moneda
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "100,50"
+ControlSource = "vvalores.idmoneda"
+FirstElement = 1
+Height = 22
+Left = 359
+Name = "Moneda"
+NumberOfElements = 0
+RowSourceType = 3
+Style = 2
+TabIndex = 4
+Top = 22
+Width = 180
+ZOrderSet = 22
+cmdsql = select descripcion,idmoneda from bs_monedas
+cursor = cMonedas
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE AddItem
+LPARAMETERS CITEM
+**
+** ReFox - este procedimiento es vacío **
+**
+ENDPROC
+PROCEDURE LostFocus
+IF THIS.PARENT.CBVALORES.VALUE='1'
+THIS.PARENT.TXTIMPORTE.SETFOCUS
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8G8
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Height = 72
+Left = 11
+Name = "Ts3dshape1"
+Top = 10
+Width = 540
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8G8
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Height = 72
+Left = 11
+Name = "Ts3dshape2"
+Top = 94
+Width = 540
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0I3CYV
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape3
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Height = 72
+Left = 11
+Name = "Ts3dshape3"
+Top = 178
+Width = 540
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0LJ4ZV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Moneda"
+Height = 16
+Left = 309
+Name = "Tslabel1"
+TabIndex = 3
+Top = 22
+Width = 46
+ZOrderSet = 21
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CS0I3D01
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Tipo de Valor"
+Height = 16
+Left = 27
+Name = "Tslabel2"
+TabIndex = 1
+Top = 22
+Width = 75
+ZOrderSet = 23
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8H4
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtConcepto
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vvalores.concepto"
+Height = 22
+Left = 359
+Name = "txtConcepto"
+TabIndex = 20
+Top = 191
+Width = 180
+ZOrderSet = 15
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFchcheque
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vvalores.fchcheque"
+Height = 22
+Left = 107
+Name = "txtFchcheque"
+TabIndex = 14
+Top = 130
+Width = 100
+ZOrderSet = 7
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GK
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFchemision
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vvalores.fchemision"
+Height = 22
+Left = 107
+Name = "txtFchemision"
+TabIndex = 10
+Top = 106
+Width = 100
+ZOrderSet = 5
+mensajevalidacion = Ingrese Fecha
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GR
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdtitular
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vvalores.idtitular"
+Height = 22
+Left = 359
+Name = "txtIdtitular"
+TabIndex = 12
+Top = 106
+Width = 180
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8H0
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtImporte
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vvalores.importe"
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 107
+Name = "txtImporte"
+TabIndex = 18
+Top = 191
+Width = 100
+ZOrderSet = 13
+condicionvalidacion = !empty(vvalores.importe)
+mensajevalidacion = Ingrese Importe
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vvalores.nombre"
+Height = 22
+Left = 359
+Name = "txtNombre"
+TabIndex = 16
+Top = 130
+Width = 180
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0CR0KP8GF
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNrocheque
+[PARENT] Tsmaintform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vvalores.nrocheque"
+Height = 22
+Left = 359
+Name = "txtNrocheque"
+TabIndex = 8
+Top = 46
+Width = 179
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

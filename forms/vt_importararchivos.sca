@@ -1,0 +1,516 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RHT
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 0
+Left = 0
+Name = "Dataenvironment"
+Top = 0
+Width = 0
+[END PROPERTIES]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RHU
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform1
+[START PROPERTIES]
+Caption = "Importar Archivo"
+DoCreate = .T.
+Height = 495
+MaxButton = .F.
+MinButton = .F.
+Name = "Tsbaseform1"
+Width = 567
+ctoolbar = 
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE procesararchivo
+*archivo=GETFILE("TXT;XLS","Archivo","Seleccionar")
+LOCAL extencion 
+
+archivo = ThisForm.NombreArchivo.Value
+		**Para crear Cursor
+		CREATE CURSOR cResultado(Clave N,Cobrado N,A_desc N,Devolucion N)
+
+*** sacar la extension y preguntar si es  txt o xls
+extension = UPPER(RIGHT(archivo,3))
+**Solo TXT
+
+IF !EMPTY(archivo)
+	IF extension='TXT'	
+		hnd= FOPEN(archivo)
+		IF !EMPTY(hnd)
+			resultado=FGETS(hnd)
+
+			DO while !EMPTY(resultado)
+
+			*Analizar y Procesar
+
+				IF SUBSTR(resultado,79,2)="01"           &&Se cobro
+					lnclave= CAST(SUBSTR(resultado,18,10) as integer)
+					lncobrado = CAST(SUBSTR(resultado,58,11) as integer)
+					INSERT INTO cResultado(Clave,Cobrado,A_desc,Devolucion) values(lnclave,lncobrado,lncobrado,0)   
+
+				ENDIF
+				resultado=FGETS(hnd)
+			ENDDO
+
+			FCLOSE(hnd)
+		 ENDIF  
+ 	ELSE 
+ 	***Solo XLS
+ 		IF extension = 'XLS'
+ 	*	oXl = CREATEOBJECT("Excel.Application")
+		*oXl.WorkBooks.Open(Archivo)
+
+			SELECT 0 
+			IMPORT from (Archivo) TYPE XLS 
+			cAlias=ALIAS()
+*			SET STEP ON 
+			IF FIELD(1)<>'A'
+				MESSAGEBOX("La estructura del archivo no es correcto",64,TASTRADE_LOC)
+				RETURN
+			ENDIF
+			scan			
+			IF !EMPTY(VAL(a))
+				lcobrado=VAL(B)-VAL(C)
+				nClave = VAL(A)
+				nADesc=VAL(B)
+				nDev = VAL(C)
+			** insert into cursor
+				INSERT INTO cResultado(Clave,Cobrado,A_desc,Devolucion) values(nClave,lcobrado,nAdesc,nDev)   
+			ENDIF 
+			SELECT (cAlias)
+			ENDSCAN
+			USE IN (cAlias) 
+		ENDIF 
+	ENDIF 
+
+	ThisForm.Tsgrid1.RecordSource = "cResultado"
+	ThisForm.Tsgrid1.Column1.ControlSource = "cResultado.Clave"
+	ThisForm.Tsgrid1.Column2.ControlSource = "cResultado.cobrado"
+	ThisForm.Tsgrid1.Column3.ControlSource = "cResultado.a_desc"
+	ThisForm.Tsgrid1.Column4.ControlSource = "cResultado.devolucion"
+	
+	SELECT cResultado			
+	CALCULATE SUM(cobrado) TO nTotal
+	thisform.tstextbox1.Value=nTotal
+
+	GO TOP 
+	thisform.tsgrid1.Refresh()
+	
+ELSE 
+	MESSAGEBOX("Seleccione el Archivo","Futura Software")
+ENDIF 
+
+*SET STEP ON 
+
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*procesararchivo 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RHT
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NombreArchivo
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Height = 21
+Left = 290
+Name = "NombreArchivo"
+Top = 53
+Width = 156
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RHX
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Alignment = 6
+Caption = "..."
+Height = 25
+Left = 447
+Name = "Tscommandbutton1"
+Top = 52
+Width = 31
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+**archivo= getFILE("txt", "Indique el destino",  "Abrir")
+ThisForm.NombreArchivo.Value = getFILE("txt;xls", "Indique el destino",  "Abrir")
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RHY
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton2
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Caption = "Procesar"
+Left = 268
+Name = "Tscommandbutton2"
+Top = 90
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF EMPTY(ThisForm.NombreArchivo.value)
+	RETURN 
+	ThisForm.NombreArchivo.SetFocus()
+ELSE 
+	thisform.procesararchivo()
+
+ENDIF 
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RHZ
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton3
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Caption = "Guardar"
+Left = 421
+Name = "Tscommandbutton3"
+Top = 90
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+
+archivo= PUTFILE("Indique el destino",  JUSTSTEM(thisform.nombreArchivo.Value), "Dbf")
+
+IF !EMPTY(archivo)
+SET STEP ON 
+ SELECT cResultado
+ COPY TO (archivo)  &&record RECNO()
+ SELECT cResultado
+ MESSAGEBOX("Exportacion realizada.",64,TASTRADE_LOC)
+ENDIF 
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RI0
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Column1.FontSize = 8
+Column1.InputMask = "999,999,999"
+Column1.Name = "Column1"
+Column1.Width = 86
+Column2.Comment = ""
+Column2.FontSize = 8
+Column2.InputMask = "999,999,999"
+Column2.Name = "Column2"
+Column2.Width = 119
+Column3.ControlSource = ""
+Column3.FontSize = 8
+Column3.InputMask = "999,999,999"
+Column3.Name = "Column3"
+Column3.Width = 116
+Column4.FontSize = 8
+Column4.InputMask = "999,999,999"
+Column4.Name = "Column4"
+Column4.Width = 107
+ColumnCount = 4
+FontSize = 8
+GridLines = 2
+Height = 302
+Left = 41
+Name = "Tsgrid1"
+Panel = 1
+RecordSourceType = 1
+RowHeight = 17
+Top = 154
+Width = 478
+cfieldtosum = Cobrado
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RI1
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform1.Tsgrid1.Column1
+[START PROPERTIES]
+Caption = "Clave"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RI2
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform1.Tsgrid1.Column1
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RI3
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform1.Tsgrid1.Column2
+[START PROPERTIES]
+Caption = "Cobrado"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RI4
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform1.Tsgrid1.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RI5
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform1.Tsgrid1.Column3
+[START PROPERTIES]
+Caption = "A_Descontar"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RI6
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform1.Tsgrid1.Column3
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60XVRB3
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform1.Tsgrid1.Column4
+[START PROPERTIES]
+Caption = "Devolucion"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60XVRB4
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform1.Tsgrid1.Column4
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RHT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Caption = "Archivo"
+Left = 210
+Name = "Tslabel1"
+Top = 53
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K70VPG74
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Caption = "Total Cobrado"
+Left = 48
+Name = "Tslabel2"
+Top = 462
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RHT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Alignment = 0
+Caption = "1- Abrir Archivo"
+FontBold = .T.
+FontSize = 8
+Height = 24
+Left = 4
+Name = "Tslabel3"
+Top = 31
+Width = 132
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K60X2RHT
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Alignment = 0
+Caption = "2- Procesar archivo seleccionado"
+FontBold = .T.
+FontSize = 8
+Height = 24
+Left = 4
+Name = "Tslabel4"
+Top = 49
+Width = 204
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K70W6NI8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Alignment = 0
+Caption = "3- Guardar archivo procesado"
+FontBold = .T.
+FontSize = 8
+Height = 24
+Left = 4
+Name = "Tslabel5"
+Top = 67
+Width = 180
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2K70VPG73
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsbaseform1
+[START PROPERTIES]
+Alignment = 3
+Height = 21
+InputMask = "999,999,999,999"
+Left = 130
+Name = "Tstextbox1"
+Top = 460
+Value = (0)
+Width = 116
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

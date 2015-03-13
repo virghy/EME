@@ -1,0 +1,152 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RF0MLUJV
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RF0MLUJW
+[CLASS] form
+[BASECLASS] form
+[OBJNAME] Form1
+[START PROPERTIES]
+DoCreate = .T.
+Caption = "Periodo de Trabajo"
+MaxButton = .F.
+MinButton = .F.
+editmode = .T.
+Name = "Form1"
+[END PROPERTIES]
+[START RESERVED3]
+editmode
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RF0MLUJX
+[CLASS] shape
+[BASECLASS] shape
+[OBJNAME] Shape1
+[PARENT] Form1
+[START PROPERTIES]
+Top = 36
+Left = 24
+Height = 168
+Width = 324
+BackStyle = 0
+SpecialEffect = 0
+Name = "Shape1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RF0MLUJY
+[CLASS] tslabel
+[CLASSLOC] ..\..\..\futura\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 2
+BackStyle = 1
+Caption = "Seleccione el Periodo de Trabajo"
+Height = 22
+Left = 24
+Top = 30
+Width = 204
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RF0MLUJZ
+[CLASS] tslabel
+[CLASSLOC] ..\..\..\futura\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 2
+BackStyle = 0
+Caption = "Periodo de Trabajo"
+Height = 22
+Left = 36
+Top = 108
+Width = 120
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RF0MLUK0
+[CLASS] tscommandbutton
+[CLASSLOC] ..\..\..\futura\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdOK
+[PARENT] Form1
+[START PROPERTIES]
+Top = 216
+Left = 144
+Caption = "\<Aceptar"
+Name = "cmdOK"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RF0MLUK1
+[CLASS] tscommandbutton
+[CLASSLOC] ..\..\..\futura\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancel
+[PARENT] Form1
+[START PROPERTIES]
+Top = 216
+Left = 264
+Caption = "\<Cancelar"
+Name = "cmdCancel"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RF0MLUK2
+[CLASS] tscombobox
+[CLASSLOC] ..\..\..\futura\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Form1
+[START PROPERTIES]
+Height = 22
+Left = 156
+Top = 108
+Width = 180
+Name = "Tscombobox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

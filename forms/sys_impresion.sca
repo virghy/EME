@@ -1,0 +1,768 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHVQ
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+Left = 190
+Name = "Dataenvironment"
+Top = 264
+Width = 520
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO seteo 
+oApp.Setdatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0P3Y2G
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sys_impresion"
+BufferModeOverride = 1
+CursorSource = "sys_impresion"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 112
+Left = 11
+Name = "Cursor1"
+NoDataOnLoad = .F.
+Top = 20
+Width = 115
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0P3Y2H
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sys_impresiondet"
+BufferModeOverride = 5
+CursorSource = "sys_impresiondet"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 126
+Left = 150
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHVT
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Caption = "Impresión"
+Comment = "idempresa = ?oApp.Empresa"
+DoCreate = .T.
+Height = 549
+Icon = ..\bitmaps\default1.ico
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 551
+Pageframe1.Left = 3
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Top = 1
+Pageframe1.Width = 765
+Width = 768
+campos = idempresa,codigo
+idobjeto = 
+lblRequerido.Name = "lblRequerido"
+tabla1 = sys_impresion
+tabla2 = sys_impresiondet
+valores = oApp.Empresa,newid('sys_impresion')
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J40K8ZXV
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] EditComandoImpresion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "sys_impresion.comandoimpresion"
+Height = 84
+Left = 140
+Name = "EditComandoImpresion"
+TabIndex = 4
+Top = 192
+Width = 372
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0QM2II
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtDescripcionsql
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sys_impresion.descripcionsql"
+Height = 96
+Left = 140
+Name = "edtDescripcionsql"
+TabIndex = 5
+Top = 93
+Width = 613
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IZ0MY2N0
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Exportar
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Exportar"
+Height = 26
+Left = 562
+Name = "Exportar"
+Top = 16
+Width = 180
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+archivo= PUTFILE("Indique el destino", "FormatoImpresion","dbf")
+
+IF !EMPTY(archivo)
+ SELECT sys_impresion 
+ COPY TO (archivo) record RECNO()
+ SELECT sys_impresiondet
+ *archivo = archivo + "det.dat"
+archivo= FORCEPATH(JUSTSTEM(archivo)+"DET",JUSTPATH(archivo))
+ COPY TO (archivo)
+ MESSAGEBOX("Exportacion realizada.",64,TASTRADE_LOC)
+ENDIF
+ 
+ 
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IZ0MY2N1
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Importar
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Importar"
+Height = 26
+Left = 562
+Name = "Importar"
+Top = 52
+Width = 180
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+archivo= getFILE("dbf", "Indique el destino",  "Abrir")
+Codigo = INPUTBOX("Ingrese el nuevo codigo","Importacion")
+*SET STEP ON
+IF !EMPTY(archivo)
+ USE (archivo) IN 0 ALIAS origen
+ SELECT sys_impresion
+ thisform.addnew()
+
+*	GATHER MEMVAR MEMO FIELDS idempresa, descripcionsql, descripcion, campomoneda, destino, comandoimpresion
+	replace codigo WITH VAL(m.codigo),;
+	idempresa WITH origen.idempresa,;
+	descripcionSQL WITH origen.descripcio,;
+	descripcion WITH origen.descripci2,;
+	campomoneda with origen.campomoned,;
+	destino WITH origen.destino,;
+	comandoimpresion WITH origen.comandoimp		
+	
+* APPEND FROM (archivo) FIELDS idempresa, descripcionsql, descripcion, campomoneda, destino, comandoimpresion
+ SELECT sys_impresiondet
+ archivo =  FORCEPATH(JUSTSTEM(archivo)+"DET",JUSTPATH(archivo))
+ APPEND FROM (archivo)
+ replace codigo WITH VAL(m.codigo) ALL   
+* THISFORM.Refresh()
+ENDIF
+
+*thisform.editar
+
+ 
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHVV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCodigo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Codigo"
+Height = 16
+Left = 68
+Name = "lblCodigo"
+TabIndex = 10
+Top = 21
+Width = 53
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0P3Y2N
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Descripcion"
+Height = 16
+Left = 42
+Name = "lblDescripcion"
+TabIndex = 9
+Top = 45
+Width = 79
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHVZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripcionsql
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Descripcion SQL"
+Height = 16
+Left = 13
+Name = "lblDescripcionsql"
+TabIndex = 11
+Top = 105
+Width = 108
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHW2
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Column1.ControlSource = "sys_impresiondet.fila"
+Column1.FontSize = 8
+Column1.Name = "Fila"
+Column1.Width = 40
+Column2.ControlSource = "sys_impresiondet.columna"
+Column2.FontSize = 8
+Column2.Name = "Columna"
+Column2.Width = 43
+Column3.ControlSource = "sys_impresiondet.campo"
+Column3.FontSize = 8
+Column3.Name = "Campos"
+Column3.Width = 295
+Column4.ControlSource = "sys_impresiondet.mascara"
+Column4.FontSize = 8
+Column4.Name = "Mascara"
+Column4.Visible = .F.
+Column4.Width = 58
+Column5.ControlSource = "sys_impresiondet.tipo"
+Column5.FontSize = 8
+Column5.Name = "Tipo"
+Column5.Sparse = .F.
+Column5.Width = 58
+Column6.ControlSource = "sys_impresiondet.condicion"
+Column6.FontSize = 8
+Column6.Name = "Column6"
+Column6.Width = 135
+Column7.ControlSource = "sys_impresiondet.calculo"
+Column7.FontSize = 8
+Column7.Name = "Column7"
+Column7.Sparse = .F.
+Column7.Width = 60
+Column8.ControlSource = "sys_impresiondet.estirar"
+Column8.FontSize = 8
+Column8.Name = "Column8"
+Column8.Sparse = .F.
+Column8.Width = 34
+Column9.ControlSource = "sys_impresiondet.longitudmax"
+Column9.FontSize = 8
+Column9.InputMask = "999"
+Column9.Name = "Column9"
+Column9.Width = 50
+ColumnCount = 9
+FontSize = 8
+GridLines = 2
+Height = 240
+Left = 7
+Name = "Tsgrid1"
+Panel = 1
+RecordSource = "sys_impresiondet"
+RowHeight = 17
+TabIndex = 6
+Top = 278
+Width = 746
+campo = codigo
+editable = .T.
+valor = sys_impresion.codigo
+valorvariable = sys_impresion.codigo
+variablevista = m.codigo
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHW7
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Campos
+[START PROPERTIES]
+Caption = "Campo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHW8
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Campos
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "sys_impresiondet.campo"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FM0KMLHR
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column6
+[START PROPERTIES]
+Caption = "Condicion"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FM0KMLHS
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column6
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FN0K9H3Y
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column7
+[START PROPERTIES]
+Caption = "Solo Calculo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FN0K9H3Z
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column7
+[START PROPERTIES]
+Alignment = 0
+Caption = ""
+Centered = .T.
+Left = 27
+Name = "Tscheckbox1"
+Top = 35
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GL0K9ENM
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column8
+[START PROPERTIES]
+Caption = "Estirar"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GL0K9ENN
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column8
+[START PROPERTIES]
+Alignment = 0
+Caption = ""
+Centered = .T.
+Left = 11
+Name = "Tscheckbox1"
+Top = 45
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GL0K9ENO
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column9
+[START PROPERTIES]
+Caption = "Long Max"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2GL0K9ENP
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Column9
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999"
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHW5
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Columna
+[START PROPERTIES]
+Caption = "Columna"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHW6
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Columna
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "sys_impresiondet.columna"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHW3
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Fila
+[START PROPERTIES]
+Caption = "Fila"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHW4
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Fila
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "sys_impresiondet.fila"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHW9
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Mascara
+[START PROPERTIES]
+Caption = "Mascara"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0JGHWA
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Mascara
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "sys_impresiondet.mascara"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0P3Y2K
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Tipo
+[START PROPERTIES]
+Caption = "Tipo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FM0JMYM5
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Tipo
+[START PROPERTIES]
+BorderStyle = 0
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "60,0"
+FontSize = 8
+Height = 22
+Left = 116
+Name = "Tscombobox1"
+RowSource = "Cabecera,C,Detalle,D,Pie,P"
+RowSourceType = 1
+SpecialEffect = 1
+Top = 165
+Width = 84
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FO0MQ2EB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Archivo Destino"
+Height = 16
+Left = 23
+Name = "Tslabel1"
+TabIndex = 8
+Top = 74
+Width = 98
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FO0MQ2ED
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Comando Impresion"
+Height = 16
+Left = 8
+Name = "Tslabel2"
+TabIndex = 7
+Top = 197
+Width = 113
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FO0MQ2EC
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sys_impresion.destino"
+Height = 22
+Left = 140
+MaxLength = 50
+Name = "Tstextbox1"
+TabIndex = 3
+Top = 69
+Width = 320
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FO0MQ2EE
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sys_impresion.comandoimpresion"
+Height = 84
+Left = 140
+MaxLength = 50
+Name = "Tstextbox2"
+TabIndex = 4
+Top = 192
+Visible = .F.
+Width = 372
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0QM2IH
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCodigo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sys_impresion.codigo"
+Height = 22
+Left = 140
+Name = "txtCodigo"
+TabIndex = 1
+Top = 16
+Width = 88
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2FI0P3Y2M
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDescripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sys_impresion.descripcion"
+Height = 22
+Left = 140
+MaxLength = 50
+Name = "txtDescripcion"
+TabIndex = 2
+Top = 45
+Width = 320
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

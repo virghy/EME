@@ -1,0 +1,1219 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 467
+Left = -28
+Name = "Dataenvironment"
+Top = 223
+Width = 792
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q9
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Form1
+[START PROPERTIES]
+BorderStyle = 3
+Caption = "Impresión de Etiquetas"
+DoCreate = .T.
+Height = 452
+MaxButton = .F.
+MinButton = .T.
+Name = "Form1"
+Width = 668
+ctoolbar = 
+editmode = .T.
+lblRequerido.Name = "lblRequerido"
+listaprecio = 
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+CREATE CURSOR Etiquetas (IDPRODUCTO C (20), PRODUCTO C (50), CANTIDAD I DEFAULT 10, STOCK N (10, 2) NULL, PRECIO Y NULL,Referencia c(10) null)
+SELECT Etiquetas 
+=CURSORSETPROP("Buffering",5)
+THISFORM.GRID1.RECORDSOURCETYPE = 1
+THISFORM.GRID1.RECORDSOURCE = "Etiquetas"
+THISFORM.TABLA1 = "Etiquetas"
+THISFORM.GRID1.IDPRODUCTO.CONTROLSOURCE = "Etiquetas.IdProducto"
+THISFORM.GRID1.PRODUCTO.CONTROLSOURCE = "Etiquetas.Producto"
+THISFORM.GRID1.CANTIDAD.CONTROLSOURCE = "Etiquetas.Cantidad"
+THISFORM.GRID1.STOCK.CONTROLSOURCE = "Etiquetas.Stock"
+THISFORM.GRID1.PRECIO.CONTROLSOURCE = "Etiquetas.Precio"
+THISFORM.GRID1.ref.CONTROLSOURCE = "Etiquetas.Referencia"
+THISFORM.GRID1.STOCK.ENABLED = .F.
+THISFORM.GRID1.PRECIO.ENABLED = .F.
+THISFORM.GRID1.PRODUCTO.ENABLED = .F.
+THISFORM.GRID1.ref.ENABLED = .F.
+SELECT ETIQUETAS
+THISFORM.CBOFORMATO.LISTITEMID = 1
+THISFORM.cbopuerto.LISTITEMID = 1
+
+lcPuerto = leerIni("PUERTOETIQUETA","OPCIONES")
+IF !EMPTY(lcPuerto)
+	THISFORM.cbopuerto.Value=lcPuerto
+ENDIF
+	
+
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+listaprecio
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A10UBJPB
+[CLASS] tsspinner
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] spinner
+[OBJNAME] Cantidad
+[PARENT] Form1
+[START PROPERTIES]
+Height = 22
+KeyboardLowValue = 0
+Left = 111
+Name = "Cantidad"
+SpecialEffect = 1
+SpinnerLowValue =   0.00
+TabIndex = 4
+Top = 70
+Value = 10
+Width = 78
+ZOrderSet = 17
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LP10IIX0
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboComprobante
+[PARENT] Form1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "this.tag"
+Height = 22
+Left = 468
+Name = "cboComprobante"
+RowSource = ""
+RowSourceType = 3
+Style = 0
+TabIndex = 9
+Top = 96
+Width = 114
+ZOrderSet = 21
+cmdsql = Select Descripcion, Cpbt_stk from st_cpbt_stk where IdEmpresa = ?oApp.Empresa
+cursor = cComprobante
+editable = .F.
+origen = L
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboFormato
+[PARENT] Form1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnLines = .F.
+ColumnWidths = "154,0"
+ControlSource = "this.tag"
+Height = 22
+Left = 101
+Name = "cboFormato"
+RowSource = "Codigo de Barras,YUTY-01,Etiquetas comunes,COMUN"
+RowSourceType = 1
+StatusBarText = "Tipo de etiqueta a imprimir."
+TabIndex = 12
+Top = 413
+Value = ("YUTY-01")
+Width = 159
+ZOrderSet = 6
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboLista
+[PARENT] Form1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "198,0"
+ControlSource = "thisform.listaPrecio"
+Height = 22
+Left = 111
+Name = "cboLista"
+RowSourceType = 3
+Style = 0
+TabIndex = 5
+Top = 94
+Width = 203
+ZOrderSet = 13
+cmdsql = SELECT Descripcion, IdLista FROM vt_ListaPrecio where IdEmpresa = ?oApp.Empresa
+cursor = cListaPrecio
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IZ0L6NVU
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboPuerto
+[PARENT] Form1
+[START PROPERTIES]
+BoundColumn = 1
+ColumnCount = 1
+ColumnLines = .F.
+ColumnWidths = "154"
+ControlSource = "this.tag"
+Height = 22
+Left = 511
+Name = "cboPuerto"
+RowSource = "LPT1,LPT2,LPT3"
+RowSourceType = 1
+StatusBarText = "Tipo de etiqueta a imprimir."
+TabIndex = 12
+Top = 413
+Value = ("LPT2")
+Width = 56
+ZOrderSet = 6
+editable = .F.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+
+EscribirIni(this.Value,"PUERTOETIQUETA","OPCIONES")
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A10WAAJE
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdBorrar
+[PARENT] Form1
+[START PROPERTIES]
+Caption = ""
+FontSize = 8
+Height = 24
+Left = 311
+Name = "cmdBorrar"
+Picture = ..\bitmaps\undo.bmp
+SpecialEffect = 2
+StatusBarText = "Elimina todas las etiquetas agregas a la lista"
+TabIndex = 14
+ToolTipText = "Deshacer la lista"
+Top = 413
+Width = 41
+ZOrderSet = 9
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+DELETE IN ETIQUETAS ALL
+THISFORM.GRID1.REFRESH
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdEjecutar
+[PARENT] Form1
+[START PROPERTIES]
+Caption = ""
+FontSize = 8
+Height = 24
+Left = 264
+Name = "cmdEjecutar"
+Picture = ..\bitmaps\_save.bmp
+SpecialEffect = 2
+StatusBarText = "Ejecuta el nuevo filtro y agrega a la lista existente"
+TabIndex = 13
+ToolTipText = "Ejecutar y agregar a la lista"
+Top = 413
+Width = 41
+ZOrderSet = 8
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+Local CMDSQL
+m.DEPOSITO = Thisform.DEPOSITO.Value
+m.IDPROI = Thisform.TXTDPRODUCTO.Value
+m.IDPROF = Thisform.TXTHPRODUCTO.Value
+m.MARCA = Thisform.MARCA.Value
+m.LINEA = Thisform.LINEA.Value
+m.FAMILIA = Thisform.FAMILIA.Value
+m.IDLISTA = Thisform.CBOLISTA.Value
+m.CPBT = Thisform.CBOCOMPROBANTE.Value
+m.NUMERO = Thisform.TXTNROMOV.Value
+m.IDEMPRESA = OAPP.EMPRESA
+NCAN = Thisform.CANTIDAD.Value
+m.hfecha=DATE()
+CFILTRO = " prod.IdProducto between "
+If Empty(Thisform.TXTDPRODUCTO.Value)
+	CFILTRO = CFILTRO+" '' "
+Else
+	CFILTRO = CFILTRO+" '"+Alltrim(Thisform.TXTDPRODUCTO.Value)+"' "
+Endif
+If Empty(Thisform.TXTHPRODUCTO.Value)
+	CFILTRO = CFILTRO+"and 'ZZZZZZZZZ' "
+Else
+	CFILTRO = CFILTRO+" and '"+Alltrim(Thisform.TXTHPRODUCTO.Value)+"' "
+Endif
+If  .Not. Empty(Thisform.FAMILIA.Value)
+	CFILTRO = CFILTRO+" AND Familia = '"+Alltrim(Thisform.FAMILIA.Value)+"' "
+Endif
+If  .Not. Empty(Thisform.LINEA.Value)
+	CFILTRO = CFILTRO+" AND Linea = '"+Alltrim(Thisform.LINEA.Value)+"' "
+Endif
+CFILTRO = CFILTRO+" AND prod.IdEmpresa = ?oApp.Empresa "
+If  .Not. Empty(Thisform.TXTNROMOV.Value) .And.  .Not. Empty(Thisform.CBOCOMPROBANTE.Value)
+	TEXT TO CMDSQL NOSHOW
+				SELECT     prod.Descripcion AS Producto, m.IdProducto, pre.Precio, SUM(m.Cantidad) AS Stock,catalogo=ISNULL(catalogo,'')
+			FROM         dbo.st_movimiento_Det m INNER JOIN
+			                      dbo.st_Producto prod ON m.IdEmpresa = prod.IdEmpresa AND m.IdProducto = prod.IdProducto LEFT OUTER JOIN
+			                      dbo.vt_Precios pre ON prod.IdEmpresa = pre.IdEmpresa AND prod.IdProducto = pre.IdProducto
+			where m.IdEmpresa = ?oApp.Empresa  and m.IdComprobante = ?m.Cpbt and m.número = ?m.Numero
+			GROUP BY prod.Descripcion, m.IdProducto, pre.Precio,Catalogo
+	ENDTEXT
+Else
+	TEXT TO CMDSQL TEXTMERGE NOSHOW
+		SELECT     prod.Descripcion AS Producto, pre.Precio, s.Cantidad as Stock, prod.IdProducto,catalogo=ISNULL(catalogo,'')
+		FROM         dbo.st_Producto prod 
+						inner join dbo.st_SaldoStock(?oApp.Empresa,null,?m.deposito,?m.hfecha) s
+				      ON prod.IdEmpresa = s.IdEmpresa AND prod.IdProducto = s.IdProducto LEFT OUTER JOIN
+		                      dbo.vt_Precios pre ON prod.IdEmpresa = pre.IdEmpresa AND prod.IdProducto = pre.IdProducto
+		where <<cFiltro>>
+		GROUP BY prod.Descripcion, pre.Precio, s.Cantidad, prod.IdProducto,Catalogo
+
+	ENDTEXT
+Endif
+If Thisform.RUNSQL(CMDSQL, 'Stock')>0
+	If Eof('Stock')
+		Messagebox("No existe ningun producto con su precio asignado.", 48, "Futura")
+		Return .F.
+	Endif
+Endif
+Select STOCK
+Scan
+	If  .Not. PRECIO>0 .Or. Isnull(PRECIO)
+		MSG = Messagebox("El producto ("+Alltrim(STOCK.IDPRODUCTO)+") "+Alltrim(STOCK.PRODUCTO)+Chr(13)+"No tiene precio asignado"+Chr(13)+"Desea Agregar de todos modos?", 067, "Futura Software")
+		Do Case
+		Case MSG=2
+			Return
+		Case MSG=6
+			Insert Into etiquetas (CANTIDAD, IDPRODUCTO, PRODUCTO, STOCK, PRECIO,Referencia) Values (Iif(STOCK.STOCK>NCAN .Or. STOCK.STOCK=-1, NCAN, STOCK.STOCK), STOCK.IDPRODUCTO, STOCK.PRODUCTO, Iif(STOCK.STOCK=-1, .Null., STOCK.STOCK), STOCK.PRECIO,stock.catalogo)
+		Endcase
+	Else
+		Insert Into etiquetas (CANTIDAD, IDPRODUCTO, PRODUCTO, STOCK, PRECIO,Referencia) Values (Iif(STOCK.STOCK>NCAN .Or. STOCK.STOCK=-1, NCAN, STOCK.STOCK), STOCK.IDPRODUCTO, STOCK.PRODUCTO, Iif(STOCK.STOCK=-1, .Null., STOCK.STOCK), STOCK.PRECIO,stock.catalogo)
+	Endif
+Endscan
+Thisform.GRID1.Refresh()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] cmdImprimir
+[PARENT] Form1
+[START PROPERTIES]
+Caption = ""
+FontSize = 8
+Height = 24
+Left = 359
+Name = "cmdImprimir"
+Picture = ..\bitmaps\wzprint.bmp
+SpecialEffect = 2
+StatusBarText = "Imprime las etiquetas según el formato seleccionado."
+TabIndex = 15
+ToolTipText = "Imprmir"
+Top = 413
+Width = 41
+ZOrderSet = 2
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+Create Cursor Labels (IDPRODUCTO C (20), PRODUCTO C (50), PRECIO Y Null)
+Select ETIQUETAS
+Scan
+	For I = 1 To CANTIDAD
+		Insert Into Labels (IDPRODUCTO, PRODUCTO, PRECIO) Values (ETIQUETAS.IDPRODUCTO, ETIQUETAS.PRODUCTO, ETIQUETAS.PRECIO)
+	Endfor
+Endscan
+Select Labels
+DO CASE 
+CASE ThisForm.cboFormato.Value="COMUN"
+
+*!*		Set REPORTBEHAVIOR 80
+*!*		Set Safety Off
+*!*		Report Form vt_precios.lbx Ascii To File C:\sistemas\ETIQUETAS.txt
+*!*		Run "copy c:\sistemas\etiquetas.txt lpt1"
+	DO ('Etiqueta'+oApp.Empresa)
+
+CASE ThisForm.cboFormato.Value="YUTY-01"
+
+	Set Safety Off
+	Select Alltrim(Transform(PRECIO, "999,999")) As PRECIO, Left(PRODUCTO, 20) As D1, Substr(PRODUCTO, 21, 9) +'/'+ Referencia As D2 , IDPRODUCTO, "P"+Alltrim(Str(Round(CANTIDAD/2, 0))) As CANTIDAD From ETIQUETAS WITH (BUFFERING=.T.) order BY IdProducto Into Cursor  ss 
+	Select ss
+	A = Fcreate("C:\ETIQUETA.TXT")
+	Fputs(A, 'FR"YUTY-01"')
+	Scan
+		Fputs(A, "?")
+		Fputs(A, Alltrim("Gs "+PRECIO))
+		Fputs(A, Alltrim(D1))
+		Fputs(A, Alltrim(D2))
+		Fputs(A, Alltrim(IDPRODUCTO))
+		Fputs(A, Alltrim(CANTIDAD))
+	Endscan
+	Fclose(A)
+	lcmd = "COPY c:\ETIQUETA.TXT " + thisform.cbopuerto.Value + " /B"
+
+*	Run "COPY c:\ETIQUETA.TXT LPT1 /B"
+	Run LCMD
+
+ENDCASE
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A011PGJZ
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command2
+[PARENT] Form1
+[START PROPERTIES]
+Caption = "\<Salir"
+FontSize = 8
+Height = 24
+Left = 576
+Name = "Command2"
+SpecialEffect = 2
+TabIndex = 16
+Top = 411
+Width = 75
+ZOrderSet = 3
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.RELEASE
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LV10A73Z
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Deposito
+[PARENT] Form1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "198,0"
+ControlSource = "this.tag"
+FirstElement = 1
+Height = 22
+Left = 111
+Name = "Deposito"
+NumberOfElements = 0
+RowSource = ""
+RowSourceType = 3
+Style = 0
+TabIndex = 1
+Top = 22
+Width = 203
+ZOrderSet = 18
+cmdsql = SELECT Deposito, IdDeposito FROM st_Depositos WHERE IdEmpresa = ?oApp.Empresa ORDER BY 1
+cursor = cDeposito
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A20WB13V
+[CLASS] detalle
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandgroup
+[OBJNAME] Detalle1
+[PARENT] Form1
+[START PROPERTIES]
+AddItem.Height = 32
+AddItem.Left = 5
+AddItem.Name = "AddItem"
+AddItem.SpecialEffect = 0
+AddItem.Top = 5
+AddItem.Width = 32
+AutoSize = .T.
+Height = 75
+Left = 624
+Name = "Detalle1"
+RemoveItem.Height = 32
+RemoveItem.Left = 5
+RemoveItem.Name = "RemoveItem"
+RemoveItem.SpecialEffect = 0
+RemoveItem.Top = 38
+RemoveItem.Width = 32
+TabIndex = 11
+Top = 216
+Width = 42
+ZOrderSet = 7
+campo = Producto
+enlace = grid1
+tabla = Etiquetas
+valor = " "
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q9
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Familia
+[PARENT] Form1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "172,0"
+ControlSource = "this.tag"
+FirstElement = 1
+Height = 22
+Left = 468
+Name = "Familia"
+NumberOfElements = 0
+RowSource = ""
+RowSourceType = 3
+Style = 0
+TabIndex = 7
+Top = 48
+Width = 177
+ZOrderSet = 19
+cmdsql = Select descripcion,idfamilia from st_familia where idempresa = ?oApp.Empresa order by 1
+cursor = cFamilia
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A011PGK0
+[CLASS] grid
+[BASECLASS] grid
+[OBJNAME] Grid1
+[PARENT] Form1
+[START PROPERTIES]
+AllowAddNew = .T.
+Column1.ColumnOrder = 2
+Column1.FontSize = 8
+Column1.Name = "IdProducto"
+Column1.Width = 80
+Column2.BackColor = 217,217,255
+Column2.ColumnOrder = 3
+Column2.FontSize = 8
+Column2.Name = "Producto"
+Column2.Width = 216
+Column3.ColumnOrder = 1
+Column3.FontSize = 8
+Column3.Format = "Z"
+Column3.Name = "Cantidad"
+Column3.Width = 62
+Column4.BackColor = 217,217,255
+Column4.FontSize = 8
+Column4.Name = "Stock"
+Column4.Width = 62
+Column5.BackColor = 217,217,255
+Column5.FontSize = 8
+Column5.Format = "Z"
+Column5.InputMask = "999,999,999.99"
+Column5.Name = "Precio"
+Column5.Width = 80
+Column6.FontSize = 8
+Column6.Name = "Ref"
+Column6.Width = 73
+ColumnCount = 6
+DeleteMark = .F.
+FontSize = 8
+Height = 256
+Left = 1
+Name = "Grid1"
+Panel = 1
+RowHeight = 17
+ScrollBars = 2
+TabIndex = 17
+Top = 134
+Width = 611
+ZOrderSet = 4
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeRowColChange
+LPARAMETERS NCOLINDEX
+IF NCOLINDEX<>THIS.ACTIVECOLUMN
+IF EMPTY(ETIQUETAS.IDPRODUCTO)
+NODEFAULT
+ENDIF
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A011PGK5
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Form1.Grid1.Cantidad
+[START PROPERTIES]
+Caption = "Cantidad"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A011PGK6
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Form1.Grid1.Cantidad
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A011PGK1
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Form1.Grid1.IdProducto
+[START PROPERTIES]
+Caption = "Producto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A012HRUY
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] IdProducto
+[PARENT] Form1.Grid1.IdProducto
+[START PROPERTIES]
+Left = 25
+Name = "IdProducto"
+Top = 23
+condicionextra = a.IdEmpresa = ?oApp.Empresa
+datoayuda = Productos
+indice = a.IdProducto
+indice1 = Catalogo
+objeto = this.parent.parent.producto.text1
+objeto2 = this.parent.parent.precio.text1
+origen = R
+retorna = Descripcion
+retorna2 = b.precio
+tabla = st_Producto a left join vt_precios b on a.idProducto= b.IdProducto and a.IdEmpresa = b.IdEmpresa and b.IdLista=?thisform.ListaPrecio
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A012BSQ7
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Form1.Grid1.Precio
+[START PROPERTIES]
+Caption = "Precio"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A012BSQ8
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Form1.Grid1.Precio
+[START PROPERTIES]
+BackColor = 217,217,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A011PGK3
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Form1.Grid1.Producto
+[START PROPERTIES]
+Caption = "Descripción"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A011PGK4
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Form1.Grid1.Producto
+[START PROPERTIES]
+BackColor = 217,217,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2HS157NAX
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Form1.Grid1.Ref
+[START PROPERTIES]
+Caption = "Referencia"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2HS157NAY
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Form1.Grid1.Ref
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A011PGK8
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Form1.Grid1.Stock
+[START PROPERTIES]
+Caption = "Stock Act."
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A011PGK9
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Form1.Grid1.Stock
+[START PROPERTIES]
+BackColor = 217,217,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LP10IIWZ
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Linea
+[PARENT] Form1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "172,0"
+ControlSource = "this.tag"
+FirstElement = 1
+Height = 22
+Left = 468
+Name = "Linea"
+NumberOfElements = 0
+RowSource = ""
+RowSourceType = 3
+Style = 0
+TabIndex = 8
+Top = 72
+Width = 177
+ZOrderSet = 20
+cmdsql = Select descripcion,idlinea from st_linea where idempresa = ?oApp.Empresa order by 1
+cursor = cLinea
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LW0ZYFT1
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Marca
+[PARENT] Form1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "172,0"
+ControlSource = "this.tag"
+FirstElement = 1
+Height = 22
+Left = 468
+Name = "Marca"
+NumberOfElements = 0
+RowSource = ""
+RowSourceType = 3
+Style = 0
+TabIndex = 6
+Top = 24
+Width = 177
+ZOrderSet = 11
+cmdsql = SELECT Descripcion, IdMarca FROM st_Marca WHERE IdEmpresa = ?oApp.Empresa ORDER BY 1
+cursor = cMarca
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Form1
+[START PROPERTIES]
+BackColor = 128,128,128
+BackStyle = 0
+Height = 115
+Left = 1
+Name = "Ts3dshape1"
+Top = 9
+Width = 659
+ZOrderSet = 1
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LW0ZYFSV
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape2
+[PARENT] Form1
+[START PROPERTIES]
+BackColor = 128,128,128
+BackStyle = 0
+Height = 47
+Left = 1
+Name = "Ts3dshape2"
+Top = 401
+Width = 659
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Lista de Precios"
+FontBold = .F.
+Height = 16
+Left = 31
+Name = "Tslabel1"
+TabIndex = 28
+Top = 99
+Width = 79
+ZOrderSet = 29
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LV10A73Y
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel10
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Deposito"
+FontBold = .F.
+Height = 16
+Left = 66
+Name = "Tslabel10"
+TabIndex = 20
+Top = 25
+Width = 44
+ZOrderSet = 25
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LW0ZYFT2
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel11
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Marca"
+FontBold = .F.
+Height = 16
+Left = 434
+Name = "Tslabel11"
+TabIndex = 22
+Top = 27
+Width = 32
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LW0ZYFT3
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel12
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+BackColor = 212,208,200
+BackStyle = 1
+Caption = "Parámetros "
+FontBold = .T.
+Height = 16
+Left = 22
+Name = "Tslabel12"
+TabIndex = 25
+Top = 3
+Width = 70
+ZOrderSet = 30
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Formato Etiqueta"
+FontBold = .F.
+Height = 16
+Left = 16
+Name = "Tslabel2"
+TabIndex = 29
+Top = 416
+Width = 82
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Producto desde"
+FontBold = .F.
+Height = 16
+Left = 32
+Name = "Tslabel3"
+TabIndex = 18
+Top = 49
+Width = 78
+ZOrderSet = 28
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A10UBJP4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Hasta:"
+FontBold = .F.
+Height = 16
+Left = 200
+Name = "Tslabel4"
+TabIndex = 19
+Top = 49
+Width = 33
+ZOrderSet = 27
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Familia"
+FontBold = .F.
+Height = 16
+Left = 432
+Name = "Tslabel5"
+TabIndex = 21
+Top = 51
+Width = 34
+ZOrderSet = 26
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1LP10IIWW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Linea"
+FontBold = .F.
+Height = 16
+Left = 438
+Name = "Tslabel6"
+TabIndex = 23
+Top = 76
+Width = 28
+ZOrderSet = 24
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Máx. de etiquetas"
+FontBold = .F.
+Height = 16
+Left = 23
+Name = "Tslabel7"
+TabIndex = 27
+Top = 74
+Width = 87
+ZOrderSet = 22
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Movimiento"
+FontBold = .F.
+Height = 16
+Left = 411
+Name = "Tslabel8"
+TabIndex = 24
+Top = 99
+Width = 55
+ZOrderSet = 23
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IZ0L6NVV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] Form1
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .T.
+Caption = "Puerto Impresion"
+FontBold = .F.
+Height = 16
+Left = 424
+Name = "Tslabel9"
+TabIndex = 29
+Top = 417
+Width = 82
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A01175Q9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtdProducto
+[PARENT] Form1
+[START PROPERTIES]
+Height = 22
+Left = 111
+Name = "txtdProducto"
+TabIndex = 2
+Top = 46
+Width = 78
+ZOrderSet = 14
+datoayuda = Productos
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A10UBJP5
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txthProducto
+[PARENT] Form1
+[START PROPERTIES]
+Height = 22
+Left = 236
+Name = "txthProducto"
+TabIndex = 3
+Top = 46
+Width = 78
+ZOrderSet = 15
+datoayuda = Productos
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1A10V0I37
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNroMov
+[PARENT] Form1
+[START PROPERTIES]
+Height = 22
+Left = 584
+Name = "txtNroMov"
+TabIndex = 10
+ToolTipText = "Nro. Comprobante"
+Top = 96
+Width = 61
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

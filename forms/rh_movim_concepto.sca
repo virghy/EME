@@ -1,0 +1,878 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\..\..\py_futura_\futurafox_2\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN14VFHJ
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 29
+Left = 38
+Width = 760
+Height = 366
+InitialSelectedAlias = "rh_cmovim_concepto"
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO seteo
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+4[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0UD1Q1
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 10
+Height = 90
+Width = 90
+Alias = "rh_cmovim_concepto"
+Database = ..\data\datos.dbc
+CursorSource = "rh_cmovim_concepto"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0VPD8D
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 150
+Height = 90
+Width = 200
+Alias = "rh_movim_concepto_detalle"
+Database = ..\data\datos.dbc
+CursorSource = "rh_movim_concepto_detalle"
+NoDataOnLoad = .T.
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RZ0VURR9
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 410
+Height = 90
+Width = 90
+Alias = "rh_mce"
+BufferModeOverride = 5
+Database = ..\data\datos.dbc
+CursorSource = "rh_mce"
+NoDataOnLoad = .T.
+Name = "Cursor3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN14VFHK
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Height = 405
+Width = 529
+DoCreate = .T.
+BorderStyle = 3
+Caption = "Recargos y Deducciones por Concepto"
+WindowState = 0
+valor_iva = 10
+tabla1 = rh_cmovim_concepto
+tabla2 = rh_movim_concepto_detalle
+detalle = .T.
+tabla4 = 
+camponro = 
+valores = val(thisform.pageframe1.page1.liquidacion.value)
+Name = "Tsmaintform1"
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.PageCount = 2
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.RecordSource = "tr_fletes"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 0
+Pageframe1.Left = 0
+Pageframe1.Width = 528
+Pageframe1.Height = 402
+Pageframe1.TabIndex = 1
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+
+IF thisform.pageframe1.page1.liquidacion.ListCount > 0
+     thisform.pageframe1.page1.liquidacion.listindex = 1
+     m.idliquidacion = thisform.pageframe1.page1.liquidacion.value
+ENDIF
+thisform.abrir()
+ENDPROC
+PROCEDURE abrir
+m.idliquidacion = thisform.pageframe1.page1.liquidacion.value
+=REQUERY("rh_cmovim_concepto")
+this.Refresh()
+ENDPROC
+PROCEDURE editar
+IF xcliquidacion.confirmado
+     MESSAGEBOX( ;
+               'No puede modificar esta Liquidación porque ya fue confirmado.',  ;
+               64,  ;
+               "Futura Software" ;
+               )
+     RETURN
+ENDIF
+IF rh_cmovim_concepto.origen =  ;
+   'C'
+     MESSAGEBOX( ;
+               'No puede modificar este tipo de Conceptos porque son calculados',  ;
+               64,  ;
+               "Futura Software" ;
+               )
+ELSE
+     DODEFAULT()
+ENDIF
+ENDPROC
+PROCEDURE idconcepto_access
+RETURN rh_cmovim_concepto.idconcepto
+ENDPROC
+PROCEDURE procesar
+SELECT * FROM datos!rh_liquiDet_base WHERE  ;
+         idliquidacion =  ;
+         rh_cmovim_concepto.idliquidacion  ;
+         AND idempleado =  ;
+         rh_movim_concepto_detalle.idempleado  ;
+         INTO CURSOR xcEmpleados
+IF RECCOUNT('xcEmpleados') = 0
+     MESSAGEBOX( ;
+               'El empleado no esta incluido dentro de esta Liquidacion.',  ;
+               48,  ;
+               "Futura Software" ;
+               )
+     RETURN
+ENDIF
+m.total = rh_movim_concepto_detalle.monto
+IF xcconceptos.unid_valor = 'U'
+     IF xcconceptos.unidad = 'H'
+          vhora = ROUND(xcempleados.sueldo /  ;
+                  xcempleados.diastrabajados/xcempleados.horastrabajados,  ;
+                  2)
+          vhora = ROUND(vhora *  ;
+                  xcconceptos.valor,  ;
+                  2)
+          m.total = ROUND(vhora *  ;
+                    INT(rh_movim_concepto_detalle.cantidad),  ;
+                    0)
+          m.resto = ROUND((rh_movim_concepto_detalle.cantidad -  ;
+                    INT(rh_movim_concepto_detalle.cantidad)) *  ;
+                    100 / 60, 2)
+          m.resto = ROUND(vhora *  ;
+                    m.resto, 0)
+          m.total = m.total +  ;
+                    m.resto
+     ELSE
+          vhora = ROUND(xcempleados.sueldo /  xcempleados.diastrabajados,  2)
+          vhora = ROUND(vhora *  xcconceptos.valor,  2)
+          m.total = ROUND(vhora * rh_movim_concepto_detalle.cantidad,0)
+     ENDIF
+ENDIF
+
+REPLACE monto WITH m.total,  ;
+        idtipo WITH  ;
+        xcconceptos.tipo, origen  ;
+        WITH 'P', idliquidet WITH  ;
+        xcempleados.idliquidet IN  ;
+        rh_movim_concepto_detalle
+ENDPROC
+PROCEDURE recalcular
+SELECT rh_movim_concepto_detalle
+SCAN
+     m.idliquidacion = rh_cmovim_concepto.idliquidacion
+     m.idempleado = rh_movim_concepto_detalle.idempleado
+     = REQUERY('rh_mce')
+     m.idliquidet = rh_mce.idliquidet
+     SELECT rh_mce
+     m.thi = 0
+     m.thn = 0
+     m.th = 0
+     m.td = 0
+     m.tn = 0
+     SCAN
+          IF idtipo = 'I'
+               IF imponible
+                    m.thi = m.thi + monto
+               ELSE
+                    m.thn = m.thn +  monto
+               ENDIF
+          ELSE
+               IF origen = 'P'
+                    m.td = m.td +  monto
+               ELSE
+                    m.monto = ROUND(valor *  thi /  100,  0)
+                    REPLACE monto  WITH  m.monto
+                    m.td = m.td +  monto
+               ENDIF
+          ENDIF
+     ENDSCAN
+     m.th = m.thi + m.thn
+     m.tn = m.th - m.td
+
+     UPDATE datos!rh_liquidet_base SET  ;
+            thi = m.thi, thn =  ;
+            m.thn, th = m.th, td =  ;
+            m.td, tn = m.tn WHERE  ;
+            idliquidet =  ;
+            m.idliquidet
+     = TABLEUPDATE(.T., .T.,  ;
+       'rh_mce')
+     SELECT rh_movim_concepto_detalle
+ENDSCAN
+ENDPROC
+PROCEDURE save
+IF DODEFAULT()
+     this.recalcular()
+ENDIF
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+cuenta_iva
+valor_iva
+cuenta_comision
+nompro
+cuenta_descuento
+idconcepto
+*procesar 
+*idconcepto_access 
+*recalcular 
+*abrir 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E106SP32
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] totales
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Top = 322
+Left = 11
+Width = 504
+Height = 40
+SpecialEffect = 1
+TabIndex = 32
+ZOrderSet = 22
+Name = "totales"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+LOCAL lntotal, lndescuento,  ;
+      lnporcdescuento
+this.parent.tsgrid1.sumcolumn()
+this.cantidad.value = this.parent.tsgrid1.totales(1)
+this.importe.value = this.parent.tsgrid1.totales(2)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E10Y1YHY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Importe
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+Value = 0
+ControlSource = ""
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999"
+Left = 384
+TabIndex = 7
+Top = 12
+Width = 105
+editable = .F.
+Name = "Importe"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E10Y1YHY
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Cantidad
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+Value = 0
+ControlSource = ""
+Enabled = .F.
+Height = 22
+InputMask = "9,999,999,999.99"
+Left = 288
+TabIndex = 7
+Top = 12
+Width = 94
+editable = .F.
+Name = "Cantidad"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN14VFHJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Caption = "Totales"
+Height = 16
+Left = 228
+Top = 12
+Width = 54
+TabIndex = 12
+ZOrderSet = 6
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0E106SP17
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Liquidación:"
+Height = 16
+Left = 23
+Top = 22
+Width = 72
+TabIndex = 18
+ZOrderSet = 6
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN14VFHJ
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Liquidacion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+FontBold = .T.
+BoundColumn = 2
+RowSourceType = 3
+RowSource = "Select descripcion, idliquidacion, confirmado from datos!rh_liquidacion_base where idempresa = oApp.Empresa order by 2 into cursor xcLiquidacion"
+ControlSource = ""
+Height = 23
+Left = 95
+Style = 2
+TabIndex = 19
+Top = 22
+Width = 420
+ForeColor = 0,0,128
+editable = .F.
+Name = "Liquidacion"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+thisform.abrir()
+ENDPROC
+PROCEDURE Refresh
+this.enabled =  .NOT.  ;
+                thisform.editmode
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _MNN1B59AG
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDescripción
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Concepto:"
+Height = 16
+Left = 23
+Top = 58
+Width = 60
+TabIndex = 7
+ZOrderSet = 4
+Name = "lblDescripción"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0UD1RC
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsgrid1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ColumnCount = 7
+FontShadow = .F.
+FontSize = 8
+AllowAddNew = .F.
+AllowHeaderSizing = .F.
+AllowRowSizing = .F.
+ChildOrder = ""
+DeleteMark = .F.
+GridLines = 2
+HeaderHeight = 17
+Height = 216
+Highlight = .F.
+Left = 11
+LinkMaster = ""
+Panel = 1
+PanelLink = .T.
+RecordMark = .F.
+RecordSource = "rh_movim_concepto_detalle"
+RelationalExpr = ""
+RowHeight = 17
+ScrollBars = 2
+SplitBar = .F.
+TabIndex = 10
+Top = 94
+Width = 504
+ZOrderSet = 19
+RightToLeft = .T.
+cfieldtosum = cantidad,monto
+editable = .T.
+campo = idconcepto,IdEmpresa
+valor = rh_cmovim_concepto.idconcepto,oApp.Empresa
+codigo = idempleado
+valorvariable = rh_cmovim_concepto.idLiquidacion
+variablevista = m.idliquidacion
+titulo = Empleados
+Name = "Tsgrid1"
+Column1.FontShadow = .F.
+Column1.FontSize = 8
+Column1.ColumnOrder = 1
+Column1.ControlSource = "rh_movim_concepto_detalle.idempleado"
+Column1.CurrentControl = "IdEmpleado"
+Column1.Width = 53
+Column1.Sparse = .F.
+Column1.Visible = .T.
+Column1.Name = "IdEmpleado"
+Column2.FontShadow = .F.
+Column2.FontSize = 8
+Column2.ControlSource = "rh_movim_concepto_detalle.empleado"
+Column2.Enabled = .F.
+Column2.Width = 163
+Column2.ReadOnly = .T.
+Column2.Visible = .T.
+Column2.BackColor = 211,224,231
+Column2.Name = "Empleado"
+Column3.FontShadow = .F.
+Column3.FontSize = 8
+Column3.ControlSource = "rh_movim_concepto_detalle.cantidad"
+Column3.Width = 49
+Column3.ReadOnly = .F.
+Column3.InputMask = "999,999.99"
+Column3.Name = "Cantidad"
+Column4.FontShadow = .F.
+Column4.FontSize = 8
+Column4.ControlSource = "rh_movim_concepto_detalle.monto"
+Column4.Width = 79
+Column4.ReadOnly = .F.
+Column4.InputMask = "999,999,999"
+Column4.Name = "Importe"
+Column5.FontShadow = .F.
+Column5.FontSize = 8
+Column5.ControlSource = "rh_movim_concepto_detalle.documento"
+Column5.Width = 59
+Column5.Name = "Documento"
+Column6.FontShadow = .F.
+Column6.FontSize = 8
+Column6.ControlSource = "rh_movim_concepto_detalle.nro"
+Column6.Width = 76
+Column6.Name = "Recargo"
+Column7.FontShadow = .F.
+Column7.FontSize = 8
+Column7.ControlSource = "rh_movim_concepto_detalle.idcomplemento"
+Column7.Width = 0
+Column7.Visible = .F.
+Column7.Name = "idcomplemento"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+this.parent.totales.refresh()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0UD1RM
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.IdEmpleado
+[START PROPERTIES]
+FontShadow = .F.
+FontSize = 8
+Caption = "Empleado"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0UD1RN
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] IdEmpleado
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.IdEmpleado
+[START PROPERTIES]
+FontSize = 8
+BackStyle = 0
+BorderStyle = 0
+ControlSource = "rh_movim_concepto_detalle.idempleado"
+Height = 22
+Left = 346
+Top = 58
+Width = 72
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+tabla = rh_empleado_base
+retorna = Alltrim(nombre) + ' ' + apellido
+indice = IdEmpleado
+objeto = this.parent.parent.empleado.text1
+actualizar = .F.
+datoayuda = Empleados
+indice1 = 
+retorna2 = 
+objeto2 = 
+condicionextra = IdEmpresa = oApp.Empresa
+Name = "IdEmpleado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0UD1RR
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Empleado
+[START PROPERTIES]
+FontShadow = .F.
+FontSize = 8
+Caption = "Nombre y Apellido"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0UD1RS
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Empleado
+[START PROPERTIES]
+FontShadow = .F.
+FontSize = 8
+BorderStyle = 0
+ControlSource = "rh_movim_concepto_detalle.empleado"
+Enabled = .F.
+Margin = 0
+ReadOnly = .T.
+Visible = .T.
+ForeColor = 0,0,0
+BackColor = 211,224,231
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0UD1RV
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Cantidad
+[START PROPERTIES]
+FontSize = 8
+Caption = "Cantidad"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0UD1RW
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Cantidad
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+ControlSource = "rh_movim_concepto_detalle.cantidad"
+InputMask = "999,999.99"
+Margin = 0
+ReadOnly = .F.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+PROCEDURE LostFocus
+IF this.tag <> STR(this.value)
+     thisform.procesar()
+     this.parent.parent.parent.totales.refresh()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0UD1SD
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Importe
+[START PROPERTIES]
+FontSize = 8
+Caption = "Importe"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0UD1SE
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Importe
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+ControlSource = "rh_movim_concepto_detalle.monto"
+InputMask = "999,999,999"
+Margin = 0
+ReadOnly = .F.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE GotFocus
+this.tag = STR(this.value)
+ENDPROC
+PROCEDURE LostFocus
+IF this.tag <> STR(this.value)
+     thisform.procesar()
+     this.parent.parent.parent.totales.refresh()
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0ZDYJK
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Documento
+[START PROPERTIES]
+FontSize = 8
+Caption = "Documento"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0ZDYJL
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Documento
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0ZDYJW
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Recargo
+[START PROPERTIES]
+FontSize = 8
+Caption = "Nro Deduc/Ben."
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RZ0YXWAY
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] nro
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.Recargo
+[START PROPERTIES]
+Left = 23
+Top = 23
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+indice = nro
+condicionextra = idEmpresa = oApp.Empresa and idempleado = rh_movim_concepto_detalle.idempleado and idconcepto = rh_cmovim_concepto.idconcepto
+mensajeerror = 
+objeto = this.parent.parent.idcomplemento.text1
+retorna = idcomplemento
+tabla = rh_complemento_base
+indice1 = 
+Name = "nro"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RZ0YKH3Z
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.idcomplemento
+[START PROPERTIES]
+Caption = "Header1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RZ0YKH40
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsgrid1.idcomplemento
+[START PROPERTIES]
+BorderStyle = 0
+ControlSource = "rh_movim_concepto_detalle.idcomplemento"
+Margin = 0
+Visible = .F.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RW0Y1OLM
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Concepto
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+FontBold = .F.
+BoundColumn = 2
+RowSourceType = 3
+RowSource = "SELECT concepto,idconcepto,  tipo, valor, unid_valor, unidad , acept_mov from datos!rh_conceptos  where patr_empl = 'E' order by 1 into cursor xcConceptos"
+ControlSource = "rh_cmovim_concepto.idconcepto"
+Height = 23
+Left = 95
+Style = 2
+TabIndex = 19
+Top = 58
+Width = 420
+editable = .T.
+solonuevo = .T.
+Name = "Concepto"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+IF xcconceptos.unid_valor = 'V'
+     this.parent.tsgrid1.cantidad.readonly =  ;
+      .T.
+     this.parent.tsgrid1.importe.readonly =  ;
+      .F.
+ELSE
+     this.parent.tsgrid1.cantidad.readonly =  ;
+      .F.
+     this.parent.tsgrid1.importe.readonly =  ;
+      .T.
+ENDIF
+ENDPROC
+PROCEDURE Valid
+IF  .NOT. xcconceptos.acept_mov
+     MESSAGEBOX( ;
+               'Este concepto no acepta movimientos',  ;
+               64,  ;
+               "Futura Software" ;
+               )
+     this.listindex = 1
+ENDIF
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

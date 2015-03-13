@@ -1,0 +1,1603 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22F0ROLLO
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 242
+Left = 234
+Width = 520
+Height = 200
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFEH
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 10
+Height = 90
+Width = 91
+Alias = "sas_panelsolicitud"
+Database = \\venus\sistemas\futura9\data\datos.dbc
+CursorSource = "sas_panelsolicitud"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY865
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 150
+Height = 90
+Width = 91
+Alias = "sas_paneldespacho"
+Database = \\venus\sistemas\futura9\data\datos.dbc
+CursorSource = "sas_paneldespacho"
+NoDataOnLoad = .T.
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22F0ROLLP
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+DataSession = 2
+Height = 543
+Width = 770
+DoCreate = .T.
+Caption = "Panel de Control"
+WindowState = 0
+ctoolbar = 
+editmode = .T.
+idobjeto = 442
+Name = "Tsbaseform12"
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+DODEFAULT()
+this.cboTipoServicio.Value='%'
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22F0ROLLO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Periodo"
+Height = 14
+Left = 2
+Top = 12
+Width = 48
+Rotation = 0
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22F0ROLLO
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtdFecha
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 3
+Value = (datetime(year(date()),month(date()),day(date())))
+Height = 21
+Left = 52
+Top = 9
+Width = 108
+Name = "txtdFecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY865
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txthFecha
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 3
+Value = (Datetime()+3600)
+Height = 21
+Left = 163
+Top = 9
+Width = 108
+Name = "txthFecha"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22F0ROLLP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Estado"
+Height = 16
+Left = 521
+Top = 12
+Width = 39
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFEJ
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboEstado
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+RowSourceType = 1
+RowSource = "Todos,%,Pendientes,P,Despachados,D,Concluidos,C"
+Value = %
+Height = 22
+Left = 564
+Top = 8
+Width = 116
+Name = "cboEstado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22F0ROLLO
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdActualizarSolicitud
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 6
+Left = 681
+Caption = "Actualizar"
+Name = "cmdActualizarSolicitud"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+m.dFecha = thisform.txtdFecha.Value
+m.hFecha = thisform.txthFecha.Value
+m.Estado = thisform.cboEstado.Value
+m.TipoServicio =ALLTRIM(thisform.cbotipoServicio.Value)
+
+=REQUERY('sas_PanelSolicitud')
+thisform.grdSas_panelsolicitud.Refresh()
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFEP
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdSas_panelsolicitud
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ColumnCount = 12
+FontSize = 8
+Anchor = 10
+Height = 240
+HighlightRow = .T.
+Left = 24
+Panel = 1
+ReadOnly = .T.
+RecordSource = "sas_panelsolicitud"
+RecordSourceType = 1
+RowHeight = 20
+Top = 36
+Width = 732
+HighlightStyle = 0
+Name = "grdSas_panelsolicitud"
+Column1.FontSize = 8
+Column1.ColumnOrder = 3
+Column1.ControlSource = "sas_panelsolicitud.nrosolicitud"
+Column1.Width = 56
+Column1.ReadOnly = .T.
+Column1.DynamicBackColor = "color"
+Column1.Name = "Column2"
+Column2.FontSize = 8
+Column2.ColumnOrder = 4
+Column2.ControlSource = "sas_panelsolicitud.idtiposervicio"
+Column2.Width = 66
+Column2.ReadOnly = .T.
+Column2.Name = "Column6"
+Column3.FontSize = 8
+Column3.ColumnOrder = 5
+Column3.ControlSource = "sas_panelsolicitud.paciente"
+Column3.Width = 105
+Column3.ReadOnly = .T.
+Column3.Name = "Column8"
+Column4.FontSize = 8
+Column4.ColumnOrder = 6
+Column4.ControlSource = "sas_panelsolicitud.edad"
+Column4.Width = 34
+Column4.ReadOnly = .T.
+Column4.Name = "Column11"
+Column5.FontSize = 8
+Column5.ColumnOrder = 7
+Column5.ControlSource = "sas_panelsolicitud.direccionref"
+Column5.Width = 131
+Column5.ReadOnly = .T.
+Column5.Name = "Column13"
+Column6.FontSize = 8
+Column6.ColumnOrder = 8
+Column6.ControlSource = "sas_panelsolicitud.idseguro"
+Column6.Width = 47
+Column6.ReadOnly = .T.
+Column6.Name = "Column14"
+Column7.FontSize = 8
+Column7.ColumnOrder = 9
+Column7.ControlSource = "sas_panelsolicitud.nroseguro"
+Column7.Width = 52
+Column7.ReadOnly = .T.
+Column7.Name = "Column15"
+Column8.FontSize = 8
+Column8.ColumnOrder = 10
+Column8.ControlSource = "sas_panelsolicitud.idzona"
+Column8.Width = 37
+Column8.ReadOnly = .T.
+Column8.Name = "Column16"
+Column9.FontSize = 8
+Column9.ColumnOrder = 11
+Column9.ControlSource = "sas_panelsolicitud.motivo"
+Column9.Width = 110
+Column9.ReadOnly = .T.
+Column9.Name = "Column17"
+Column10.FontSize = 8
+Column10.ColumnOrder = 2
+Column10.ControlSource = "sas_panelsolicitud.fechaagenda"
+Column10.Width = 80
+Column10.ReadOnly = .T.
+Column10.DynamicBackColor = "iif(fechaagenda>datetime(),rgb(255,255,128),rgb(255,255,255))"
+Column10.Name = "Column18"
+Column11.FontSize = 8
+Column11.ColumnOrder = 12
+Column11.ControlSource = "sas_panelsolicitud.estado"
+Column11.Width = 44
+Column11.ReadOnly = .T.
+Column11.Name = "Column23"
+Column12.FontSize = 8
+Column12.ColumnOrder = 1
+Column12.Width = 58
+Column12.ReadOnly = .T.
+Column12.Sparse = .F.
+Column12.Name = "Column12"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFEQ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column2
+[START PROPERTIES]
+FontSize = 8
+Caption = "Nro. Sol."
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFER
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column2
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFES
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column6
+[START PROPERTIES]
+FontSize = 8
+Caption = "Tipo Servicio"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFET
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column6
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFEW
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column8
+[START PROPERTIES]
+FontSize = 8
+Caption = "Paciente"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFEX
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column8
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFEY
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column11
+[START PROPERTIES]
+FontSize = 8
+Caption = "edad"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFEZ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column11
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFF0
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column13
+[START PROPERTIES]
+FontSize = 8
+Caption = "direccionref"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFF1
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column13
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFF2
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column14
+[START PROPERTIES]
+FontSize = 8
+Caption = "idseguro"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFF3
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column14
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFF4
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column15
+[START PROPERTIES]
+FontSize = 8
+Caption = "nroseguro"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFF5
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column15
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFF6
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column16
+[START PROPERTIES]
+FontSize = 8
+Caption = "idzona"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFF7
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column16
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFF8
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column17
+[START PROPERTIES]
+FontSize = 8
+Caption = "motivo"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFF9
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column17
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFFA
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column18
+[START PROPERTIES]
+FontSize = 8
+Caption = "Fecha Agenda"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFFB
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column18
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFFC
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column23
+[START PROPERTIES]
+FontSize = 8
+Caption = "estado"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0MFFFD
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column23
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0RAE4L
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column12
+[START PROPERTIES]
+FontSize = 8
+Caption = "Despachar"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0RAE4M
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsbaseform12.grdSas_panelsolicitud.Column12
+[START PROPERTIES]
+Top = 23
+Left = 35
+FontBold = .F.
+Caption = "Despachar ..."
+Name = "Tscommandbutton1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL lnIdSolicitud
+
+IF ! NVL(sas_PanelSolicitud.Estado, '')='P'
+	MESSAGEBOX('Solo puede despachar solicitudes pendientes',64,TASTRADE_LOC)
+	RETURN	
+ENDIF
+
+lnIdSolicitud = sas_PanelSolicitud.IdSolicitud
+
+oapp.doform('sas_despacho',lnIdSolicitud)
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86G
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdSas_paneldespacho
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+ColumnCount = 18
+FontSize = 8
+Anchor = 15
+Height = 219
+Left = 24
+Panel = 1
+RecordSource = "sas_paneldespacho"
+RecordSourceType = 1
+RowHeight = 20
+Top = 313
+Width = 732
+HighlightStyle = 0
+Name = "grdSas_paneldespacho"
+Column1.FontSize = 8
+Column1.ColumnOrder = 2
+Column1.ControlSource = "sas_paneldespacho.nrosalida"
+Column1.Width = 48
+Column1.DynamicBackColor = "color"
+Column1.Name = "Column3"
+Column2.FontSize = 8
+Column2.ColumnOrder = 3
+Column2.ControlSource = "sas_paneldespacho.idmovil"
+Column2.Width = 41
+Column2.Name = "Column4"
+Column3.FontSize = 8
+Column3.ColumnOrder = 4
+Column3.ControlSource = "sas_paneldespacho.idtipoatencion"
+Column3.Width = 69
+Column3.Name = "Column5"
+Column4.FontSize = 8
+Column4.ColumnOrder = 5
+Column4.ControlSource = "sas_paneldespacho.kmsalida"
+Column4.Width = 55
+Column4.Name = "Column6"
+Column5.FontSize = 8
+Column5.ColumnOrder = 6
+Column5.ControlSource = "sas_paneldespacho.kmllegada"
+Column5.Width = 54
+Column5.Name = "Column7"
+Column6.FontSize = 8
+Column6.ColumnOrder = 7
+Column6.ControlSource = "sas_paneldespacho.lugarinternacion"
+Column6.Width = 126
+Column6.Name = "Column8"
+Column7.FontSize = 8
+Column7.ColumnOrder = 8
+Column7.ControlSource = "sas_paneldespacho.chofer"
+Column7.Width = 45
+Column7.Name = "Column9"
+Column8.FontSize = 8
+Column8.ColumnOrder = 9
+Column8.ControlSource = "sas_paneldespacho.paramedico"
+Column8.Width = 63
+Column8.Name = "Column10"
+Column9.FontSize = 8
+Column9.ColumnOrder = 10
+Column9.ControlSource = "sas_paneldespacho.medico"
+Column9.Width = 43
+Column9.Name = "Column11"
+Column10.FontSize = 8
+Column10.ColumnOrder = 11
+Column10.ControlSource = "sas_paneldespacho.observacion"
+Column10.Width = 87
+Column10.Name = "Column12"
+Column11.FontSize = 8
+Column11.ColumnOrder = 12
+Column11.ControlSource = "sas_paneldespacho.fecha"
+Column11.Width = 61
+Column11.Name = "Column18"
+Column12.FontSize = 8
+Column12.ColumnOrder = 13
+Column12.ControlSource = "sas_paneldespacho.horasalida"
+Column12.Width = 54
+Column12.Name = "Column19"
+Column13.FontSize = 8
+Column13.ColumnOrder = 14
+Column13.ControlSource = "sas_paneldespacho.horallegada"
+Column13.Width = 63
+Column13.Name = "Column20"
+Column14.FontSize = 8
+Column14.ColumnOrder = 15
+Column14.ControlSource = "sas_paneldespacho.horasalida1"
+Column14.Width = 59
+Column14.Name = "Column21"
+Column15.FontSize = 8
+Column15.ColumnOrder = 16
+Column15.ControlSource = "sas_paneldespacho.horallegada1"
+Column15.Width = 65
+Column15.Name = "Column22"
+Column16.FontSize = 8
+Column16.ColumnOrder = 17
+Column16.ControlSource = "sas_paneldespacho.horasalida2"
+Column16.Width = 60
+Column16.Name = "Column23"
+Column17.FontSize = 8
+Column17.ColumnOrder = 18
+Column17.ControlSource = "sas_paneldespacho.horallegada2"
+Column17.Width = 67
+Column17.ReadOnly = .T.
+Column17.Sparse = .F.
+Column17.Name = "Column24"
+Column18.FontSize = 8
+Column18.ColumnOrder = 1
+Column18.Width = 46
+Column18.ReadOnly = .T.
+Column18.Sparse = .F.
+Column18.Name = "Column1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86I
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column3
+[START PROPERTIES]
+FontSize = 8
+Caption = "nrosalida"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86J
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column3
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86K
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column4
+[START PROPERTIES]
+FontSize = 8
+Caption = "idmovil"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86L
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column4
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86M
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column5
+[START PROPERTIES]
+FontSize = 8
+Caption = "idtipoatencion"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86N
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column5
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86O
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column6
+[START PROPERTIES]
+FontSize = 8
+Caption = "kmsalida"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86P
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column6
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86Q
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column7
+[START PROPERTIES]
+FontSize = 8
+Caption = "kmllegada"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86R
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column7
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86S
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column8
+[START PROPERTIES]
+FontSize = 8
+Caption = "lugarinternacion"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86T
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column8
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86U
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column9
+[START PROPERTIES]
+FontSize = 8
+Caption = "chofer"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86V
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column9
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86W
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column10
+[START PROPERTIES]
+FontSize = 8
+Caption = "paramedico"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86X
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column10
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86Y
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column11
+[START PROPERTIES]
+FontSize = 8
+Caption = "medico"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY86Z
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column11
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY870
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column12
+[START PROPERTIES]
+FontSize = 8
+Caption = "observacion"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY871
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column12
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY872
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column18
+[START PROPERTIES]
+FontSize = 8
+Caption = "fecha"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY873
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column18
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY874
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column19
+[START PROPERTIES]
+FontSize = 8
+Caption = "horasalida"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY875
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column19
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY876
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column20
+[START PROPERTIES]
+FontSize = 8
+Caption = "horallegada"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY877
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column20
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY878
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column21
+[START PROPERTIES]
+FontSize = 8
+Caption = "horasalida1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY879
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column21
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY87A
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column22
+[START PROPERTIES]
+FontSize = 8
+Caption = "horallegada1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY87B
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column22
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY87C
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column23
+[START PROPERTIES]
+FontSize = 8
+Caption = "horasalida2"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY87D
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column23
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY87E
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column24
+[START PROPERTIES]
+FontSize = 8
+Caption = "horallegada2"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY87F
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column24
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0T5Z55
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column1
+[START PROPERTIES]
+FontSize = 8
+Caption = "Editar"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0T84PP
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsbaseform12.grdSas_paneldespacho.Column1
+[START PROPERTIES]
+Top = 35
+Left = 23
+FontBold = .F.
+Caption = "Editar..."
+Name = "Tscommandbutton1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+DO FORM sas_despacho WITH sas_PanelDespacho.IdSolicitud,sas_PanelDespacho.IdDespacho
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0SY87G
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdActualizarDespacho
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 283
+Left = 680
+Caption = "Actualizar"
+Name = "cmdActualizarDespacho"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+m.dFecha = thisform.txtdFecha.Value
+m.hFecha = thisform.txthFecha.Value
+IF EMPTY(thisform.txtMovil.Value)
+	m.IdMovil = "%"
+ELSE
+	m.IdMovil = ALLTRIM(thisform.txtMovil.Value)
+ENDIF
+
+
+
+=REQUERY('sas_PanelDespacho')
+thisform.grdsas_PanelDespacho.Refresh()
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0TEQ10
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Movil"
+Height = 14
+Left = 420
+Top = 289
+Width = 60
+Name = "Tslabel4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22J0THR0O
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtMovil
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 3
+Value = 
+Height = 21
+Left = 492
+Top = 286
+Width = 108
+Name = "txtMovil"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22K0VHHBO
+[CLASS] timer
+[BASECLASS] timer
+[OBJNAME] Timer1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Top = 286
+Left = 420
+Height = 23
+Width = 23
+Interval = 60000
+Name = "Timer1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Timer
+WAIT windows 'Actualizando...' NOWAIT NOCLEAR
+ThisForm.cmdActualizarSolicitud.Click()
+ThisForm.cmdActualizarDespacho.Click()
+WAIT CLEAR
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22F0ROLLO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+FontOutline = .F.
+FontSize = 10
+FontStrikethru = .F.
+FontUnderline = .F.
+BackStyle = 1
+BorderStyle = 1
+Caption = "Solicitudes"
+Height = 239
+Left = 4
+Top = 36
+Width = 20
+ForeColor = 255,255,255
+BackColor = 0,64,128
+Style = 0
+Rotation = 90
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _22K0VHHBP
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+FontOutline = .F.
+FontSize = 10
+FontStrikethru = .F.
+FontUnderline = .F.
+Anchor = 5
+BackStyle = 1
+BorderStyle = 1
+Caption = "Despachos"
+Height = 218
+Left = 4
+Top = 313
+Width = 20
+ForeColor = 255,255,255
+BackColor = 0,64,128
+Style = 0
+Rotation = 90
+Name = "Tslabel5"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2ET10RGWD
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdtiposervicio
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Tipo Servicio"
+Height = 16
+Left = 274
+Top = 11
+Width = 77
+TabIndex = 35
+ZOrderSet = 21
+Name = "lblIdtiposervicio"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2ET10RGWE
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboTipoServicio
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BoundColumn = 2
+Value = ('%')
+Height = 22
+Left = 358
+TabIndex = 14
+Top = 8
+Width = 158
+ZOrderSet = 26
+cmdsql = Select Descripcion, IdTipoServicio from sas_TipoServicios where IdEmpresa = ?oApp.Empresa Union Select Descripcion='(Todos)',IdTipoServicio='%' order by 1 
+cursor = cTipoServicio
+requerido = .T.
+Name = "cboTipoServicio"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[START RESERVED1]
+  ..\include\tastrade.hÖ“õv†5@ ..\..\..\archivos de programa\microsoft visual foxpro 9\foxpro.hÞ”š‰1 ..\include\strings.hæ•õv†5[END RESERVED1]
+[EOF]

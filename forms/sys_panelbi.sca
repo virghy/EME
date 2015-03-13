@@ -1,0 +1,180 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2W90XBYJX
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2W90XBYJY
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "sys_panelbi"
+CursorSource = "sys_panelbi"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 91
+Name = "Cursor1"
+Top = 10
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2W90XBYJZ
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+DataSession = 1
+DoCreate = .T.
+Name = "Tsbaseform12"
+lblRequerido.Name = "lblRequerido"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2W90XBYK4
+[CLASS] editbox
+[BASECLASS] editbox
+[OBJNAME] edtSql
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sys_panelbi.sql"
+Left = 70
+Name = "edtSql"
+TabIndex = 7
+Top = 81
+Width = 80
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2W90XBYK1
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblIdpanel
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+AutoSize = .T.
+BackStyle = 0
+Caption = "Idpanel"
+Left = 21
+Name = "lblIdpanel"
+TabIndex = 2
+Top = 25
+Width = 41
+WordWrap = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2W90XBYK5
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblSql
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+AutoSize = .T.
+BackStyle = 0
+Caption = "Sql"
+Left = 21
+Name = "lblSql"
+TabIndex = 6
+Top = 81
+Width = 18
+WordWrap = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2W90XBYK3
+[CLASS] label
+[BASECLASS] label
+[OBJNAME] lblTitulo
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+AutoSize = .T.
+BackStyle = 0
+Caption = "Titulo"
+Left = 21
+Name = "lblTitulo"
+TabIndex = 4
+Top = 53
+Width = 30
+WordWrap = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2W90XBYK0
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtIdpanel
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sys_panelbi.idpanel"
+Height = 23
+Left = 70
+Name = "txtIdpanel"
+TabIndex = 3
+Top = 25
+Width = 87
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2W90XBYK2
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] txtTitulo
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Comment = ""
+ControlSource = "sys_panelbi.titulo"
+Height = 23
+Left = 70
+MaxLength = 50
+Name = "txtTitulo"
+TabIndex = 5
+Top = 53
+Width = 358
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,312 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0Y6BNJ
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+InitialSelectedAlias = "vt_vendedor"
+Left = 182
+Name = "Dataenvironment"
+Top = 132
+Width = 520
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO seteo
+oApp.SetDatabase(this)
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU17IAWT
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_vendedor"
+BufferModeOverride = 5
+CursorSource = "vt_vendedor"
+Database = \\tierra2\sistemas\futura9\data\datos.dbc
+Height = 129
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0Y6BNK
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] vendedor
+[START PROPERTIES]
+Caption = "Vendedor"
+DataSession = 2
+DoCreate = .T.
+Height = 229
+Icon = ..\bitmaps\default1.ico
+Name = "vendedor"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 228
+Pageframe1.Left = 0
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.TabIndex = 2
+Pageframe1.Top = 0
+Pageframe1.Width = 420
+Width = 419
+camponro = idvendedor,vt_vendedores,idempresa=?oapp.empresa
+campos = idempresa
+campotam = 2
+enlaces = Personas,Tabla de Comisiones
+idobjeto = 63
+lblRequerido.Name = "lblRequerido"
+lblRequerido.TabIndex = 1
+tabla1 = vt_vendedor
+valores = oapp.empresa
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU17IAWT
+[CLASS] idpersona
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idpersona1
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "vt_vendedor.idpersona"
+Height = 23
+Left = 167
+Name = "Idpersona1"
+TabIndex = 2
+Top = 58
+Width = 48
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FO0OS6O5
+[CLASS] idpersona
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idpersona2
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "vt_vendedor.idsupervisor"
+Height = 23
+Left = 167
+Name = "Idpersona2"
+TabIndex = 3
+Top = 82
+Width = 48
+objeto = this.parent.supervisor
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU14WKWZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcomision
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Idcomision"
+Height = 16
+Left = 90
+Name = "lblIdcomision"
+TabIndex = 11
+Top = 106
+Width = 63
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0Y6BNJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdpersona
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Idpersona"
+Height = 16
+Left = 95
+Name = "lblIdpersona"
+TabIndex = 9
+Top = 58
+Width = 58
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU14WKWV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdvendedor
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Idvendedor"
+Height = 16
+Left = 88
+Name = "lblIdvendedor"
+TabIndex = 8
+Top = 34
+Width = 65
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0Y6BNK
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] persona
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 23
+Left = 215
+Name = "persona"
+TabIndex = 6
+Top = 58
+Width = 180
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FO0OS6O6
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Supervisor
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 23
+Left = 215
+Name = "Supervisor"
+TabIndex = 7
+Top = 82
+Width = 180
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FO0OS6O7
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Activo"
+ControlSource = "vt_vendedor.activo"
+FontBold = .T.
+Left = 167
+Name = "Tscheckbox1"
+TabIndex = 5
+Top = 130
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU14WKX1
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "100,50"
+ControlSource = "vt_vendedor.idcomision"
+Height = 23
+Left = 167
+Name = "Tscombobox1"
+TabIndex = 4
+Top = 106
+Width = 132
+cmdsql = select a.descripcion,a.idcomision from vt_comisiones a where a.idempresa=?oapp.empresa
+cursor = ccomision
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1FO0OS6O4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Supervisor"
+Height = 16
+Left = 71
+Name = "Tslabel1"
+TabIndex = 10
+Top = 82
+Width = 82
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NU14WKWU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdvendedor
+[PARENT] vendedor.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "vt_vendedor.idvendedor"
+Height = 23
+Left = 167
+Name = "txtIdvendedor"
+TabIndex = 1
+Top = 34
+Width = 48
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,400 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LJ
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WD0SP98C
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_producto"
+CursorSource = "vt_producto"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LK
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+Caption = "Consulta de Productos"
+Closable = .T.
+DoCreate = .T.
+Height = 408
+LBLREQUERIDO.Name = "LBLREQUERIDO"
+MaxButton = .F.
+MinButton = .F.
+Name = "Tsbaseform12"
+Width = 552
+WindowState = 0
+lallowconsultar = .F.
+lallowdelete = .F.
+lallowedits = .F.
+lallownew = .F.
+navegador = .F.
+[END PROPERTIES]
+[START METHODS]
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LO
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdInventario
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+FontSize = 8
+Height = 132
+Left = 120
+Name = "grdInventario"
+Panel = 1
+ReadOnly = .T.
+RecordSource = ""
+RowHeight = 17
+Top = 245
+Width = 396
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12K11W
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdPrecio
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+FontSize = 8
+Height = 76
+Left = 120
+Name = "grdPrecio"
+Panel = 1
+ReadOnly = .T.
+RowHeight = 20
+ScrollBars = 2
+TabIndex = 22
+Top = 149
+Width = 396
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LL
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] IdProducto
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 22
+Left = 120
+Name = "IdProducto"
+Top = 12
+Width = 108
+ZOrderSet = 1
+condicionextra = IdEmpresa = ?oApp.Empresa
+datoayuda = Materia Prima      
+editable = .F.
+indice = IdProducto
+objeto = this.parent.txtProducto
+origen = R
+retorna = Descripcion
+tabla = st_Producto
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF  .NOT. EMPTY(THIS.VALUE)
+M.PRODUCTO = THIS.VALUE
+THISFORM.GRDINVENTARIO.RECORDSOURCE = ''
+THISFORM.GRDPRECIO.RECORDSOURCE = ''
+M.FECHA = GETDATE(0)
+M.IDPRODUCTO = THISFORM.IDPRODUCTO.VALUE
+SET NULLDISPLAY TO ''
+= THISFORM.RUNSQL(" SELECT precio, a.moneda, Vigencia "+" FROM  vt_precios a"+" WHERE idproducto = ?thisform.idproducto.value "+" AND a.idempresa =  ?oapp.empresa ", "xPrecios")
+= THISFORM.RUNSQL(" SELECT IdDeposito, Cantidad=SUM(Cantidad) "+" FROM  dbo.st_SaldoStock(?oapp.empresa,?m.IdProducto,null, ?m.Fecha) group by IdDeposito", "xSaldos")
+THISFORM.GRDINVENTARIO.RECORDSOURCE = 'xSaldos'
+THISFORM.GRDPRECIO.RECORDSOURCE = 'xPrecios'
+REQUERY('vt_producto')
+THISFORM.REFRESH()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12K11V
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 276
+Left = 24
+Name = "Ts3dshape1"
+Top = 120
+Width = 516
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Producto"
+Height = 22
+Left = 55
+Name = "Tslabel1"
+Top = 12
+Width = 60
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12K125
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+BackColor = 0,0,128
+BackStyle = 1
+Caption = "  Inventario"
+ForeColor = 255,255,255
+Height = 16
+Left = 120
+Name = "Tslabel2"
+Style = 0
+TabIndex = 13
+Top = 233
+Width = 396
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel23
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Alignment = 0
+AutoSize = .F.
+BackColor = 0,0,128
+BackStyle = 1
+Caption = "  Lista de Precios"
+ForeColor = 255,255,255
+Height = 16
+Left = 120
+Name = "Tslabel23"
+Style = 0
+TabIndex = 13
+Top = 136
+Width = 396
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Ultima Compra:"
+Height = 22
+Left = 19
+Name = "Tslabel3"
+Top = 36
+Width = 96
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Ultimo Costo:"
+Height = 22
+Left = 19
+Name = "Tslabel4"
+Top = 60
+Width = 96
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WD0RUSOY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Costo Reposición:"
+Height = 22
+Left = 7
+Name = "Tslabel5"
+Top = 84
+Width = 108
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WD0RUSOZ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCostoRepos
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BackStyle = 0
+ControlSource = "vt_producto.costo_repo"
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999.99"
+Left = 120
+Name = "txtCostoRepos"
+Top = 84
+Width = 108
+ZOrderSet = 2
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LJ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtProducto
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 240
+Name = "txtProducto"
+Top = 12
+Width = 276
+ZOrderSet = 2
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LK
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtUltimaCompra
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BackStyle = 0
+ControlSource = "vt_producto.fecha_últi"
+DateFormat = 13
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+Left = 120
+Name = "txtUltimaCompra"
+Top = 36
+Width = 108
+ZOrderSet = 2
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1OV12C9LK
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtUltimoCosto
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BackStyle = 0
+ControlSource = "vt_producto.ult_costo"
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999.99"
+Left = 120
+Name = "txtUltimoCosto"
+Top = 60
+Width = 108
+ZOrderSet = 2
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

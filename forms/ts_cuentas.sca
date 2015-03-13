@@ -1,0 +1,944 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP86
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 64
+Left = 167
+Width = 521
+Height = 321
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+3[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1J50ZEWDI
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 290
+Height = 207
+Width = 91
+Alias = "cuentas"
+Database = ..\data\datos.dbc
+CursorSource = "ts_cuentas"
+Name = "Cursor2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18PP
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 20
+Left = 150
+Height = 90
+Width = 91
+Alias = "ts_chequeras"
+BufferModeOverride = 5
+Database = ..\data\datos.dbc
+CursorSource = "ts_chequeras"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP88
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+Height = 397
+Width = 758
+DoCreate = .T.
+Caption = "Cuentas"
+WindowState = 0
+camponro = 
+campotam = 
+tabla1 = cuentas
+campos = idempresa,idcuenta
+valores = oapp.empresa,newid('idcuenta')
+auditusuario = audit_usuario
+auditmarcahora = audit_fecha
+tabla2 = ts_Chequeras
+Name = "Tsmaintform1"
+lblRequerido.ZOrderSet = 1
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.PageCount = 3
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page3.FontSize = 8
+Pageframe1.Page3.Caption = "Movimientos"
+Pageframe1.Page3.Name = "Page3"
+Pageframe1.Top = 0
+Pageframe1.Left = 0
+Pageframe1.Width = 756
+Pageframe1.Height = 396
+Pageframe1.ZOrderSet = 3
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18PZ
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Top = 22
+Left = 335
+Height = 204
+Width = 408
+ZOrderSet = 0
+Name = "Ts3dshape1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYPM
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdcuenta
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cuentas.idcuenta"
+Enabled = .F.
+Height = 22
+Left = 155
+TabIndex = 1
+Top = 22
+Visible = .F.
+Width = 62
+editable = .F.
+Name = "txtIdcuenta"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYPO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdcuenta
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Id. de cuenta"
+Height = 16
+Left = 42
+Top = 22
+Visible = .F.
+Width = 72
+TabIndex = 16
+Name = "lblIdcuenta"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP86
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNrocuenta
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cuentas.nrocuenta"
+Height = 22
+Left = 155
+TabIndex = 3
+Top = 46
+Width = 157
+editable = .T.
+Name = "txtNrocuenta"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18Q0
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] grdTs_chequeras
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ColumnCount = 6
+FontSize = 8
+Height = 172
+Left = 347
+Panel = 1
+RecordSource = "ts_chequeras"
+RecordSourceType = 1
+RowHeight = 17
+TabIndex = 2
+Top = 34
+Width = 379
+ZOrderSet = 4
+campo = IdCuenta,IdEmpresa
+valor = cuentas.idcuenta,oApp.Empresa
+valorvariable = cuentas.idcuenta
+variablevista = m.IdCuenta
+editable = .T.
+Name = "grdTs_chequeras"
+Column1.FontSize = 8
+Column1.ColumnOrder = 2
+Column1.ControlSource = "ts_chequeras.dnumero"
+Column1.Width = 55
+Column1.DynamicBackColor = "iif(hnumero=UltNumero,rgb(235,204,109),rgb(255,255,255))"
+Column1.Name = "Column4"
+Column2.FontSize = 8
+Column2.ColumnOrder = 3
+Column2.ControlSource = "ts_chequeras.hnumero"
+Column2.Width = 53
+Column2.DynamicBackColor = "iif(hnumero=UltNumero,rgb(235,204,109),rgb(255,255,255))"
+Column2.Name = "Column5"
+Column3.FontSize = 8
+Column3.ColumnOrder = 4
+Column3.ControlSource = "ts_chequeras.ultnumero"
+Column3.Width = 56
+Column3.DynamicBackColor = "iif(hnumero=UltNumero,rgb(235,204,109),rgb(255,255,255))"
+Column3.Name = "Column6"
+Column4.FontSize = 8
+Column4.ColumnOrder = 5
+Column4.ControlSource = "ts_chequeras.activo"
+Column4.Width = 51
+Column4.Sparse = .F.
+Column4.DynamicBackColor = "iif(hnumero=UltNumero,rgb(235,204,109),rgb(255,255,255))"
+Column4.Name = "Column7"
+Column5.FontSize = 8
+Column5.ColumnOrder = 6
+Column5.ControlSource = "ts_chequeras.obs"
+Column5.Width = 79
+Column5.DynamicBackColor = "iif(hnumero=UltNumero,rgb(235,204,109),rgb(255,255,255))"
+Column5.Name = "Column8"
+Column6.FontSize = 8
+Column6.ColumnOrder = 1
+Column6.ControlSource = "ts_chequeras.tipo"
+Column6.CurrentControl = "Tscombobox1"
+Column6.Width = 59
+Column6.DynamicBackColor = "iif(hnumero=UltNumero,rgb(235,204,109),rgb(255,255,255))"
+Column6.Name = "Column1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18Q1
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column4
+[START PROPERTIES]
+FontSize = 8
+Caption = "Desde Nro."
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18Q2
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column4
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18Q3
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column5
+[START PROPERTIES]
+FontSize = 8
+Caption = "Hasta Nro"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18Q4
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column5
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18Q5
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column6
+[START PROPERTIES]
+FontSize = 8
+Caption = "Ultimo Nro"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18Q6
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column6
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18Q7
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column7
+[START PROPERTIES]
+FontSize = 8
+Caption = "Activo"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18Q8
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column7
+[START PROPERTIES]
+Top = 23
+Left = 24
+Alignment = 0
+Caption = ""
+SpecialEffect = 1
+Name = "Tscheckbox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18Q9
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column8
+[START PROPERTIES]
+FontSize = 8
+Caption = "Obs"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18QA
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column8
+[START PROPERTIES]
+FontSize = 8
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+SelectedForeColor = 0,64,128
+SelectedBackColor = 247,223,187
+Name = "Text1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1S70V79SM
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column1
+[START PROPERTIES]
+FontSize = 8
+Caption = "Tipo"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1S70V79SN
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1.grdTs_chequeras.Column1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "50,20"
+RowSourceType = 1
+RowSource = "Normal,N,Diferido,D"
+Left = 35
+Top = 23
+BorderStyle = 0
+Name = "Tscombobox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1J50ZEWDI
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNrocuenta
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Número de cuenta"
+Height = 16
+Left = 42
+Top = 46
+Width = 103
+TabIndex = 17
+Name = "lblNrocuenta"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYPU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cuentas.nombre"
+Height = 22
+Left = 155
+TabIndex = 4
+Top = 70
+Width = 157
+editable = .T.
+requerido = .T.
+Name = "txtNombre"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYPX
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNombre
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Nombre de cuenta"
+Height = 16
+Left = 42
+Top = 70
+Width = 103
+TabIndex = 18
+Name = "lblNombre"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP86
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdtipo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Tipo de cuenta"
+Height = 16
+Left = 42
+Top = 95
+Width = 83
+TabIndex = 19
+Name = "lblIdtipo"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYQ0
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFchinicio
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cuentas.fchinicio"
+Height = 22
+Left = 155
+TabIndex = 8
+Top = 166
+Width = 98
+editable = .T.
+Name = "txtFchinicio"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP86
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblFchinicio
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Fecha de inicio"
+Height = 16
+Left = 42
+Top = 166
+Width = 83
+TabIndex = 23
+Name = "lblFchinicio"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYQ5
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSaldo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cuentas.saldo"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 155
+TabIndex = 9
+Top = 190
+Width = 98
+editable = .F.
+Name = "txtSaldo"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYQ7
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSaldo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Saldo"
+Height = 16
+Left = 42
+Top = 190
+Width = 32
+TabIndex = 24
+Name = "lblSaldo"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYQ9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtSaldoconciliado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "cuentas.saldoconciliado"
+Enabled = .F.
+Height = 22
+InputMask = "999,999,999,999.99"
+Left = 155
+TabIndex = 10
+Top = 214
+Width = 98
+editable = .F.
+Name = "txtSaldoconciliado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYQD
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblSaldoconciliado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Saldo Conciliado"
+Height = 16
+Left = 42
+Top = 214
+Width = 101
+TabIndex = 25
+Name = "lblSaldoconciliado"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYQF
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtNota
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+Height = 60
+Left = 155
+TabIndex = 14
+Top = 286
+Width = 270
+ControlSource = "cuentas.nota"
+editable = .T.
+Name = "edtNota"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYQO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNota
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Nota"
+Height = 16
+Left = 47
+Top = 310
+Width = 26
+TabIndex = 28
+Name = "lblNota"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYPE
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+RowSourceType = 3
+ControlSource = "Cuentas.Idtipo"
+FirstElement = 1
+Height = 22
+Left = 155
+NumberOfElements = 0
+Style = 2
+TabIndex = 5
+Top = 94
+Width = 157
+editable = .T.
+cmdsql = select  descripcion,idtipo from ts_tipo
+cursor = cTipos
+Name = "Tscombobox1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP86
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Moneda"
+Height = 16
+Left = 42
+Top = 119
+Width = 83
+TabIndex = 20
+Name = "Tslabel1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0MRYPE
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+RowSourceType = 3
+ControlSource = "cuentas.idmoneda"
+FirstElement = 1
+Height = 22
+Left = 155
+NumberOfElements = 0
+Style = 2
+TabIndex = 6
+Top = 118
+Width = 157
+editable = .T.
+solonuevo = .F.
+cmdsql = select descripcion,idmoneda from bs_monedas
+cursor = cMoneda
+Name = "Tscombobox2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP86
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Cuenta Contable"
+Height = 16
+Left = 42
+Top = 238
+Width = 103
+TabIndex = 27
+Name = "Tslabel2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0D50NCW9I
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Banco"
+Height = 16
+Left = 42
+Top = 143
+Width = 83
+TabIndex = 21
+Name = "Tslabel3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _07Q0KBP86
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "Cuentas.Idbanco"
+FirstElement = 1
+Height = 22
+Left = 155
+NumberOfElements = 0
+Style = 2
+TabIndex = 7
+Top = 142
+Width = 157
+editable = .T.
+solonuevo = .F.
+cmdsql = select descripcion,convert(char(4),idbanco) as IdBanco from bs_bancos
+cursor = cBancos
+Name = "Tscombobox3"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1J50ZEWDI
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] cuentaContable
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 234
+TabIndex = 13
+Top = 238
+Width = 192
+editable = .F.
+Name = "cuentaContable"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18PP
+[CLASS] idcuenta
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcuenta1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "cuentas.cuentacontable"
+Left = 155
+TabIndex = 11
+Top = 238
+Name = "Idcuenta1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1RA0O18QB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 0
+BackStyle = 1
+Caption = "Control de Chequeras"
+Height = 16
+Left = 407
+Top = 14
+Width = 120
+TabIndex = 22
+Name = "Tslabel4"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1YV0M38T0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+WordWrap = .T.
+Alignment = 0
+Caption = "Cuenta Contable Diferida"
+Height = 36
+Left = 42
+Top = 262
+Width = 103
+TabIndex = 26
+Name = "Tslabel5"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1YV0M38T1
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] CuentaContable1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = ""
+Enabled = .F.
+Height = 22
+Left = 234
+TabIndex = 15
+Top = 262
+Width = 192
+editable = .F.
+Name = "CuentaContable1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1YV0M38T2
+[CLASS] idcuenta
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcuenta2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "cuentas.cuentacontable1"
+Left = 155
+TabIndex = 12
+Top = 262
+objeto = this.parent.cuentaContable1
+Name = "Idcuenta2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

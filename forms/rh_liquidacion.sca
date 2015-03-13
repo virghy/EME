@@ -1,0 +1,2067 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\..\..\py_futura_\futurafox_2\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 310
+InitialSelectedAlias = "rh_liquidacion"
+Left = 123
+Name = "Dataenvironment"
+Top = 68
+Width = 457
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+
+
+ENDPROC
+PROCEDURE Init
+
+
+SELECT rh_procesos
+
+INDEX on  idproceso TAG idproceso 
+
+
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+7[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RM10EZW4
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rh_liquidacion"
+BufferModeOverride = 5
+CursorSource = "rh_liquidacion"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 11
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 114
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RM10RD1S
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor2
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rh_liquidet"
+BufferModeOverride = 5
+CursorSource = "rh_liquidet"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 150
+Name = "Cursor2"
+NoDataOnLoad = .T.
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0XLEL8
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor3
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rh_procesos"
+CursorSource = "rh_procesos"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 290
+Name = "Cursor3"
+Order = ""
+Top = 20
+Width = 90
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RS0XLELA
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor4
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rh_vliquida_conceptos"
+BufferModeOverride = 5
+CursorSource = "rh_liquida_concepto"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 18
+Name = "Cursor4"
+NoDataOnLoad = .T.
+Top = 141
+Width = 150
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RT0ZSKY8
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor5
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rh_lq_hijos"
+CursorSource = "rh_hijos"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 209
+Name = "Cursor5"
+NoDataOnLoad = .T.
+Top = 143
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RT12EXO7
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor6
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "rh_conceptos"
+CursorSource = "rh_conceptos"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 324
+Name = "Cursor6"
+Top = 141
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WWM
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmaintform1
+[START PROPERTIES]
+BufferMode = 0
+Caption = "Liquidación de Sueldos"
+DataSession = 2
+DoCreate = .T.
+Height = 484
+LockScreen = .F.
+Name = "Tsmaintform1"
+Pageframe1.ErasePage = .T.
+Pageframe1.Height = 516
+Pageframe1.Left = 1
+Pageframe1.Name = "Pageframe1"
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.TabIndex = 1
+Pageframe1.Top = 0
+Pageframe1.Width = 699
+WhatsThisButton = .T.
+Width = 697
+WindowState = 0
+camponro = nroliquidacion,rh_liquidacion,IdEmpresa=?oApp.Empresa
+campos = IdEmpresa,IdLiquidacion,mes,año,fecha,Tipo
+campotam = 
+detalle = .T.
+editmode = .F.
+etiquetamenu = Compras
+identidad = IdLiquidacion
+idobjeto = 427
+lblRequerido.Name = "lblRequerido"
+tabla1 = rh_liquidacion
+tabla2 = rh_liquidet
+tabla3 = rh_vliquida_conceptos
+tablaconsulta = Liquidacion
+tipo = L
+valores = oApp.Empresa, NewId('RH_LIQUIDACION'),month(date()),year(date()),date(),'L'
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+LPARAMETERS Tipo
+DODEFAULT()
+IF PCOUNT()=1 AND Tipo="A"
+		this.Caption="Liquidacion de Aguinaldo"
+		ThisForm.Pageframe1.Page1.cmdAguinaldo.Visible=.t.
+		ThisForm.Pageframe1.Page1.generar.Visible=.f.
+		thisform.camponro=thisform.camponro+ " AND Tipo='A'"
+		thisform.tipo="A"
+		thisform.pageframe1.page1.container1.Visible=.t.
+		thisform.tablaconsulta="Aguinaldo"
+		thisform.valores="oApp.Empresa, NewId('RH_LIQUIDACION'),month(date()),year(date()),date(),'A'"
+ELSE
+		ThisForm.Pageframe1.Page1.cmdAguinaldo.Visible=.f.
+		ThisForm.Pageframe1.Page1.generar.Visible=.t.
+		thisform.camponro=thisform.camponro+ " AND Tipo='L'"
+		thisform.pageframe1.page1.container1.Visible=.f.
+ENDIF
+		
+ENDPROC
+PROCEDURE lallowedits_access
+RETURN !nvl(rh_liquidacion.confirmado,.f.)
+ENDPROC
+PROCEDURE procesar
+PARAMETER idempleado, idliquidet,  ;
+          sueldo, dias, horas,  ;
+          ips, thi, thn, th, td,  ;
+          tn
+LOCAL lcalias, m.documento
+proc1 = '1'
+proc2 = '2'
+proc3 = '3'
+proc6 = '15'
+lcalias = ALIAS()
+
+sueldomin = oApp.leerconstante("RH_SUELDO_MINIMO","money")
+
+SET STEP ON
+
+haberes = 0
+
+= SEEK(proc1, 'rh_procesos',  ;
+  'idproceso')
+proceso = rh_procesos.idconcepto
+INSERT INTO rh_vliquida_conceptos  ;
+       (IdEmpresa,idliquidet, idempleado,  ;
+       idconcepto, origen, idtipo,  ;
+       monto, cantidad) VALUES  ;
+       (oApp.Empresa, m.idliquidet,  ;
+       m.idempleado, proceso, 'P',  ;
+       'I', m.sueldo, m.dias)
+STORE m.sueldo TO thi
+
+*!*	SELECT d.*, rh_c.imponible FROM  ;
+*!*	       datos!rh_complemento_base  ;
+*!*	       d, rh_conceptos rh_c WHERE  ;
+*!*	       d.idempresa = oapp.empresa  ;
+*!*	       AND idempleado =  ;
+*!*	       m.idempleado AND  ;
+*!*	       d.idconcepto =  ;
+*!*	       rh_c.idconcepto AND not  ;
+*!*	       NVL(cancelado,.f.) INTO CURSOR  ;
+*!*	       xcComplemento
+
+TEXT TO cmdSQL
+	SELECT     a.idempresa, a.idcomplemento, a.fecha, a.nro, a.idempleado, a.idconcepto, a.tipo, a.total, Cuota=ISNULL(a.cuota,ISNULL(a.saldo,a.Total)), a.saldo, a.aplicado, a.cancelado, a.dFecha, 
+	                      ISNULL(b.imponible, 0) AS Imponible
+	FROM         rh_complemento AS a INNER JOIN
+	                      rh_conceptos AS b ON a.idempresa = b.IdEmpresa AND a.idconcepto = b.idconcepto
+	WHERE A.IdEmpleado = ?m.IdEmpleado
+	and a.IdEmpresa = ?oApp.Empresa
+	and ISNULL(a.cancelado, 0)=0
+	and (case when isnull([total],(0))>(0) then [total]-isnull([aplicado],(0)) else (cuota) end)>0
+	and dFecha <= ?rh_liquidacion.hfecha
+ENDTEXT
+
+this.runsql(cmdSQL,'xcComplemento')
+
+
+
+
+       
+       
+SELECT xccomplemento
+
+SCAN
+     IF xccomplemento.total = 0
+          m.monto = xccomplemento.cuota
+     ELSE
+          m.monto = IIF(xccomplemento.saldo <  xccomplemento.cuota,  xccomplemento.saldo,  xccomplemento.cuota)
+     ENDIF
+     m.documento = ''
+     IF xccomplemento.total > 0
+          m.documento = "Nro " +  ;
+                        ALLTRIM(STR(xccomplemento.nro)) +  ;
+                        " (" +  ;
+                        ALLTRIM(TRANSFORM(xccomplemento.aplicado +  ;
+                        m.monto,  ;
+                        '999,999,999' ;
+                        )) + "/" +  ;
+                        ALLTRIM(TRANSFORM(xccomplemento.total,  ;
+                        '999,999,999' ;
+                        )) + ")"
+     ENDIF
+     INSERT INTO  ;
+            rh_vliquida_conceptos  ;
+            (IdEmpresa,idliquidet,  ;
+            idempleado,  ;
+            idconcepto, origen,  ;
+            idtipo, monto,  ;
+            cantidad, nro,  ;
+            idcomplemento,  ;
+            documento) VALUES  ;
+            (oApp.Empresa, m.idliquidet,  ;
+            m.idempleado,  ;
+            xccomplemento.idconcepto,  ;
+            'P',  ;
+            xccomplemento.tipo,  ;
+            m.monto, 1,  ;
+            xccomplemento.nro,  ;
+            xccomplemento.idcomplemento,  ;
+            m.documento)
+     IF xccomplemento.tipo = 'E'
+          m.td = m.td + m.monto
+     ELSE
+          IF xccomplemento.imponible
+               m.thi = m.thi +  ;
+                       m.monto
+          ELSE
+               m.thn = m.thn +  ;
+                       m.monto
+          ENDIF
+     ENDIF
+ENDSCAN
+m.monto = 0
+***IPS
+**SET STEP ON
+
+IF  .NOT. EMPTY(NVL(ips,''))
+     = SEEK(proc3, 'rh_procesos',  ;
+       'idproceso')
+     proceso = rh_procesos.idconcepto
+     mValorConcepto =  LeerParam("Valor","rh_conceptos","IdEmpresa = ?oApp.Empresa and idConcepto = '" + proceso + "'")
+     			
+     m.monto = ROUND(mValorConcepto *  ;
+               thi / 100, 0)
+     INSERT INTO  ;
+            rh_vliquida_conceptos  ;
+            (IdEmpresa,idliquidet,  ;
+            idempleado,  ;
+            idconcepto, origen,  ;
+            idtipo, monto) VALUES  ;
+            (oApp.Empresa, m.idliquidet,  ;
+            m.idempleado, proceso,  ;
+            'C', "E", m.monto)
+     td = td + m.monto
+ENDIF
+m.th = m.thn + m.thi
+m.tn = m.th - m.td
+SELECT (lcalias)
+ENDPROC
+PROCEDURE procesaraguinaldo
+PARAMETER idempleado, idliquidet,  ;
+          sueldo, dias, horas,  ;
+          ips, thi, thn, th, td,  ;
+          tn
+LOCAL lcalias, m.documento
+proc1 = '50'	&&Aguinaldo
+proc2 = '2'
+proc3 = '3'
+proc6 = '15'
+lcalias = ALIAS()
+
+*sueldomin = oApp.leerconstante("RH_SUELDO_MINIMO","money")
+
+SET STEP ON
+
+haberes = 0
+
+= SEEK(proc1, 'rh_procesos',  ;
+  'idproceso')
+proceso = rh_procesos.idconcepto
+INSERT INTO rh_vliquida_conceptos  ;
+       (IdEmpresa,idliquidet, idempleado,  ;
+       idconcepto, origen, idtipo,  ;
+       monto, cantidad) VALUES  ;
+       (oApp.Empresa, m.idliquidet,  ;
+       m.idempleado, proceso, 'P',  ;
+       'I', m.sueldo, m.dias)
+STORE m.sueldo TO thi
+
+*!*	SELECT d.*, rh_c.imponible FROM  ;
+*!*	       datos!rh_complemento_base  ;
+*!*	       d, rh_conceptos rh_c WHERE  ;
+*!*	       d.idempresa = oapp.empresa  ;
+*!*	       AND idempleado =  ;
+*!*	       m.idempleado AND  ;
+*!*	       d.idconcepto =  ;
+*!*	       rh_c.idconcepto AND not  ;
+*!*	       NVL(cancelado,.f.) INTO CURSOR  ;
+*!*	       xcComplemento
+
+TEXT TO cmdSQL
+	SELECT     a.idempresa, a.idcomplemento, a.fecha, a.nro, a.idempleado, a.idconcepto, a.tipo, a.total, Cuota=ISNULL(a.cuota,ISNULL(a.saldo,a.Total)), a.saldo, a.aplicado, a.cancelado, a.dFecha, 
+	                      ISNULL(b.imponible, 0) AS Imponible
+	FROM         rh_complemento AS a INNER JOIN
+	                      rh_conceptos AS b ON a.idempresa = b.IdEmpresa AND a.idconcepto = b.idconcepto
+	WHERE A.IdEmpleado = ?m.IdEmpleado
+	and a.IdEmpresa = ?oApp.Empresa
+	and ISNULL(a.cancelado, 0)=0
+	and (case when isnull([total],(0))>(0) then [total]-isnull([aplicado],(0)) else (cuota) end)>0
+	and dFecha <= ?rh_liquidacion.hfecha
+ENDTEXT
+
+this.runsql(cmdSQL,'xcComplemento')
+
+
+
+
+       
+       
+SELECT xccomplemento
+
+SCAN
+     IF xccomplemento.total = 0
+          m.monto = xccomplemento.cuota
+     ELSE
+          m.monto = IIF(xccomplemento.saldo <  xccomplemento.cuota,  xccomplemento.saldo,  xccomplemento.cuota)
+     ENDIF
+     m.documento = ''
+     IF xccomplemento.total > 0
+          m.documento = "Nro " +  ;
+                        ALLTRIM(STR(xccomplemento.nro)) +  ;
+                        " (" +  ;
+                        ALLTRIM(TRANSFORM(xccomplemento.aplicado +  ;
+                        m.monto,  ;
+                        '999,999,999' ;
+                        )) + "/" +  ;
+                        ALLTRIM(TRANSFORM(xccomplemento.total,  ;
+                        '999,999,999' ;
+                        )) + ")"
+     ENDIF
+     INSERT INTO  ;
+            rh_vliquida_conceptos  ;
+            (IdEmpresa,idliquidet,  ;
+            idempleado,  ;
+            idconcepto, origen,  ;
+            idtipo, monto,  ;
+            cantidad, nro,  ;
+            idcomplemento,  ;
+            documento) VALUES  ;
+            (oApp.Empresa, m.idliquidet,  ;
+            m.idempleado,  ;
+            xccomplemento.idconcepto,  ;
+            'P',  ;
+            xccomplemento.tipo,  ;
+            m.monto, 1,  ;
+            xccomplemento.nro,  ;
+            xccomplemento.idcomplemento,  ;
+            m.documento)
+     IF xccomplemento.tipo = 'E'
+          m.td = m.td + m.monto
+     ELSE
+          IF xccomplemento.imponible
+               m.thi = m.thi +  ;
+                       m.monto
+          ELSE
+               m.thn = m.thn +  ;
+                       m.monto
+          ENDIF
+     ENDIF
+ENDSCAN
+m.monto = 0
+***IPS
+**SET STEP ON
+
+IF  .NOT. EMPTY(NVL(ips,''))
+     = SEEK(proc3, 'rh_procesos',  ;
+       'idproceso')
+     proceso = rh_procesos.idconcepto
+     mValorConcepto =  LeerParam("Valor","rh_conceptos","IdEmpresa = ?oApp.Empresa and idConcepto = '" + proceso + "'")
+     			
+     m.monto = ROUND(mValorConcepto *  ;
+               thi / 100, 0)
+     INSERT INTO  ;
+            rh_vliquida_conceptos  ;
+            (IdEmpresa,idliquidet,  ;
+            idempleado,  ;
+            idconcepto, origen,  ;
+            idtipo, monto) VALUES  ;
+            (oApp.Empresa, m.idliquidet,  ;
+            m.idempleado, proceso,  ;
+            'C', "E", m.monto)
+     td = td + m.monto
+ENDIF
+m.th = m.thn + m.thi
+m.tn = m.th - m.td
+SELECT (lcalias)
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*procesar 
+*procesaraguinaldo 
+tipo
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Año
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "rh_liquidacion.año"
+DateFormat = 13
+Format = ""
+Height = 23
+InputMask = "9999"
+Left = 274
+Name = "Año"
+TabIndex = 14
+Top = 106
+Width = 48
+ZOrderSet = 13
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21G0L484W
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboSeccion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "150,0"
+ControlSource = "rh_liquidacion.idseccion"
+FirstElement = 1
+Height = 24
+Left = 526
+Name = "cboSeccion"
+NumberOfElements = 0
+Style = 0
+TabIndex = 18
+Top = 46
+Width = 132
+cmdsql = Select Descripcion, IdSeccion from rh_seccion where IdEmpresa=?oApp.Empresa order by 1
+cursor = cSeccion
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RT0XWQ3F
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] chkConfirmado
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = ""
+Comment = ""
+ControlSource = "rh_liquidacion.confirmado"
+Height = 16
+Left = 262
+Name = "chkConfirmado"
+TabIndex = 22
+Top = 406
+Width = 13
+ZOrderSet = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2J510EQVF
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdAguinaldo
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Generar Aguinaldo"
+FontBold = .F.
+Height = 26
+Left = 514
+Name = "cmdAguinaldo"
+TabIndex = 19
+Top = 72
+Width = 132
+ZOrderSet = 11
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+PARAMETER lcidempleado
+IF EMPTY(this.parent.frecuencia.value)
+     MESSAGEBOX("Seleccione una frecuencia de liquidación.",64,"Futura Software")
+     RETURN
+ENDIF
+
+lcalias = ALIAS()
+
+manual = (PCOUNT() = 1)
+
+IF manual
+     SELECT idempleado,  ;
+            ALLTRIM(nombre) + " " +  ;
+            apellido AS empleado,  ;
+            dias, horas,  ;
+            sueldo_bas,  ;
+            nro_asegur AS ips  ;
+            FROM datos!rh_empleado_base e,  ;
+            rh_horarios h WHERE  ;
+            e.idempresa =  ;
+            oapp.empresa AND  ;
+            e.categ_hora =  ;
+            h.idhorario AND  ;
+            frec_liqui =  ;
+            this.parent.frecuencia.value  ;
+            AND activo AND  ;
+            idempleado =  ;
+            lcidempleado ORDER BY  ;
+            1 INTO CURSOR  ;
+            xcEmpleados
+ELSE
+     SELECT idempleado,  ;
+            ALLTRIM(nombre) + " " +  ;
+            apellido AS empleado,  ;
+            dias, horas,  ;
+            sueldo_bas,  ;
+            nro_asegur AS ips  ;
+            FROM datos!rh_empleado_base e,  ;
+            rh_horarios h WHERE  ;
+            e.idempresa =  ;
+            oapp.empresa AND  ;
+            e.categ_hora =  ;
+            h.idhorario AND  ;
+            frec_liqui =  ;
+            this.parent.frecuencia.value  ;
+            AND (seccion = this.Parent.cboSeccion.Value OR EMPTY(this.Parent.cboSeccion.Value));
+            AND activo ORDER BY 1  ;
+            INTO CURSOR  ;
+            xcEmpleados
+ENDIF
+TEXT TO cmdSQL1 noshow
+	SELECT     ld.idempleado,sum (ld.thi) as Monto
+	FROM         rh_liquidacion AS l INNER JOIN
+	                      rh_liquidet AS ld ON l.idliquidacion = ld.idliquidacion 
+	where l.IdEmpresa=?oApp.Empresa
+		and ld.IdEmpleado = ?xcempleados.idempleado
+		and l.Fecha between ?rh_liquidacion.dfecha and ?rh_liquidacion.hfecha
+	group by ld.idempleado
+ENDTEXT
+
+
+IF RECCOUNT('xcEmpleados') > 0
+
+
+     SCAN
+     	thisform.runsql(cmdSQL1,'cIngresos')
+     	IF RECCOUNT('cIngresos')>0
+     	  m.aguinaldo=ROUND(cIngresos.Monto/12,0)
+          m.thi = 0
+          m.thn = m.aguinaldo
+          m.th = m.aguinaldo
+          m.td = 0
+          m.tn = m.aguinaldo
+     	
+     	ELSE
+          m.thi = 0
+          m.thn = 0
+          m.th = 0
+          m.td = 0
+          m.tn = 0
+     	
+     	ENDIF
+     	
+        
+        
+          m.idliquidet = newid('RH_LIQUIDET')
+          
+         
+proceso = oApp.leerconstante("RH_CONCEPTO_AGUINALDO","CHAR(3)")
+
+     INSERT INTO  ;
+            rh_vliquida_conceptos  ;
+            (IdEmpresa,idliquidet,  ;
+            idempleado,  ;
+            idconcepto, origen,  ;
+            idtipo, monto) VALUES  ;
+            (oApp.Empresa, m.idliquidet,  ;
+            xcempleados.idempleado, proceso,  ;
+            'C', "I", m.aguinaldo)          
+          
+*!*	          thisform.procesar(xcempleados.idempleado, ;
+*!*	                           m.idliquidet, ;
+*!*	                           xcempleados.sueldo_bas, ;
+*!*	                           xcempleados.dias, ;
+*!*	                           xcempleados.horas, ;
+*!*	                           xcempleados.ips, ;
+*!*	                           @thi, ;
+*!*	                           @thn, ;
+*!*	                           @th, ;
+*!*	                           @td, ;
+*!*	                           @tn)
+          IF manual
+               REPLACE idliquidet  ;
+                       WITH  ;
+                       m.idliquidet,  ;
+                       sueldo  ;
+                       WITH  ;
+                       cIngresos.Monto,  ;
+                       diastrabajados  ;
+                       WITH  ;
+                       xcempleados.dias,  ;
+                       horastrabajados  ;
+                       WITH  ;
+                       xcempleados.horas,  ;
+                       thi WITH  ;
+                       m.thi, thn  ;
+                       WITH m.thn,  ;
+                       th WITH  ;
+                       m.th, td  ;
+                       WITH m.td,  ;
+                       tn WITH  ;
+                       m.tn IN  ;
+                       rh_liquidet
+          ELSE
+               INSERT INTO  ;
+                      rh_liquidet  ;
+                      (IdEmpresa,idliquidet,  ;
+                      idliquidacion,  ;
+                      idempleado,  ;
+                      empleado,  ;
+                      sueldo,  ;
+                      diastrabajados,  ;
+                      horastrabajados,  ;
+                      thi, thn,  ;
+                      th, td, tn)  ;
+                      VALUES  ;
+                      (oApp.Empresa, m.idliquidet,  ;
+                      rh_liquidacion.idliquidacion,  ;
+                      xcempleados.idempleado,  ;
+                      xcempleados.empleado,  ;
+                      cIngresos.Monto,  ;
+                      xcempleados.dias,  ;
+                      xcempleados.horas,  ;
+                      m.thi,  ;
+                      m.thn, m.th,  ;
+                      m.td,  ;
+                      m.tn)
+          ENDIF
+     ENDSCAN
+     this.parent.tsfact1.refresh()
+     this.enabled = .F.
+ENDIF
+SELECT (lcalias)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2JA0XJH48
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] Container1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BackStyle = 0
+BorderWidth = 0
+Height = 36
+Left = 382
+Name = "Container1"
+Top = 106
+Width = 288
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2JA0XJH4B
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Redondeo
+[PARENT] Tsmaintform1.Pageframe1.Page1.Container1
+[START PROPERTIES]
+Height = 21
+Left = 164
+Name = "Redondeo"
+Top = 8
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2JA0XJH49
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel9
+[PARENT] Tsmaintform1.Pageframe1.Page1.Container1
+[START PROPERTIES]
+Caption = "Redondeo"
+Left = 4
+Name = "Tslabel9"
+Top = 12
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2JA0XJH4A
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtLimite
+[PARENT] Tsmaintform1.Pageframe1.Page1.Container1
+[START PROPERTIES]
+Height = 21
+Left = 92
+Name = "txtLimite"
+Top = 8
+Width = 60
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21G0KKZTU
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Descripcion
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "rh_liquidacion.descripcion"
+DateFormat = 13
+Height = 23
+Left = 118
+Name = "Descripcion"
+TabIndex = 10
+Top = 82
+Width = 204
+ZOrderSet = 17
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] dFecha
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "rh_liquidacion.dfecha"
+DateFormat = 13
+Format = "D"
+Height = 23
+Left = 118
+Name = "dFecha"
+TabIndex = 6
+Top = 58
+Width = 84
+ZOrderSet = 3
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RM10EZW4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] fechafac
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Fecha:"
+FontBold = .F.
+Height = 16
+Left = 46
+Name = "fechafac"
+TabIndex = 3
+Top = 34
+Width = 64
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RM10EZW4
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Frecuencia
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+BoundTo = .F.
+ColumnCount = 2
+ColumnWidths = "175,60"
+ControlSource = "rh_liquidacion.idfrecuencia"
+DisplayCount = 0
+DisplayValue = 
+FirstElement = 1
+Height = 23
+Left = 526
+Name = "Frecuencia"
+NumberOfElements = 0
+RowSource = "select descripcion, idfrecliqui from datos!rh_frecuencia order by 1 into cursor cxFrecuencia"
+RowSourceType = 3
+Style = 2
+TabIndex = 16
+Top = 22
+Width = 132
+ZOrderSet = 10
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Generar
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Generar Liquidacion"
+FontBold = .F.
+Height = 26
+Left = 526
+Name = "Generar"
+TabIndex = 19
+Top = 72
+Width = 132
+ZOrderSet = 11
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+PARAMETER lcidempleado
+IF EMPTY(this.parent.frecuencia.value)
+     MESSAGEBOX("Seleccione una frecuencia de liquidación.",64,"Futura Software")
+     RETURN
+ENDIF
+
+*Si fue llamado este metodo en el proceso de Aguinaldo
+*le reenviamos al boton correspondiente
+IF thisform.tipo="A"
+	IF PCOUNT()=1
+		This.parent.cmdAguinaldo.Click(lcidempleado)
+	ELSE
+		This.parent.cmdAguinaldo.Click()
+	ENDIF
+	return
+ENDIF
+		
+
+
+
+lcalias = ALIAS()
+
+manual = (PCOUNT() = 1)
+
+IF manual
+     SELECT idempleado,  ;
+            ALLTRIM(nombre) + " " +  ;
+            apellido AS empleado,  ;
+            dias, horas,  ;
+            sueldo_bas,  ;
+            nro_asegur AS ips  ;
+            FROM datos!rh_empleado_base e,  ;
+            rh_horarios h WHERE  ;
+            e.idempresa =  ;
+            oapp.empresa AND  ;
+            e.categ_hora =  ;
+            h.idhorario AND  ;
+            frec_liqui =  ;
+            this.parent.frecuencia.value  ;
+            AND activo AND  ;
+            idempleado =  ;
+            lcidempleado ORDER BY  ;
+            1 INTO CURSOR  ;
+            xcEmpleados
+ELSE
+     SELECT idempleado,  ;
+            ALLTRIM(nombre) + " " +  ;
+            apellido AS empleado,  ;
+            dias, horas,  ;
+            sueldo_bas,  ;
+            nro_asegur AS ips  ;
+            FROM datos!rh_empleado_base e,  ;
+            rh_horarios h WHERE  ;
+            e.idempresa =  ;
+            oapp.empresa AND  ;
+            e.categ_hora =  ;
+            h.idhorario AND  ;
+            frec_liqui =  ;
+            this.parent.frecuencia.value  ;
+            AND (seccion = this.Parent.cboSeccion.Value OR EMPTY(this.Parent.cboSeccion.Value));
+            AND activo ORDER BY 1  ;
+            INTO CURSOR  ;
+            xcEmpleados
+ENDIF
+IF RECCOUNT('xcEmpleados') > 0
+     SCAN
+          m.thi = 0
+          m.thn = 0
+          m.th = 0
+          m.td = 0
+          m.tn = 0
+          m.idliquidet = newid('RH_LIQUIDET')
+          thisform.procesar(xcempleados.idempleado, ;
+                           m.idliquidet, ;
+                           xcempleados.sueldo_bas, ;
+                           xcempleados.dias, ;
+                           xcempleados.horas, ;
+                           xcempleados.ips, ;
+                           @thi, ;
+                           @thn, ;
+                           @th, ;
+                           @td, ;
+                           @tn)
+          IF manual
+               REPLACE idliquidet  ;
+                       WITH  ;
+                       m.idliquidet,  ;
+                       sueldo  ;
+                       WITH  ;
+                       xcempleados.sueldo_bas,  ;
+                       diastrabajados  ;
+                       WITH  ;
+                       xcempleados.dias,  ;
+                       horastrabajados  ;
+                       WITH  ;
+                       xcempleados.horas,  ;
+                       thi WITH  ;
+                       m.thi, thn  ;
+                       WITH m.thn,  ;
+                       th WITH  ;
+                       m.th, td  ;
+                       WITH m.td,  ;
+                       tn WITH  ;
+                       m.tn IN  ;
+                       rh_liquidet
+          ELSE
+               INSERT INTO  ;
+                      rh_liquidet  ;
+                      (IdEmpresa,idliquidet,  ;
+                      idliquidacion,  ;
+                      idempleado,  ;
+                      empleado,  ;
+                      sueldo,  ;
+                      diastrabajados,  ;
+                      horastrabajados,  ;
+                      thi, thn,  ;
+                      th, td, tn)  ;
+                      VALUES  ;
+                      (oApp.Empresa, m.idliquidet,  ;
+                      rh_liquidacion.idliquidacion,  ;
+                      xcempleados.idempleado,  ;
+                      xcempleados.empleado,  ;
+                      xcempleados.sueldo_bas,  ;
+                      xcempleados.dias,  ;
+                      xcempleados.horas,  ;
+                      m.thi,  ;
+                      m.thn, m.th,  ;
+                      m.td,  ;
+                      m.tn)
+          ENDIF
+     ENDSCAN
+     this.parent.tsfact1.refresh()
+     this.enabled = .F.
+ENDIF
+SELECT (lcalias)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21G0L484X
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] hFecha
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "rh_liquidacion.hfecha"
+DateFormat = 13
+Format = "D"
+Height = 23
+Left = 238
+Name = "hFecha"
+TabIndex = 8
+Top = 58
+Width = 84
+ZOrderSet = 3
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _05F0ROVJR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdfactura
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Nro."
+FontBold = .T.
+FontSize = 8
+ForeColor = 0,0,128
+Height = 12
+Left = 86
+Name = "lblIdfactura"
+TabIndex = 1
+Top = 12
+Visible = .T.
+Width = 25
+ZOrderSet = 8
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0S80V5PU2
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Mes
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+BoundTo = .F.
+ColumnCount = 2
+ColumnWidths = "175"
+ControlSource = "rh_liquidacion.mes"
+DisplayCount = 0
+DisplayValue = 
+FirstElement = 1
+Height = 23
+Left = 118
+Name = "Mes"
+NumberOfElements = 0
+RowSource = "Enero,1,Febrero,2,Marzo,3,Abril,4,Mayo,5,Junio,6,Julio,7,Agosto,8,Setiembre,9,Octubre,10,Noviembre,11,Diciembre,12"
+RowSourceType = 1
+Style = 2
+TabIndex = 12
+Top = 106
+Width = 132
+ZOrderSet = 15
+editable = .T.
+solonuevo = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] container
+[BASECLASS] container
+[OBJNAME] totales
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 43
+Left = 286
+Name = "totales"
+SpecialEffect = 1
+TabIndex = 23
+Top = 406
+Width = 371
+ZOrderSet = 1
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+this.parent.tsfact1.sumcolumn()
+this.tdeducciones.value = this.parent.tsfact1.totales(1)
+this.thaberes.value = this.parent.tsfact1.totales(2)
+this.tneto.value = this.parent.tsfact1.totales(3)
+DODEFAULT()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RN1049RD
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] tDeducciones
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 192,192,192
+ControlSource = ""
+Enabled = .F.
+Height = 24
+InputMask = "999,999,999,999"
+Left = 132
+Name = "tDeducciones"
+TabIndex = 2
+Top = 12
+Value = 0
+Width = 76
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] THaberes
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 192,192,192
+ControlSource = ""
+Enabled = .F.
+Height = 24
+InputMask = "999,999,999,999"
+Left = 211
+Name = "THaberes"
+TabIndex = 2
+Top = 12
+Value = 0
+Width = 74
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RB0YJHF0
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] tNeto
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+Alignment = 3
+BackColor = 192,192,192
+ControlSource = ""
+Enabled = .F.
+Height = 24
+InputMask = "999,999,999,999.99"
+Left = 289
+Name = "tNeto"
+TabIndex = 2
+Top = 12
+Value = 0
+Width = 75
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WWM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform1.Pageframe1.Page1.totales
+[START PROPERTIES]
+BackColor = 0,0,0
+Caption = "Totales"
+Height = 12
+Left = 12
+Name = "Tslabel7"
+TabIndex = 8
+Top = 17
+Width = 96
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21G0KKZTH
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Height = 96
+Left = 382
+Name = "Ts3dshape1"
+Rotation = 40
+Style = 3
+Top = 10
+Width = 288
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21G0LX414
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Limpiar Liquidacion"
+FontBold = .F.
+Height = 26
+Left = 34
+Name = "Tscommandbutton1"
+TabIndex = 19
+Top = 406
+Width = 132
+ZOrderSet = 11
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+RETURN
+
+
+PARAMETER lcidempleado
+IF EMPTY(this.parent.frecuencia.value)
+     MESSAGEBOX( ;
+               "Seleccione una frecuencia de liquidación.",  ;
+               48,  ;
+               "Futura Software" ;
+               )
+     RETURN
+ENDIF
+lcalias = ALIAS()
+manual = (PCOUNT() = 1)
+IF manual
+     SELECT idempleado,  ;
+            ALLTRIM(nombre) + " " +  ;
+            apellido AS empleado,  ;
+            dias, horas,  ;
+            sueldo_bas,  ;
+            nro_asegur AS ips  ;
+            FROM datos!rh_empleado_base e,  ;
+            rh_horarios h WHERE  ;
+            e.idempresa =  ;
+            oapp.empresa AND  ;
+            e.categ_hora =  ;
+            h.idhorario AND  ;
+            frec_liqui =  ;
+            this.parent.frecuencia.value  ;
+            AND activo AND  ;
+            idempleado =  ;
+            lcidempleado ORDER BY  ;
+            1 INTO CURSOR  ;
+            xcEmpleados
+ELSE
+     SELECT idempleado,  ;
+            ALLTRIM(nombre) + " " +  ;
+            apellido AS empleado,  ;
+            dias, horas,  ;
+            sueldo_bas,  ;
+            nro_asegur AS ips  ;
+            FROM datos!rh_empleado_base e,  ;
+            rh_horarios h WHERE  ;
+            e.idempresa =  ;
+            oapp.empresa AND  ;
+            e.categ_hora =  ;
+            h.idhorario AND  ;
+            frec_liqui =  ;
+            this.parent.frecuencia.value  ;
+            AND activo ORDER BY 1  ;
+            INTO CURSOR  ;
+            xcEmpleados
+ENDIF
+IF RECCOUNT('xcEmpleados') > 0
+     SCAN
+          m.thi = 0
+          m.thn = 0
+          m.th = 0
+          m.td = 0
+          m.tn = 0
+          m.idliquidet = newid('RH_LIQUIDET')
+          thisform.procesar(xcempleados.idempleado, ;
+                           m.idliquidet, ;
+                           xcempleados.sueldo_bas, ;
+                           xcempleados.dias, ;
+                           xcempleados.horas, ;
+                           xcempleados.ips, ;
+                           @thi, ;
+                           @thn, ;
+                           @th, ;
+                           @td, ;
+                           @tn)
+          IF manual
+               REPLACE idliquidet  ;
+                       WITH  ;
+                       m.idliquidet,  ;
+                       sueldo  ;
+                       WITH  ;
+                       xcempleados.sueldo_bas,  ;
+                       diastrabajados  ;
+                       WITH  ;
+                       xcempleados.dias,  ;
+                       horastrabajados  ;
+                       WITH  ;
+                       xcempleados.horas,  ;
+                       thi WITH  ;
+                       m.thi, thn  ;
+                       WITH m.thn,  ;
+                       th WITH  ;
+                       m.th, td  ;
+                       WITH m.td,  ;
+                       tn WITH  ;
+                       m.tn IN  ;
+                       rh_liquidet
+          ELSE
+               INSERT INTO  ;
+                      rh_liquidet  ;
+                      (IdEmpresa,idliquidet,  ;
+                      idliquidacion,  ;
+                      idempleado,  ;
+                      empleado,  ;
+                      sueldo,  ;
+                      diastrabajados,  ;
+                      horastrabajados,  ;
+                      thi, thn,  ;
+                      th, td, tn)  ;
+                      VALUES  ;
+                      (oApp.Empresa, m.idliquidet,  ;
+                      rh_liquidacion.idliquidacion,  ;
+                      xcempleados.idempleado,  ;
+                      xcempleados.empleado,  ;
+                      xcempleados.sueldo_bas,  ;
+                      xcempleados.dias,  ;
+                      xcempleados.horas,  ;
+                      m.thi,  ;
+                      m.thn, m.th,  ;
+                      m.td,  ;
+                      m.tn)
+          ENDIF
+     ENDSCAN
+     this.parent.tsfact1.refresh()
+     this.enabled = .F.
+ENDIF
+SELECT (lcalias)
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BO0N2CL2
+[CLASS] tsgrid
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] grid
+[OBJNAME] Tsfact1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AllowAddNew = .F.
+AllowHeaderSizing = .F.
+AllowRowSizing = .F.
+ChildOrder = ""
+Column1.ColumnOrder = 1
+Column1.ControlSource = "rh_liquidet.idempleado"
+Column1.CurrentControl = "IdEmpleado"
+Column1.FontShadow = .F.
+Column1.FontSize = 8
+Column1.Name = "IdEmpleado"
+Column1.Sparse = .F.
+Column1.Visible = .T.
+Column1.Width = 48
+Column2.BackColor = 211,224,231
+Column2.ControlSource = "rh_liquidet.empleado"
+Column2.Enabled = .F.
+Column2.FontShadow = .F.
+Column2.FontSize = 8
+Column2.Name = "Empleado"
+Column2.ReadOnly = .T.
+Column2.Visible = .T.
+Column2.Width = 210
+Column3.BackColor = 241,235,220
+Column3.ControlSource = "rh_liquidet.sueldo"
+Column3.FontShadow = .F.
+Column3.FontSize = 8
+Column3.InputMask = "999,999,999"
+Column3.Name = "Sueldo"
+Column3.ReadOnly = .T.
+Column3.Width = 75
+Column4.ControlSource = "rh_liquidet.td"
+Column4.FontShadow = .F.
+Column4.FontSize = 8
+Column4.InputMask = "999,999,999"
+Column4.Name = "Deducciones"
+Column4.ReadOnly = .T.
+Column4.Width = 74
+Column5.ControlSource = "rh_liquidet.th"
+Column5.FontShadow = .F.
+Column5.FontSize = 8
+Column5.InputMask = "999,999,999"
+Column5.Name = "Haberes"
+Column5.ReadOnly = .T.
+Column5.Width = 75
+Column6.ControlSource = "rh_liquidet.tn"
+Column6.FontShadow = .F.
+Column6.FontSize = 8
+Column6.InputMask = "999,999,999"
+Column6.Name = "Neto"
+Column6.ReadOnly = .T.
+Column6.Width = 78
+Column7.FontShadow = .F.
+Column7.FontSize = 8
+Column7.Name = "Column7"
+Column7.Sparse = .F.
+Column7.Width = 50
+ColumnCount = 7
+DeleteMark = .F.
+FontShadow = .F.
+FontSize = 8
+GridLines = 2
+HeaderHeight = 17
+Height = 252
+Highlight = .F.
+Left = 34
+LinkMaster = ""
+Name = "Tsfact1"
+Panel = 1
+PanelLink = .T.
+RecordMark = .F.
+RecordSource = "rh_liquidet"
+RelationalExpr = ""
+RightToLeft = .T.
+RowHeight = 17
+ScrollBars = 2
+SplitBar = .F.
+TabIndex = 21
+Top = 142
+Width = 637
+ZOrderSet = 7
+campo = idliquidacion,IdEmpresa
+cfieldtosum = td,th,tn
+codigo = idempleado
+editable = .T.
+titulo = Empleados
+valor = rh_liquidacion.idliquidacion,oApp.Empresa
+valorvariable = rh_liquidacion.idliquidacion
+variablevista = m.idliquidacion
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Refresh
+DODEFAULT()
+this.parent.totales.refresh()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21N0IX9AK
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Column7
+[START PROPERTIES]
+Caption = "Recalcular"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21N0IX9AL
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] Tscommandbutton2
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Column7
+[START PROPERTIES]
+Caption = ""
+Left = 334
+Name = "Tscommandbutton2"
+Top = 94
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL lcIdEmpleado,lnIdLiquiDet, lcEmpleado
+lcIdEmpleado = rh_liquidet.idempleado
+lnIdLiquiDet = rh_liquidet.IdLiquiDet
+lcEmpleado = rh_liquidet.empleado
+DELETE 
+DELETE FOR rh_vliquida_conceptos.IdLiquiDet =  lnIdLiquiDet  IN rh_vliquida_conceptos 
+thisform.runsql("Delete from rh_liquidet where IdLiquiDet = " + STR(lnIdLiquiDet))
+thisform.runsql("Delete from rh_liquida_Conceptos where IdLiquiDet = " + STR(lnIdLiquiDet))
+
+thisform.agregaritem(.f.)
+replace rh_liquidet.idempleado WITH lcIdEmpleado, empleado WITH  lcEmpleado 
+This.parent.parent.parent.Generar.Click(lcIdEmpleado)
+thisform.Refresh()
+
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RN0WKJWY
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Deducciones
+[START PROPERTIES]
+Caption = "Deducciones"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RN0WKJWZ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Deducciones
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "rh_liquidet.td"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BO0N2CLB
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Empleado
+[START PROPERTIES]
+Caption = "Nombre y Apellido"
+FontShadow = .F.
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BO0N2CLC
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Empleado
+[START PROPERTIES]
+BackColor = 211,224,231
+BorderStyle = 0
+ControlSource = "rh_liquidet.empleado"
+Enabled = .F.
+FontShadow = .F.
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RN0XIOIF
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Haberes
+[START PROPERTIES]
+Caption = "Haberes"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RN0XIOIG
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Haberes
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "rh_liquidet.th"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BO0N2CL8
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.IdEmpleado
+[START PROPERTIES]
+Caption = "Empleado"
+FontShadow = .F.
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0BO0OCBWP
+[CLASS] campo_clave
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] IdEmpleado
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.IdEmpleado
+[START PROPERTIES]
+BackStyle = 0
+BorderStyle = 0
+ControlSource = "rh_liquidet.idempleado"
+FontSize = 8
+Height = 22
+Left = 346
+Name = "IdEmpleado"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Top = 58
+Width = 72
+actualizar = .F.
+condicionextra = IdEmpresa = ?oApp.Empresa
+datoayuda = empleado
+indice = IdEmpleado
+indice1 = 
+objeto = this.parent.parent.empleado.text1
+objeto2 = 
+origen = R
+retorna = fNombre
+retorna2 = 
+tabla = rh_empleado
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE LostFocus
+IF this.cambio
+     this.parent.parent.parent.generar.click(this.value)
+ENDIF
+DODEFAULT()
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RN0XIOII
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Neto
+[START PROPERTIES]
+Caption = "Neto"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RN0XIOIJ
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Neto
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ControlSource = "rh_liquidet.tn"
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RN0WKJWQ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Sueldo
+[START PROPERTIES]
+Caption = "Sueldo"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RN0WKJWR
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsmaintform1.Pageframe1.Page1.Tsfact1.Sueldo
+[START PROPERTIES]
+BackColor = 241,235,220
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+InputMask = "999,999,999"
+Margin = 0
+Name = "Text1"
+ReadOnly = .T.
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Descripción:"
+FontBold = .F.
+Height = 16
+Left = 47
+Name = "Tslabel1"
+TabIndex = 9
+Top = 82
+Width = 64
+ZOrderSet = 6
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Frecuencia Liquidación"
+FontBold = .F.
+Height = 24
+Left = 404
+Name = "Tslabel2"
+TabIndex = 15
+Top = 22
+Width = 120
+WordWrap = .T.
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RT0XZF3L
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Confirmado"
+FontBold = .F.
+Height = 16
+Left = 190
+Name = "Tslabel3"
+TabIndex = 20
+Top = 406
+Width = 64
+ZOrderSet = 5
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21G0KKZTV
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+AutoSize = .F.
+Caption = "Seccion"
+FontBold = .F.
+Height = 24
+Left = 404
+Name = "Tslabel4"
+TabIndex = 17
+Top = 46
+Width = 120
+WordWrap = .T.
+ZOrderSet = 9
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0S80V5PTZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+BackStyle = 1
+Caption = "Corresponde al Mes"
+FontBold = .F.
+Height = 16
+Left = 10
+Name = "Tslabel5"
+TabIndex = 11
+Top = 106
+Width = 101
+ZOrderSet = 16
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0S80V5PU1
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Año"
+FontBold = .F.
+Height = 16
+Left = 250
+Name = "Tslabel6"
+TabIndex = 13
+Top = 106
+Width = 24
+ZOrderSet = 14
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0RM10EZW4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Periodo a Liquidar"
+FontBold = .F.
+Height = 16
+Left = 22
+Name = "Tslabel7"
+TabIndex = 5
+Top = 58
+Width = 88
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _21G0L484Y
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Alignment = 1
+Caption = "Al"
+FontBold = .F.
+Height = 16
+Left = 214
+Name = "Tslabel8"
+TabIndex = 7
+Top = 58
+Width = 12
+ZOrderSet = 4
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtcpbt
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+ControlSource = "rh_liquidacion.nroliquidacion"
+Enabled = .T.
+FontBold = .T.
+FontSize = 8
+ForeColor = 0,0,128
+Height = 23
+InputMask = ""
+Left = 118
+Name = "txtcpbt"
+TabIndex = 2
+Top = 10
+Visible = .T.
+Width = 84
+ZOrderSet = 2
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04G132WW9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFecfactu
+[PARENT] Tsmaintform1.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "rh_liquidacion.fecha"
+DateFormat = 13
+Format = "D"
+Height = 23
+Left = 118
+Name = "txtFecfactu"
+TabIndex = 4
+Top = 34
+Width = 84
+ZOrderSet = 3
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

@@ -1,0 +1,257 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PYY1J
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+DataSource = .NULL.
+Height = 200
+Left = 1
+Name = "Dataenvironment"
+Top = 220
+Width = 520
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0Q1XP4
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "vt_valores"
+BufferModeOverride = 5
+CursorSource = "vt_valores"
+Database = ..\data\datos.dbc
+Height = 90
+Left = 10
+Name = "Cursor1"
+NoDataOnLoad = .T.
+Top = 20
+Width = 91
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PYY1K
+[CLASS] tsbaseform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsbaseform12
+[START PROPERTIES]
+Caption = "Valores"
+DataSession = 1
+DoCreate = .T.
+Height = 240
+MaxButton = .F.
+MinButton = .F.
+Name = "Tsbaseform12"
+Width = 494
+WindowType = 1
+editmode = .F.
+idfactura = 0
+importe = 0
+lallowconsultar = .F.
+lallowdelete = .F.
+lallownew = .F.
+lblRequerido.Name = "lblRequerido"
+navegador = .F.
+tabla1 = vt_Valores
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Init
+LPARAMETERS NIDFACTURA, NIMPORTE, EDITMODE
+THIS.IDFACTURA = NIDFACTURA
+THIS.IMPORTE = NIMPORTE
+THISFORM.VALORES1.TSFACT1.REFRESH()
+THISFORM.EDITMODE = EDITMODE
+DODEFAULT()
+ENDPROC
+**
+[END METHODS]
+[START RESERVED3]
+idfactura
+importe
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PYY1Q
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdCancel
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Cancel = .T.
+Caption = "Cancelar"
+Left = 396
+Name = "cmdCancel"
+Top = 200
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+THISFORM.RELEASE()
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PYY1R
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdOk
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Caption = "Aceptar"
+Left = 300
+Name = "cmdOk"
+Top = 200
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+IF THISFORM.SAVE()
+THISFORM.RELEASE()
+ENDIF
+ENDPROC
+**
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PYY1P
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+Height = 0
+Left = 24
+Name = "Ts3dshape1"
+Top = 190
+Width = 444
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PYY1L
+[CLASS] valores
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] container
+[OBJNAME] Valores1
+[PARENT] Tsbaseform12
+[START PROPERTIES]
+BackStyle = 0
+BorderWidth = 0
+Left = 24
+Name = "Valores1"
+SpecialEffect = 2
+Top = 20
+Tsfact1.Banco.ControlSource = "vt_valores.idbanco"
+Tsfact1.Banco.Header1.Name = "Header1"
+Tsfact1.Banco.Name = "Banco"
+Tsfact1.Banco.Tscombobox3.Name = "Tscombobox3"
+Tsfact1.COLUMN0.ControlSource = ""
+Tsfact1.COLUMN0.Name = "COLUMN0"
+Tsfact1.COLUMN0.Visible = .F.
+Tsfact1.Name = "Tsfact1"
+Tsfact1.Nro.ControlSource = "vt_valores.nrocheque"
+Tsfact1.Nro.CurrentControl = "Text1"
+Tsfact1.Nro.Header1.Name = "Header1"
+Tsfact1.Nro.Name = "Nro"
+Tsfact1.Nro.Text1.Name = "Text1"
+Tsfact1.RecordSource = "vt_valores"
+Tsfact1.Tipo.ControlSource = "vt_valores.idtipovalor"
+Tsfact1.Tipo.Header1.Name = "Header1"
+Tsfact1.Tipo.Name = "Tipo"
+Tsfact1.Tipo.Tscombobox1.Name = "Tscombobox1"
+Tsfact1.campo = IdFactura,idempresa,IdMoneda
+Tsfact1.fecha.ControlSource = "vt_valores.fchcheque"
+Tsfact1.fecha.Header1.Name = "Header1"
+Tsfact1.fecha.Name = "fecha"
+Tsfact1.fecha.Text1.Name = "Text1"
+Tsfact1.importe.ControlSource = "vt_valores.importe"
+Tsfact1.importe.Header1.Name = "Header1"
+Tsfact1.importe.Name = "importe"
+Tsfact1.importe.Text1.Name = "Text1"
+Tslabel10.Caption = "Detalle de Valores"
+Tslabel10.Name = "Tslabel10"
+Tslabel9.Name = "Tslabel9"
+txtTotalValor.Name = "txtTotalValor"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PYY1N
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Tsbaseform12.Valores1.Tsfact1.COLUMN0
+[START PROPERTIES]
+Caption = "Header1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PYY1M
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] Tsbaseform12.Valores1.Tsfact1.COLUMN0
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 255,255,255
+SelectedForeColor = 0,0,0
+Visible = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1WK0PYY1O
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text2
+[PARENT] Tsbaseform12.Valores1.Tsfact1.COLUMN0
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text2"
+SelectedBackColor = 255,255,255
+SelectedForeColor = 0,0,0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

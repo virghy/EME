@@ -1,0 +1,553 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0YZCM1
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 220
+Left = 59
+Width = 520
+Height = 255
+InitialSelectedAlias = "bs_personas"
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+1[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZHP5Z
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Top = 19
+Left = 124
+Height = 167
+Width = 103
+Alias = "bs_personas"
+BufferModeOverride = 5
+Database = \\venus\sistemas\futura9\data\datos.dbc
+CursorSource = "bs_personas"
+NoDataOnLoad = .T.
+Name = "Cursor1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0YZCM2
+[CLASS] tsmovform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] Tsmovform12
+[START PROPERTIES]
+DataSession = 1
+Height = 324
+Width = 440
+DoCreate = .T.
+Caption = "Personas"
+Icon = ..\bitmaps\default1.ico
+tabla1 = bs_personas
+identidad = idpersona
+tablaconsulta = Personas
+idobjeto = 65
+Name = "Tsmovform12"
+lblRequerido.Name = "lblRequerido"
+Pageframe1.ErasePage = .T.
+Pageframe1.Page1.Name = "Page1"
+Pageframe1.Page2.grdList.Name = "grdList"
+Pageframe1.Page2.Name = "Page2"
+Pageframe1.Top = 0
+Pageframe1.Left = 0
+Pageframe1.Width = 444
+Pageframe1.Height = 324
+Pageframe1.Name = "Pageframe1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZHP5Z
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtIdpersona
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_personas.idpersona"
+Height = 22
+Left = 107
+TabIndex = 1
+Top = 34
+Visible = .F.
+Width = 129
+Name = "txtIdpersona"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0YZCM2
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdpersona
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Idpersona"
+Height = 16
+Left = 42
+Top = 34
+Visible = .F.
+Width = 58
+TabIndex = 12
+Name = "lblIdpersona"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYYX
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNombre
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_personas.nombre"
+Height = 22
+Left = 107
+TabIndex = 3
+Top = 58
+Width = 308
+Name = "txtNombre"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYYY
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNombre
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nombre"
+Height = 16
+Left = 54
+Top = 58
+Width = 46
+TabIndex = 13
+Name = "lblNombre"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYYZ
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtApellido
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_personas.apellido"
+Height = 22
+Left = 107
+TabIndex = 4
+Top = 82
+Width = 308
+Name = "txtApellido"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZ0
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblApellido
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Apellido"
+Height = 16
+Left = 53
+Top = 82
+Width = 47
+TabIndex = 14
+Name = "lblApellido"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZ1
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDireccion1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_personas.direccion1"
+Height = 22
+Left = 107
+TabIndex = 5
+Top = 106
+Width = 308
+Name = "txtDireccion1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZ2
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDireccion1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Direccion1"
+Height = 16
+Left = 41
+Top = 106
+Width = 59
+TabIndex = 15
+Name = "lblDireccion1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZ3
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtDireccion2
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_personas.direccion2"
+Height = 22
+Left = 107
+TabIndex = 6
+Top = 130
+Width = 308
+Name = "txtDireccion2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZ4
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblDireccion2
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Direccion2"
+Height = 16
+Left = 41
+Top = 130
+Width = 59
+TabIndex = 16
+Name = "lblDireccion2"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZ5
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtCelular
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_personas.celular"
+Height = 22
+Left = 107
+TabIndex = 7
+Top = 154
+Width = 129
+Name = "txtCelular"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZ6
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblCelular
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Celular"
+Height = 16
+Left = 59
+Top = 154
+Width = 41
+TabIndex = 17
+Name = "lblCelular"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZ7
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtTelefono
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_personas.telefono"
+Height = 22
+Left = 107
+TabIndex = 8
+Top = 178
+Width = 129
+Name = "txtTelefono"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZ8
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTelefono
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Telefono"
+Height = 16
+Left = 49
+Top = 178
+Width = 51
+TabIndex = 18
+Name = "lblTelefono"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZ9
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtEmail
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_personas.email"
+Height = 22
+Left = 107
+TabIndex = 9
+Top = 202
+Width = 308
+Name = "txtEmail"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZA
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblEmail
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Email"
+Height = 16
+Left = 69
+Top = 202
+Width = 31
+TabIndex = 19
+Name = "lblEmail"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZB
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIdtipodoc
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Idtipodoc"
+Height = 16
+Left = 47
+Top = 226
+Width = 53
+TabIndex = 20
+Name = "lblIdtipodoc"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZC
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtNrodoc
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Comment = ""
+ControlSource = "bs_personas.nrodoc"
+Height = 22
+Left = 107
+TabIndex = 11
+Top = 250
+Width = 129
+Name = "txtNrodoc"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblNrodoc
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Nrodoc"
+Height = 16
+Left = 59
+Top = 250
+Width = 41
+TabIndex = 21
+Name = "lblNrodoc"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZF
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblTipopersona
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Tipopersona"
+Height = 16
+Left = 28
+Top = 34
+Width = 72
+TabIndex = 22
+Name = "lblTipopersona"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0ZQYZG
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tscombobox1
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "100,0"
+RowSourceType = 1
+RowSource = "Fisica,F,Juridica,J"
+ControlSource = "bs_personas.tipopersona"
+Height = 22
+Left = 107
+TabIndex = 2
+Top = 34
+Width = 129
+Name = "Tscombobox1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+DODEFAULT()
+IF THIS.VALUE='J'
+THIS.PARENT.LBLNOMBRE.VISIBLE = .F.
+THIS.PARENT.RAZON.VISIBLE = .T.
+THIS.PARENT.LBLAPELLIDO.VISIBLE = .F.
+THIS.PARENT.TXTAPELLIDO.VISIBLE = .F.
+ELSE
+THIS.PARENT.LBLNOMBRE.VISIBLE = .T.
+THIS.PARENT.RAZON.VISIBLE = .F.
+THIS.PARENT.LBLNOMBRE.CAPTION = 'Nombre'
+THIS.PARENT.LBLAPELLIDO.VISIBLE = .T.
+THIS.PARENT.TXTAPELLIDO.VISIBLE = .T.
+ENDIF
+ENDPROC
+PROCEDURE Refresh
+IF THIS.VALUE='J'
+THIS.PARENT.LBLNOMBRE.VISIBLE = .F.
+THIS.PARENT.RAZON.VISIBLE = .T.
+THIS.PARENT.LBLAPELLIDO.VISIBLE = .F.
+THIS.PARENT.TXTAPELLIDO.VISIBLE = .F.
+ELSE
+THIS.PARENT.LBLNOMBRE.VISIBLE = .T.
+THIS.PARENT.RAZON.VISIBLE = .F.
+THIS.PARENT.LBLNOMBRE.CAPTION = 'Nombre'
+THIS.PARENT.LBLAPELLIDO.VISIBLE = .T.
+THIS.PARENT.TXTAPELLIDO.VISIBLE = .T.
+ENDIF
+DODEFAULT()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT0YZCM1
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] razon
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+Caption = "Razon Social"
+Height = 16
+Left = 28
+Top = 58
+Width = 72
+TabIndex = 23
+Name = "razon"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _1NT10K0UT
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] Tipodocumento
+[PARENT] Tsmovform12.Pageframe1.Page1
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "bs_personas.idtipodoc"
+Height = 22
+Left = 107
+TabIndex = 10
+Top = 226
+Width = 129
+cmdsql = select sigla,idtipodoc from bs_tipodoc
+cursor = ctipodoc
+Name = "Tipodocumento"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]

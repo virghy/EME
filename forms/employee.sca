@@ -1,0 +1,1137 @@
+SccTextX Version 1.0.0.1
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1252
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+[START RESERVED8]
+..\include\tastrade.h[END RESERVED8]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R480MK7UW
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+AutoCloseTables = .F.
+DataSource = .NULL.
+Height = 414
+InitialSelectedAlias = "employee1"
+Left = 229
+Name = "Dataenvironment"
+Top = 76
+Width = 501
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE BeforeOpenTables
+DO SETEO
+oApp.SetDatabase(this)
+ENDPROC
+[END METHODS]
+[START RESERVED2]
+2[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0R70PFW67
+[CLASS] cursor
+[BASECLASS] cursor
+[OBJNAME] Cursor1
+[PARENT] Dataenvironment
+[START PROPERTIES]
+Alias = "employee1"
+CursorSource = "usuarios"
+Database = \\venus\sistemas\futura9\data\datos.dbc
+Height = 328
+Left = 10
+Name = "Cursor1"
+Top = 20
+Width = 198
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QV00H03XB
+[CLASS] tsmaintform
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] form
+[OBJNAME] frmemployee
+[START PROPERTIES]
+AutoCenter = .F.
+BorderStyle = 2
+Caption = "Usuarios"
+DataSession = 2
+DoCreate = .T.
+Height = 321
+Icon = ..\bitmaps\emply.ico
+Left = 0
+LockScreen = .T.
+Name = "frmemployee"
+ScaleMode = 3
+Top = 11
+Width = 460
+WindowState = 0
+etiquetamenu = Usuarios
+lblRequerido.Name = "lblRequerido"
+pageframe1.ErasePage = .T.
+pageframe1.Height = 320
+pageframe1.Left = 2
+pageframe1.Name = "pageframe1"
+pageframe1.Page3.BackColor = 236,233,225
+pageframe1.Page3.Caption = "\<Información adicional"
+pageframe1.Page3.FontSize = 8
+pageframe1.Page3.Name = "Page3"
+pageframe1.Page3.PageOrder = 2
+pageframe1.Page4.Caption = "TPV"
+pageframe1.Page4.FontSize = 8
+pageframe1.Page4.Name = "Page4"
+pageframe1.Page4.PageOrder = 4
+pageframe1.PageCount = 4
+pageframe1.TabIndex = 1
+pageframe1.TabStretch = 0
+pageframe1.Top = 1
+pageframe1.Width = 459
+pageframe1.page1.Name = "page1"
+pageframe1.page1.PageOrder = 1
+pageframe1.page2.Name = "page2"
+pageframe1.page2.PageOrder = 3
+pageframe1.page2.grdlist.Column1.Alignment = 0
+pageframe1.page2.grdlist.Column1.BackColor = 255,255,255
+pageframe1.page2.grdlist.Column1.ControlSource = "employee1.employee_id"
+pageframe1.page2.grdlist.Column1.DynamicBackColor = ""
+pageframe1.page2.grdlist.Column1.FontBold = .F.
+pageframe1.page2.grdlist.Column1.FontName = "Arial"
+pageframe1.page2.grdlist.Column1.FontSize = 8
+pageframe1.page2.grdlist.Column1.ForeColor = 0,0,0
+pageframe1.page2.grdlist.Column1.Name = "Column1"
+pageframe1.page2.grdlist.Column1.Visible = .T.
+pageframe1.page2.grdlist.Column1.Width = 61
+pageframe1.page2.grdlist.Column2.Alignment = 0
+pageframe1.page2.grdlist.Column2.BackColor = 255,255,255
+pageframe1.page2.grdlist.Column2.ControlSource = "employee1.first_name"
+pageframe1.page2.grdlist.Column2.DynamicBackColor = ""
+pageframe1.page2.grdlist.Column2.FontBold = .F.
+pageframe1.page2.grdlist.Column2.FontName = "Arial"
+pageframe1.page2.grdlist.Column2.FontSize = 8
+pageframe1.page2.grdlist.Column2.ForeColor = 0,0,0
+pageframe1.page2.grdlist.Column2.Name = "Column3"
+pageframe1.page2.grdlist.Column2.Visible = .T.
+pageframe1.page2.grdlist.Column2.Width = 200
+pageframe1.page2.grdlist.Column3.BackColor = 255,255,255
+pageframe1.page2.grdlist.Column3.ControlSource = "employee1.last_name"
+pageframe1.page2.grdlist.Column3.FontSize = 8
+pageframe1.page2.grdlist.Column3.ForeColor = 0,0,0
+pageframe1.page2.grdlist.Column3.Name = "Column2"
+pageframe1.page2.grdlist.Column3.Width = 169
+pageframe1.page2.grdlist.ColumnCount = 3
+pageframe1.page2.grdlist.DeleteMark = .F.
+pageframe1.page2.grdlist.ForeColor = 0,0,0
+pageframe1.page2.grdlist.GridLineWidth = 1
+pageframe1.page2.grdlist.GridLines = 2
+pageframe1.page2.grdlist.HeaderHeight = 20
+pageframe1.page2.grdlist.Height = 277
+pageframe1.page2.grdlist.Left = 2
+pageframe1.page2.grdlist.Name = "grdlist"
+pageframe1.page2.grdlist.Panel = 1
+pageframe1.page2.grdlist.RecordMark = .F.
+pageframe1.page2.grdlist.RecordSource = "employee1"
+pageframe1.page2.grdlist.RecordSourceType = 1
+pageframe1.page2.grdlist.ScrollBars = 2
+pageframe1.page2.grdlist.TabIndex = 1
+pageframe1.page2.grdlist.Top = 2
+pageframe1.page2.grdlist.Width = 451
+tabla1 = employee1
+tabla2 = 
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Destroy
+TSMAINTFORM::DESTROY()
+IF USED("employee1")
+SELECT EMPLOYEE1
+SET RELATION TO
+ENDIF
+ENDPROC
+PROCEDURE Error
+LPARAMETERS NERROR, CMETHOD, NLINE
+LOCAL LAERROR[7], LCMESSAGE
+= AERROR(LAERROR)
+DO CASE
+CASE NERROR=1582
+TSMAINTFORM::ERROR(NERROR, CMETHOD, NLINE)
+DO CASE
+CASE UPPER(LAERROR(3))="LAST_NAME"
+THIS.PAGEFRAME1.PAGE1.TXTLAST_NAME.SETFOCUS()
+ENDCASE
+OTHERWISE
+TSMAINTFORM::ERROR(NERROR, CMETHOD, NLINE)
+ENDCASE
+ENDPROC
+PROCEDURE Init
+TSBASEFORM::INIT()
+THIS.AERRORMSG[3] = "El empleado existe en los pedidos. No se puede eliminar."
+THIS.AERRORMSG[1] = "Todos los empleados deben estar asignados a un grupo."
+ENDPROC
+PROCEDURE Refresh
+LOCAL LCEMPLOYEEID
+LCEMPLOYEEID = ""
+IF TYPE("oApp")=="O"
+LCEMPLOYEEID = OAPP.GETEMPLOYEEID()
+ENDIF
+IF  .NOT. EMPTY(LCEMPLOYEEID) .AND. EMPLOYEE1.EMPLOYEE_ID=LCEMPLOYEEID
+THISFORM.LALLOWDELETE = .F.
+ELSE
+THISFORM.LALLOWDELETE = .T.
+ENDIF
+ENDPROC
+PROCEDURE addnew
+TSMAINTFORM::ADDNEW()
+THISFORM.PAGEFRAME1.PAGE1.TXTLAST_NAME.SETFOCUS()
+ENDPROC
+PROCEDURE pageframe1.Page3.Activate
+LOCAL LCALIAS
+LCALIAS = THISFORM.DATAENVIRONMENT.INITIALSELECTEDALIAS
+IF  .NOT. EMPTY(LCALIAS)
+SELECT (LCALIAS)
+ENDIF
+THISFORM.REFRESHFORM()
+ENDPROC
+PROCEDURE pageframe1.Page3.Refresh
+THIS.TXTEMPLOYEENAME.VALUE = ALLTRIM(EMPLOYEE1.FIRST_NAME)+" "+EMPLOYEE1.LAST_NAME
+DODEFAULT()
+ENDPROC
+PROCEDURE pageframe1.Page4.Activate
+this.Refresh()
+
+ENDPROC
+PROCEDURE refreshform
+LOCAL LCFILE
+IF  .NOT. ISNULL(EMPLOYEE1.PHOTO_FILE) .AND. FILE(EMPLOYEE1.PHOTO_FILE)
+LCFILE = EMPLOYEE1.PHOTO_FILE
+ELSE
+LCFILE = ''
+ENDIF
+THIS.PAGEFRAME1.PAGE3.IMGPHOTO.PICTURE = LCFILE
+TSBASEFORM::REFRESHFORM()
+ENDPROC
+PROCEDURE save
+IF IIF(ISNULL(GETFLDSTATE(-1, THISFORM.TABLA1)), .F., ("3"$GETFLDSTATE(-1, THISFORM.TABLA1) .OR. "4"$GETFLDSTATE(-1, THISFORM.TABLA1)))
+ENDIF
+DODEFAULT()
+ENDPROC
+[END METHODS]
+[START RESERVED3]
+*actualizar 
+[END RESERVED3]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2DG101YAD
+[CLASS] cbosucursal
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbosucursal1
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+ControlSource = "employee1.sucursal"
+Left = 129
+Name = "Cbosucursal1"
+Style = 0
+Top = 141
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RVZ1AA8R5
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Id_empleado
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+ControlSource = "employee1.employee_id"
+Enabled = .F.
+Height = 24
+Left = 129
+Name = "Id_empleado"
+TabIndex = 2
+Top = 45
+Width = 74
+ZOrderSet = 4
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R480MK7UW
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+Height = 225
+Left = 33
+Name = "Ts3dshape1"
+Top = 24
+Width = 408
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R480MK7UW
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox1
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Es Super Usuario"
+ControlSource = "employee1.superuser"
+Left = 129
+Name = "Tscheckbox1"
+TabIndex = 9
+Top = 189
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _27X14PMKQ
+[CLASS] tscheckbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] checkbox
+[OBJNAME] Tscheckbox2
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+Alignment = 0
+Caption = "Puede generar asiento automático"
+Height = 15
+Left = 129
+Name = "Tscheckbox2"
+Style = 0
+TabIndex = 9
+Top = 213
+Width = 240
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+IF this.Value
+	replace group_Id WITH "1" IN employee1
+ELSE
+	replace group_Id WITH "" IN employee1
+ENDIF
+	
+
+ENDPROC
+PROCEDURE Refresh
+DODEFAULT()
+this.Value=employee1.group_id="1"
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0R70PFW67
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .T.
+Caption = "Apellido"
+Height = 16
+Left = 77
+Name = "Tslabel1"
+TabIndex = 5
+Top = 99
+Width = 47
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0R70PFW67
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .T.
+Caption = "Nombre"
+Height = 16
+Left = 78
+Name = "Tslabel2"
+TabIndex = 3
+Top = 75
+Width = 46
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R480MK7UW
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .T.
+Caption = "Usuario de Red"
+Height = 16
+Left = 39
+Name = "Tslabel3"
+TabIndex = 7
+Top = 123
+Width = 85
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2DG101YAE
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .T.
+Caption = "Sucursal"
+Height = 16
+Left = 73
+Name = "Tslabel4"
+TabIndex = 7
+Top = 142
+Width = 50
+ZOrderSet = 2
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RVZ1AA8QZ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+Alignment = 1
+AutoSize = .T.
+Caption = "Usuario"
+Height = 16
+Left = 80
+Name = "Tslabel8"
+TabIndex = 1
+Top = 51
+Width = 44
+ZOrderSet = 3
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0UR0J6IAF
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Tstextbox1
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+ControlSource = "employee1.title"
+Enabled = .F.
+Height = 24
+Left = 129
+Name = "Tstextbox1"
+TabIndex = 8
+Top = 117
+Width = 291
+ZOrderSet = 1
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R480MK7UW
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtFirst_Name
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+ControlSource = "employee1.first_name"
+Enabled = .F.
+Height = 24
+Left = 129
+Name = "txtFirst_Name"
+TabIndex = 4
+Top = 69
+Width = 291
+ZOrderSet = 1
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R480MK7UW
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtLast_Name
+[PARENT] frmemployee.pageframe1.page1
+[START PROPERTIES]
+ControlSource = "employee1.last_name"
+Enabled = .F.
+Height = 24
+Left = 129
+Name = "txtLast_Name"
+TabIndex = 6
+Top = 93
+Width = 291
+ZOrderSet = 1
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04O0RZVY4
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] frmemployee.pageframe1.page2.grdlist.Column1
+[START PROPERTIES]
+Alignment = 2
+Caption = "Nº Usuario"
+FontBold = .T.
+FontName = "Arial"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04O0RZVY5
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] frmemployee.pageframe1.page2.grdlist.Column1
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BorderStyle = 0
+FontBold = .F.
+FontName = "Arial"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0R70PSZZX
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] frmemployee.pageframe1.page2.grdlist.Column2
+[START PROPERTIES]
+Alignment = 2
+Caption = "Apellido"
+FontBold = .T.
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _0R70PSZZY
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] frmemployee.pageframe1.page2.grdlist.Column2
+[START PROPERTIES]
+BackColor = 255,255,255
+BorderStyle = 0
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04O0RZVY8
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] frmemployee.pageframe1.page2.grdlist.Column3
+[START PROPERTIES]
+Alignment = 2
+Caption = "Nombre"
+FontBold = .T.
+FontName = "Arial"
+FontSize = 8
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _04O0RZVY9
+[CLASS] textbox
+[BASECLASS] textbox
+[OBJNAME] Text1
+[PARENT] frmemployee.pageframe1.page2.grdlist.Column3
+[START PROPERTIES]
+Alignment = 0
+BackColor = 255,255,255
+BorderStyle = 0
+FontBold = .F.
+FontName = "Arial"
+FontSize = 8
+ForeColor = 0,0,0
+Margin = 0
+Name = "Text1"
+SelectedBackColor = 247,223,187
+SelectedForeColor = 0,64,128
+Visible = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R480MK7UW
+[CLASS] tscommandbutton
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] commandbutton
+[OBJNAME] cmdPicture
+[PARENT] frmemployee.pageframe1.Page3
+[START PROPERTIES]
+Caption = "Cambiar imagen:"
+Height = 22
+Left = 8
+Name = "cmdPicture"
+TabIndex = 2
+Top = 47
+Width = 201
+editable = .T.
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+LOCAL LCFILENAME
+LCFILENAME = GETFILE("BMP", THIS.CAPTION, "Seleccionar")
+IF  .NOT. EMPTY(LCFILENAME)
+THISFORM.PAGEFRAME1.PAGE3.IMGPHOTO.PICTURE = LCFILENAME
+REPLACE EMPLOYEE1.PHOTO_FILE WITH LCFILENAME
+THISFORM.REFRESH()
+ENDIF
+ENDPROC
+PROCEDURE Refresh
+IF "3"$GETFLDSTATE(-1) .OR. "4"$GETFLDSTATE(-1)
+THIS.CAPTION = "Agregar imagen"
+ELSE
+THIS.CAPTION = "Cambiar imagen"
+ENDIF
+DODEFAULT()
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _QZ4111UWI
+[CLASS] tseditbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] editbox
+[OBJNAME] edtNotes
+[PARENT] frmemployee.pageframe1.Page3
+[START PROPERTIES]
+ControlSource = "employee1.notes"
+Height = 241
+Left = 218
+Name = "edtNotes"
+TabIndex = 1
+Top = 47
+Width = 229
+editable = .T.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _RVZ19I8BT
+[CLASS] image
+[BASECLASS] image
+[OBJNAME] imgPhoto
+[PARENT] frmemployee.pageframe1.Page3
+[START PROPERTIES]
+Height = 216
+Left = 8
+Name = "imgPhoto"
+Stretch = 2
+Top = 72
+Width = 205
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _R480MK7UW
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] txtEmployeeName
+[PARENT] frmemployee.pageframe1.Page3
+[START PROPERTIES]
+Enabled = .F.
+Height = 22
+Left = 7
+Name = "txtEmployeeName"
+ReadOnly = .T.
+TabIndex = 4
+Top = 20
+Value = (ALLTRIM( Employee.first_name) + " " +  Employee.last_name)
+Width = 444
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCL
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboComprobante
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+BoundColumn = 2
+ControlSource = "employee1.tpv_comprobante"
+Left = 140
+Name = "cboComprobante"
+Style = 2
+TabIndex = 3
+Top = 92
+Width = 204
+cmdsql = select descripcion,idComprobante,cpbt_stk,tipo,Tipo_Iva as tipoiva from vt_cpbt where IdEmpresa=?oApp.Empresa order by descripcion 
+condicionvalidacion = 
+cursor = xVenta
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCX
+[CLASS] cbocondventa
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbocondicion
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+ControlSource = "employee1.tpv_condicion"
+Left = 140
+Name = "Cbocondicion"
+TabIndex = 4
+Top = 116
+Width = 204
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZD1
+[CLASS] tscombobox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] combobox
+[OBJNAME] cboCuenta
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "120,30"
+ControlSource = "employee1.tpv_cuenta"
+FirstElement = 1
+Height = 22
+Left = 140
+Name = "cboCuenta"
+NumberOfElements = 0
+RowSource = "cCuentas.nombre,idcuenta"
+RowSourceType = 6
+Style = 0
+TabIndex = 22
+Top = 236
+Width = 204
+ZOrderSet = 10
+cmdsql = select  nombre, convert(char(5),idcuenta) as IdCuenta from ts_cuentas where IdEmpresa = ?oApp.Empresa
+cursor = cCuentas
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+*!*	IF ! thisform.esnuevo
+*!*		thisform.cambiocuenta=.t.
+*!*		replace cp_gastos.nrocheque WITH "" IN cp_gastos
+*!*	ELSE
+*!*		thisform.cambiocuenta=.f.
+*!*	ENDIF
+*!*		
+ENDPROC
+PROCEDURE When
+*!*	IF cp_condicion.plazo=0
+*!*		RETURN .t.
+*!*	ELSE
+*!*		MESSAGEBOX("Esta opcion esta disponible solamente cuando " + CHR(13) + ;
+*!*					"la cuota de condición de pago sea igual a 0.",64,TASTRADE_LOC)
+*!*		RETURN .F.			
+*!*	ENDIF
+*!*			
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCW
+[CLASS] cbodeposito
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbodeposito1
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+ControlSource = "employee1.tpv_deposito"
+Left = 140
+Name = "Cbodeposito1"
+TabIndex = 2
+Top = 68
+Width = 204
+cmdsql = Select Deposito,idDeposito from dbo.st_depositos  where IdEmpresa=?oApp.Empresa
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCY
+[CLASS] cbolistaprecio
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbolistaprecio1
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+ControlSource = "employee1.tpv_listaprecios"
+Left = 140
+Name = "Cbolistaprecio1"
+TabIndex = 5
+Top = 140
+Width = 204
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCZ
+[CLASS] cbomoneda
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbomoneda1
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+ControlSource = "employee1.tpv_moneda"
+Left = 140
+Name = "Cbomoneda1"
+TabIndex = 6
+Top = 164
+Width = 204
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE InteractiveChange
+*
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCV
+[CLASS] cbosucursal
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] combobox
+[OBJNAME] Cbosucursal1
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+ControlSource = "employee1.tpv_sucursal"
+Height = 24
+Left = 140
+Name = "Cbosucursal1"
+TabIndex = 1
+Top = 43
+Width = 204
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCP
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] Cliente
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 21
+Left = 206
+Name = "Cliente"
+TabIndex = 21
+Top = 212
+Width = 240
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZD0
+[CLASS] idcliente
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idcliente1
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+ControlSource = "employee1.tpv_cliente"
+Height = 22
+Left = 140
+Name = "Idcliente1"
+TabIndex = 8
+Top = 212
+Width = 64
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCU
+[CLASS] idvendedor
+[CLASSLOC] ..\libs\futura.vcx
+[BASECLASS] textbox
+[OBJNAME] Idvendedor1
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+ControlSource = "employee1.tpv_vendedor"
+Height = 23
+Left = 140
+Name = "Idvendedor1"
+TabIndex = 7
+Top = 188
+Width = 64
+objeto = this.parent.Nombrevendedor
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZD2
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] lblIddeposito
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+Alignment = 1
+Caption = "Cuenta Caja:"
+Height = 16
+Left = 45
+Name = "lblIddeposito"
+TabIndex = 33
+Top = 238
+Width = 92
+ZOrderSet = 11
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCT
+[CLASS] tstextbox
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] textbox
+[OBJNAME] NombreVendedor
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+BackStyle = 0
+DisabledForeColor = 0,0,0
+Enabled = .F.
+Height = 21
+Left = 206
+Name = "NombreVendedor"
+TabIndex = 19
+Top = 188
+Width = 240
+editable = .F.
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCI
+[CLASS] ts3dshape
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] shape
+[OBJNAME] Ts3dshape1
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+Height = 262
+Left = 4
+Name = "Ts3dshape1"
+Top = 21
+Width = 449
+ZOrderSet = 0
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCJ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel1
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+Caption = "Sucursal:"
+Left = 60
+Name = "Tslabel1"
+TabIndex = 12
+Top = 43
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCK
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel2
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+Caption = "Comprobante de Venta:"
+Height = 22
+Left = -4
+Name = "Tslabel2"
+TabIndex = 14
+Top = 92
+Width = 141
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCM
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel3
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+Caption = "Lista de Precios:"
+Height = 22
+Left = 36
+Name = "Tslabel3"
+TabIndex = 16
+Top = 140
+Width = 101
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCN
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel4
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+Caption = "Cliente:"
+Height = 22
+Left = 76
+Name = "Tslabel4"
+TabIndex = 20
+Top = 212
+Width = 61
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCO
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel5
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+Caption = "Moneda:"
+Height = 22
+Left = 84
+Name = "Tslabel5"
+TabIndex = 17
+Top = 164
+Width = 53
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCQ
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel6
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+Caption = "Deposito:"
+Left = 60
+Name = "Tslabel6"
+TabIndex = 13
+Top = 68
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCR
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel7
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+Caption = "Condicion de Venta:"
+Height = 22
+Left = -4
+Name = "Tslabel7"
+TabIndex = 15
+Top = 116
+Width = 141
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _2IF10UZCS
+[CLASS] tslabel
+[CLASSLOC] ..\libs\tsbase.vcx
+[BASECLASS] label
+[OBJNAME] Tslabel8
+[PARENT] frmemployee.pageframe1.Page4
+[START PROPERTIES]
+Caption = "Vendedor:"
+Height = 22
+Left = 76
+Name = "Tslabel8"
+TabIndex = 18
+Top = 188
+Width = 61
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+[END PROPERTIES]
+[EOF]
